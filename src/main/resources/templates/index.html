@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name = "viewport" content = "initial-scale = 1.0">
+
+    <title>Pom Hotel & SPA</title>
+    <!-- Bootstrap CDN way -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{~/css/index.css}">
+</head>
+<body>
+
+<header>
+    <section>
+        <div class="container-fluid text-center ">
+            <span class="stars-gold">
+                <i class="fa fa-star fa-lg"></i>
+                <i class="fa fa-star fa-lg"></i>
+                <i class="fa fa-star fa-lg"></i>
+                <i class="fa fa-star fa-lg"></i>
+                <i class="fa fa-star fa-lg"></i>
+            </span>
+            <h1 class=""><a th:href="@{~/}" style="text-decoration: none; color: inherit;">Pom Hotel & SPA</a></h1>
+        </div>
+
+    </section>
+
+
+    <section class="d-none">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#" th:text="${projectname}">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <button type="button" class="btn">Sign In</button>
+            </div>
+        </nav>
+    </section>
+
+</header>
+
+    <section>
+        <div class="jumbotron">
+
+
+
+            
+            <!--Usage of models we wrote in WepAppController th:text="'Welcome to basic Bootstrap with Spring Boot created by ' + ${username} -->
+            <h2>Welcome to Pom Hotel & SPA</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga vero temporibus inventore nihil! Saepe consequuntur recusandae corrupti quibusdam possimus qui aut fuga quia dicta corporis! Placeat sequi, dolorem deserunt id fugiat expedita consectetur ut ab exercitationem illum aperiam itaque tempora porro, eligendi optio est qui? Autem earum dolor iure, soluta eius unde, architecto culpa illum ab delectus nesciunt at alias consequuntur beatae qui. Praesentium sequi nesciunt ex harum culpa, aspernatur a, perspiciatis sed facere incidunt aliquid beatae molestiae aliquam hic qui, cumque sit quaerat? Soluta modi eos, veritatis possimus architecto, molestias vel cumque animi quas ab quia ut tempora dolorem.</p>
+            <p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn  btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Reserve &raquo;</button>
+            </p>
+        </div>
+    </section>
+    <!-- carousel de imagenes-->
+    <section>
+        <div class="container text-center ">
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <img th:src=@{~/images/camere-10.jpg} class="d-block w-100" alt="...">
+                        <div class="carousel-content">
+                            <div style="margin: 0 auto">
+                                <h3 class="float-right">Business</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item active">
+                        <img th:src=@{~/images/camere-2.jpg} class="d-block w-100" alt="...">
+                        <div class="carousel-content">
+                            <div style="margin: 0 auto">
+                                <h3 class="float-right">Classic</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src=@{~/images/camere-3.jpg} class="d-block w-100" alt="...">
+                        <div class="carousel-content">
+                            <div style="margin: 0 auto">
+                                <h3 class="float-right">Executive</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src=@{~/images/camere-9.jpg} class="d-block w-100" alt="...">
+                        <div class="carousel-content">
+                            <div style="margin: 0 auto">
+                                <h3 class="float-right">Luxe</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src=@{~/images/camere-4.jpg} class="d-block w-100" alt="...">
+                        <div class="carousel-content">
+                            <div style="margin: 0 auto">
+                                <h3 class="float-right">Suite</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src=@{~/images/ok21.jpg} class="d-block w-100" alt="...">
+                        <div class="carousel-content">
+                            <div style="margin: 0 auto">
+                                <h3 class="float-right">Wellness & SPA</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img th:src=@{~/images/ok23.jpg} class="d-block w-100" alt="...">
+                        <div class="carousel-content">
+                            <div style="margin: 0 auto">
+                                <h3 class="float-right">Wellness & SPA</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img th:src=@{~/images/ok10.jpg} class="d-block w-100" alt="...">
+                        <div class="carousel-content">
+                            <div style="margin: 0 auto">
+                                <h3 class="float-right">Wellness & SPA</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img th:src=@{~/images/ok12.jpg} class="d-block w-100" alt="...">
+                        <div class="carousel-content">
+                            <div style="margin: 0 auto">
+                                <h3 class="float-right">Wellness & SPA</h3>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+<!-- formulario colocado a saco solo para probar-->
+<section>
+    <!-- Modal -->
+    <!-- ejemplo para la validacion de los campos https://mdbootstrap.com/docs/jquery/forms/validation/ -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Room Reservation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-auto">
+                <!-- controles  -->
+                <div class="col-md-12 order-md-1">
+                    <form action="/reserve"  method="POST">
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="checkin">Arrival</label>
+                                <input type="date" class="form-control" id="arrival" name="arrival" required/>
+                            </div>
+                            <div class="col">
+                                <label for="checkout">Departure</label>
+                                <input type="date" class="form-control" id="departure"  name="departure" required/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">First name</label>
+                                <input type="text" class="form-control" id="firstName" name="firstname" placeholder="Your name here"  required>
+
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Last name</label>
+                                <input type="text" class="form-control" id="lastName" name="lastname" placeholder="Your last name here" required>
+
+                            </div>
+                        </div>
+                
+                        <div class="mb-3">
+                            <label for="roomtype">Room Type</label>
+                            <select class="custom-select d-block w-100" id="roomtype" name="roomtype" required>
+                                <option value="">Choose...</option>
+                                <option>Business</option>
+                                <option>Classic</option>
+                                <option>Executive</option>
+                                <option>Luxe</option>
+                                <option>Suite</option>
+                            </select>
+                        </div>
+
+
+                        <div class="mb-3">
+                        <label for="username">Username</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                            </div>
+                            <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                        </div>
+                        </div>
+                
+                        <div class="mb-3">
+                        <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                        </div>
+                
+                        <div class="mb-3">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                        </div>
+                
+                        <div class="mb-3">
+                        <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                        </div>
+                
+                        <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="country">Country</label>
+                            <select class="custom-select d-block w-100" id="country" required="">
+                            <option value="">Choose...</option>
+                            <option>United States</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="state">State</label>
+                            <select class="custom-select d-block w-100" id="state" required="">
+                            <option value="">Choose...</option>
+                            <option>California</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="zip">Zip</label>
+                            <input type="text" class="form-control" id="zip" placeholder="" required="">
+
+                        </div>
+                        </div>
+
+                        <hr class="mb-4">
+                
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        <button class="btn btn-primary float-right" type="submit">Continue to checkout</button>
+                    </form>
+                </div>
+                <!-- controles  -->
+                <!--
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                    
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+        
+    </div>
+</section>
+
+
+
+<div th:insert="fragments/custom-footer.html">Aqui dentro se va insertar custom-footer.html</div>
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
