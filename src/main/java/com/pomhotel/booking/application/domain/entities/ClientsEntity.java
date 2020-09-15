@@ -11,8 +11,11 @@ public class ClientsEntity {
     private String lastname;
     private String email;
     private Collection<BookingsEntity> bookingsById;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
     private PreferencesEntity preferencesByFkPreferencesId;
-    private Collection<LoginsEntity> loginsById;
+    //private Collection<LoginsEntity> loginsById;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -79,7 +82,15 @@ public class ClientsEntity {
         this.bookingsById = bookingsById;
     }
 
-    @ManyToOne
+    public PreferencesEntity getPreferencesByFkPreferencesId() {
+        return preferencesByFkPreferencesId;
+    }
+
+    public void setPreferencesByFkPreferencesId(PreferencesEntity preferencesByFkPreferencesId) {
+        this.preferencesByFkPreferencesId = preferencesByFkPreferencesId;
+    }
+
+    /*@ManyToOne
     @JoinColumn(name = "fk_preferences_id", referencedColumnName = "id", table = "clients")
     public PreferencesEntity getPreferencesByFkPreferencesId() {
         return preferencesByFkPreferencesId;
@@ -94,7 +105,8 @@ public class ClientsEntity {
         return loginsById;
     }
 
+
     public void setLoginsById(Collection<LoginsEntity> loginsById) {
         this.loginsById = loginsById;
-    }
+    }*/
 }

@@ -8,6 +8,9 @@ public class LoginsEntity {
     private long id;
     private String username;
     private String password;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
     private ClientsEntity clientsByFkClientId;
 
     @Id
@@ -55,8 +58,6 @@ public class LoginsEntity {
         return Objects.hash(id, username, password);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "fk_client_id", referencedColumnName = "id", table = "logins")
     public ClientsEntity getClientsByFkClientId() {
         return clientsByFkClientId;
     }
@@ -64,4 +65,14 @@ public class LoginsEntity {
     public void setClientsByFkClientId(ClientsEntity clientsByFkClientId) {
         this.clientsByFkClientId = clientsByFkClientId;
     }
+
+    /*@ManyToOne
+    @JoinColumn(name = "fk_client_id", referencedColumnName = "id", table = "logins")
+    public ClientsEntity getClientsByFkClientId() {
+        return clientsByFkClientId;
+    }
+
+    public void setClientsByFkClientId(ClientsEntity clientsByFkClientId) {
+        this.clientsByFkClientId = clientsByFkClientId;
+    }*/
 }

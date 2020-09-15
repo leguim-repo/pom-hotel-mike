@@ -12,7 +12,7 @@ public class RoomsEntity {
     private String description;
     private Double pricePerNight;
     private byte[] image;
-    private Collection<BookingsEntity> bookingsById;
+    //private Collection<BookingsEntity> bookingsById;
     private RoomtypesEntity roomtypesByFkRoomtypeId;
 
     @Id
@@ -84,14 +84,14 @@ public class RoomsEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "roomsByFkRoomId")
+    /*@OneToMany(mappedBy = "roomsByFkRoomId")
     public Collection<BookingsEntity> getBookingsById() {
         return bookingsById;
     }
 
     public void setBookingsById(Collection<BookingsEntity> bookingsById) {
         this.bookingsById = bookingsById;
-    }
+    }*/
 
     @ManyToOne
     @JoinColumn(name = "fk_roomtype_id", referencedColumnName = "id", table = "rooms")

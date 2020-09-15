@@ -8,7 +8,7 @@ import java.util.Objects;
 public class PreferencesEntity {
     private long id;
     private Double priceLastSearch;
-    private Collection<ClientsEntity> clientsById;
+    //private Collection<ClientsEntity> clientsById;
     private RoomtypesEntity roomtypesByFkRoomtypeId;
 
     @Id
@@ -45,14 +45,14 @@ public class PreferencesEntity {
         return Objects.hash(id, priceLastSearch);
     }
 
-    @OneToMany(mappedBy = "preferencesByFkPreferencesId")
+    /*@OneToMany(mappedBy = "preferencesByFkPreferencesId")
     public Collection<ClientsEntity> getClientsById() {
         return clientsById;
     }
 
     public void setClientsById(Collection<ClientsEntity> clientsById) {
         this.clientsById = clientsById;
-    }
+    }*/
 
     @ManyToOne
     @JoinColumn(name = "fk_roomtype_id", referencedColumnName = "id", table = "preferences")

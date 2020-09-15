@@ -11,6 +11,9 @@ public class BookingsEntity {
     private Date checkOut;
     private Double totalPrice;
     private ClientsEntity clientsByFkClientId;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
     private RoomsEntity roomsByFkRoomId;
 
     @Id
@@ -79,8 +82,16 @@ public class BookingsEntity {
         this.clientsByFkClientId = clientsByFkClientId;
     }
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "fk_room_id", referencedColumnName = "id", table = "bookings")
+    public RoomsEntity getRoomsByFkRoomId() {
+        return roomsByFkRoomId;
+    }
+
+    public void setRoomsByFkRoomId(RoomsEntity roomsByFkRoomId) {
+        this.roomsByFkRoomId = roomsByFkRoomId;
+    }*/
+
     public RoomsEntity getRoomsByFkRoomId() {
         return roomsByFkRoomId;
     }

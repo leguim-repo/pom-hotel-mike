@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class pruebaRoomEntity {
-    private static SessionFactory dbConnection;
+    /*private static SessionFactory dbConnection;
 
     public static void MyPrint(String TituloLista, List<RoomEntity> lista) {
         System.out.println("** ** " + TituloLista + " ** **");
@@ -47,6 +47,6 @@ public class pruebaRoomEntity {
             session.close();
         }
         MyPrint("Lista Rooms", rooms);
-    }
+    }*/
 
 }
