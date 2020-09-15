@@ -15,9 +15,9 @@ public class LoginEntity {
     private String nickname;
     private String password;
 
-    @OneToOne()
+    /*@OneToOne()
     @JoinColumn(name = "CLIENT_ID", unique = true, nullable = false)
-    private ClientEntity client;
+    private ClientEntity client;*/
 
     //Constructors
     public LoginEntity() {
@@ -45,11 +45,11 @@ public class LoginEntity {
         this.password = password;
     }
 
-    public ClientEntity getClient() {
+    /*public ClientEntity getClient() {
         return client;
     }
 
     public void setClient(ClientEntity client) {
         this.client = client;
-    }
+    }*/
 }

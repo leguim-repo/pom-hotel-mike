@@ -13,55 +13,55 @@ create table if not exists ROOMTYPES
 create table if not exists ROOMS
 (
     id              bigint AUTO_INCREMENT,
-    roomtype_id     bigint,
+    fk_roomtype_id     bigint,
     code            varchar(100),
     description     varchar(200),
     pricePerNight   double,
     image           blob,
     PRIMARY KEY (id),
-    FOREIGN KEY (roomtype_id) REFERENCES ROOMTYPES (id)
+    FOREIGN KEY (fk_roomtype_id) REFERENCES ROOMTYPES (id)
 );
 
 create table if not exists PREFERENCES
 (
     id				bigint AUTO_INCREMENT,
-    roomtype_id     bigint,
+    fk_roomtype_id     bigint,
     priceLastSearch double,
     PRIMARY KEY (id),
-    FOREIGN KEY (roomtype_id) REFERENCES ROOMTYPES (id)
+    FOREIGN KEY (fk_roomtype_id) REFERENCES ROOMTYPES (id)
 );
 
 create table if not exists CLIENTS
 (
     id               bigint AUTO_INCREMENT,
-    preferences_id   bigint UNIQUE,
+    fk_preferences_id   bigint UNIQUE,
     name           	 varchar(100),
     lastname         varchar(100),
     email            varchar(100),
     PRIMARY KEY (id),
-    FOREIGN KEY (preferences_id) REFERENCES PREFERENCES (id)
+    FOREIGN KEY (fk_preferences_id) REFERENCES PREFERENCES (id)
 );
 
 create table if not exists BOOKINGS
 (
     id              bigint AUTO_INCREMENT,
-    client_id		bigint,
-    room_id			bigint,
+    fk_client_id		bigint,
+    fk_room_id			bigint,
     checkIn         date,
     checkOut        date,
     totalPrice      double,
     PRIMARY KEY (id),
-    FOREIGN KEY (room_id) REFERENCES ROOMS (id),
-    FOREIGN KEY (client_id) REFERENCES CLIENTS (id)
+    FOREIGN KEY (fk_room_id) REFERENCES ROOMS (id),
+    FOREIGN KEY (fk_client_id) REFERENCES CLIENTS (id)
 );
 
 
 create table if not exists LOGINS
 (
     id      		bigint AUTO_INCREMENT,
-    client_id  		bigint UNIQUE,
+    fk_client_id  		bigint UNIQUE,
     username 		varchar(100),
     password 		varchar(100),
     PRIMARY KEY (id),
-    FOREIGN KEY (client_id) REFERENCES CLIENTS (id)
+    FOREIGN KEY (fk_client_id) REFERENCES CLIENTS (id)
 );
