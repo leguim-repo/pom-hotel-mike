@@ -1,50 +1,66 @@
 package com.pomhotel.booking.application.domain.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Objects;
 
+@Table(name = "preferences", schema = "pom_hotel", catalog = "")
 public class PreferencesEntity {
-    //Variables
+    private long id;
+    private Double priceLastSearch;
+    private Collection<ClientsEntity> clientsById;
+    private RoomtypesEntity roomtypesByFkRoomtypeId;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private double priceLastSearch;
-
-    @ManyToOne()
-    @JoinColumn(name = "ROOMTYPE_ID")
-    private RoomTypeEntity roomType;
-
-    //Constructors
-    public PreferencesEntity() {
-    }
-
-    public PreferencesEntity(Long id, double priceLastSearch, RoomTypeEntity roomType) {
-        this.id = id;
-        this.priceLastSearch = priceLastSearch;
-        this.roomType = roomType;
-    }
-
-    //Getters and Setters
-    public Long getId() {
+    @Column(name = "id", nullable = false)
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public double getPriceLastSearch() {
+    @Basic
+    @Column(name = "priceLastSearch", nullable = true, precision = 0)
+    public Double getPriceLastSearch() {
         return priceLastSearch;
     }
 
-    public void setPriceLastSearch(double priceLastSearch) {
+    public void setPriceLastSearch(Double priceLastSearch) {
         this.priceLastSearch = priceLastSearch;
     }
 
-    public RoomTypeEntity getRoomType() {
-        return roomType;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PreferencesEntity that = (PreferencesEntity) o;
+        return id == that.id &&
+                Objects.equals(priceLastSearch, that.priceLastSearch);
     }
 
-    public void setRoomType(RoomTypeEntity roomType) {
-        this.roomType = roomType;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, priceLastSearch);
+    }
+
+    @OneToMany(mappedBy = "preferencesByFkPreferencesId")
+    public Collection<ClientsEntity> getClientsById() {
+        return clientsById;
+    }
+
+    public void setClientsById(Collection<ClientsEntity> clientsById) {
+        this.clientsById = clientsById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "fk_roomtype_id", referencedColumnName = "id", table = "preferences")
+    public RoomtypesEntity getRoomtypesByFkRoomtypeId() {
+        return roomtypesByFkRoomtypeId;
+    }
+
+    public void setRoomtypesByFkRoomtypeId(RoomtypesEntity roomtypesByFkRoomtypeId) {
+        this.roomtypesByFkRoomtypeId = roomtypesByFkRoomtypeId;
     }
 }
