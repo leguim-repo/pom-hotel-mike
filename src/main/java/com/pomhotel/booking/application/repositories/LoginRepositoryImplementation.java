@@ -59,9 +59,6 @@ public class LoginRepositoryImplementation implements LoginRepository{
         LoginsEntity login = null;
         try (Session session = dbConnection.openSession()) {
             session.get(LoginsEntity.class, entity.getUsername());
-
-
-
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
