@@ -24,7 +24,7 @@ public class LoginsEntity {
     }
 
     @Basic
-    @Column(name = "username", nullable = true, length = 100)
+    @Column(name = "username", nullable = true, length = 100, unique = true)
     public String getUsername() {
         return username;
     }
