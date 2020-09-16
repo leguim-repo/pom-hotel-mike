@@ -7,15 +7,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaQuery;
-import java.util.List;
 
+import java.util.List;
 @Repository
 public class LoginRepositoryImplementation implements LoginRepository{
     private static SessionFactory dbConnection;
 
+    @Autowired
     public LoginRepositoryImplementation() {
             // Configuracion de Full Hibernate
             try {
@@ -60,11 +62,11 @@ public class LoginRepositoryImplementation implements LoginRepository{
     public LoginsEntity findByEntity(LoginsEntity entity) {
         LoginsEntity login = null;
         try (Session session = dbConnection.openSession()) {
-<<<<<<< HEAD
+        //<<<<<<< HEAD
             session.get(LoginsEntity.class, entity.getId()); //TODO esto tengo que revisarlo
-=======
-            session.get(LoginsEntity.class, entity.getUsername());
->>>>>>> ed3afb8bbfbff0a5e088ac14214e5146f6ca86fb
+        //=======
+        //            session.get(LoginsEntity.class, entity.getUsername());
+        //>>>>>>> ed3afb8bbfbff0a5e088ac14214e5146f6ca86fb
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
@@ -174,7 +176,7 @@ public class LoginRepositoryImplementation implements LoginRepository{
 
     @Override
     public boolean checkLoginExists(LoginsEntity entity) {
-        if (this.findByEntity(entity) != null) {
+        if (findByEntity(entity) != null) {
             return true;
         }
         else {
