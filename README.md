@@ -13,5 +13,6 @@ Ahora modificamos/creamos lo necesario para la feature
 git add .
 git commit
 git flow feature finish
+git pull
 git push
 ````
