@@ -3,6 +3,7 @@ package com.pomhotel.booking.application.domain.entities;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Table(name = "clients", schema = "pom_hotel", catalog = "")
 public class ClientsEntity {
@@ -10,7 +11,7 @@ public class ClientsEntity {
     private String name;
     private String lastname;
     private String email;
-    private Collection<BookingsEntity> bookingsById;
+    private Set<BookingsEntity> bookingsById;
 
     @OneToOne
     @PrimaryKeyJoinColumn
@@ -74,11 +75,11 @@ public class ClientsEntity {
     }
 
     @OneToMany(mappedBy = "clientsByFkClientId")
-    public Collection<BookingsEntity> getBookingsById() {
+    public Set<BookingsEntity> getBookingsById() {
         return bookingsById;
     }
 
-    public void setBookingsById(Collection<BookingsEntity> bookingsById) {
+    public void setBookingsById(Set<BookingsEntity> bookingsById) {
         this.bookingsById = bookingsById;
     }
 

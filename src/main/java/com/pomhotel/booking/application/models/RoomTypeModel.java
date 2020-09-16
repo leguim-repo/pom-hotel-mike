@@ -5,7 +5,7 @@ import com.pomhotel.booking.application.domain.entities.RoomsEntity;
 import java.util.Collection;
 
 public class RoomTypeModel {
-    private long id;
+    public long id;
     public String name;
     public String description;
     public Collection<PreferencesEntity> preferencesById;

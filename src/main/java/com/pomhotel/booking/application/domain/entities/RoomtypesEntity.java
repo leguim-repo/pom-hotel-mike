@@ -3,14 +3,15 @@ package com.pomhotel.booking.application.domain.entities;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Table(name = "roomtypes", schema = "pom_hotel", catalog = "")
 public class RoomtypesEntity {
     private long id;
     private String name;
     private String description;
-    private Collection<PreferencesEntity> preferencesById;
-    private Collection<RoomsEntity> roomsById;
+    private Set<PreferencesEntity> preferencesById;
+    private Set<RoomsEntity> roomsById;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -62,16 +63,16 @@ public class RoomtypesEntity {
         return preferencesById;
     }
 
-    public void setPreferencesById(Collection<PreferencesEntity> preferencesById) {
+    public void setPreferencesById(Set<PreferencesEntity> preferencesById) {
         this.preferencesById = preferencesById;
     }
 
     @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
-    public Collection<RoomsEntity> getRoomsById() {
+    public Set<RoomsEntity> getRoomsById() {
         return roomsById;
     }
 
-    public void setRoomsById(Collection<RoomsEntity> roomsById) {
+    public void setRoomsById(Set<RoomsEntity> roomsById) {
         this.roomsById = roomsById;
     }
 }

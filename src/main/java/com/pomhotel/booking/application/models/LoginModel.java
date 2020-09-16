@@ -1,7 +1,7 @@
 package com.pomhotel.booking.application.models;
 
 public class LoginModel {
-    private long id;
+    public long id;
     public String username;
     public String password;
 

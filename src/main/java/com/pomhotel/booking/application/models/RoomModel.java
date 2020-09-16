@@ -3,7 +3,7 @@ package com.pomhotel.booking.application.models;
 import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
 
 public class RoomModel {
-    private long id;
+    public long id;
     public String code;
     public String description;
     public Double pricePerNight;

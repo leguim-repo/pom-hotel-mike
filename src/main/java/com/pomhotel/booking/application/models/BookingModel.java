@@ -4,7 +4,7 @@ import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import java.sql.Date;
 
 public class BookingModel {
-    private long id;
+    public long id;
     public Date checkIn;
     public Date checkOut;
     public Double totalPrice;
