@@ -22,6 +22,7 @@ public class LoginRepositoryImplementation implements LoginRepository{
                 Configuration config = new Configuration();
                 //Registro de entidades
                 config.addAnnotatedClass(LoginsEntity.class);
+                config.addAnnotatedClass(ClientsEntity.class);
                 config.configure();
                 dbConnection = config.buildSessionFactory();
             } catch (Throwable ex) {
@@ -33,6 +34,7 @@ public class LoginRepositoryImplementation implements LoginRepository{
     @Override
     public ClientsEntity authentification(LoginsEntity entity) {
         ClientsEntity client = null;
+        //TODO la logica de authtentifiation se va al servicio
         //comprueba existencia username
         //entonces verifica que la contraena es correcta
         //si es correcta pasamos el cliente correspondiente sino, null
@@ -55,13 +57,10 @@ public class LoginRepositoryImplementation implements LoginRepository{
     }
 
     @Override
-    public LoginsEntity findByUsername(LoginsEntity entity) {
+    public LoginsEntity findByEntity(LoginsEntity entity) {
         LoginsEntity login = null;
         try (Session session = dbConnection.openSession()) {
-            session.get(LoginsEntity.class, entity.getUsername());
-
-
-
+            session.get(LoginsEntity.class, entity.getId()); //TODO esto tengo que revisarlo
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
@@ -102,7 +101,26 @@ public class LoginRepositoryImplementation implements LoginRepository{
     }
 
     @Override
-    public void updateLogin(LoginsEntity entity) {
+    public boolean createNewLoginAndUser(LoginsEntity login, ClientsEntity client) {
+        Session session = this.dbConnection.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.persist(login);
+            session.persist(client);
+            transaction.commit();
+        }catch (Throwable ex) {
+            if (transaction!=null) transaction.rollback();
+            ex.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
+    @Override
+    public void update(LoginsEntity entity) {
         Session session = this.dbConnection.openSession();
         Transaction transaction = null;
         try {
@@ -118,13 +136,12 @@ public class LoginRepositoryImplementation implements LoginRepository{
     }
 
     @Override
-    public void deleteLogin(long id) {
+    public void deleteByEntity(LoginsEntity entity) {
         Session session = this.dbConnection.openSession();
         Transaction transaction = null;
         try {
-            LoginsEntity tareaABorrar = session.load(LoginsEntity.class, id);
             transaction = session.beginTransaction();
-            session.delete(tareaABorrar);
+            session.delete(entity);
             transaction.commit();
         }catch (Throwable ex) {
             if (transaction!=null) transaction.rollback();
@@ -132,5 +149,47 @@ public class LoginRepositoryImplementation implements LoginRepository{
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public void deleteById(long id) {
+        Session session = this.dbConnection.openSession();
+        Transaction transaction = null;
+        try {
+            LoginsEntity target = session.load(LoginsEntity.class, id);
+            transaction = session.beginTransaction();
+            session.delete(target);
+            transaction.commit();
+        }catch (Throwable ex) {
+            if (transaction!=null) transaction.rollback();
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean checkLoginExists(LoginsEntity entity) {
+        if (this.findByEntity(entity) != null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkClientExists(ClientsEntity entity) {
+        ClientsEntity logins = null;
+        Session session = this.dbConnection.openSession();
+        try {
+            logins = session.get(ClientsEntity.class, entity.getId());
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
     }
 }
