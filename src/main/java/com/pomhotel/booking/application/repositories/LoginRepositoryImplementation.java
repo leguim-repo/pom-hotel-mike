@@ -1,6 +1,8 @@
 package com.pomhotel.booking.application.repositories;
 
+import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import com.pomhotel.booking.application.domain.entities.LoginsEntity;
+import com.pomhotel.booking.application.models.LoginModel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -24,14 +26,19 @@ public class LoginRepositoryImplementation implements LoginRepository{
     }
 
     @Override
-    public LoginsEntity findByUsername(String username) {
-        LoginsEntity login = null;
+    public ClientsEntity authentification(LoginsEntity entity) {
+        ClientsEntity client = null;
         try (Session session = dbConnection.openSession()) {
-            login = session.get(LoginsEntity.class, username);
+            session.get(LoginsEntity.class, entity.getUsername());
+            //comprueba existencia username
+            //entonces verifica que la contraena es correcta
+            //si es correcta pasamos el cliente correspondiente sino, null
+
+
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
-        return login;
+        return client;
     }
 
 
