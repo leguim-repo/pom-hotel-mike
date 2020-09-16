@@ -1,5 +1,6 @@
-package com.pomhotel.booking;
+package com.pomhotel.booking.sandbox;
 
+import com.pomhotel.booking.application.domain.entities.RoomsEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -8,12 +9,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class pruebaRoomEntity {
-    /*private static SessionFactory dbConnection;
+    private static SessionFactory dbConnection;
 
-    public static void MyPrint(String TituloLista, List<RoomEntity> lista) {
+    public static void MyPrint(String TituloLista, List<RoomsEntity> lista) {
         System.out.println("** ** " + TituloLista + " ** **");
         System.out.println("En esta tabla hay " + lista.size() + " registros");
-        for (RoomEntity e : lista) {
+        for (RoomsEntity e : lista) {
             System.out.println("ID: " + e.getId());
             System.out.println("Descripcion:" + e.getDescription());
             System.out.println("");
@@ -25,7 +26,7 @@ public class pruebaRoomEntity {
         try {
             Configuration config = new Configuration();
             //Registro de entidades
-            config.addAnnotatedClass(RoomEntity.class);
+            config.addAnnotatedClass(RoomsEntity.class);
 
             config.configure();
             dbConnection = config.buildSessionFactory();
@@ -34,12 +35,11 @@ public class pruebaRoomEntity {
             throw new ExceptionInInitializerError(ex);
         }
 
-        //TODO pasar el try para arriba -> throws Throwable
-        List<RoomEntity> rooms = null;
+        List<RoomsEntity> rooms = null;
         Session session = dbConnection.openSession();
         try {
-            CriteriaQuery<RoomEntity> cq = session.getCriteriaBuilder().createQuery(RoomEntity.class);
-            cq.select(cq.from(RoomEntity.class));
+            CriteriaQuery<RoomsEntity> cq = session.getCriteriaBuilder().createQuery(RoomsEntity.class);
+            cq.select(cq.from(RoomsEntity.class));
             rooms = session.createQuery(cq).getResultList();
         }catch (Throwable ex) {
             ex.printStackTrace();
@@ -47,6 +47,6 @@ public class pruebaRoomEntity {
             session.close();
         }
         MyPrint("Lista Rooms", rooms);
-    }*/
+    }
 
 }
