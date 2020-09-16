@@ -1,9 +1,7 @@
 package com.pomhotel.booking.application.factories;
 
 import com.pomhotel.booking.application.domain.entities.ClientsEntity;
-import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.models.ClientModel;
-import com.pomhotel.booking.application.models.LoginModel;
 import org.springframework.stereotype.Component;
 
 @Component
