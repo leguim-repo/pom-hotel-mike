@@ -31,13 +31,13 @@ public class LoginRepositoryImplementation implements LoginRepository{
     }
 
     @Override
-<<<<<<< HEAD
     public ClientsEntity authentification(LoginsEntity entity) {
         ClientsEntity client = null;
-=======
-    public LoginsEntity authentification(LoginsEntity entity) {
-        // TODO pendiente de ver la implementacion que necesitamos
-        return null;
+        //comprueba existencia username
+        //entonces verifica que la contraena es correcta
+        //si es correcta pasamos el cliente correspondiente sino, null
+
+        return client;
     }
 
     @Override
@@ -55,20 +55,17 @@ public class LoginRepositoryImplementation implements LoginRepository{
     }
 
     @Override
-    public LoginsEntity findByUsername(String username) {
+    public LoginsEntity findByUsername(LoginsEntity entity) {
         LoginsEntity login = null;
->>>>>>> e691301ea9dcd5309d22b7ec566f4c594966da92
         try (Session session = dbConnection.openSession()) {
             session.get(LoginsEntity.class, entity.getUsername());
-            //comprueba existencia username
-            //entonces verifica que la contraena es correcta
-            //si es correcta pasamos el cliente correspondiente sino, null
+
 
 
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
-        return client;
+        return login;
     }
 
     @Override
@@ -136,6 +133,4 @@ public class LoginRepositoryImplementation implements LoginRepository{
             session.close();
         }
     }
-
-
 }
