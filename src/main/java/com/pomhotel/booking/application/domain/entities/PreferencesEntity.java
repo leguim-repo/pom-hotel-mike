@@ -1,7 +1,6 @@
 package com.pomhotel.booking.application.domain.entities;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
 @Table(name = "preferences", schema = "pom_hotel", catalog = "")
