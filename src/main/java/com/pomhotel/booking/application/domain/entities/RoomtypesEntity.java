@@ -1,7 +1,6 @@
 package com.pomhotel.booking.application.domain.entities;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
@@ -59,7 +58,7 @@ public class RoomtypesEntity {
     }
 
     @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
-    public Collection<PreferencesEntity> getPreferencesById() {
+    public Set<PreferencesEntity> getPreferencesById() {
         return preferencesById;
     }
 
