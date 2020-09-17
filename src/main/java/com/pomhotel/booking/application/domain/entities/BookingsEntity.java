@@ -1,13 +1,15 @@
 package com.pomhotel.booking.application.domain.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "bookings", schema = "pom_hotel", catalog = "")
-public class BookingsEntity {
+@Table(name = "bookings", schema = "pom_hotel")
+public class BookingsEntity implements Serializable {
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private long id;
 
