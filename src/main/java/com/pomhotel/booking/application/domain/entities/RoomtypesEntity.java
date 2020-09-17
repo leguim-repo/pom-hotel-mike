@@ -4,42 +4,60 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
 @Table(name = "roomtypes", schema = "pom_hotel", catalog = "")
 public class RoomtypesEntity {
-    private long id;
-    private String name;
-    private String description;
-    private Set<PreferencesEntity> preferencesById;
-    private Set<RoomsEntity> roomsById;
-
     @Id
     @Column(name = "id", nullable = false)
+    private long id;
+
+    @Basic
+    @Column(name = "name", nullable = true, length = 100)
+    private String name;
+
+    @Basic
+    @Column(name = "description", nullable = true, length = 200)
+    private String description;
+
+    @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
+    private Set<PreferencesEntity> preferencesById;
+
+    @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
+    private Set<RoomsEntity> roomsById;
+
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "name", nullable = true, length = 100)
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "description", nullable = true, length = 200)
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<PreferencesEntity> getPreferencesById() {
+        return preferencesById;
+    }
+    public void setPreferencesById(Set<PreferencesEntity> preferencesById) {
+        this.preferencesById = preferencesById;
+    }
+
+    public Set<RoomsEntity> getRoomsById() {
+        return roomsById;
+    }
+    public void setRoomsById(Set<RoomsEntity> roomsById) {
+        this.roomsById = roomsById;
     }
 
     @Override
@@ -55,23 +73,5 @@ public class RoomtypesEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description);
-    }
-
-    @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
-    public Set<PreferencesEntity> getPreferencesById() {
-        return preferencesById;
-    }
-
-    public void setPreferencesById(Set<PreferencesEntity> preferencesById) {
-        this.preferencesById = preferencesById;
-    }
-
-    @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
-    public Set<RoomsEntity> getRoomsById() {
-        return roomsById;
-    }
-
-    public void setRoomsById(Set<RoomsEntity> roomsById) {
-        this.roomsById = roomsById;
     }
 }

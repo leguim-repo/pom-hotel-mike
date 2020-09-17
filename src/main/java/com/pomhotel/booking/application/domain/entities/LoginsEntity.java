@@ -3,44 +3,52 @@ package com.pomhotel.booking.application.domain.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 @Table(name = "logins", schema = "pom_hotel", catalog = "")
 public class LoginsEntity {
-    private long id;
-    private String username;
-    private String password;
-
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private ClientsEntity clientsByFkClientId;
 
     @Id
     @Column(name = "id", nullable = false)
+    private long id;
+
+    @Basic
+    @Column(name = "username", nullable = true, length = 100, unique = true)
+    private String username;
+
+    @Basic
+    @Column(name = "password", nullable = true, length = 100)
+    private String password;
+
+    @OneToOne
+    @JoinColumn(referencedColumnName = "id")
+    private ClientsEntity clientsByFkClientId;
+
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "username", nullable = true, length = 100, unique = true)
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "password", nullable = true, length = 100)
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ClientsEntity getClientsByFkClientId() {
+        return clientsByFkClientId;
+    }
+    public void setClientsByFkClientId(ClientsEntity clientsByFkClientId) {
+        this.clientsByFkClientId = clientsByFkClientId;
     }
 
     @Override
@@ -57,22 +65,4 @@ public class LoginsEntity {
     public int hashCode() {
         return Objects.hash(id, username, password);
     }
-
-    public ClientsEntity getClientsByFkClientId() {
-        return clientsByFkClientId;
-    }
-
-    public void setClientsByFkClientId(ClientsEntity clientsByFkClientId) {
-        this.clientsByFkClientId = clientsByFkClientId;
-    }
-
-    /*@ManyToOne
-    @JoinColumn(name = "fk_client_id", referencedColumnName = "id", table = "logins")
-    public ClientsEntity getClientsByFkClientId() {
-        return clientsByFkClientId;
-    }
-
-    public void setClientsByFkClientId(ClientsEntity clientsByFkClientId) {
-        this.clientsByFkClientId = clientsByFkClientId;
-    }*/
 }

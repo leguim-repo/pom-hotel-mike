@@ -21,6 +21,7 @@
         <property name = "hibernate.connection.password">
             secret1234
         </property>
+
         <property name="hibernate.hbm2ddl.auto">validate</property>
         <property name="hibernate.show_sql">true</property>
         <mapping class="com.pomhotel.booking.application.domain.entities.BookingsEntity"/>
@@ -29,7 +30,5 @@
         <mapping class="com.pomhotel.booking.application.domain.entities.PreferencesEntity"/>
         <mapping class="com.pomhotel.booking.application.domain.entities.RoomsEntity"/>
         <mapping class="com.pomhotel.booking.application.domain.entities.RoomtypesEntity"/>
-
-
     </session-factory>
 </hibernate-configuration>

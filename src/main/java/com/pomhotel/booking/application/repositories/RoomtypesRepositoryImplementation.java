@@ -1,5 +1,6 @@
 package com.pomhotel.booking.application.repositories;
 
+import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,11 +43,13 @@ public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
         return entity;
     }
 
-    /*@Override
+    @Override
     public List<RoomtypesEntity> findAll() {
         List<RoomtypesEntity> entities = null;
         Session session = this.dbConnection.openSession();
         try {
+            CriteriaQuery<LoginsEntity> c = session.getCriteriaBuilder().createQuery(LoginsEntity.class);
+            c.select(c.from(LoginsEntity.class));
             CriteriaQuery<RoomtypesEntity> cq = session.getCriteriaBuilder().createQuery(RoomtypesEntity.class);
             cq.select(cq.from(RoomtypesEntity.class));
             entities = session.createQuery(cq).getResultList();
@@ -54,17 +57,6 @@ public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
             ex.printStackTrace();
         } finally {
             session.close();
-        }
-        return entities;
-    }*/
-
-    @Override
-    public List<RoomtypesEntity> findAll() {
-        List<RoomtypesEntity> entities = null;
-        try (Session session = this.dbConnection.openSession();) {
-            entities = session.createQuery("SELECT e FROM RoomtypesEntity e", RoomtypesEntity.class).getResultList();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
         }
         return entities;
     }

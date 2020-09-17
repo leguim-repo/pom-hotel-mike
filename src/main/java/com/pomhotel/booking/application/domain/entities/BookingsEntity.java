@@ -4,57 +4,77 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
+@Entity
 @Table(name = "bookings", schema = "pom_hotel", catalog = "")
 public class BookingsEntity {
+    @Id
+    @Column(name = "id", nullable = false)
     private long id;
+
+    @Basic
+    @Column(name = "checkIn", nullable = true)
     private Date checkIn;
+
+    @Basic
+    @Column(name = "checkOut", nullable = true)
     private Date checkOut;
+
+    @Basic
+    @Column(name = "totalPrice", nullable = true, precision = 0)
     private Double totalPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_client_id", referencedColumnName = "id", table = "bookings")
     private ClientsEntity clientsByFkClientId;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
+    @JoinColumn(referencedColumnName = "id")
     private RoomsEntity roomsByFkRoomId;
 
-    @Id
-    @Column(name = "id", nullable = false)
+
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "checkIn", nullable = true)
     public Date getCheckIn() {
         return checkIn;
     }
-
     public void setCheckIn(Date checkIn) {
         this.checkIn = checkIn;
     }
 
-    @Basic
-    @Column(name = "checkOut", nullable = true)
     public Date getCheckOut() {
         return checkOut;
     }
-
     public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
     }
 
-    @Basic
-    @Column(name = "totalPrice", nullable = true, precision = 0)
     public Double getTotalPrice() {
         return totalPrice;
     }
-
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+
+    public ClientsEntity getClientsByFkClientId() {
+        return clientsByFkClientId;
+    }
+    public void setClientsByFkClientId(ClientsEntity clientsByFkClientId) {
+        this.clientsByFkClientId = clientsByFkClientId;
+    }
+
+    public RoomsEntity getRoomsByFkRoomId() {
+        return roomsByFkRoomId;
+    }
+    public void setRoomsByFkRoomId(RoomsEntity roomsByFkRoomId) {
+        this.roomsByFkRoomId = roomsByFkRoomId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -72,31 +92,4 @@ public class BookingsEntity {
         return Objects.hash(id, checkIn, checkOut, totalPrice);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "fk_client_id", referencedColumnName = "id", table = "bookings")
-    public ClientsEntity getClientsByFkClientId() {
-        return clientsByFkClientId;
-    }
-
-    public void setClientsByFkClientId(ClientsEntity clientsByFkClientId) {
-        this.clientsByFkClientId = clientsByFkClientId;
-    }
-
-    /*@ManyToOne
-    @JoinColumn(name = "fk_room_id", referencedColumnName = "id", table = "bookings")
-    public RoomsEntity getRoomsByFkRoomId() {
-        return roomsByFkRoomId;
-    }
-
-    public void setRoomsByFkRoomId(RoomsEntity roomsByFkRoomId) {
-        this.roomsByFkRoomId = roomsByFkRoomId;
-    }*/
-
-    public RoomsEntity getRoomsByFkRoomId() {
-        return roomsByFkRoomId;
-    }
-
-    public void setRoomsByFkRoomId(RoomsEntity roomsByFkRoomId) {
-        this.roomsByFkRoomId = roomsByFkRoomId;
-    }
 }
