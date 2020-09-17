@@ -2,10 +2,8 @@ package com.pomhotel.booking.application.repositories;
 
 import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import com.pomhotel.booking.application.domain.entities.LoginsEntity;
-import org.apache.juli.logging.Log;
+
 import java.util.List;
-import java.util.Set;
-import com.pomhotel.booking.application.models.LoginModel;
 
 public interface LoginRepository {
     //TODO esto va para el servicio. Para borrar

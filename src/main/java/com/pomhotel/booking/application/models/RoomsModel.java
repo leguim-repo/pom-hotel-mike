@@ -2,7 +2,7 @@ package com.pomhotel.booking.application.models;
 
 import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
 
-public class RoomModel {
+public class RoomsModel {
     public long id;
     public String code;
     public String description;
@@ -11,6 +11,6 @@ public class RoomModel {
     public RoomtypesEntity roomtypesByFkRoomtypeId;
 
     //Constructor
-    public RoomModel() {
+    public RoomsModel() {
     }
 }

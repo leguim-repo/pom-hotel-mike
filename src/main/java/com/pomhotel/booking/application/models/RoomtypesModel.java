@@ -5,7 +5,7 @@ import com.pomhotel.booking.application.domain.entities.RoomsEntity;
 import java.util.Collection;
 import java.util.Set;
 
-public class RoomTypeModel {
+public class RoomtypesModel {
     public long id;
     public String name;
     public String description;
@@ -13,6 +13,6 @@ public class RoomTypeModel {
     public Set<RoomsEntity> roomsById;
 
     //Constructor
-    public RoomTypeModel() {
+    public RoomtypesModel() {
     }
 }

@@ -1,12 +1,12 @@
 package com.pomhotel.booking.application.factories;
 
 import com.pomhotel.booking.application.domain.entities.ClientsEntity;
-import com.pomhotel.booking.application.models.ClientModel;
+import com.pomhotel.booking.application.models.ClientsModel;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ClientsFactory {
-    public ClientsEntity createEntity(ClientModel model){
+    public ClientsEntity createEntity(ClientsModel model){
         ClientsEntity entity = new ClientsEntity();
         entity.setId(model.id);
         entity.setName(model.name);
@@ -17,8 +17,8 @@ public class ClientsFactory {
         return entity;
     }
 
-    public ClientModel createModel(ClientsEntity entity){
-        ClientModel model = new ClientModel();
+    public ClientsModel createModel(ClientsEntity entity){
+        ClientsModel model = new ClientsModel();
         model.id = entity.getId();
         model.name = entity.getName();
         model.lastname = entity.getLastname();

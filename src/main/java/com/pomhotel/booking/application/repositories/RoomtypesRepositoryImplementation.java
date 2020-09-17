@@ -5,13 +5,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
+@Repository
 public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
     private static SessionFactory dbConnection;
 
+    @Autowired
     public RoomtypesRepositoryImplementation() {
         try {
             Configuration config = new Configuration();
@@ -38,7 +42,7 @@ public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
         return entity;
     }
 
-    @Override
+    /*@Override
     public List<RoomtypesEntity> findAll() {
         List<RoomtypesEntity> entities = null;
         Session session = this.dbConnection.openSession();
@@ -52,31 +56,26 @@ public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
             session.close();
         }
         return entities;
-    }
+    }*/
 
     @Override
-    public void createNew(RoomtypesEntity entity) {
-        Session session = this.dbConnection.openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.persist(entity);
-            transaction.commit();
-        }catch (Throwable ex) {
-            if (transaction!=null) transaction.rollback();
+    public List<RoomtypesEntity> findAll() {
+        List<RoomtypesEntity> entities = null;
+        try (Session session = this.dbConnection.openSession();) {
+            entities = session.createQuery("SELECT e FROM RoomtypesEntity e", RoomtypesEntity.class).getResultList();
+        } catch (Throwable ex) {
             ex.printStackTrace();
-        } finally {
-            session.close();
         }
+        return entities;
     }
 
     @Override
-    public void update(RoomtypesEntity entity) {
+    public void saveOrUpdate(RoomtypesEntity entity) {
         Session session = this.dbConnection.openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(entity);
+            session.saveOrUpdate(entity);
             transaction.commit();
         }catch (Throwable ex) {
             if (transaction!=null) transaction.rollback();

@@ -5,13 +5,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
+@Repository
 public class BookingsRepositoryImplementation implements BookingsRepository{
     private static SessionFactory dbConnection;
 
+    @Autowired
     public BookingsRepositoryImplementation() {
         try {
             Configuration config = new Configuration();
@@ -55,28 +59,12 @@ public class BookingsRepositoryImplementation implements BookingsRepository{
     }
 
     @Override
-    public void createNew(BookingsEntity entity) {
+    public void saveOrUpdate(BookingsEntity entity) {
         Session session = this.dbConnection.openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.persist(entity);
-            transaction.commit();
-        }catch (Throwable ex) {
-            if (transaction!=null) transaction.rollback();
-            ex.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    @Override
-    public void update(BookingsEntity entity) {
-        Session session = this.dbConnection.openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.update(entity);
+            session.saveOrUpdate(entity);
             transaction.commit();
         }catch (Throwable ex) {
             if (transaction!=null) transaction.rollback();

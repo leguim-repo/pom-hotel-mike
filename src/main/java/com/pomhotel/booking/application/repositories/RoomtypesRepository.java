@@ -9,8 +9,7 @@ import java.util.List;
 public interface RoomtypesRepository {
     RoomtypesEntity findById(long id);
     List<RoomtypesEntity> findAll();
-    void createNew(RoomtypesEntity entity);
-    void update(RoomtypesEntity entity);
+    void saveOrUpdate(RoomtypesEntity entity);
     void deleteById(long id);
     void delete(RoomtypesEntity entity);
 }

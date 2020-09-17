@@ -4,15 +4,14 @@ import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.factories.ClientsFactory;
 import com.pomhotel.booking.application.factories.LoginsFactory;
-import com.pomhotel.booking.application.models.ClientModel;
-import com.pomhotel.booking.application.models.LoginModel;
+import com.pomhotel.booking.application.models.ClientsModel;
+import com.pomhotel.booking.application.models.LoginsModel;
 import com.pomhotel.booking.application.repositories.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginServiceImplementation implements LoginService{
-
 
     LoginRepository loginRepository;
     LoginsFactory loginsFactory;
@@ -26,19 +25,19 @@ public class LoginServiceImplementation implements LoginService{
     }
 
     @Override
-    public ClientModel authentification (LoginModel model) {
-        ClientModel clientModel;
+    public ClientsModel authentification (LoginsModel model) {
+        ClientsModel clientsModel;
 
         LoginsEntity loginsEntity = loginsFactory.createEntity(model);
         ClientsEntity clientsEntity = loginRepository.authentification(loginsEntity);
 
         if (clientsEntity != null){
-            clientModel = clientsFactory.createModel(clientsEntity);
+            clientsModel = clientsFactory.createModel(clientsEntity);
         }
         else{
-            clientModel = null;
+            clientsModel = null;
         }
 
-        return clientModel;
+        return clientsModel;
     }
 }

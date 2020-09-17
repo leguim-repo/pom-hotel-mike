@@ -1,5 +1,8 @@
 package com.pomhotel.booking.ui.controllers;
 
+import com.pomhotel.booking.application.models.RoomtypesModel;
+import com.pomhotel.booking.application.repositories.RoomtypesRepository;
+import com.pomhotel.booking.application.services.RoomTypesService;
 import org.apache.catalina.connector.CoyoteInputStream;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +18,16 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class HomeController {
+    RoomTypesService roomTypesService;
 
     @Autowired
-    public HomeController() { }
+    public HomeController(RoomTypesService roomTypesService) {
+        this.roomTypesService = roomTypesService;
+    }
 
     @GetMapping("/")
     public String index(Model model){
@@ -28,6 +35,8 @@ public class HomeController {
         model.addAttribute("projectname", "Pom Hotel & SPA");
 
         model.addAttribute("mode", "Test");
+
+        roomTypesService.findAll();
 
         return "index";
     }

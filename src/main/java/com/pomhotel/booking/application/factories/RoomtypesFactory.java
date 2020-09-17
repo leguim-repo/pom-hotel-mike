@@ -1,12 +1,12 @@
 package com.pomhotel.booking.application.factories;
 
 import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
-import com.pomhotel.booking.application.models.RoomTypeModel;
+import com.pomhotel.booking.application.models.RoomtypesModel;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RoomtypesFactory {
-    public RoomtypesEntity createEntity(RoomTypeModel model){
+    public RoomtypesEntity createEntity(RoomtypesModel model){
         RoomtypesEntity entity = new RoomtypesEntity();
         entity.setId(model.id);
         entity.setName(model.name);
@@ -16,8 +16,8 @@ public class RoomtypesFactory {
         return entity;
     }
 
-    public RoomTypeModel createModel(RoomtypesEntity entity){
-        RoomTypeModel model = new RoomTypeModel();
+    public RoomtypesModel createModel(RoomtypesEntity entity){
+        RoomtypesModel model = new RoomtypesModel();
         model.id = entity.getId();
         model.name = entity.getName();
         model.description = entity.getDescription();

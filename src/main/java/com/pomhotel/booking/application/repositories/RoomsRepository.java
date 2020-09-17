@@ -6,8 +6,7 @@ import java.util.List;
 public interface RoomsRepository {
     RoomsEntity findById(long id);
     List<RoomsEntity> findAll();
-    void createNew(RoomsEntity entity);
-    void update(RoomsEntity entity);
+    void saveOrUpdate(RoomsEntity entity);
     void deleteById(long id);
     void delete(RoomsEntity entity);
 }

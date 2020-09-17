@@ -1,9 +1,8 @@
 package com.pomhotel.booking.application.services;
 
-import com.pomhotel.booking.application.domain.entities.LoginsEntity;
-import com.pomhotel.booking.application.models.ClientModel;
-import com.pomhotel.booking.application.models.LoginModel;
+import com.pomhotel.booking.application.models.ClientsModel;
+import com.pomhotel.booking.application.models.LoginsModel;
 
 public interface LoginService {
-    ClientModel authentification (LoginModel model);
+    ClientsModel authentification (LoginsModel model);
 }

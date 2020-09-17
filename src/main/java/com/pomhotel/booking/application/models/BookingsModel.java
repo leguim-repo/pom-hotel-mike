@@ -3,7 +3,7 @@ package com.pomhotel.booking.application.models;
 import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import java.sql.Date;
 
-public class BookingModel {
+public class BookingsModel {
     public long id;
     public Date checkIn;
     public Date checkOut;
@@ -11,6 +11,6 @@ public class BookingModel {
     public ClientsEntity clientsByFkClientId;
 
     //Constructor
-    public BookingModel() {
+    public BookingsModel() {
     }
 }

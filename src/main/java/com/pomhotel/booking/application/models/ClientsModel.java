@@ -8,7 +8,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.Collection;
 import java.util.Set;
 
-public class ClientModel {
+public class ClientsModel {
     public long id;
     public String name;
     public String lastname;
@@ -17,6 +17,6 @@ public class ClientModel {
     public PreferencesEntity preferencesByFkPreferencesId;
 
     //Constructor
-    public ClientModel() {
+    public ClientsModel() {
     }
 }
