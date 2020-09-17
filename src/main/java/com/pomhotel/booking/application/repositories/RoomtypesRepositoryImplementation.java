@@ -17,16 +17,8 @@ public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
     private static SessionFactory dbConnection;
 
     @Autowired
-    public RoomtypesRepositoryImplementation() {
-        try {
-            Configuration config = new Configuration();
-            config.addAnnotatedClass(RoomtypesEntity.class);
-            config.configure();
-            dbConnection = config.buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Failed to create sessionFactory object." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+    public RoomtypesRepositoryImplementation(SessionFactory dbConnection) {
+        this.dbConnection = dbConnection;
     }
 
     @Override

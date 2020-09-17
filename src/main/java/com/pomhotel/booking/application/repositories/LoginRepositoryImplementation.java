@@ -17,19 +17,8 @@ public class LoginRepositoryImplementation implements LoginRepository{
     private static SessionFactory dbConnection;
 
     @Autowired
-    public LoginRepositoryImplementation() {
-            // Configuracion de Full Hibernate
-            try {
-                Configuration config = new Configuration();
-                //Registro de entidades
-                config.addAnnotatedClass(LoginsEntity.class);
-                config.addAnnotatedClass(ClientsEntity.class);
-                config.configure();
-                dbConnection = config.buildSessionFactory();
-            } catch (Throwable ex) {
-                System.err.println("Failed to create sessionFactory object." + ex);
-                throw new ExceptionInInitializerError(ex);
-            }
+    public LoginRepositoryImplementation(SessionFactory dbConnection) {
+        this.dbConnection = dbConnection;
     }
 
     @Override

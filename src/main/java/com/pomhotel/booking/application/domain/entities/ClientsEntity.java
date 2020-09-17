@@ -25,10 +25,10 @@ public class ClientsEntity implements Serializable {
     @Column(name = "email", nullable = true, length = 100)
     private String email;
 
-    @OneToMany(mappedBy = "clientsByFkClientId")
+    @OneToMany(mappedBy = "clientsByFkClientId", fetch=FetchType.EAGER)
     private Set<BookingsEntity> bookingsById;
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER)
     @PrimaryKeyJoinColumn
     private PreferencesEntity preferencesByFkPreferencesId;
 

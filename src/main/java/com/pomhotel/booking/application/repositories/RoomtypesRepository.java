@@ -3,6 +3,7 @@ package com.pomhotel.booking.application.repositories;
 import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 

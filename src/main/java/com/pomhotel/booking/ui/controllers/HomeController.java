@@ -1,32 +1,28 @@
 package com.pomhotel.booking.ui.controllers;
 
+import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
+import com.pomhotel.booking.application.models.LoginsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.repositories.RoomtypesRepository;
+import com.pomhotel.booking.application.services.LoginService;
 import com.pomhotel.booking.application.services.RoomTypesService;
-import org.apache.catalina.connector.CoyoteInputStream;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.xml.transform.stream.StreamSource;
-import java.io.InputStream;
-import java.io.StringReader;
 import java.util.Date;
 import java.util.List;
 
 @Controller
 public class HomeController {
-    RoomTypesService roomTypesService;
+    LoginService loginService;
 
     @Autowired
-    public HomeController(RoomTypesService roomTypesService) {
-        this.roomTypesService = roomTypesService;
+    public HomeController(LoginService loginService) {
+        this.loginService = loginService;
     }
 
     @GetMapping("/")
@@ -36,8 +32,7 @@ public class HomeController {
 
         model.addAttribute("mode", "Test");
 
-        roomTypesService.findAll();
-
+        List<LoginsModel> models = loginService.findAll();
         return "index";
     }
 

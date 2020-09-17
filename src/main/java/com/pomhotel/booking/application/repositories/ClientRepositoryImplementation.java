@@ -18,18 +18,8 @@ public class ClientRepositoryImplementation implements ClientRepository{
 
     private static SessionFactory dbConnection;
 
-    public ClientRepositoryImplementation() {
-        try {
-            Configuration config = new Configuration();
-            //Registro de entidades
-            config.addAnnotatedClass(LoginsEntity.class);
-            config.addAnnotatedClass(ClientsEntity.class);
-            config.configure();
-            dbConnection = config.buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Failed to create sessionFactory object." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+    public ClientRepositoryImplementation(SessionFactory dbConnection) {
+        this.dbConnection = dbConnection;
     }
 
     @Override

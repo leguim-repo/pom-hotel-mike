@@ -16,16 +16,8 @@ public class BookingsRepositoryImplementation implements BookingsRepository{
     private static SessionFactory dbConnection;
 
     @Autowired
-    public BookingsRepositoryImplementation() {
-        try {
-            Configuration config = new Configuration();
-            config.addAnnotatedClass(BookingsEntity.class);
-            config.configure();
-            dbConnection = config.buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Failed to create sessionFactory object." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+    public BookingsRepositoryImplementation(SessionFactory dbConnection) {
+        this.dbConnection = dbConnection;
     }
 
     @Override

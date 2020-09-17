@@ -21,7 +21,7 @@ public class LoginsEntity implements Serializable {
     @Column(name = "password", nullable = true, length = 100)
     private String password;
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER)
     @PrimaryKeyJoinColumn
     private ClientsEntity clientsByFkClientId;
 
