@@ -22,7 +22,7 @@
             secret1234
         </property>
 
-        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
         <mapping class="com.pomhotel.booking.application.domain.entities.BookingsEntity"/>
         <mapping class="com.pomhotel.booking.application.domain.entities.ClientsEntity"/>

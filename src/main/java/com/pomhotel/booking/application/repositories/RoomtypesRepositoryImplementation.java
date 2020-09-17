@@ -48,8 +48,6 @@ public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
         List<RoomtypesEntity> entities = null;
         Session session = this.dbConnection.openSession();
         try {
-            CriteriaQuery<LoginsEntity> c = session.getCriteriaBuilder().createQuery(LoginsEntity.class);
-            c.select(c.from(LoginsEntity.class));
             CriteriaQuery<RoomtypesEntity> cq = session.getCriteriaBuilder().createQuery(RoomtypesEntity.class);
             cq.select(cq.from(RoomtypesEntity.class));
             entities = session.createQuery(cq).getResultList();

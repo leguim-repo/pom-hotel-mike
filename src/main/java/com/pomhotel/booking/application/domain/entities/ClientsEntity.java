@@ -29,9 +29,8 @@ public class ClientsEntity implements Serializable {
     private Set<BookingsEntity> bookingsById;
 
     @OneToOne
-    @JoinColumn(referencedColumnName = "id")
+    @PrimaryKeyJoinColumn
     private PreferencesEntity preferencesByFkPreferencesId;
-    //private Collection<LoginsEntity> loginsById;
 
     public long getId() {
         return id;

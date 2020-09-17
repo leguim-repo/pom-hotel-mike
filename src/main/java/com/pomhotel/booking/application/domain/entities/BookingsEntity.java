@@ -30,7 +30,7 @@ public class BookingsEntity implements Serializable {
     private ClientsEntity clientsByFkClientId;
 
     @OneToOne
-    @JoinColumn(referencedColumnName = "id")
+    @PrimaryKeyJoinColumn
     private RoomsEntity roomsByFkRoomId;
 
 
@@ -61,7 +61,6 @@ public class BookingsEntity implements Serializable {
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
-
 
     public ClientsEntity getClientsByFkClientId() {
         return clientsByFkClientId;

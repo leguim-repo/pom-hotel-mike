@@ -22,7 +22,7 @@ public class LoginsEntity implements Serializable {
     private String password;
 
     @OneToOne
-    @JoinColumn(referencedColumnName = "id")
+    @PrimaryKeyJoinColumn
     private ClientsEntity clientsByFkClientId;
 
     public long getId() {

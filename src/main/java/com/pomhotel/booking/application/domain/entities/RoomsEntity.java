@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,8 +31,6 @@ public class RoomsEntity implements Serializable {
     @Column(name = "image", nullable = true)
     private byte[] image;
 
-    @OneToMany(mappedBy = "roomsByFkRoomId")
-    private Collection<BookingsEntity> bookingsById;
 
     @ManyToOne
     @JoinColumn(name = "fk_roomtype_id", referencedColumnName = "id", table = "rooms")
@@ -70,13 +69,6 @@ public class RoomsEntity implements Serializable {
     }
     public void setImage(byte[] image) {
         this.image = image;
-    }
-
-    public Collection<BookingsEntity> getBookingsById() {
-        return bookingsById;
-    }
-    public void setBookingsById(Collection<BookingsEntity> bookingsById) {
-        this.bookingsById = bookingsById;
     }
 
     public RoomtypesEntity getRoomtypesByFkRoomtypeId() {
