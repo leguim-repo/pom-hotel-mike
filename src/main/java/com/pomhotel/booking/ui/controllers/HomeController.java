@@ -1,11 +1,7 @@
 package com.pomhotel.booking.ui.controllers;
 
-import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
 import com.pomhotel.booking.application.models.LoginsModel;
-import com.pomhotel.booking.application.models.RoomtypesModel;
-import com.pomhotel.booking.application.repositories.RoomtypesRepository;
 import com.pomhotel.booking.application.services.LoginService;
-import com.pomhotel.booking.application.services.RoomTypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
