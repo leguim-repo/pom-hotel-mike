@@ -1,13 +1,13 @@
 package com.pomhotel.booking.application.services;
 
+import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import com.pomhotel.booking.application.factories.ClientsFactory;
-import com.pomhotel.booking.application.factories.RoomtypesFactory;
 import com.pomhotel.booking.application.models.ClientsModel;
 import com.pomhotel.booking.application.repositories.ClientRepository;
-import com.pomhotel.booking.application.repositories.RoomtypesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClientServiceImplementation implements ClientService{
     ClientRepository repository;
@@ -20,32 +20,26 @@ public class ClientServiceImplementation implements ClientService{
     }
 
     @Override
-    public void Insert(ClientsModel employee) {
-
-    }
-
-    @Override
     public ClientsModel findById(long id) {
-        return null;
+        return factory.createModel(repository.findById(id));
     }
 
     @Override
     public List<ClientsModel> findAll() {
-        return null;
+        List<ClientsEntity> entities = repository.findAll();
+        List<ClientsModel> models = entities.stream().map(entity -> {
+            return factory.createModel(entity);
+        }).collect(Collectors.toList());
+        return models;
     }
 
     @Override
     public void saveOrUpdate(ClientsModel model) {
-
-    }
-
-    @Override
-    public void deleteById(long id) {
-
+        repository.update(factory.createEntity(model));
     }
 
     @Override
     public void delete(ClientsModel model) {
-
+        repository.delete(factory.createEntity(model));
     }
 }
