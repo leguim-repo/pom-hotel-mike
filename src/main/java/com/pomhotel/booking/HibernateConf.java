@@ -21,7 +21,6 @@ public class HibernateConf {
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan("com.pomhotel.booking.application.domain.entities");
         sessionFactory.setHibernateProperties(hibernateProperties());
-
         return sessionFactory;
     }
 
