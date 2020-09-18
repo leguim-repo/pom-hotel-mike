@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tour Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" th:href="@{~/css/animate.css}">
+
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" th:href="@{~/css/icomoon.css}">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}">
+
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" th:href="@{~/css/magnific-popup.css}">
+
+    <!-- Flexslider  -->
+    <link rel="stylesheet" th:href="@{~/css/flexslider.css}">
+
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" th:href="@{~/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{~/css/owl.theme.default.min.css}">
+
+    <!-- Date Picker -->
+    <link rel="stylesheet" th:href="@{~/css/bootstrap-datepicker.css}">
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+
+</head>
+<body>
+
+<div class="colorlib-loader"></div>
+
+<div id="page">
+    <div class="colorlib-wrap">
+        <div class="container">
+            <div class="row">
+
+                <!-- SECTION OF ROOMS -->
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="wrap-division">
+
+                                <!-- TITLE OF THE SECTION -->
+                                <div class="col-md-12 col-md-offset-0 heading2 animate-box">
+                                    <h2>Own Rooms</h2>
+                                </div>
+
+                                <!-- ROOM SECTION (loop) -->
+                                <div class="row">
+                                    <div class="col-md-12 animate-box">
+                                        <div class="room-wrap">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="room-img" style="background-color: dimgrey;"></div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="desc">
+                                                        <h2>Family Room</h2>
+                                                        <p class="price"><span>$45</span> <small>/ night</small></p>
+                                                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                                                        <p><a href="#" class="btn btn-primary">Book Now!</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR -->
+                <div class="col-md-3">
+                    <div class="sidebar-wrap">
+
+                        <!-- BLACK BOX SEARCHER -->
+                        <div class="side search-wrap animate-box">
+                            <h3 class="sidebar-heading">Find your room</h3>
+                            <form method="post" class="colorlib-form">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="checkin">Check-in:</label>
+                                            <div class="form-field">
+                                                <i class="icon icon-calendar2"></i>
+                                                <input type="text" id="checkin" class="form-control date" placeholder="Check-in date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="checkout">Check-out:</label>
+                                            <div class="form-field">
+                                                <i class="icon icon-calendar2"></i>
+                                                <input type="text" id="checkout" class="form-control date" placeholder="Check-out date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="guests">Guest</label>
+                                            <div class="form-field">
+                                                <i class="icon icon-arrow-down3"></i>
+                                                <select name="people" id="guests" class="form-control">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5+</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="submit" name="submit" id="submit" value="Find Room" class="btn btn-primary btn-block">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- PRICE RANGE -->
+                        <div class="side animate-box">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="sidebar-heading">Price Range</h3>
+                                    <form method="post" class="colorlib-form-2">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="guests">Price from:</label>
+                                                    <div class="form-field">
+                                                        <i class="icon icon-arrow-down3"></i>
+                                                        <select name="pricefrom" id="pricefrom" class="form-control">
+                                                            <option value="#">1</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="guests">Price to:</label>
+                                                    <div class="form-field">
+                                                        <i class="icon icon-arrow-down3"></i>
+                                                        <select name="priceto" id="priceto" class="form-control">
+                                                            <option value="#">2000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ROOM TYPE -->
+                        <div class="side animate-box">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="sidebar-heading">Room Type</h3>
+                                    <form method="post" class="colorlib-form-2">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="form-field">
+                                                        <i class="icon icon-arrow-down3"></i>
+                                                        <select name="roomtype" id="roomtype" class="form-control">
+                                                            <option value="#">1</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+    </div>
+
+    <!-- jQuery -->
+    <script th:src="@{~/js/jquery.min.js}"></script>
+    <!-- jQuery Easing -->
+    <script th:src="@{~/js/jquery.easing.1.3.js}"></script>
+    <!-- Bootstrap -->
+    <script th:src="@{~/js/bootstrap.min.js}"></script>
+    <!-- Waypoints -->
+    <script th:src="@{~/js/jquery.waypoints.min.js}"></script>
+    <!-- Flexslider -->
+    <script th:src="@{~/js/jquery.flexslider-min.js}"></script>
+    <!-- Owl carousel -->
+    <script th:src="@{~/js/owl.carousel.min.js}"></script>
+    <!-- Magnific Popup -->
+    <script th:src="@{~/js/jquery.magnific-popup.min.js}"></script>
+    <script th:src="@{~/js/magnific-popup-options.js}"></script>
+    <!-- Date Picker -->
+    <script th:src="@{~/js/bootstrap-datepicker.js}"></script>
+    <!-- Stellar Parallax -->
+    <script th:src="@{~/js/jquery.stellar.min.js}"></script>
+
+    <!-- Main -->
+    <script th:src="@{~/js/main.js}"></script>
+</div>
+</body>
+</html>
