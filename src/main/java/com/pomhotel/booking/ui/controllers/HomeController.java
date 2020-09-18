@@ -33,7 +33,7 @@ public class HomeController {
         model.addAttribute("mode", "Test");
 
         List<LoginsModel> models = loginService.findAll();
-        return "index";
+        return "newClient";
     }
 
     @GetMapping("/petar")
