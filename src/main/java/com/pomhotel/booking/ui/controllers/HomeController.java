@@ -37,16 +37,14 @@ public class HomeController {
         return "index";
     }
 
-<<<<<<< HEAD
     //REGISTRATION FORM (get and post)
-=======
+
     //Enter at home page (provisional)
     @GetMapping("/home")
     public String home(Model model) {
 
         return "home";
     }
->>>>>>> f9de40be918aae100f0822af71cf3df14c89ed14
 
     @GetMapping("/registrationform")
     public String registration(Model model) {
