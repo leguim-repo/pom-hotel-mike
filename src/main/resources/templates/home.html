@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="/fragments/layout.html :: head"></head>
+<body>
+<header th:insert="fragments/layout.html :: header"></header>
+<div class="colorlib-loader"></div>
+<div id="page">
+    <div id="colorlib-reservation">
+        <div class="row">
+            <div class="tab-content">
+                <div id="hotel">
+                    <form method="post" class="colorlib-form">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="booknow">
+                                    <h2>Book Now</h2>
+                                    <span>Best Price Online</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="checkin">Check-in:</label>
+                                    <div class="form-field">
+                                        <i class="icon icon-calendar2"></i>
+                                        <input type="text" id="checkin" class="form-control date"
+                                               placeholder="Check-in date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="checkout">Check-out:</label>
+                                    <div class="form-field">
+                                        <i class="icon icon-calendar2"></i>
+                                        <input type="text" id="checkout" class="form-control date"
+                                               placeholder="Check-out date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="guests">Guest</label>
+                                    <div class="form-field">
+                                        <i class="icon icon-arrow-down3"></i>
+                                        <select name="guests" id="guests" class="form-control">
+                                            <option value="#">1</option>
+                                            <option value="#">2</option>
+                                            <option value="#">3</option>
+                                            <option value="#">4</option>
+                                            <option value="#">5+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" name="submit" id="submit" value="Find Hotel"
+                                       class="btn btn-primary btn-block">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div th:insert="fragments/layout.html :: sources"></div>
+</body>
+</html>
