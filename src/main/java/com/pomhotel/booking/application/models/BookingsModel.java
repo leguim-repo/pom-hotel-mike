@@ -8,7 +8,7 @@ public class BookingsModel {
     public Date checkIn;
     public Date checkOut;
     public Double totalPrice;
-    public ClientsEntity clientsByFkClientId;
+    public ClientsModel clientsByFkClientId;
 
     //Constructor
     public BookingsModel() {

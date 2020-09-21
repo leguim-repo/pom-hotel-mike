@@ -13,8 +13,8 @@ public class ClientsModel {
     public String name;
     public String lastname;
     public String email;
-    public Set<BookingsEntity> bookingsById;
-    public PreferencesEntity preferencesByFkPreferencesId;
+    public Set<BookingsModel> bookingsById;
+    public PreferencesModel preferencesByFkPreferencesId;
 
     //Constructor
     public ClientsModel() {

@@ -5,7 +5,7 @@ import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
 public class PreferencesModel {
     public long id;
     public Double priceLastSearch;
-    public RoomtypesEntity roomtypesByFkRoomtypeId;
+    public RoomtypesModel roomtypesByFkRoomtypeId;
 
     //Constructor
     public PreferencesModel() {

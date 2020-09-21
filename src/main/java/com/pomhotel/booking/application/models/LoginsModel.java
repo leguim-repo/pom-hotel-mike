@@ -6,7 +6,7 @@ public class LoginsModel {
     public long id;
     public String username;
     public String password;
-    public ClientsEntity clientsByFkClientId;
+    public ClientsModel clientsByFkClientId;
 
     //Constructor
     public LoginsModel() {
