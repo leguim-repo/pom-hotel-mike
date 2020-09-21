@@ -6,6 +6,7 @@ import com.pomhotel.booking.application.domain.entities.PreferencesEntity;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 public class ClientsModel {
@@ -13,7 +14,7 @@ public class ClientsModel {
     public String name;
     public String lastname;
     public String email;
-    public Set<BookingsModel> bookingsById;
+    public List<BookingsModel> bookingsById;
     public PreferencesModel preferencesByFkPreferencesId;
 
     //Constructor

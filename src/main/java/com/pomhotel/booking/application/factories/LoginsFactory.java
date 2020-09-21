@@ -2,16 +2,23 @@ package com.pomhotel.booking.application.factories;
 
 import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.models.LoginsModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 @Component
 public class LoginsFactory {
+    private final ClientsFactory clientsFactory;
+
+    @Autowired
+    public LoginsFactory(ClientsFactory clientsFactory) {
+        this.clientsFactory = clientsFactory;
+    }
+
     public LoginsEntity createEntity(LoginsModel model){
         LoginsEntity entity = new LoginsEntity();
         entity.setId(model.id);
         entity.setUsername(model.username);
         entity.setPassword(model.password);
-        entity.setClientsByFkClientId(model.clientsByFkClientId);
+        entity.setClientsByFkClientId(clientsFactory.createEntity(model.clientsByFkClientId));
         return entity;
     }
     public LoginsModel createModel(LoginsEntity entity){
@@ -19,7 +26,7 @@ public class LoginsFactory {
         model.id = entity.getId();
         model.username = entity.getUsername();
         model.password = entity.getPassword();
-        model.clientsByFkClientId = entity.getClientsByFkClientId();
+        model.clientsByFkClientId = clientsFactory.createModel(entity.getClientsByFkClientId());
         return model;
     }
 }

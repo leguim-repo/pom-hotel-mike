@@ -2,6 +2,7 @@ package com.pomhotel.booking.application.domain.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class ClientsEntity implements Serializable {
     private String email;
 
     @OneToMany(mappedBy = "clientsByFkClientId", fetch=FetchType.EAGER)
-    private Set<BookingsEntity> bookingsById;
+    private List<BookingsEntity> bookingsById;
 
     @OneToOne(fetch=FetchType.EAGER)
     @PrimaryKeyJoinColumn
@@ -76,10 +77,10 @@ public class ClientsEntity implements Serializable {
         return Objects.hash(id, name, lastname, email);
     }
 
-    public Set<BookingsEntity> getBookingsById() {
+    public List<BookingsEntity> getBookingsById() {
         return bookingsById;
     }
-    public void setBookingsById(Set<BookingsEntity> bookingsById) {
+    public void setBookingsById(List<BookingsEntity> bookingsById) {
         this.bookingsById = bookingsById;
     }
 

@@ -23,10 +23,10 @@ public class RoomtypesEntity implements Serializable {
     private String description;
 
     @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
-    private Set<PreferencesEntity> preferencesById;
+    private List<PreferencesEntity> preferencesById;
 
     @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
-    private Set<RoomsEntity> roomsById;
+    private List<RoomsEntity> roomsById;
 
     public long getId() {
         return id;
@@ -49,17 +49,17 @@ public class RoomtypesEntity implements Serializable {
         this.description = description;
     }
 
-    public Set<PreferencesEntity> getPreferencesById() {
+    public List<PreferencesEntity> getPreferencesById() {
         return preferencesById;
     }
-    public void setPreferencesById(Set<PreferencesEntity> preferencesById) {
+    public void setPreferencesById(List<PreferencesEntity> preferencesById) {
         this.preferencesById = preferencesById;
     }
 
-    public Set<RoomsEntity> getRoomsById() {
+    public List<RoomsEntity> getRoomsById() {
         return roomsById;
     }
-    public void setRoomsById(Set<RoomsEntity> roomsById) {
+    public void setRoomsById(List<RoomsEntity> roomsById) {
         this.roomsById = roomsById;
     }
 

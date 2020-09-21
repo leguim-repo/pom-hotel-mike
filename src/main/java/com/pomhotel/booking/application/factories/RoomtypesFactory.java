@@ -47,7 +47,6 @@ public class RoomtypesFactory {
         model.id = entity.getId();
         model.name = entity.getName();
         model.description = entity.getDescription();
-        model.preferencesById = entity.getPreferencesById();
 
         model.preferencesById = entity.getPreferencesById().stream()
                 .map(e -> preferencesFactory.createModel(e))
