@@ -8,7 +8,7 @@ public class RoomsModel {
     public String description;
     public Double pricePerNight;
     public byte[] image;
-    public RoomtypesEntity roomtypesByFkRoomtypeId;
+    public RoomtypesModel roomtypesByFkRoomtypeId;
 
     //Constructor
     public RoomsModel() {

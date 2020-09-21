@@ -10,7 +10,7 @@ public class RoomtypesModel {
     public String name;
     public String description;
     public Set<PreferencesEntity> preferencesById;
-    public Set<RoomsEntity> roomsById;
+    public Set<RoomsModel> roomsById;
 
     //Constructor
     public RoomtypesModel() {
