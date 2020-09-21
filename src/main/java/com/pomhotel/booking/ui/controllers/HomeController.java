@@ -34,6 +34,12 @@ public class HomeController {
         return "index";
     }
 
+    //Enter at home page (provisional)
+    @GetMapping("/home")
+    public String home(Model model) {
+
+        return "home";
+    }
 
     @GetMapping("/registration")
     public String registration(Model model) {
