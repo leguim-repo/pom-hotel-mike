@@ -14,7 +14,7 @@ public class ClientsModel {
     public String lastname;
     public String email;
     public Set<BookingsEntity> bookingsById;
-    public PreferencesEntity preferencesByFkPreferencesId;
+    public PreferencesModel preferencesByFkPreferencesId;
 
     //Constructor
     public ClientsModel() {
