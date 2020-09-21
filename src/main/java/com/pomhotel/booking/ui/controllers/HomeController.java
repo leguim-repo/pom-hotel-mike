@@ -1,7 +1,9 @@
 package com.pomhotel.booking.ui.controllers;
 
 import com.pomhotel.booking.application.models.LoginsModel;
+import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.LoginService;
+import com.pomhotel.booking.application.services.RoomsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
@@ -15,13 +17,14 @@ import java.util.List;
 @Controller
 public class HomeController {
     LoginService loginService;
+    RoomsService roomsService;
 
     @Autowired
-    public HomeController(LoginService loginService) {
+    public HomeController(LoginService loginService, RoomsService roomsService) {
         this.loginService = loginService;
+        this.roomsService = roomsService;
     }
 
-    // main entry point
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("datetime", new Date());
@@ -34,15 +37,16 @@ public class HomeController {
         return "index";
     }
 
+    //REGISTRATION FORM (get and post)
 
-    @GetMapping("/registration")
+    @GetMapping("/registrationform")
     public String registration(Model model) {
         //model.addAttribute("userForm", new User());
 
-        return "registration";
+        return "registrationform";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/registrationform")
     //public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
     public String registration() {
         /*
@@ -56,6 +60,7 @@ public class HomeController {
 
         return "redirect:/";
     }
+
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
@@ -91,12 +96,15 @@ public class HomeController {
         return new ModelAndView(view);
     }
 
-    // list rooms entry point
+    //Rooms without applying pre-filters.
     @GetMapping("/rooms")
-    public ModelAndView roomsList(Model model){
-
-        return new ModelAndView("listarooms");
+    public String roomsList(Model model){
+        List<RoomsModel> models = roomsService.findAll();
+        model.addAttribute("rooms", models);
+        return "listrooms";
     }
+
+
 
     // prebooking entry point
     @PostMapping("/prebooking")
