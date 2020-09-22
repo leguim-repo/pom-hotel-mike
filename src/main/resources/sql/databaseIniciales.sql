@@ -26,6 +26,7 @@ create table if not exists ROOMS
     description     varchar(300),
     pricePerNight   double,
     image           varchar(100),
+    guests          int,
     PRIMARY KEY (id),
     FOREIGN KEY (fk_roomtype_id) REFERENCES ROOMTYPES (id)
 );
@@ -56,7 +57,7 @@ create table if not exists CLIENTS
     email            varchar(100),
     PRIMARY KEY (id)
 );
-INSERT INTO CLIENTS VALUES (1, 'Pablo','Garcia','Garcia@seat.es'),(2, 'Oscar','Garcia','OGarcia@seat.com');
+INSERT INTO CLIENTS VALUES (1, 'Pablo','Garcia','Garcia@seat.es'),(2, 'Oscar','Garcia','OGarcia@seat.com'),(3, 'Miguel','de Pablos','mdpablos@seat.com');
 create table if not exists BOOKINGS
 (
     id              bigint AUTO_INCREMENT,
@@ -77,7 +78,9 @@ create table if not exists LOGINS
     fk_client_id  		bigint UNIQUE,
     username 		varchar(100) UNIQUE,
     password 		varchar(100),
+    role            varchar(100),
+    enabled         tinyint(1),
     PRIMARY KEY (id),
     FOREIGN KEY (fk_client_id) REFERENCES CLIENTS (id)
 );
-INSERT INTO LOGINS VALUES (1, 1, 'Garcia1989','1234'),(2, 2, 'Oscar2000','1234');
+INSERT INTO LOGINS VALUES (1, 1, 'Garcia1989','1234','ROLE_CLIENT',1),(2, 2, 'Oscar2000','1234','ROLE_CLIENT',1),(3, 3, 'Miguel','1234','ROLE_CLIENT',1);
