@@ -50,26 +50,16 @@ INSERT INTO ROOMS VALUES
 (18,2, 'DOU2','Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus iure a quod cum. Voluptatum repellat similique facilis nisi libero co',70,null),
 (19,2, 'DOU3','Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad id facilis nesciunt animi perferendis!',85,null),
 (20,2, 'DOU4','Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad id facilis nesciunt animi perferendis!',90,null);
-create table if not exists PREFERENCES
-(
-    id				bigint AUTO_INCREMENT,
-    fk_roomtype_id     bigint,
-    priceLastSearch double,
-    PRIMARY KEY (id),
-    FOREIGN KEY (fk_roomtype_id) REFERENCES ROOMTYPES (id)
-);
-INSERT INTO PREFERENCES VALUES (1, 1, 300),(2,2, 200);
+
 create table if not exists CLIENTS
 (
     id               bigint AUTO_INCREMENT,
-    fk_preferences_id   bigint UNIQUE,
     name           	 varchar(100),
     lastname         varchar(100),
     email            varchar(100),
-    PRIMARY KEY (id),
-    FOREIGN KEY (fk_preferences_id) REFERENCES PREFERENCES (id)
+    PRIMARY KEY (id)
 );
-INSERT INTO CLIENTS VALUES (1, 1, 'Pablo','Garcia','Garcia@seat.es'),(2, 2, 'Oscar','Garcia','OGarcia@seat.com');
+INSERT INTO CLIENTS VALUES (1, 'Pablo','Garcia','Garcia@seat.es'),(2, 'Oscar','Garcia','OGarcia@seat.com');
 create table if not exists BOOKINGS
 (
     id              bigint AUTO_INCREMENT,

@@ -4,8 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-
 @Entity
 @Table(name = "roomtypes", schema = "pom_hotel")
 public class RoomtypesEntity implements Serializable {
@@ -21,9 +19,6 @@ public class RoomtypesEntity implements Serializable {
     @Basic
     @Column(name = "description", nullable = true, length = 200)
     private String description;
-
-    @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
-    private List<PreferencesEntity> preferencesById;
 
     @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
     private List<RoomsEntity> roomsById;
@@ -47,13 +42,6 @@ public class RoomtypesEntity implements Serializable {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<PreferencesEntity> getPreferencesById() {
-        return preferencesById;
-    }
-    public void setPreferencesById(List<PreferencesEntity> preferencesById) {
-        this.preferencesById = preferencesById;
     }
 
     public List<RoomsEntity> getRoomsById() {

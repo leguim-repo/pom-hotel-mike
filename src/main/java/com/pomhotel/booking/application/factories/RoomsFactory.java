@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RoomsFactory {
-    private final RoomtypesFactory roomtypesFactory;
+    private RoomtypesFactory roomtypesFactory;
 
     @Autowired
     public RoomsFactory(RoomtypesFactory roomtypesFactory) {

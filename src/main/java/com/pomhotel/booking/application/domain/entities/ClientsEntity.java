@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "clients", schema = "pom_hotel")
@@ -28,10 +27,6 @@ public class ClientsEntity implements Serializable {
 
     @OneToMany(mappedBy = "clientsByFkClientId", fetch=FetchType.EAGER)
     private List<BookingsEntity> bookingsById;
-
-    @OneToOne(fetch=FetchType.EAGER)
-    @PrimaryKeyJoinColumn
-    private PreferencesEntity preferencesByFkPreferencesId;
 
     public long getId() {
         return id;
@@ -82,12 +77,5 @@ public class ClientsEntity implements Serializable {
     }
     public void setBookingsById(List<BookingsEntity> bookingsById) {
         this.bookingsById = bookingsById;
-    }
-
-    public PreferencesEntity getPreferencesByFkPreferencesId() {
-        return preferencesByFkPreferencesId;
-    }
-    public void setPreferencesByFkPreferencesId(PreferencesEntity preferencesByFkPreferencesId) {
-        this.preferencesByFkPreferencesId = preferencesByFkPreferencesId;
     }
 }

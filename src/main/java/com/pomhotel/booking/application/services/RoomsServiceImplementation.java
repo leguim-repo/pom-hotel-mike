@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RoomServiceImplementation implements RoomsService {
+public class RoomsServiceImplementation implements RoomsService {
 
     RoomsRepository repository;
     RoomsFactory factory;
 
     @Autowired
-    public RoomServiceImplementation(RoomsRepository repository, RoomsFactory factory) {
+    public RoomsServiceImplementation(RoomsRepository repository, RoomsFactory factory) {
         this.repository = repository;
         this.factory = factory;
     }

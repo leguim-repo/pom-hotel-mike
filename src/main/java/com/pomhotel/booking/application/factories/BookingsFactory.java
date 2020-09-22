@@ -7,11 +7,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BookingsFactory {
-    private final ClientsFactory clientsFactory;
 
     @Autowired
-    public BookingsFactory(ClientsFactory clientsFactory) {
-        this.clientsFactory = clientsFactory;
+    public BookingsFactory() {
     }
 
     public BookingsEntity createEntity(BookingsModel model){
@@ -20,7 +18,7 @@ public class BookingsFactory {
         entity.setCheckIn(model.checkIn);
         entity.setCheckOut(model.checkOut);
         entity.setTotalPrice(model.totalPrice);
-        entity.setClientsByFkClientId(clientsFactory.createEntity(model.clientsByFkClientId));
+        //entity.setClientsByFkClientId(clientsFactory.createEntity(model.clientsByFkClientId));
         return entity;
     }
 
@@ -30,7 +28,7 @@ public class BookingsFactory {
         model.checkIn = entity.getCheckIn();
         model.checkOut = entity.getCheckOut();
         model.totalPrice = entity.getTotalPrice();
-        model.clientsByFkClientId = clientsFactory.createModel(entity.getClientsByFkClientId());
+        //model.clientsByFkClientId = clientsFactory.createModel(entity.getClientsByFkClientId());
         return model;
     }
 }

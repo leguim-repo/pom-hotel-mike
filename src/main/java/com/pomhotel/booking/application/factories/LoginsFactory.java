@@ -4,9 +4,10 @@ import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.models.LoginsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 @Component
 public class LoginsFactory {
-    private final ClientsFactory clientsFactory;
+    private ClientsFactory clientsFactory;
 
     @Autowired
     public LoginsFactory(ClientsFactory clientsFactory) {
