@@ -25,27 +25,31 @@ public class HomeController {
         this.roomsService = roomsService;
     }
 
+    //HOME PAGE
     @GetMapping("/")
     public String index(Model model){
-        model.addAttribute("datetime", new Date());
-        model.addAttribute("projectname", "Pom Hotel & SPA");
-
-        model.addAttribute("mode", "Test");
-
-        List<LoginsModel> models = loginService.findAll();
-
-        return "index";
+        return "redirect:/home";
     }
 
-    //REGISTRATION FORM (get and post)
-
-    //Enter at home page (provisional)
     @GetMapping("/home")
     public String home(Model model) {
-
+        model.addAttribute("strNav", "Find Emotions");
+        model.addAttribute("imgNav", "chica_piscina.jpg");
         return "home";
     }
 
+    //ROOM PAGE
+    @GetMapping("/rooms")
+    public String roomsList(Model model){
+        model.addAttribute("strNav", "Find your rest");
+        model.addAttribute("imgNav", "hotel-30.jpg");
+
+        List<RoomsModel> models = roomsService.findAll();
+        model.addAttribute("rooms", models);
+        return "listrooms";
+    }
+
+    //OTHERS *MIKEEE*
     @GetMapping("/registrationform")
     public String registration(Model model) {
         //model.addAttribute("userForm", new User());
@@ -103,14 +107,6 @@ public class HomeController {
         return new ModelAndView(view);
     }
 
-    //Rooms without applying pre-filters.
-    @GetMapping("/rooms")
-    public String roomsList(Model model){
-        List<RoomsModel> models = roomsService.findAll();
-        model.addAttribute("rooms", models);
-        model.addAttribute("imgNav", "hotel-30.jpg");
-        return "listrooms";
-    }
 
 
 
@@ -139,20 +135,6 @@ public class HomeController {
         // comprobar login de cliente por seguridad
         return new ModelAndView("booked");
     }
-
-    /* paginas tontas se tiran directo en static
-    @GetMapping("/aboutuss")
-    public String aboutusview() {
-        // es necesario o...lo puedo tirar por static directo?
-        return "acercade";
-    }
-     */
-
-    /*
-    https://www.generateit.net/javascript-decompressor/
-    https://onlineasciitools.com/convert-decimal-to-ascii
-    https://beautifier.io/
-    */
 
     // for test purposes
     @PostMapping("/mike")
