@@ -1,14 +1,5 @@
 package com.pomhotel.booking.application.models;
-
-import com.pomhotel.booking.application.domain.entities.BookingsEntity;
-/*import com.pomhotel.booking.application.domain.entities
-        .PreferencesEntity;*/
-
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public class ClientsModel {
     public long id;
@@ -16,7 +7,6 @@ public class ClientsModel {
     public String lastname;
     public String email;
     public List<BookingsModel> bookingsById;
-    //public PreferencesModel preferencesByFkPreferencesId;
 
     //Constructor
     public ClientsModel() {

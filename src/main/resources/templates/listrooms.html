@@ -22,7 +22,7 @@
 
                                 <!-- TITLE OF THE SECTION -->
                                 <div class="col-md-12 col-md-offset-0 heading2 animate-box">
-                                    <h2>Own Rooms</h2>
+                                    <h2>Our Rooms</h2>
                                 </div>
 
                                 <!-- ROOM SECTION (loop) -->
@@ -31,7 +31,9 @@
                                         <div class="room-wrap">
                                             <div class="row">
                                                 <div class="col-md-6 col-sm-6">
-                                                    <div class="room-img" style="background-color: dimgrey;"></div>
+                                                    <div class="room-img" style="background-color: dimgrey;">
+                                                        <div class="room-img" th:style="'background-image:url(' + @{/images/{img}(img=${room.image})}+ ');'"></div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="desc">

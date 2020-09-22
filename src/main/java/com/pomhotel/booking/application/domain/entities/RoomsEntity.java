@@ -29,7 +29,7 @@ public class RoomsEntity implements Serializable {
 
     @Basic
     @Column(name = "image", nullable = true)
-    private byte[] image;
+    private String image;
 
 
     @ManyToOne
@@ -64,10 +64,10 @@ public class RoomsEntity implements Serializable {
         this.pricePerNight = pricePerNight;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -87,13 +87,11 @@ public class RoomsEntity implements Serializable {
                 Objects.equals(code, that.code) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(pricePerNight, that.pricePerNight) &&
-                Arrays.equals(image, that.image);
+                Objects.equals(image, that.image);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, code, description, pricePerNight);
-        result = 31 * result + Arrays.hashCode(image);
-        return result;
+        return Objects.hash(id, code, description, pricePerNight, image);
     }
 }

@@ -5,7 +5,7 @@ public class RoomsModel {
     public String code;
     public String description;
     public Double pricePerNight;
-    public byte[] image;
+    public String image;
     public RoomtypesModel roomtypesByFkRoomtypeId;
 
     //Constructor

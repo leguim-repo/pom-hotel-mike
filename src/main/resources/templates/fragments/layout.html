@@ -54,7 +54,7 @@
     <aside id="colorlib-hero">
         <div class="flexslider">
             <ul class="slides">
-                <li style="background-color: dimgrey;">
+                <li th:style="'background-image:url(' + @{/images/{img}(img=${imgNav})}+ ');'">
                     <div class="overlay"></div>
                     <div class="container-fluid">
                         <div class="row">

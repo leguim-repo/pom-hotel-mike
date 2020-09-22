@@ -108,6 +108,7 @@ public class HomeController {
     public String roomsList(Model model){
         List<RoomsModel> models = roomsService.findAll();
         model.addAttribute("rooms", models);
+        model.addAttribute("imgNav", "hotel-30.jpg");
         return "listrooms";
     }
 
