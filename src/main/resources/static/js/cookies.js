@@ -25,9 +25,9 @@ function getCookies() {
     document.getElementById("checkin").value = getCookie("Checkin");
     document.getElementById("checkout").value = getCookie("Checkout");
     selectorGuest.options[selectorGuest.selectedIndex].text = getCookie("Guests");
-    selectPriceFrom.options[selectPriceFrom.selectedIndex].text = getCookie("pricefrom");
-    selectPriceTo.options[selectPriceTo.selectedIndex].text = getCookie("priceto");
-    selectType.options[selectType.selectedIndex].text = getCookie("roomtype");
+    selectPriceFrom.options[selectPriceFrom.selectedIndex].text = getCookie("MinPrice");
+    selectPriceTo.options[selectPriceTo.selectedIndex].text = getCookie("MaxPrice");
+    selectType.options[selectType.selectedIndex].text = getCookie("Type");
 }
 
 //Function for get every cookies' values
