@@ -3,6 +3,8 @@ package com.pomhotel.booking.ui.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Description;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -57,15 +59,13 @@ Con solo meter la dependencias en el pom spring ya mete un login
     }
 
 
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/booknow/**").hasRole("CLIENT") //protegido por el role
+                    .antMatchers("/book/**").hasRole("CLIENT") //protegido por el role
                     .antMatchers(resources).permitAll()
                     .anyRequest().authenticated()
                     .and()
@@ -73,7 +73,8 @@ Con solo meter la dependencias en el pom spring ya mete un login
                     .loginPage("/showMyLoginPage")  // entrypoint que pasar el form de login
                     //.loginPage("/contact.html") // de ser un static para hacerlo asin
                     .loginProcessingUrl("/authenticateTheUser") //entrypoint gestionado por spring
-                    .defaultSuccessUrl("/login?ok") // no me redirige quizas por el handler
+                    //.defaultSuccessUrl("/login?ok") // no me redirige quizas por el handler
+                    .defaultSuccessUrl("/defaultbooknow")
                     .successHandler(successHandler)
                     .failureHandler(failureHandler)
                     .permitAll()
@@ -106,6 +107,8 @@ Con solo meter la dependencias en el pom spring ya mete un login
 
         return jdbcUserDetailsManager;
     }
+
+
 
 
 }
