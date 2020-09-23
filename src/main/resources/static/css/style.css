@@ -464,7 +464,7 @@ h1, h2, h3, h4, h5, h6, figure {
         #colorlib-reservation .nav-tabs li a {
           padding: 10px !important; } }
   #colorlib-reservation .tab-content {
-    background: #2C2E3E;
+    background: #011f48; /*#2C2E3E;*/
     padding: 30px 60px; }
 
 .colorlib-form label {
@@ -743,7 +743,7 @@ h1, h2, h3, h4, h5, h6, figure {
     text-transform: uppercase;
     margin-bottom: 30px; }
   .sidebar-wrap .search-wrap {
-    background: #2C2E3E;
+    background: #011f48; /*#2C2E3E;*/
     border: 1px solid #f0f0f0;
     padding: 2em 20px;
     -webkit-border-radius: 4px;
@@ -1753,6 +1753,7 @@ input[type="text"] {
   background: #FFDD00;
   color: #000;
   border: 1px solid #FFDD00; }
+
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background: #ffe01a !important;
     border-color: #ffe01a !important; }

@@ -36,7 +36,6 @@ public class HomeController {
         return "home";
     }
 
-
     //ROOM PAGE
     @GetMapping("/rooms")
     public String roomsList(Model model){
@@ -52,6 +51,13 @@ public class HomeController {
     public String roomsList() {
         return "redirect:/rooms";
     }
+
+    //SIGN IN PAGE
+    @GetMapping("/signin")
+    public String signIn(Model model){
+        return "signin";
+    }
+
 
     //OTHERS *MIKEEE*
     //@GetMapping("/registrationform")
