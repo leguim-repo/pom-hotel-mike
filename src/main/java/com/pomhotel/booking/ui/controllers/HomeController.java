@@ -33,7 +33,7 @@ public class HomeController {
     @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("strNav", "Find Emotions");
-        model.addAttribute("imgNav", "chica_jacuzzi.jpg");
+        model.addAttribute("imgNav", "chica_piscina.jpg");
         return "home";
     }
 
@@ -53,13 +53,10 @@ public class HomeController {
         return "listrooms";
     }
 
-<<<<<<< HEAD
     @PostMapping("/rooms")
     public String roomsList() {
         return "redirect:/rooms";
     }
-=======
->>>>>>> d5cc803ca9d906868a8f8f81f4fff833202c7681
 
     //OTHERS *MIKEEE*
     //@GetMapping("/registrationform")
