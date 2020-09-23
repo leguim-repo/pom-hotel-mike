@@ -1,6 +1,5 @@
 package com.pomhotel.booking.ui.controllers;
 
-import com.pomhotel.booking.application.models.LoginsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.LoginService;
 import com.pomhotel.booking.application.services.RoomsService;
@@ -34,7 +33,7 @@ public class HomeController {
     @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("strNav", "Find Emotions");
-        model.addAttribute("imgNav", "chica_piscina.jpg");
+        model.addAttribute("imgNav", "chica_jacuzzi.jpg");
         return "home";
     }
 
@@ -54,22 +53,25 @@ public class HomeController {
         return "listrooms";
     }
 
+<<<<<<< HEAD
     @PostMapping("/rooms")
     public String roomsList() {
         return "redirect:/rooms";
     }
+=======
+>>>>>>> d5cc803ca9d906868a8f8f81f4fff833202c7681
 
     //OTHERS *MIKEEE*
-    @GetMapping("/registrationform")
-    public String registration(Model model) {
+    //@GetMapping("/registrationform")
+    //public String registration(Model model) {
         //model.addAttribute("userForm", new User());
 
-        return "registrationform";
-    }
+    //    return "registrationform";
+    //}
 
-    @PostMapping("/registrationform")
+    //@PostMapping("/registrationform")
     //public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-    public String registration() {
+    //public String registration() {
         /*
         userValidator.validate(userForm, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -79,10 +81,10 @@ public class HomeController {
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
          */
 
-        return "redirect:/";
-    }
+    //    return "redirect:/";
+    //}
 
-
+    /*
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (error != null)
@@ -93,21 +95,21 @@ public class HomeController {
 
         return "login";
     }
-
+    */
 
     // TODO petarme authentificate login/resitration is the way
     // login entry point
-    @PostMapping("/authentificate")
-    public ModelAndView loginView(Model model) {
+    //@PostMapping("/authentificate")
+    //public ModelAndView loginView(Model model) {
         // recogemos las credenciales de cliente y llamamos al servicio para que las compruebe
-        String logincorrect = "logincorrect";
-        String loginfail = "loginfail";
-        String view = "";
+    //    String logincorrect = "logincorrect";
+    //    String loginfail = "loginfail";
+    //    String view = "";
         /*
          si el servicio valida la credenciales que...que hacemos...como decimos al cliente que esta logeado correctamente?
          si las credenciales no son validas le tiramos un pop up de que no son validas
          */
-
+    /*
         if (true) {
             view = logincorrect;
         }
@@ -116,18 +118,18 @@ public class HomeController {
         }
         return new ModelAndView(view);
     }
-
+    */
 
 
 
     // prebooking entry point
-    @PostMapping("/prebooking")
-    public ModelAndView booknow(Model model) {
+    //@PostMapping("/prebooking")
+    //public ModelAndView booknow(Model model) {
         /*
          si el cliente esta conectado pasa la vista de checkavail
          si el cliente no esta conectado pasamos a al vista de login
         */
-
+/*
         String loginview = "login";
         String checkavail = "checkavail";
         String view = "";
@@ -139,12 +141,14 @@ public class HomeController {
         }
         return new ModelAndView(view);
     }
-
+*/
+    /*
     @PostMapping("/booking")
     public ModelAndView checkdates(Model model){
         // comprobar login de cliente por seguridad
         return new ModelAndView("booked");
     }
+    */
 
     // for test purposes
     @PostMapping("/mike")
