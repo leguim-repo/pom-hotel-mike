@@ -37,10 +37,6 @@ public class HomeController {
         return "home";
     }
 
-    @PostMapping("/home")
-    public String home() {
-        return "redirect:/rooms";
-    }
 
     //ROOM PAGE
     @GetMapping("/rooms")

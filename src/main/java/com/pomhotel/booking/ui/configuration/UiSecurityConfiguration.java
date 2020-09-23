@@ -37,7 +37,7 @@ Con solo meter la dependencias en el pom spring ya mete un login
     //Necesario para evitar que la seguridad se aplique a los resources estaticos
     //Como los css, imagenes y javascripts
     String[] resources = new String[]{
-            "/css/**","/fonts/**","/images/**","/js/**","/**"
+            "/css/**","/fonts/**","/images/**","/js/**","/**","/home/**"
             };
 
     @Override
