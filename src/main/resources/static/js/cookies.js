@@ -1,12 +1,19 @@
+let selectorGuest = document.getElementById("guests");
+
 //on load getCookies !!!
-getCookies();
+//getCookies();
+
 
 //Function for save session cookies
 function saveCookies(){
-    document.cookie = "Checkin=" + document.getElementById("checkin").value;
-    document.cookie = "Checkout=" + document.getElementById("checkout").value;
-    document.cookie = "Guest=" + document.getElementById("guest").value;
-    // OJO listrooms.html
+    var d = new Date();
+    d.setTime(d.getTime() + (31 * 24 * 60* 60* 1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = "Checkin=" + document.getElementById("checkin").value + expires;
+    document.cookie = "Checkout=" + document.getElementById("checkout").value + expires;
+    document.cookie = "Guests=" + selectorGuest.options[selectorGuest.selectedIndex].text + expires;
+    
+
     //document.cookie = "MinPrice=" + document.getElementById("pricefrom").value;
     //document.cookie = "MaxPrice=" + document.getElementById("priceto").value;
     //document.cookie = "Type=" + document.getElementById("roomtype").value;
@@ -16,8 +23,9 @@ function saveCookies(){
 function getCookies() {
     document.getElementById("checkin").value = getCookie("Checkin");
     document.getElementById("checkout").value = getCookie("Checkout");
-    document.getElementById("guest").value = getCookie("Guest");
-    // OJO listrooms.html
+    selectorGuest.options[selectorGuest.selectedIndex].text = getCookie("Guests");
+
+
     //document.getElementById("MinPrice").value = getCookie("pricefrom");
     //document.getElementById("MaxPrice").value = getCookie("priceto");
     //document.getElementById("Type").value = getCookie("roomtype");

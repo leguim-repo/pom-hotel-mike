@@ -38,6 +38,11 @@ public class HomeController {
         return "home";
     }
 
+    @PostMapping("/home")
+    public String home() {
+        return "redirect:/rooms";
+    }
+
     //ROOM PAGE
     @GetMapping("/rooms")
     public String roomsList(Model model){
@@ -47,6 +52,11 @@ public class HomeController {
         List<RoomsModel> models = roomsService.findAll();
         model.addAttribute("rooms", models);
         return "listrooms";
+    }
+
+    @PostMapping("/rooms")
+    public String roomsList() {
+        return "redirect:/rooms";
     }
 
     //OTHERS *MIKEEE*
