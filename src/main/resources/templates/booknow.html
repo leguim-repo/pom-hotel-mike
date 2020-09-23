@@ -16,7 +16,8 @@
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
     </form>
-    
+
+
     <h2>Welcome</h2>
     <p>Spring Security Thymeleaf tutorial</p>
     <div sec:authorize="hasRole('USER')">Text visible to user.</div>
