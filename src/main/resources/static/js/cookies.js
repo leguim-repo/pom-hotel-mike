@@ -1,33 +1,43 @@
-let selectorGuest = document.getElementById("guests");
-let selectPriceFrom =  document.getElementById("pricefrom");
-let selectPriceTo =  document.getElementById("priceto");
-let selectType =  document.getElementById("roomtype");
-
-//on load getCookies !!!
-getCookies();
-
+if (document.URL.includes("home")){
+    getCookiesHome();
+}else{
+    getCookiesRooms();
+}
 
 //Function for save session cookies
 function saveCookies(){
-    var d = new Date();
-    d.setTime(d.getTime() + (31 * 24 * 60* 60* 1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = "Checkin=" + document.getElementById("checkin").value + expires;
-    document.cookie = "Checkout=" + document.getElementById("checkout").value + expires;
-    document.cookie = "Guests=" + selectorGuest.options[selectorGuest.selectedIndex].text + expires;
-    document.cookie = "MinPrice=" + selectPriceFrom.options[selectPriceFrom.selectedIndex].text + expires;
-    document.cookie = "MaxPrice=" + selectPriceTo.options[selectPriceTo.selectedIndex].text + expires;
-    document.cookie = "Type=" + selectType.options[selectType.selectedIndex].text + expires;
+    setCookie("Checkin",document.getElementById("checkin").value,90);
+    setCookie("Checkout",document.getElementById("checkout").value,90);
+    setCookie("Guests",document.getElementById("guests").value,90);
 }
 
+function setCookiePriceFrom(){
+    setCookie("MinPrice",document.getElementById("pricefrom").value,90);
+}
+
+function setCookiePriceTo(){
+    setCookie("MaxPrice",document.getElementById("priceto").value,90);
+}
+
+function setCookieType(){
+    setCookie("Type",document.getElementById("type").value,90);
+}
+
+
 //Function for read saved cookies
-function getCookies() {
+function getCookiesHome() {
     document.getElementById("checkin").value = getCookie("Checkin");
     document.getElementById("checkout").value = getCookie("Checkout");
-    selectorGuest.options[selectorGuest.selectedIndex].text = getCookie("Guests");
-    selectPriceFrom.options[selectPriceFrom.selectedIndex].text = getCookie("MinPrice");
-    selectPriceTo.options[selectPriceTo.selectedIndex].text = getCookie("MaxPrice");
-    selectType.options[selectType.selectedIndex].text = getCookie("Type");
+    document.getElementById("guests").value = getCookie("Guests");
+}
+
+function getCookiesRooms() {
+    document.getElementById("checkin").value = getCookie("Checkin");
+    document.getElementById("checkout").value = getCookie("Checkout");
+    document.getElementById("guests").value = getCookie("Guests");
+    document.getElementById("pricefrom").value = getCookie("MinPrice");
+    document.getElementById("priceto").value = getCookie("MaxPrice");
+    document.getElementById("roomtype").value= getCookie("Type");
 }
 
 //Function for get every cookies' values
@@ -45,4 +55,11 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }

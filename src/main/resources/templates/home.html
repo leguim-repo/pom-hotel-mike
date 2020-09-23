@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="/fragments/layout.html :: head"></head>
+<head th:insert="/fragments/layout.html :: head">
+</head>
 <body>
 <header th:insert="fragments/layout.html :: header"></header>
 <div class="colorlib-loader"></div>
@@ -43,11 +44,11 @@
                                     <div class="form-field">
                                         <i class="icon icon-arrow-down3"></i>
                                         <select name="guests" id="guests" class="form-control">
-                                            <option value="#">1</option>
-                                            <option value="#">2</option>
-                                            <option value="#">3</option>
-                                            <option value="#">4</option>
-                                            <option value="#">5+</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5+</option>
                                         </select>
                                     </div>
                                 </div>

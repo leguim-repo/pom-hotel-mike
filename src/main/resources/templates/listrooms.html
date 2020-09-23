@@ -114,8 +114,12 @@
                                                     <label for="guests">Price from:</label>
                                                     <div class="form-field">
                                                         <i class="icon icon-arrow-down3"></i>
-                                                        <select name="pricefrom" id="pricefrom" class="form-control">
-                                                            <option value="#">1</option>
+                                                        <select onchange="setCookiePriceFrom()"  name="pricefrom" id="pricefrom" class="form-control">
+                                                            <option value="1">1</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                            <option value="200">200</option>
+                                                            <option value="300">300</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -125,8 +129,12 @@
                                                     <label for="guests">Price to:</label>
                                                     <div class="form-field">
                                                         <i class="icon icon-arrow-down3"></i>
-                                                        <select name="priceto" id="priceto" class="form-control">
-                                                            <option value="#">2000</option>
+                                                        <select onchange="setCookiePriceTo()" name="priceto" id="priceto" class="form-control">
+                                                            <option value="100">100</option>
+                                                            <option value="200">200</option>
+                                                            <option value="300">300</option>
+                                                            <option value="500">500</option>
+                                                            <option value="1000">1000</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -148,7 +156,7 @@
                                                 <div class="form-group">
                                                     <div class="form-field">
                                                         <i class="icon icon-arrow-down3"></i>
-                                                        <select name="roomtype" id="roomtype" class="form-control">
+                                                        <select onchange="setCookieType()" name="roomtype" id="roomtype" class="form-control">
                                                             <option value="#">1</option>
                                                         </select>
                                                     </div>
