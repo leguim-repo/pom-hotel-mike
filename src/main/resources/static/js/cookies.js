@@ -15,9 +15,9 @@ function saveCookies(){
     document.cookie = "Checkin=" + document.getElementById("checkin").value + expires;
     document.cookie = "Checkout=" + document.getElementById("checkout").value + expires;
     document.cookie = "Guests=" + selectorGuest.options[selectorGuest.selectedIndex].text + expires;
-    document.cookie = "MinPrice=" + document.getElementById("pricefrom").value;
-    document.cookie = "MaxPrice=" + document.getElementById("priceto").value;
-    document.cookie = "Type=" + document.getElementById("roomtype").value;
+    document.cookie = "MinPrice=" + selectPriceFrom.options[selectPriceFrom.selectedIndex].text + expires;
+    document.cookie = "MaxPrice=" + selectPriceTo.options[selectPriceTo.selectedIndex].text + expires;
+    document.cookie = "Type=" + selectType.options[selectType.selectedIndex].text + expires;
 }
 
 //Function for read saved cookies
@@ -25,9 +25,9 @@ function getCookies() {
     document.getElementById("checkin").value = getCookie("Checkin");
     document.getElementById("checkout").value = getCookie("Checkout");
     selectorGuest.options[selectorGuest.selectedIndex].text = getCookie("Guests");
-    document.getElementById("MinPrice").value = getCookie("pricefrom");
-    document.getElementById("MaxPrice").value = getCookie("priceto");
-    document.getElementById("Type").value = getCookie("roomtype");
+    selectPriceFrom.options[selectPriceFrom.selectedIndex].text = getCookie("pricefrom");
+    selectPriceTo.options[selectPriceTo.selectedIndex].text = getCookie("priceto");
+    selectType.options[selectType.selectedIndex].text = getCookie("roomtype");
 }
 
 //Function for get every cookies' values
