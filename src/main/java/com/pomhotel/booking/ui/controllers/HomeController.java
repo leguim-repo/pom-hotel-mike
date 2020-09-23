@@ -1,7 +1,9 @@
 package com.pomhotel.booking.ui.controllers;
 
 import com.pomhotel.booking.application.models.RoomsModel;
+import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.LoginService;
+import com.pomhotel.booking.application.services.RoomTypesService;
 import com.pomhotel.booking.application.services.RoomsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,11 +18,13 @@ import java.util.List;
 public class HomeController {
     LoginService loginService;
     RoomsService roomsService;
-
+    RoomTypesService roomTypesService;
     @Autowired
-    public HomeController(LoginService loginService, RoomsService roomsService) {
+    public HomeController(LoginService loginService, RoomsService roomsService, RoomTypesService roomTypesService) {
         this.loginService = loginService;
         this.roomsService = roomsService;
+        this.roomTypesService = roomTypesService;
+
     }
 
     //HOME PAGE
@@ -42,8 +46,12 @@ public class HomeController {
         model.addAttribute("strNav", "Find your rest");
         model.addAttribute("imgNav", "hotel-30.jpg");
 
-        List<RoomsModel> models = roomsService.findAll();
-        model.addAttribute("rooms", models);
+        List<RoomsModel> rooms = roomsService.findAll();
+        model.addAttribute("rooms", rooms);
+
+        List<RoomtypesModel> types = roomTypesService.findAll();
+        model.addAttribute("types", types);
+
         return "listrooms";
     }
 

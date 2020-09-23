@@ -1,8 +1,4 @@
-if (document.URL.includes("home")){
-    getCookiesHome();
-}else{
-    getCookiesRooms();
-}
+inicializeCookies();
 
 //Function for save session cookies
 function saveCookies(){
@@ -20,7 +16,7 @@ function setCookiePriceTo(){
 }
 
 function setCookieType(){
-    setCookie("Type",document.getElementById("type").value,90);
+    setCookie("Type",document.getElementById("roomtype").value,90);
 }
 
 
@@ -62,4 +58,18 @@ function setCookie(cname, cvalue, exdays) {
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function inicializeCookies(){
+    if(!getCookie("MinPrice")){
+        setCookie("MinPrice",1,90);
+        setCookie("MaxPrice",1000,90);
+        setCookie("Type",0,90);
+    }
+
+    if (document.URL.includes("home")){
+        getCookiesHome();
+    }else{
+        getCookiesRooms();
+    }
 }

@@ -86,6 +86,7 @@
                                             <div class="form-field">
                                                 <i class="icon icon-arrow-down3"></i>
                                                 <select name="people" id="guests" class="form-control">
+                                                    <option value="" disabled selected>Select guests</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -156,8 +157,13 @@
                                                 <div class="form-group">
                                                     <div class="form-field">
                                                         <i class="icon icon-arrow-down3"></i>
-                                                        <select onchange="setCookieType()" name="roomtype" id="roomtype" class="form-control">
-                                                            <option value="#">1</option>
+                                                        <!-- <select onchange="setCookieType()" name="roomtype" id="roomtype" class="form-control">
+                                                            <option value="0">All types</option>
+                                                        </select> -->
+                                                        <select  onchange="setCookieType()" name="roomtype" id="roomtype" class="form-control">
+                                                            <option value="0">All types</option>
+                                                            <option th:each="item : ${types}" th:value="${item.id}"
+                                                                    th:text="${item.name}"></option>
                                                         </select>
                                                     </div>
                                                 </div>
