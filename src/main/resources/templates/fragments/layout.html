@@ -31,7 +31,7 @@
 </head>
 <body>
 <header th:fragment="header">
-    <nav class="colorlib-nav" role="navigation">
+    <nav th:fragment="nav" class="colorlib-nav" role="navigation">
         <div class="top-menu">
             <div class="container-fluid">
                 <div class="row">
@@ -43,7 +43,7 @@
                             <li><a href="home">Home</a></li>
                             <li><a href="rooms">Rooms</a></li>
                             <li><a href="aboutus">About</a></li>
-                            <li><a href="#">Sign in</a></li>
+                            <li><a href="signin">Sign in</a></li>
                         </ul>
                     </div>
                 </div>
