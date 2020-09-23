@@ -30,5 +30,14 @@
     Authenticated user roles:
     <div sec:authentication="principal.authorities"></div>
 
+    <form th:action="@{/finalbooking}" class="form" id="booking" method="post">
+        <label>Campo dummy</label>
+        <input type="text">
+        <label>Campo dummy</label>
+        <input type="text">
+        <label>Campo dummy</label>
+        <input type="text">
+        <button type="submit">Booking</button>
+    </form>
 </body>
 </html>

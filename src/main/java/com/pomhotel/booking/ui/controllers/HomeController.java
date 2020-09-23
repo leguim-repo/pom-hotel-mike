@@ -44,7 +44,8 @@ public class HomeController {
     @GetMapping("/rooms")
     public String roomsList(Model model){
         model.addAttribute("strNav", "Find your rest");
-        model.addAttribute("imgNav", "hotel-30.jpg");
+        //model.addAttribute("imgNav", "hotel-30.jpg");
+        model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
 
         List<RoomsModel> rooms = roomsService.findAll();
         model.addAttribute("rooms", rooms);
@@ -60,24 +61,28 @@ public class HomeController {
         return "redirect:/rooms";
     }
 
-
+    // BOOk FLOW created with https://www.youtube.com/watch?v=GJkuTx1DQzg
     @RequestMapping("/bookroomnow")
     public String bookroomnow() {
-        // aqui debemos asegurarnos que el user esta logeado?
+        // aqui presentamos el formulario final para hacer la reserva
 
         return "booknow";
     }
 
-    //presentamos el form de booknow
-    /*
-    @GetMapping("/boooknow")
-    public String bookNow() {
-        return "booknow";
+    @PostMapping("/finalbooking")
+    public String finalBooking(){
+        String view="fail";
+        //aqui recogemos los datos del formulario booknow
+        // y finalemente introducimos los datos de reserva en la db
+        // el servicio de turno nos debera devolver si se ha podido meter la reserva en la db con exito o si ha fallado
+        if ( true ) {
+            view="bookedsucces";
+        }
+        else {
+            view="bookedfail";
+        }
+        return view;
     }
-
-     */
-    //
-
 
     //SIGN IN PAGE
     @GetMapping("/signin")
@@ -85,7 +90,11 @@ public class HomeController {
         return "signin";
     }
 
-
+    //ABOUT US
+    @GetMapping("/aboutus")
+    public String aboutus(Model model){
+        return "redirect:/acercade.html";
+    }
 
     // for test purposes
     @PostMapping("/mike")

@@ -66,7 +66,9 @@ Con solo meter la dependencias en el pom spring ya mete un login
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/book/**").hasRole("CLIENT") //protegido por el role
-                    .antMatchers(resources).permitAll()
+                    .antMatchers("/bookroomnow/**").hasRole("CLIENT") //protegido por el role
+                    .antMatchers("/finalbooking/**").hasRole("CLIENT")
+                .antMatchers(resources).permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
