@@ -1,6 +1,5 @@
 package com.pomhotel.booking.ui.controllers;
 
-import com.pomhotel.booking.application.models.LoginsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.LoginService;
 import com.pomhotel.booking.application.services.RoomsService;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -81,7 +79,7 @@ public class HomeController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
 
-        return "login";
+        return "signin";
     }
 
 
@@ -141,7 +139,7 @@ public class HomeController {
     public String acceptData(@RequestBody String payloadBody, @RequestHeader HttpHeaders headers)  {
         // Con este metodo podemos ver que paramentros enviamos con el post desde el form
         System.out.println("\nParametros recibidos: "+payloadBody+"\n");
-        return "index";
+        return "home";
     }
 
     // for test purposes
