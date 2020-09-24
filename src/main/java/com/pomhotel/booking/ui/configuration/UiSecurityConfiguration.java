@@ -91,16 +91,6 @@ Con solo meter la dependencias en el pom spring ya mete un login
 
 
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-
-        /*web.ignoring().antMatchers("/resources/**","/static/**","/Script/**","/Style/**","/Icon/**",
-                "/js/**","/vendor/**","/bootstrap/**","/Image/**","/rooms/**");*/
-
-        //logoutSuccessUrl("/customLogout")
-    }
-
-
     @Bean
     public UserDetailsManager userDetailsManager() {
 

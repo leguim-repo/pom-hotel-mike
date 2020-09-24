@@ -1,5 +1,6 @@
 package com.pomhotel.booking.ui.controllers;
 
+import com.pomhotel.booking.application.models.NewClientModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.LoginService;
@@ -9,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -76,7 +81,7 @@ public class HomeController {
     // BOOK NOW! (User has to be connected)
     @PostMapping("/finalbooking")
     public String finalBooking(){
-        String view="fail";
+        String view;
         //aqui recogemos los datos del formulario booknow
         // y finalemente introducimos los datos de reserva en la db
         // el servicio de turno nos debera devolver si se ha podido meter la reserva en la db con exito o si ha fallado
@@ -96,8 +101,25 @@ public class HomeController {
 
     //SIGN IN PAGE
     @GetMapping("/signin")
-    public String signIn(Model model){
+    public String signIn(WebRequest request, Model model){
+        NewClientModel newclient = new NewClientModel();
+        model.addAttribute("newclient", newclient);
+
         return "signin";
+    }
+
+    //RESGISTER NEW CLIENT created with https://www.youtube.com/watch?v=1q-1Bpy168g
+    @PostMapping("/registernewclient")
+    public String registerNewClient(@ModelAttribute("user") @Valid NewClientModel newclient, HttpServletRequest request, Errors errors) {
+        // aqui haria falta un servicio que compruebe si el user ya existe o no.
+        String view;
+        System.out.println("newclient:"+newclient.toString());
+        if (true) {
+            view = "redirect:/home";
+        } else {
+            view = "registerfail";
+        }
+        return view;
     }
 
     //ABOUT US

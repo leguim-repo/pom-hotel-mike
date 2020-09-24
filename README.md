@@ -15,4 +15,10 @@ git commit
 git flow feature finish
 git pull
 git push
+
+# Si al cerrar la feature da error (esto esta pendiente de comprobar)
+git checkout develop
+git pull
+git checkout <nombredelafeature>
+git push
 ````
