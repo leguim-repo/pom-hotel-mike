@@ -66,6 +66,7 @@ Con solo meter la dependencias en el pom spring ya mete un login
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/book/**").hasRole("CLIENT") //protegido por el role
+                    .antMatchers("/rooms/**").permitAll()
                     .antMatchers("/bookroomnow/**").hasRole("CLIENT") //protegido por el role
                     .antMatchers("/finalbooking/**").hasRole("CLIENT")
                 .antMatchers(resources).permitAll()
@@ -83,8 +84,8 @@ Con solo meter la dependencias en el pom spring ya mete un login
                     .and()
                 .logout()
                     .logoutSuccessUrl("/showMyLoginPage?logout")
-                    .permitAll()
-                ;
+                    .permitAll();
+        //http.csrf().disable();
 
     }
 
@@ -93,8 +94,8 @@ Con solo meter la dependencias en el pom spring ya mete un login
     @Override
     public void configure(WebSecurity web) throws Exception {
 
-        web.ignoring().antMatchers("/resources/**","/login/**","/static/**","/Script/**","/Style/**","/Icon/**",
-                "/js/**","/vendor/**","/bootstrap/**","/Image/**","/rooms/**");
+        /*web.ignoring().antMatchers("/resources/**","/static/**","/Script/**","/Style/**","/Icon/**",
+                "/js/**","/vendor/**","/bootstrap/**","/Image/**","/rooms/**");*/
 
         //logoutSuccessUrl("/customLogout")
     }
