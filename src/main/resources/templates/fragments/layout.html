@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head th:fragment="head">
     <meta charset="utf-8">
     <title>POM Hotel & SPA</title>
@@ -40,10 +40,12 @@
                     </div>
                     <div class="col-xs-10 text-right menu-1">
                         <ul>
+                            <li><a href="home" th:inline="text">[[${#httpServletRequest.remoteUser}]]!</a></li>
                             <li><a href="home">Home</a></li>
                             <li><a href="rooms">Rooms</a></li>
                             <li><a href="aboutus">About</a></li>
-                            <li><a href="signin">Sign in</a></li>
+                            <li sec:authorize="isAnonymous()"><a href="signin">Sign In</a></li>
+                            <li sec:authorize="isAuthenticated()"><a href="signout">Sign Out</a></li>
                         </ul>
                     </div>
                 </div>

@@ -69,6 +69,7 @@ public class HomeController {
         return "booknow";
     }
 
+    // BOOK NOW! (User has to be connected)
     @PostMapping("/finalbooking")
     public String finalBooking(){
         String view="fail";
@@ -82,6 +83,11 @@ public class HomeController {
             view="bookedfail";
         }
         return view;
+    }
+
+    @GetMapping("/reg")
+    public String reg(Model model){
+        return "registrationform";
     }
 
     //SIGN IN PAGE
