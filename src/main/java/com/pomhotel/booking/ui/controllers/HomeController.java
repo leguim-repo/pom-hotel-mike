@@ -64,7 +64,6 @@ public class HomeController {
     // BOOK FLOW created with https://www.youtube.com/watch?v=GJkuTx1DQzg
     @GetMapping("/bookroomnow")
     public String bookroomnow(Model model) {
-
         return "booknow";
     }
 
