@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 
 <head th:insert="/fragments/layout.html :: head"> </head>
 
@@ -12,36 +12,63 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1 animate-box">
-						<h3>Create your account</h3>
+						<h3>Book your room</h3>
 						<form action="#">
 							<div class="row form-group">
 								<div class="col-md-6 padding-bottom">
-									<label for="uname">Username</label>
-									<input type="text" id="uname" class="form-control" placeholder="Your username">
+									<label for="name">First Name</label>
+									<input type="text" id="name" class="form-control" disabled>
 								</div>
 								<div class="col-md-6">
-									<label for="password">Password</label>
-									<input type="password" id="password" class="form-control" placeholder="Your password">
+									<label for="lastname">Last Name</label>
+									<input type="text" id="lastname" class="form-control" disabled>
+								</div>
+							</div>
+							<div class="form-group col-12"><hr></div>
+							<div class="row form-group">
+								<div class="col-md-3 padding-bottom">
+									<label for="rcode">Room Code</label>
+									<input type="text" id="rcode" class="form-control" disabled>
+								</div>
+								<div class="col-md-3 padding-bottom">
+									<label for="rtype">Type</label>
+									<input type="text" id="rtype" class="form-control" disabled>
+								</div>
+								<div class="col-md-3 padding-bottom">
+									<label for="guests">Guests</label>
+									<input type="text" id="guests" class="form-control" disabled>
+								</div>
+								<div class="col-md-3">
+									<label for="pnigh">Price per night</label>
+									<input type="text" id="pnigh" class="form-control" disabled>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-6 padding-bottom">
-									<label for="fname">First Name</label>
-									<input type="text" id="fname" class="form-control" placeholder="Your firstname">
+									<div class="room-img" style="background-color: dimgrey;">
+										<div class="room-img" <!--th:style="'background-image:url(' + @{/images/{img}(img=${room.image})}+ ');'"-->></div>
+								</div>
 								</div>
 								<div class="col-md-6">
-									<label for="lname">Last Name</label>
-									<input type="text" id="lname" class="form-control" placeholder="Your lastname">
+									<label for="description">Description</label>
+									<textarea type="text" id="description" class="form-control textarea" disabled></textarea>
 								</div>
 							</div>
-
+							<div class="form-group col-12"><hr></div>
 							<div class="row form-group">
-								<div class="col-md-12">
-									<label for="email">Email</label>
-									<input type="text" id="email" class="form-control" placeholder="Your email address">
+								<div class="col-md-5 padding-bottom">
+									<label for="checkin">Check In</label>
+									<input type="text" id="checkin" class="form-control">
+								</div>
+								<div class="col-md-5">
+									<label for="checkout">Check Out</label>
+									<input type="text" id="checkout" class="form-control">
+								</div>
+								<div class="col-md-2">
+									<label for="tprice">Total Price</label>
+									<input type="text" id="tprice" class="form-control" disabled>
 								</div>
 							</div>
-
 							<div class="form-group text-center">
 								<input type="submit" value="Create new account" class="btn btn-primary">
 							</div>

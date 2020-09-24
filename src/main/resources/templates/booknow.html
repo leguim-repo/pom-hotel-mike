@@ -1,16 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 
-<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="/fragments/layout.html :: head"> </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Book Now!</title>
-</head>
 <body>
-    <h1>Aqui va el fuckin formulario para confirmar los datos y ejecutar la reserva</h1>
+<header th:insert="fragments/layout.html :: header"> </header>
     <a href="javascript:history.back()">Pa Atras</a>
     <h1 th:inline="text">[[${#httpServletRequest.remoteUser}]]!</h1>
     <form th:action="@{/logout}" method="post">
@@ -23,21 +17,85 @@
     <div sec:authorize="hasRole('USER')">Text visible to user.</div>
     <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
     <div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div>
-
+    <div sec:authorize="isAnonymous()"></div>
     Authenticated username:
     <div sec:authentication="name"></div>
 
     Authenticated user roles:
     <div sec:authentication="principal.authorities"></div>
 
-    <form th:action="@{/finalbooking}" class="form" id="booking" method="post">
-        <label>Campo dummy</label>
-        <input type="text">
-        <label>Campo dummy</label>
-        <input type="text">
-        <label>Campo dummy</label>
-        <input type="text">
-        <button type="submit">Booking</button>
-    </form>
+    <div class="colorlib-loader"></div>
+    <div id="page">
+        <div id="colorlib-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 animate-box">
+                        <h3>Book your room</h3>
+                        <form th:action="@{/finalbooking}" id="booking" method="post">
+                            <div class="row form-group">
+                                <div class="col-md-6 padding-bottom">
+                                    <label for="name">First Name</label>
+                                    <input type="text" id="name" class="form-control" disabled>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastname">Last Name</label>
+                                    <input type="text" id="lastname" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-12"><hr></div>
+                            <div class="row form-group">
+                                <div class="col-md-3 padding-bottom">
+                                    <label for="rcode">Room Code</label>
+                                    <input type="text" id="rcode" class="form-control" disabled>
+                                </div>
+                                <div class="col-md-3 padding-bottom">
+                                    <label for="rtype">Type</label>
+                                    <input type="text" id="rtype" class="form-control" disabled>
+                                </div>
+                                <div class="col-md-3 padding-bottom">
+                                    <label for="guests">Guests</label>
+                                    <input type="text" id="guests" class="form-control" disabled>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="pnigh">Price per night</label>
+                                    <input type="text" id="pnigh" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-6 padding-bottom">
+                                    <div class="room-img" style="background-color: dimgrey;">
+                                        <div class="room-img"></div> <!--th:style="'background-image:url(' + @{/images/{img}(img=${room.image})}+ ');'"-->
+                                </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="description">Description</label>
+                                    <textarea type="text" id="description" class="form-control textarea" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-12"><hr></div>
+                            <div class="row form-group">
+                                <div class="col-md-5 padding-bottom">
+                                    <label for="checkin">Check In</label>
+                                    <input type="text" id="checkin" class="form-control">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="checkout">Check Out</label>
+                                    <input type="text" id="checkout" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="tprice">Total Price</label>
+                                    <input type="text" id="tprice" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group text-center">
+                                <input type="submit" value="Create new account" class="btn btn-primary">
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments/layout.html :: sources"> </div>
 </body>
 </html>
