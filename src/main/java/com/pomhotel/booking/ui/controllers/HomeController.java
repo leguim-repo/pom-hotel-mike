@@ -61,11 +61,16 @@ public class HomeController {
         return "redirect:/rooms";
     }
 
-    // BOOk FLOW created with https://www.youtube.com/watch?v=GJkuTx1DQzg
-    @RequestMapping("/bookroomnow")
-    public String bookroomnow() {
-        // aqui presentamos el formulario final para hacer la reserva
+    // BOOK FLOW created with https://www.youtube.com/watch?v=GJkuTx1DQzg
+    @GetMapping("/bookroomnow")
+    public String bookroomnow(Model model) {
 
+        return "booknow";
+    }
+
+    @PostMapping("/bookroomnow")
+    public String bookroomnow(Model model, @ModelAttribute(value="room") RoomsModel room) {
+        model.addAttribute("room", room);
         return "booknow";
     }
 
