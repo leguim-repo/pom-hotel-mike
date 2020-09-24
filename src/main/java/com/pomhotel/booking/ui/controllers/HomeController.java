@@ -44,7 +44,8 @@ public class HomeController {
     @GetMapping("/rooms")
     public String roomsList(Model model){
         model.addAttribute("strNav", "Find your rest");
-        model.addAttribute("imgNav", "hotel-30.jpg");
+        //model.addAttribute("imgNav", "hotel-30.jpg");
+        model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
 
         List<RoomsModel> rooms = roomsService.findAll();
         model.addAttribute("rooms", rooms);
@@ -60,101 +61,40 @@ public class HomeController {
         return "redirect:/rooms";
     }
 
+    // BOOk FLOW created with https://www.youtube.com/watch?v=GJkuTx1DQzg
+    @RequestMapping("/bookroomnow")
+    public String bookroomnow() {
+        // aqui presentamos el formulario final para hacer la reserva
+
+        return "booknow";
+    }
+
+    @PostMapping("/finalbooking")
+    public String finalBooking(){
+        String view="fail";
+        //aqui recogemos los datos del formulario booknow
+        // y finalemente introducimos los datos de reserva en la db
+        // el servicio de turno nos debera devolver si se ha podido meter la reserva en la db con exito o si ha fallado
+        if ( true ) {
+            view="bookedsucces";
+        }
+        else {
+            view="bookedfail";
+        }
+        return view;
+    }
+
     //SIGN IN PAGE
     @GetMapping("/signin")
     public String signIn(Model model){
         return "signin";
     }
 
-
-    //OTHERS *MIKEEE*
-    //@GetMapping("/registrationform")
-    //public String registration(Model model) {
-        //model.addAttribute("userForm", new User());
-
-    //    return "registrationform";
-    //}
-
-    //@PostMapping("/registrationform")
-    //public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-    //public String registration() {
-        /*
-        userValidator.validate(userForm, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-        userService.save(userForm);
-        securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
-         */
-
-    //    return "redirect:/";
-    //}
-
-    /*
-    @GetMapping("/login")
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "signin";
+    //ABOUT US
+    @GetMapping("/aboutus")
+    public String aboutus(Model model){
+        return "redirect:/acercade.html";
     }
-    */
-
-    // TODO petarme authentificate login/resitration is the way
-    // login entry point
-    //@PostMapping("/authentificate")
-    //public ModelAndView loginView(Model model) {
-        // recogemos las credenciales de cliente y llamamos al servicio para que las compruebe
-    //    String logincorrect = "logincorrect";
-    //    String loginfail = "loginfail";
-    //    String view = "";
-        /*
-         si el servicio valida la credenciales que...que hacemos...como decimos al cliente que esta logeado correctamente?
-         si las credenciales no son validas le tiramos un pop up de que no son validas
-         */
-    /*
-        if (true) {
-            view = logincorrect;
-        }
-        else {
-            view = loginfail;
-        }
-        return new ModelAndView(view);
-    }
-    */
-
-
-
-    // prebooking entry point
-    //@PostMapping("/prebooking")
-    //public ModelAndView booknow(Model model) {
-        /*
-         si el cliente esta conectado pasa la vista de checkavail
-         si el cliente no esta conectado pasamos a al vista de login
-        */
-/*
-        String loginview = "login";
-        String checkavail = "checkavail";
-        String view = "";
-        if (true) {
-            view = checkavail;
-        }
-        else {
-            view = loginview;
-        }
-        return new ModelAndView(view);
-    }
-*/
-    /*
-    @PostMapping("/booking")
-    public ModelAndView checkdates(Model model){
-        // comprobar login de cliente por seguridad
-        return new ModelAndView("booked");
-    }
-    */
 
     // for test purposes
     @PostMapping("/mike")

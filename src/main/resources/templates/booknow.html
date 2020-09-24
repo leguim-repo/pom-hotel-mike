@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Now!</title>
+</head>
+<body>
+    <h1>Aqui va el fuckin formulario para confirmar los datos y ejecutar la reserva</h1>
+    <a href="javascript:history.back()">Pa Atras</a>
+    <h1 th:inline="text">[[${#httpServletRequest.remoteUser}]]!</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+
+    <h2>Welcome</h2>
+    <p>Spring Security Thymeleaf tutorial</p>
+    <div sec:authorize="hasRole('USER')">Text visible to user.</div>
+    <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+    <div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div>
+
+    Authenticated username:
+    <div sec:authentication="name"></div>
+
+    Authenticated user roles:
+    <div sec:authentication="principal.authorities"></div>
+
+    <form th:action="@{/finalbooking}" class="form" id="booking" method="post">
+        <label>Campo dummy</label>
+        <input type="text">
+        <label>Campo dummy</label>
+        <input type="text">
+        <label>Campo dummy</label>
+        <input type="text">
+        <button type="submit">Booking</button>
+    </form>
+</body>
+</html>

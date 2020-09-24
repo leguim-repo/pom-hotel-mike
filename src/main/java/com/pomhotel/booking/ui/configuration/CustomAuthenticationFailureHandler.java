@@ -14,6 +14,8 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         System.out.println("onAuthenticationFailure: "+e.getMessage());
+        //TODO redirigir cuando las credenciales son incorrectas
         //e.printStackTrace();
+        httpServletResponse.sendRedirect("/showMyLoginPage?badcredentials");
     }
 }
