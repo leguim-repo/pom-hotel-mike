@@ -104,7 +104,7 @@
                             </form>
                         </div>
 
-                        <!-- PRICE RANGE -->
+                        <!-- PRICE RANGE -->  <!--
                         <div class="side animate-box">
                             <div class="row">
                                 <div class="col-md-12">
@@ -147,7 +147,26 @@
                             </div>
                         </div>
 
-                        <!-- ROOM TYPE -->
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="1000" value="50" class="slider" id="price">
+                        </div>   -->
+
+
+                        <div class="selector">
+                            <div class="price-slider">
+                                <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                </div>
+                                <span id="pricefrom" data-currency="€" class="slider-price">0</span> <span class="seperator">-</span> <span id="priceto" data-currency="€" data-max="1000"  class="slider-price">1000+</span>
+                            </div>
+                        </div>
+
+
+
+
+
+
                         <div class="side animate-box">
                             <div class="row">
                                 <div class="col-md-12">
@@ -158,9 +177,6 @@
                                                 <div class="form-group">
                                                     <div class="form-field">
                                                         <i class="icon icon-arrow-down3"></i>
-                                                        <!-- <select onchange="setCookieType()" name="roomtype" id="roomtype" class="form-control">
-                                                            <option value="0">All types</option>
-                                                        </select> -->
                                                         <select  onchange="setCookieType()" name="roomtype" id="roomtype" class="form-control">
                                                             <option value="0">All types</option>
                                                             <option th:each="item : ${types}" th:value="${item.id}"
@@ -179,12 +195,11 @@
             </div>
         </div>
     </div>
-
     <div class="gototop js-top">
         <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
     </div>
-
     <div th:insert="fragments/layout.html :: sources"> </div>
+    <script type="text/javascript" th:src="@{/js/slide.js}"></script>
 </div>
 </body>
 </html>

@@ -9,10 +9,12 @@ function saveCookies(){
 
 function setCookiePriceFrom(){
     setCookie("MinPrice",document.getElementById("pricefrom").value,90);
+    controlSelectOptions();
 }
 
 function setCookiePriceTo(){
     setCookie("MaxPrice",document.getElementById("priceto").value,90);
+    controlSelectOptions();
 }
 
 function setCookieType(){
@@ -71,5 +73,24 @@ function inicializeCookies(){
         getCookiesHome();
     }else{
         getCookiesRooms();
+    }
+}
+
+function controlSelectOptions(){
+    var maxSelector = document.getElementById("priceto");
+    var minSelector = document.getElementById("pricefrom");
+    var maxPrice =  document.getElementById("priceto").value;
+    var minPrice = document.getElementById("pricefrom").value;
+    for (let i = 0; i < 5; i++) {
+        if (maxSelector.options[i].value < minPrice) {
+            maxSelector.options[i].disabled = true;
+        } else {
+            maxSelector.options[i].disabled = false;
+        }
+        if (minSelector.options[i].value > maxPrice) {
+            minSelector.options[i].disabled = true;
+        } else {
+            minSelector.options[i].disabled = false;
+        }
     }
 }
