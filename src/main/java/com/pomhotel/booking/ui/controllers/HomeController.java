@@ -3,7 +3,7 @@ package com.pomhotel.booking.ui.controllers;
 import com.pomhotel.booking.ui.dto.NewClientDTO;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
-import com.pomhotel.booking.application.services.LoginService;
+import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomTypesService;
 import com.pomhotel.booking.application.services.RoomsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-    LoginService loginService;
+    ClientLoginService clientLoginService;
     RoomsService roomsService;
     RoomTypesService roomTypesService;
     @Autowired
-    public HomeController(LoginService loginService, RoomsService roomsService, RoomTypesService roomTypesService) {
-        this.loginService = loginService;
+    public HomeController(ClientLoginService clientLoginService, RoomsService roomsService, RoomTypesService roomTypesService) {
+        this.clientLoginService = clientLoginService;
         this.roomsService = roomsService;
         this.roomTypesService = roomTypesService;
 
@@ -49,7 +49,6 @@ public class HomeController {
     @GetMapping("/rooms")
     public String roomsList(Model model){
         model.addAttribute("strNav", "Find your rest");
-        //model.addAttribute("imgNav", "hotel-30.jpg");
         model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
 
         List<RoomsModel> rooms = roomsService.findAll();
@@ -98,30 +97,6 @@ public class HomeController {
         }
         else {
             view="bookedfail";
-        }
-        return view;
-    }
-
-
-    //SIGN IN PAGE
-    @GetMapping("/signin")
-    public String signIn(WebRequest request, Model model){
-        NewClientDTO newclient = new NewClientDTO();
-        model.addAttribute("newclient", newclient);
-
-        return "signin";
-    }
-
-    //RESGISTER NEW CLIENT created with https://www.youtube.com/watch?v=1q-1Bpy168g
-    @PostMapping("/registernewclient")
-    public String registerNewClient(@ModelAttribute("user") @Valid NewClientDTO newclient, HttpServletRequest request, Errors errors) {
-        // aqui haria falta un servicio que compruebe si el user ya existe o no.
-        String view;
-        System.out.println("newclient:"+newclient.toString());
-        if (true) {
-            view = "redirect:/home";
-        } else {
-            view = "registerfail";
         }
         return view;
     }
