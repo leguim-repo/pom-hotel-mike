@@ -12,6 +12,7 @@ public class LoginsModel {
     public LoginsModel() {
     }
 
+
     public LoginsModel(String username, String password, ClientsModel clientsByFkClientId) {
         this.username = username;
         this.password = password;
@@ -28,6 +29,14 @@ public class LoginsModel {
                 ", password='" + password + '\'' +
                 ", clientsByFkClientId=" + clientsByFkClientId +
                 '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUsername() {

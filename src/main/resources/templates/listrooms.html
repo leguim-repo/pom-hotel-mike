@@ -42,6 +42,7 @@
                                                         <p class="price"><span th:text="${room.pricePerNight}"></span> <small>/ night</small></p>
                                                         <p th:text="${room.description}"></p>
                                                         <p><button class="btn btn-primary" type="submit">Book Now!</button></p>
+                                                        <p><a class="btn btn-primary" th:href="@{/bookroomnow/{id}(id=${room.id})}">Book Now!</a></p>
                                                     </div>
                                                 </div>
                                             </div>

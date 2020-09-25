@@ -40,12 +40,11 @@
                     </div>
                     <div class="col-xs-10 text-right menu-1">
                         <ul>
-                            <li><a href="home" th:inline="text">[[${#httpServletRequest.remoteUser}]]!</a></li>
                             <li><a href="home">Home</a></li>
                             <li><a href="rooms">Rooms</a></li>
                             <li><a href="aboutus">About</a></li>
                             <li sec:authorize="isAnonymous()"><a href="signin">Sign In</a></li>
-                            <li sec:authorize="isAuthenticated()"><a href="signout">Sign Out</a></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Sign Out</a></li>
                         </ul>
                     </div>
                 </div>

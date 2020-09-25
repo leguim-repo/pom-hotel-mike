@@ -21,6 +21,7 @@ public class RoomsFactory {
         entity.setDescription(model.description);
         entity.setPricePerNight(model.pricePerNight);
         entity.setImage(model.image);
+        entity.setGuests(model.guests);
         entity.setRoomtypesByFkRoomtypeId(roomtypesFactory.createEntity(model.roomtypesByFkRoomtypeId));
         return entity;
     }
@@ -32,6 +33,7 @@ public class RoomsFactory {
         model.description = entity.getDescription();
         model.pricePerNight = entity.getPricePerNight();
         model.image = entity.getImage();
+        model.guests = entity.getGuests();
         model.roomtypesByFkRoomtypeId = roomtypesFactory.createModel(entity.getRoomtypesByFkRoomtypeId());
         return model;
     }

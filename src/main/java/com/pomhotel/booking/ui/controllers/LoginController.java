@@ -5,6 +5,9 @@ import com.pomhotel.booking.application.models.LoginsModel;
 import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.ui.dto.NewClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -51,8 +55,7 @@ public class LoginController {
         LoginsModel loginModel = new LoginsModel(newclient.username, newclient.password, clientModel);
         System.out.println(loginModel);
 
-        //clientLoginService.createNewClientAndLogin(clientModel,loginModel);
-        clientLoginService.createNewLoginAndUser(loginModel);
+        clientLoginService.createClientAndLogin(loginModel);
 
         if (true) {
             view = "redirect:/home";
@@ -60,5 +63,14 @@ public class LoginController {
             view = "registerfail";
         }
         return view;
+    }
+
+    @GetMapping(value="/logout")
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/signin";
     }
 }
