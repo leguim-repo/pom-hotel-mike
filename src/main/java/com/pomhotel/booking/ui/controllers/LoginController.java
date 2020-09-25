@@ -1,6 +1,10 @@
 package com.pomhotel.booking.ui.controllers;
 
+import com.pomhotel.booking.application.models.ClientsModel;
+import com.pomhotel.booking.application.models.LoginsModel;
+import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.ui.dto.NewClientDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,6 +19,13 @@ import javax.validation.Valid;
 
 @Controller
 public class LoginController {
+    ClientLoginService clientLoginService;
+
+    @Autowired
+    LoginController(ClientLoginService clientLoginService){
+        this.clientLoginService = clientLoginService;
+    }
+
     @RequestMapping("/showMyLoginPage")
     public String showHome()
     {
@@ -34,7 +45,11 @@ public class LoginController {
     @PostMapping("/registernewclient")
     public String registerNewClient(@ModelAttribute("user") @Valid NewClientDTO newclient, HttpServletRequest request, Errors errors) {
         String view;
-        System.out.println("newclient:"+newclient.toString());
+
+        ClientsModel clientsModel = new ClientsModel(newclient.name, newclient.lastname, newclient.email);
+        LoginsModel loginsModel = new LoginsModel(newclient.username, newclient.password, clientsModel);
+        clientLoginService.createNewLoginAndUser(loginsModel);
+
         if (true) {
             view = "redirect:/home";
         } else {

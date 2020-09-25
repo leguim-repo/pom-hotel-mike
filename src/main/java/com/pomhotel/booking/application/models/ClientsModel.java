@@ -8,7 +8,13 @@ public class ClientsModel {
     public String email;
     public List<BookingsModel> bookingsById;
 
-    //Constructor
+    //Constructors
     public ClientsModel() {
+    }
+
+    public ClientsModel(String name, String lastname, String email) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
     }
 }

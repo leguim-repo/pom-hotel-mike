@@ -11,4 +11,10 @@ public class LoginsModel {
     //Constructor
     public LoginsModel() {
     }
+
+    public LoginsModel(String username, String password, ClientsModel clientsByFkClientId) {
+        this.username = username;
+        this.password = password;
+        this.clientsByFkClientId = clientsByFkClientId;
+    }
 }

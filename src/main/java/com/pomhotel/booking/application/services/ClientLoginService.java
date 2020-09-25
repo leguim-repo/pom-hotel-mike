@@ -4,5 +4,5 @@ import com.pomhotel.booking.application.models.ClientsModel;
 import com.pomhotel.booking.application.models.LoginsModel;
 
 public interface ClientLoginService {
-    boolean createNewLoginAndUser(LoginsModel login, ClientsModel client);
+    boolean createNewLoginAndUser(LoginsModel login);
 }

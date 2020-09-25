@@ -28,8 +28,8 @@ public class ClientLoginServiceImplementation implements ClientLoginService {
     }
 
     @Override
-    public boolean createNewLoginAndUser(LoginsModel login, ClientsModel client) {
+    public boolean createNewLoginAndUser(LoginsModel login) {
         //Falta controlar a bajo nivel que todos los datos han sido introducidos correctamente, deberia salir fallo de db si hay mas de una clave unica igual = false
-        return repository.createNewLoginAndUser(loginsFactory.createEntity(login), clientsFactory.createEntity(client));
+        return repository.createNewLoginAndUser(loginsFactory.createEntity(login));
     }
 }

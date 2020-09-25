@@ -20,6 +20,8 @@ public class LoginsFactory {
         entity.setUsername(model.username);
         entity.setPassword(model.password);
         entity.setClientsByFkClientId(clientsFactory.createEntity(model.clientsByFkClientId));
+        entity.setRole("ROLE_CLIENT");
+        entity.setEnabled(true);
         return entity;
     }
     public LoginsModel createModel(LoginsEntity entity){

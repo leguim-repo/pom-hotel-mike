@@ -21,12 +21,10 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-    ClientLoginService clientLoginService;
     RoomsService roomsService;
     RoomTypesService roomTypesService;
     @Autowired
-    public HomeController(ClientLoginService clientLoginService, RoomsService roomsService, RoomTypesService roomTypesService) {
-        this.clientLoginService = clientLoginService;
+    public HomeController(RoomsService roomsService, RoomTypesService roomTypesService) {
         this.roomsService = roomsService;
         this.roomTypesService = roomTypesService;
 

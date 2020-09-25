@@ -21,6 +21,14 @@ public class LoginsEntity implements Serializable {
     @Column(name = "password", nullable = true, length = 100)
     private String password;
 
+    @Basic
+    @Column(name = "role")
+    private String role;
+
+    @Basic
+    @Column(name = "enabled")
+    private boolean enabled;
+
     @OneToOne(fetch=FetchType.EAGER)
     @PrimaryKeyJoinColumn
     private ClientsEntity clientsByFkClientId;
@@ -44,6 +52,20 @@ public class LoginsEntity implements Serializable {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public ClientsEntity getClientsByFkClientId() {
