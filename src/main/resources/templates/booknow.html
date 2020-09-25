@@ -32,16 +32,22 @@
                     <div class="col-md-10 col-md-offset-1 animate-box">
                         <h3>Book your room</h3>
                         <form th:action="@{/finalbooking}" id="booking" method="post">
+
                             <div class="row form-group">
                                 <div class="col-md-12 padding-bottom">
-                                    <label for="name">Username Account:</label>
-                                    <input type="text" id="name" class="form-control" sec:authentication="name" disabled>
-                                    <span sec:authentication="name">Bob</span>
-                                    <div sec:authentication="name"></div>
-                                    <input type="text" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <label for="token">CSRF Token Transaction</label>
+                                    <input type="text" id="token" class="form-control" th:value="${_csrf.token}" disabled>
                                 </div>
-                                
                             </div>
+
+
+                            <div class="row form-group">
+                                <div class="col-md-12 padding-bottom">
+                                    <label for="name">Username Account</label>
+                                    <input type="text" id="name" class="form-control" th:value="${#authentication.name}" disabled>
+                                </div>
+                            </div>
+
                             <div class="form-group col-12"><hr></div>
                             <div class="row form-group">
                                 <div class="col-md-3 padding-bottom">
