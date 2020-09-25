@@ -1,4 +1,4 @@
-package com.pomhotel.booking;
+package com.pomhotel.booking.configuration;
 
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;

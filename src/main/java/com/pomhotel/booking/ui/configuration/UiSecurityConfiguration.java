@@ -1,17 +1,15 @@
 package com.pomhotel.booking.ui.configuration;
 
+import com.pomhotel.booking.ui.security.CustomAuthenticationFailureHandler;
+import com.pomhotel.booking.ui.security.CustomAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Description;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -55,7 +53,7 @@ Con solo meter la dependencias en el pom spring ya mete un login
     //NoOpPasswordEncoder deprecated clase chapu para hacer tener un plaintext de los passwords
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new PasswordEnconderTest();
+        return new PasswordEnconderPlaintText();
     }
 
 
@@ -106,18 +104,4 @@ Con solo meter la dependencias en el pom spring ya mete un login
 
 }
 
-class PasswordEnconderTest implements PasswordEncoder {
-    /*
-    esto es una chapu...hay que darle una vuelta mas y crear una clase como toca o comprobar si NoOpPasswordEncoder rula.
-     */
 
-    @Override
-    public String encode(CharSequence charSequence) {
-        return charSequence.toString();
-    }
-
-    @Override
-    public boolean matches(CharSequence charSequence, String s) {
-        return charSequence.toString().equals(s);
-    }
-}

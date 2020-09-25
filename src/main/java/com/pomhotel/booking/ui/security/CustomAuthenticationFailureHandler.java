@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.configuration;
+package com.pomhotel.booking.ui.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.AuthenticationException;

@@ -1,6 +1,6 @@
 package com.pomhotel.booking.ui.controllers;
 
-import com.pomhotel.booking.application.models.NewClientModel;
+import com.pomhotel.booking.ui.dto.NewClientDTO;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.LoginService;
@@ -67,14 +67,22 @@ public class HomeController {
     }
 
     // BOOK FLOW created with https://www.youtube.com/watch?v=GJkuTx1DQzg
+    /*
     @GetMapping("/bookroomnow")
     public String bookroomnow(Model model) {
         return "booknow";
     }
+    */
+
 
     @PostMapping("/bookroomnow")
     public String bookroomnow(Model model, @ModelAttribute(value="room") RoomsModel room) {
-        model.addAttribute("room", room);
+        //NewBookDTO newBook = new NewBookDTO();
+        //newBook.room = room;
+        // los datos de cliente se deben recuperar internamente no a traves de la web
+        //newBook.clientName =
+        //model.addAttribute("newBook", newBook);
+        //model.addAttribute("room", room);
         return "booknow";
     }
 
@@ -94,15 +102,11 @@ public class HomeController {
         return view;
     }
 
-    @GetMapping("/reg")
-    public String reg(Model model){
-        return "registrationform";
-    }
 
     //SIGN IN PAGE
     @GetMapping("/signin")
     public String signIn(WebRequest request, Model model){
-        NewClientModel newclient = new NewClientModel();
+        NewClientDTO newclient = new NewClientDTO();
         model.addAttribute("newclient", newclient);
 
         return "signin";
@@ -110,7 +114,7 @@ public class HomeController {
 
     //RESGISTER NEW CLIENT created with https://www.youtube.com/watch?v=1q-1Bpy168g
     @PostMapping("/registernewclient")
-    public String registerNewClient(@ModelAttribute("user") @Valid NewClientModel newclient, HttpServletRequest request, Errors errors) {
+    public String registerNewClient(@ModelAttribute("user") @Valid NewClientDTO newclient, HttpServletRequest request, Errors errors) {
         // aqui haria falta un servicio que compruebe si el user ya existe o no.
         String view;
         System.out.println("newclient:"+newclient.toString());

@@ -1,10 +1,12 @@
-package com.pomhotel.booking.application.models;
+package com.pomhotel.booking.ui.dto;
 
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class NewClientModel {
+/* DTO para el formulario de registro de clientes */
+
+public class NewClientDTO {
     @NotNull
     @NotEmpty
     String name;
