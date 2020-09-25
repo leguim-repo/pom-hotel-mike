@@ -30,7 +30,7 @@ public class BookingsEntity implements Serializable {
     private ClientsEntity clientsByFkClientId;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "fk_room_id", referencedColumnName = "id", table = "bookings")
     private RoomsEntity roomsByFkRoomId;
 
 
