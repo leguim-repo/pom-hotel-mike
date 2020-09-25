@@ -26,8 +26,8 @@
                                 </div>
 
                                 <!-- ROOM SECTION (loop) -->
-                                <div th:each="room, cnf : ${rooms}" class="row">
-                                    <form th:action="@{/bookroomnow}" th:name="${room.id}" method="post">
+                                <div th:each="room: ${rooms}" class="row">
+                                    <form th:action="@{/bookroomnow}" th:object="${room}" method="post">
                                     <div class="col-md-12 animate-box">
                                         <div class="room-wrap">
                                             <div class="row">
