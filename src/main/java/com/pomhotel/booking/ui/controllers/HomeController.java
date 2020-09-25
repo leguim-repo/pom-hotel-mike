@@ -5,6 +5,7 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.RoomTypesService;
 import com.pomhotel.booking.application.services.RoomsService;
+import com.pomhotel.booking.ui.dto.NewClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -46,6 +48,7 @@ public class HomeController {
 
         List<RoomsModel> rooms = roomsService.findAll();
         model.addAttribute("rooms", rooms);
+        model.addAttribute("roomy", new RoomsModel());
 
         List<RoomtypesModel> types = roomTypesService.findAll();
         model.addAttribute("types", types);
@@ -58,15 +61,24 @@ public class HomeController {
         return "redirect:/rooms";
     }
 
-
-    @PostMapping("/bookroomnow")
-    public String bookroomnow(Model model, @ModelAttribute(value="room") RoomsModel room) {
+    //PROBLEMA DE CARGA CSS Y JS, FUNCION LLAMADA POR HREF... NO HAY ESTILO, PERO OBTENEMOS EL OBJETO
+    @GetMapping("/bookroomnow/{id}")
+    public String bookroomnow(@PathVariable("id") long id, Model model) {
         NewBookingDTO newBookingDTO = new NewBookingDTO();
-        newBookingDTO.room = room;
+        newBookingDTO.room = roomsService.findById(id);
         model.addAttribute("newBooking", newBookingDTO);
-        //model.addAttribute("room", room);
         return "booknow";
     }
+
+    //PROBLEMA PARA OBTENER EL OBJETO, FUNCION LLAMADA CON ACTION-POST, HAY ESTILO PERO NO OBJETO
+    @PostMapping("/bookroomnow")
+    public String bookroomnow(Model model, @ModelAttribute("room") @Valid RoomsModel room) {
+        NewBookingDTO newBookingDTO = new NewBookingDTO();
+        //newBookingDTO.room = room;
+        model.addAttribute("newBooking", newBookingDTO);
+        return "booknow";
+    }
+
 
     // BOOK NOW! (User has to be connected)
     @PostMapping("/finalbooking")
