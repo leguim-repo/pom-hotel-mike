@@ -2,6 +2,8 @@ package com.pomhotel.booking.application.repositories;
 
 import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import com.pomhotel.booking.application.domain.entities.LoginsEntity;
+import com.pomhotel.booking.application.models.ClientsModel;
+import com.pomhotel.booking.application.models.LoginsModel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -61,13 +63,76 @@ public class ClientLoginRepositoryImplementation implements ClientLoginRepositor
     }
 
     @Override
-    public boolean createNewLoginAndUser(LoginsEntity login) {
+    public ClientsEntity findClientById(long id) {
+        ClientsEntity entity = null;
+        Session session = this.dbConnection.openSession();
+        try {
+            entity = session.get(ClientsEntity.class, id);
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return entity;
+    }
+
+
+    @Override
+    public boolean createNewClientAndLogin(ClientsEntity newclient, LoginsEntity newlogin) {
+        ClientsEntity client;
         Session session = this.dbConnection.openSession();
         Transaction transaction = null;
+        long newClientId = 0;
+
         try {
             transaction = session.beginTransaction();
-            session.persist(login);
-            //session.persist(client);
+            newClientId = (long) session.save(newclient);
+            transaction.commit();
+        }
+        catch (Throwable ex) {
+            if (transaction!=null) transaction.rollback();
+            ex.printStackTrace();
+            return false;
+
+        } finally {
+            session.close();
+        }
+
+        session = this.dbConnection.openSession();
+
+
+        try {
+            client = findClientById(newClientId);
+            newlogin.setClientsByFkClientId(client);
+
+            transaction = session.beginTransaction();
+            session.save(newlogin);
+            transaction.commit();
+        }catch (Throwable ex) {
+            if (transaction!=null) transaction.rollback();
+            ex.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean createNewLoginAndUser_Old(LoginsEntity login) {
+        Session session = this.dbConnection.openSession();
+        Transaction transaction = null;
+        long newClientId;
+        try {
+            transaction = session.beginTransaction();
+            //session.persist(login.getClientsByFkClientId());
+            //session.save(login.getClientsByFkClientId());
+            ClientsEntity client = login.getClientsByFkClientId();
+            client.setId((long) session.save(client));
+            login.setClientsByFkClientId(client);
+            session.saveOrUpdate(login);
+            //session.persist(login);
             transaction.commit();
         }catch (Throwable ex) {
             if (transaction!=null) transaction.rollback();

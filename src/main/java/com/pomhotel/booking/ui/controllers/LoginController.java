@@ -7,6 +7,7 @@ import com.pomhotel.booking.ui.dto.NewClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,12 +44,15 @@ public class LoginController {
 
     //REGISTER NEW CLIENT
     @PostMapping("/registernewclient")
-    public String registerNewClient(@ModelAttribute("user") @Valid NewClientDTO newclient, HttpServletRequest request, Errors errors) {
+    public String registerNewClient(@ModelAttribute("newclient") @Valid NewClientDTO newclient, HttpServletRequest request, Errors errors) {
         String view;
 
-        ClientsModel clientsModel = new ClientsModel(newclient.name, newclient.lastname, newclient.email);
-        LoginsModel loginsModel = new LoginsModel(newclient.username, newclient.password, clientsModel);
-        clientLoginService.createNewLoginAndUser(loginsModel);
+        ClientsModel clientModel = new ClientsModel(newclient.name, newclient.lastname, newclient.email);
+        LoginsModel loginModel = new LoginsModel(newclient.username, newclient.password, clientModel);
+        System.out.println(loginModel);
+
+        //clientLoginService.createNewClientAndLogin(clientModel,loginModel);
+        clientLoginService.createNewLoginAndUser(loginModel);
 
         if (true) {
             view = "redirect:/home";

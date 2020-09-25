@@ -29,7 +29,15 @@ public class ClientLoginServiceImplementation implements ClientLoginService {
 
     @Override
     public boolean createNewLoginAndUser(LoginsModel login) {
+        //TODO: Bicicleta para refactorizar
         //Falta controlar a bajo nivel que todos los datos han sido introducidos correctamente, deberia salir fallo de db si hay mas de una clave unica igual = false
-        return repository.createNewLoginAndUser(loginsFactory.createEntity(login));
+        return repository.createNewLoginAndUser_Old(loginsFactory.createEntity(login));
+    }
+
+    @Override
+    public boolean createNewClientAndLogin(ClientsModel newclient, LoginsModel newlogin) {
+        //TODO: Bicicleta para eliminar
+        repository.createNewClientAndLogin(clientsFactory.createEntity(newclient), loginsFactory.createEntity(newlogin));
+        return false;
     }
 }

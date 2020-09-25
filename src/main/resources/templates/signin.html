@@ -18,13 +18,13 @@
 <div class="container left-panel-active">
     <!-- Sign Up -->
     <div class="container__form container--signup">
-        <form th:action="@{/registernewclient}" th:object="${newclient}" method="post" enctype="utf8" class="form" id="form1">    
+        <form th:action="@{/registernewclient}" th:object="${newclient}" method="post" enctype="utf8" class="form" id="form1">
             <h2 class="form__title">Sign Up</h2>
-            <input type="text" name="name" id="name" placeholder="Name" class="input" required/>
-            <input type="text" name="lastname" id="lastname" placeholder="Lastname" class="input" required/>
-            <input type="email" name="email" id="email" placeholder="Email" class="input" required/>
-            <input type="text" name="username" id="username" placeholder="Username" class="input" required/>
-            <input type="password" name="password" id="password" placeholder="Password" class="input" required/>
+            <input th:field="*{name}" placeholder="Name" class="input" required/>
+            <input type="text" th:field="*{lastname}" placeholder="Lastname" class="input" required/>
+            <input type="email" th:field="*{email}" placeholder="Email" class="input" required/>
+            <input type="text" th:field="*{username}" placeholder="Username" class="input" required/>
+            <input type="password" th:field="*{password}" placeholder="Password" class="input" required/>
             <button type="submit" class="btn btn-primary" id="signOutBtn">Register</button>
         </form>
     </div>

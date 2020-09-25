@@ -30,7 +30,8 @@ public class LoginsEntity implements Serializable {
     private boolean enabled;
 
     @OneToOne(fetch=FetchType.EAGER)
-    @PrimaryKeyJoinColumn
+    //@PrimaryKeyJoinColumn
+    @JoinColumn(name = "fk_client_id", referencedColumnName = "id", table = "logins")
     private ClientsEntity clientsByFkClientId;
 
     public long getId() {
