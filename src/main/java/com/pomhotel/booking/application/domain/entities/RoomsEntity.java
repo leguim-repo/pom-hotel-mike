@@ -28,6 +28,10 @@ public class RoomsEntity implements Serializable {
     private Double pricePerNight;
 
     @Basic
+    @Column(name = "guests", nullable = true, precision = 0)
+    private int guests;
+
+    @Basic
     @Column(name = "image", nullable = true)
     private String image;
 
@@ -69,6 +73,13 @@ public class RoomsEntity implements Serializable {
     }
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getGuests() {
+        return guests;
+    }
+    public void setGuests(int guests) {
+        this.guests = guests;
     }
 
     public RoomtypesEntity getRoomtypesByFkRoomtypeId() {

@@ -5,25 +5,6 @@
 
 <body>
 <header th:insert="fragments/layout.html :: header"> </header>
-    <a href="javascript:history.back()">Pa Atras</a>
-    <h1 th:inline="text">[[${#httpServletRequest.remoteUser}]]!</h1>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-
-
-    <h2>Welcome</h2>
-    <p>Spring Security Thymeleaf tutorial</p>
-    <div sec:authorize="hasRole('USER')">Text visible to user.</div>
-    <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
-    <div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div>
-    <div sec:authorize="isAnonymous()"></div>
-    Authenticated username:
-    <div sec:authentication="name"></div>
-
-    Authenticated user roles:
-    <div sec:authentication="principal.authorities"></div>
-
     <div class="colorlib-loader"></div>
     <div id="page">
         <div id="colorlib-contact">
@@ -35,49 +16,42 @@
 
                             <div class="row form-group">
                                 <div class="col-md-12 padding-bottom">
-                                    <label for="token">CSRF Token Transaction</label>
-                                    <input type="text" id="token" class="form-control" th:value="${_csrf.token}" disabled>
-                                </div>
-                            </div>
-
-
-                            <div class="row form-group">
-                                <div class="col-md-12 padding-bottom">
-                                    <label for="name">Username Account</label>
-                                    <input type="text" id="name" class="form-control" th:value="${#authentication.name}" disabled>
+                                    <label>Username Account</label>
+                                    <input type="text" id="username" class="form-control" th:value="${#authentication.name}" disabled>
                                 </div>
                             </div>
 
                             <div class="form-group col-12"><hr></div>
                             <div class="row form-group">
                                 <div class="col-md-3 padding-bottom">
-                                    <label for="rcode">Room Code</label>
-                                    <input type="text" id="rcode" class="form-control" disabled>
+                                    <label>Room Code</label>
+                                    <input type="text" th:text="${newBooking.getRoom().code}" class="form-control" disabled>
+                                </div>
+                                <!--<div class="col-md-3 padding-bottom">
+                                    <label>Type</label>
+                                    <input type="text" th:field="${newBooking.getRoom().roomtypesByFkRoomtypeId.name}" class="form-control" disabled>
                                 </div>
                                 <div class="col-md-3 padding-bottom">
-                                    <label for="rtype">Type</label>
-                                    <input type="text" id="rtype" class="form-control" disabled>
-                                </div>
-                                <div class="col-md-3 padding-bottom">
-                                    <label for="guests">Guests</label>
-                                    <input type="text" id="guests" class="form-control" disabled>
+                                    <label>Guests</label>
+                                    <input type="text" th:field="${newBooking.getRoom().guests}" class="form-control" disabled>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="pnigh">Price per night</label>
-                                    <input type="text" id="pnigh" class="form-control" disabled>
-                                </div>
+                                    <label>Price per night</label>
+                                    <input type="text" th:field="${newBooking.getRoom().pricePerNight}" class="form-control" disabled>
+                                </div>-->
                             </div>
+                            <!--
                             <div class="row form-group">
                                 <div class="col-md-6 padding-bottom">
                                     <div class="room-img" style="background-color: dimgrey;">
-                                        <div class="room-img"></div> <!--th:style="'background-image:url(' + @{/images/{img}(img=${room.image})}+ ');'"-->
-                                </div>
+                                        <div class="room-img"></div>--> <!--th:style="'background-image:url(' + @{/images/{img}(img=${room.image})}+ ');'"-->
+                                <!--</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="description">Description</label>
-                                    <textarea type="text" id="description" class="form-control textarea" disabled></textarea>
+                                    <label>Description</label>
+                                    <textarea type="text" th:field="${newBooking.getRoom().description}"  class="form-control textarea" disabled></textarea>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-group col-12"><hr></div>
                             <div class="row form-group">
                                 <div class="col-md-5 padding-bottom">
