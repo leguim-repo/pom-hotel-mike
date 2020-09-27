@@ -1,4 +1,4 @@
-inicializeCookies();
+//inicializeCookies();
 
 //Function for save session cookies
 function saveCookies(){
