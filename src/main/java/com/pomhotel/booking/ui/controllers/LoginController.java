@@ -10,12 +10,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,12 +27,6 @@ public class LoginController {
     @Autowired
     LoginController(ClientLoginService clientLoginService){
         this.clientLoginService = clientLoginService;
-    }
-
-    @RequestMapping("/showMyLoginPage")
-    public String showHome()
-    {
-        return "signin";
     }
 
     //SIGN IN PAGE

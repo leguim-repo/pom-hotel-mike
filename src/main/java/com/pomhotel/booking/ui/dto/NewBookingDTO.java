@@ -5,6 +5,7 @@ import com.pomhotel.booking.application.models.RoomsModel;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 public class NewBookingDTO {
     @NotNull
@@ -17,7 +18,15 @@ public class NewBookingDTO {
 
     @NotNull
     @NotEmpty
-    public BookingsModel booking;
+    public Date checkIn;
+
+    @NotNull
+    @NotEmpty
+    public Date checkOut;
+
+    @NotNull
+    @NotEmpty
+    public int totalPrice;
 
     public String getUsername() {
         return username;
@@ -35,11 +44,27 @@ public class NewBookingDTO {
         this.room = room;
     }
 
-    public BookingsModel getBooking() {
-        return booking;
+    public Date getCheckIn() {
+        return checkIn;
     }
 
-    public void setBooking(BookingsModel booking) {
-        this.booking = booking;
+    public void setCheckIn(Date checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public Date getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(Date checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

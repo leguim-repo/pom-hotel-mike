@@ -61,7 +61,6 @@ public class HomeController {
         return "redirect:/rooms";
     }
 
-    //PROBLEMA DE CARGA CSS Y JS, FUNCION LLAMADA POR HREF... NO HAY ESTILO, PERO OBTENEMOS EL OBJETO
     @GetMapping("/bookroomnow/{id}")
     public String bookroomnow(@PathVariable("id") long id, Model model) {
         NewBookingDTO newBookingDTO = new NewBookingDTO();
@@ -70,31 +69,14 @@ public class HomeController {
         return "booknow";
     }
 
-    //PROBLEMA PARA OBTENER EL OBJETO, FUNCION LLAMADA CON ACTION-POST, HAY ESTILO PERO NO OBJETO
     @PostMapping("/bookroomnow")
     public String bookroomnow(Model model, @ModelAttribute("room") @Valid RoomsModel room) {
         NewBookingDTO newBookingDTO = new NewBookingDTO();
         //newBookingDTO.room = room;
         model.addAttribute("newBooking", newBookingDTO);
-        return "booknow";
+        return "redirect:/home";
     }
 
-
-    // BOOK NOW! (User has to be connected)
-    @PostMapping("/finalbooking")
-    public String finalBooking(){
-        String view;
-        //aqui recogemos los datos del formulario booknow
-        // y finalemente introducimos los datos de reserva en la db
-        // el servicio de turno nos debera devolver si se ha podido meter la reserva en la db con exito o si ha fallado
-        if ( true ) {
-            view="bookedsucces";
-        }
-        else {
-            view="bookedfail";
-        }
-        return view;
-    }
 
     //ABOUT US
     @GetMapping("/aboutus")
