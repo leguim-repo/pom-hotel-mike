@@ -1,26 +1,16 @@
 inicializeCookies();
 
-//Function for save session cookies
+//Function for save cookies
 function saveCookies(){
-    setCookie("Checkin",document.getElementById("checkin").value,90);
-    setCookie("Checkout",document.getElementById("checkout").value,90);
-    setCookie("Guests",document.getElementById("guests").value,90);
+    if (document.URL.includes("rooms")){
+        setCookie("MinPrice",document.getElementById("pricefrom").value,90);
+        setCookie("MaxPrice",document.getElementById("priceto").value,90);
+        setCookie("Type",document.getElementById("roomtype").value,90);
+    }
+        setCookie("Checkin",document.getElementById("checkin").value,90);
+        setCookie("Checkout",document.getElementById("checkout").value,90);
+        setCookie("Guests",document.getElementById("guests").value,90);
 }
-
-function setCookiePriceFrom(){
-    setCookie("MinPrice",document.getElementById("pricefrom").value,90);
-    controlSelectOptions();
-}
-
-function setCookiePriceTo(){
-    setCookie("MaxPrice",document.getElementById("priceto").value,90);
-    controlSelectOptions();
-}
-
-function setCookieType(){
-    setCookie("Type",document.getElementById("roomtype").value,90);
-}
-
 
 //Function for read saved cookies
 function getCookiesHome() {
@@ -71,7 +61,7 @@ function inicializeCookies(){
 
     if (document.URL.includes("home")){
         getCookiesHome();
-    }else{
+    }else if (document.URL.includes("rooms")) {
         getCookiesRooms();
     }
 }

@@ -13,6 +13,10 @@
 select option {
   color: #000;
 }
+#pricefrom, #priceto{
+  padding-left: 9px !important;
+}
+
 
 .textarea{
   overflow-y: scroll;

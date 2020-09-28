@@ -26,7 +26,7 @@
                                 </div>
 
                                 <!-- ROOM SECTION (loop) -->
-                                <div th:each="room: ${rooms}" class="row">
+                                <div th:each="room, data: ${rooms}" class="row">
                                     <form th:action="@{/bookroomnow}" th:object="${room}" method="post">
                                     <div class="col-md-12 animate-box">
                                         <div class="room-wrap">
@@ -58,7 +58,6 @@
                 <!-- SIDEBAR -->
                 <div class="col-md-3">
                     <div class="sidebar-wrap">
-
                         <!-- BLACK BOX SEARCHER -->
                         <div class="side search-wrap animate-box">
                             <h3 class="sidebar-heading">Find your room</h3>
@@ -99,77 +98,62 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="guests">Price from:</label>
+                                                        <div class="form-field">
+                                                            <i class="icon icon-arrow-down3"></i>
+                                                            <select name="pricefrom" id="pricefrom" class="form-control">
+                                                                <option value="1">1</option>
+                                                                <option value="50">50</option>
+                                                                <option value="100">100</option>
+                                                                <option value="200">200</option>
+                                                                <option value="300">300</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="guests">Price to:</label>
+                                                        <div class="form-field">
+                                                            <i class="icon icon-arrow-down3"></i>
+                                                            <select name="priceto" id="priceto" class="form-control">
+                                                                <option value="100">100</option>
+                                                                <option value="200">200</option>
+                                                                <option value="300">300</option>
+                                                                <option value="500">500</option>
+                                                                <option value="1000">1000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="guests">Room Type</label>
+                                            <div class="form-field">
+                                                <i class="icon icon-arrow-down3"></i>
+                                                <select name="roomtype" id="roomtype" class="form-control">
+                                                    <option value="0">All types</option>
+                                                    <option th:each="item : ${types}" th:value="${item.id}"
+                                                            th:text="${item.name}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
                                         <input onclick="saveCookies()" type="submit" name="submit" id="submit" value="Find Room" class="btn btn-primary btn-block">
                                     </div>
                                 </div>
                             </form>
                         </div>
-
-                        <!-- PRICE RANGE -->
-                        <div class="side animate-box">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3 class="sidebar-heading">Price Range</h3>
-                                    <form method="post" class="colorlib-form-2">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="guests">Price from:</label>
-                                                    <div class="form-field">
-                                                        <i class="icon icon-arrow-down3"></i>
-                                                        <select onchange="setCookiePriceFrom()"  name="pricefrom" id="pricefrom" class="form-control">
-                                                            <option value="1">1</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                            <option value="200">200</option>
-                                                            <option value="300">300</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="guests">Price to:</label>
-                                                    <div class="form-field">
-                                                        <i class="icon icon-arrow-down3"></i>
-                                                        <select onchange="setCookiePriceTo()" name="priceto" id="priceto" class="form-control">
-                                                            <option value="100">100</option>
-                                                            <option value="200">200</option>
-                                                            <option value="300">300</option>
-                                                            <option value="500">500</option>
-                                                            <option value="1000">1000</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="side animate-box">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3 class="sidebar-heading">Room Type</h3>
-                                    <form method="post" class="colorlib-form-2">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <div class="form-field">
-                                                        <i class="icon icon-arrow-down3"></i>
-                                                        <select  onchange="setCookieType()" name="roomtype" id="roomtype" class="form-control">
-                                                            <option value="0">All types</option>
-                                                            <option th:each="item : ${types}" th:value="${item.id}"
-                                                                    th:text="${item.name}"></option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
