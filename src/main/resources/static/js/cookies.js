@@ -83,14 +83,14 @@ function controlSelectOptions(){
     var minPrice = document.getElementById("pricefrom").value;
     for (let i = 0; i < 5; i++) {
         if (parseInt(maxSelector.options[i].value) < parseInt(minPrice)) {
-            maxSelector.options[i].disabled = true;
+            maxSelector.options[i].hidden = true;
         } else {
-            maxSelector.options[i].disabled = false;
+            maxSelector.options[i].hidden = false;
         }
         if (parseInt(minSelector.options[i].value) > parseInt(maxPrice)) {
-            minSelector.options[i].disabled = true;
+            minSelector.options[i].hidden = true;
         } else {
-            minSelector.options[i].disabled = false;
+            minSelector.options[i].hidden = false;
         }
     }
 }
