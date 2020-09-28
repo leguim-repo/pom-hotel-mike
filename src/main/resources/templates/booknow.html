@@ -20,39 +20,36 @@
                                     <input type="text" id="username" class="form-control" th:value="${#authentication.name}" disabled>
                                 </div>
                             </div>
-                            <!--
                             <div class="form-group col-12"><hr></div>
                             <div class="row form-group">
                                 <div class="col-md-3 padding-bottom">
                                     <label>Room Code</label>
-                                    <input type="text" th:text="${newBooking.getRoom().code}" class="form-control" disabled>
+                                    <input type="text" th:field="${newBooking.room.code}" class="form-control" disabled>
                                 </div>
                                 <div class="col-md-3 padding-bottom">
                                     <label>Type</label>
-                                    <input type="text" th:field="${newBooking.getRoom().roomtypesByFkRoomtypeId.name}" class="form-control" disabled>
+                                    <input type="text" th:field="${newBooking.room.roomtypesByFkRoomtypeId.name}" class="form-control" disabled>
                                 </div>
                                 <div class="col-md-3 padding-bottom">
                                     <label>Guests</label>
-                                    <input type="text" th:field="${newBooking.getRoom().guests}" class="form-control" disabled>
+                                    <input type="text" th:field="${newBooking.room.guests}" class="form-control" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Price per night</label>
-                                    <input type="text" th:field="${newBooking.getRoom().pricePerNight}" class="form-control" disabled>
-                                </div>-->
-                            <!--</div>
+                                    <input type="text" th:field="${newBooking.room.pricePerNight}" class="form-control" disabled>
+                                </div>
+                            </div>
 
                             <div class="row form-group">
                                 <div class="col-md-6 padding-bottom">
-                                    <div class="room-img" style="background-color: dimgrey;">
-                                        <div class="room-img"></div>--> <!--th:style="'background-image:url(' + @{/images/{img}(img=${room.image})}+ ');'"-->
-                                <!--</div>
+                                        <div class="room-img" th:style="'background-image:url(' + @{/images/{img}(img=${newBooking.room.image})}+ ');'"></div>
                                 </div>
                                 <div class="col-md-6">
                                     <label>Description</label>
-                                    <textarea type="text" th:field="${newBooking.getRoom().description}"  class="form-control textarea" disabled></textarea>
+                                    <textarea type="text" th:field="${newBooking.room.description}"  class="form-control textarea" disabled></textarea>
                                 </div>
-                            </div>-->
-                            <!--<div class="form-group col-12"><hr></div>
+                            </div>
+                            <div class="form-group col-12"><hr></div>
                             <div class="row form-group">
                                 <div class="col-md-5 padding-bottom">
                                     <label for="checkin">Check In</label>
@@ -69,7 +66,7 @@
                             </div>
                             <div class="form-group text-center">
                                 <input type="submit" value="Create new account" class="btn btn-primary">
-                            </div>-->
+                            </div>
                     </form>
                 </div>
             </div>

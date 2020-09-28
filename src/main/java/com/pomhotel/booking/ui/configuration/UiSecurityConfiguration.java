@@ -71,7 +71,7 @@ Con solo meter la dependencias en el pom spring ya mete un login
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .loginPage("/showMyLoginPage")  // entrypoint que pasar el form de login
+                    .loginPage("/signin")  // entrypoint que pasar el form de login
                     //.loginPage("/contact.html") // de ser un static para hacerlo asin
                     .loginProcessingUrl("/authenticateTheUser") //entrypoint gestionado por spring
                     //.defaultSuccessUrl("/login?ok") // no me redirige quizas por el handler
@@ -81,7 +81,7 @@ Con solo meter la dependencias en el pom spring ya mete un login
                     .permitAll()
                     .and()
                 .logout()
-                    .logoutSuccessUrl("/showMyLoginPage?logout")
+                    .logoutSuccessUrl("/showMyLoginPage?logout") //no entiendo que hace esto.
                     .permitAll();
         //http.csrf().disable();
 

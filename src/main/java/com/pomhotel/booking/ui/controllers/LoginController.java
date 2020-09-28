@@ -31,12 +31,6 @@ public class LoginController {
         this.clientLoginService = clientLoginService;
     }
 
-    @RequestMapping("/showMyLoginPage")
-    public String showHome()
-    {
-        return "signin";
-    }
-
     //SIGN IN PAGE
     @GetMapping("/signin")
     public String signIn(WebRequest request, Model model){
