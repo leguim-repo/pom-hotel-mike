@@ -1,4 +1,4 @@
-//inicializeCookies();
+inicializeCookies();
 
 //Function for save session cookies
 function saveCookies(){
@@ -82,12 +82,12 @@ function controlSelectOptions(){
     var maxPrice =  document.getElementById("priceto").value;
     var minPrice = document.getElementById("pricefrom").value;
     for (let i = 0; i < 5; i++) {
-        if (maxSelector.options[i].value < minPrice) {
+        if (parseInt(maxSelector.options[i].value) < parseInt(minPrice)) {
             maxSelector.options[i].disabled = true;
         } else {
             maxSelector.options[i].disabled = false;
         }
-        if (minSelector.options[i].value > maxPrice) {
+        if (parseInt(minSelector.options[i].value) > parseInt(maxPrice)) {
             minSelector.options[i].disabled = true;
         } else {
             minSelector.options[i].disabled = false;
