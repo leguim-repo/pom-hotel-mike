@@ -35,6 +35,7 @@ public class BookRoomController {
     @GetMapping("/bookroomnow/{id}")
     public String bookroomnow(@PathVariable("id") long id, Model model) {
         roomSelected = roomsService.findById(id);
+        model.addAttribute("imgNav", "high-performance.jpg");
 
         NewBookingDTO newBookingDTO = new NewBookingDTO();
         newBookingDTO.room = roomSelected;
