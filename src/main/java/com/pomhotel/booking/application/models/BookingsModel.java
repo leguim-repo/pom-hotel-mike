@@ -8,7 +8,8 @@ public class BookingsModel {
     public Date checkIn;
     public Date checkOut;
     public Double totalPrice;
-    //public ClientsModel clientsByFkClientId;
+    public ClientsModel clientsByFkClientId;
+    public RoomsModel roomsByFKRoomId;
 
     //Constructor
     public BookingsModel() {
@@ -44,5 +45,21 @@ public class BookingsModel {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public ClientsModel getClientsByFkClientId() {
+        return clientsByFkClientId;
+    }
+
+    public void setClientsByFkClientId(ClientsModel clientsByFkClientId) {
+        this.clientsByFkClientId = clientsByFkClientId;
+    }
+
+    public RoomsModel getRoomsByFKRoomId() {
+        return roomsByFKRoomId;
+    }
+
+    public void setRoomsByFKRoomId(RoomsModel roomsByFKRoomId) {
+        this.roomsByFKRoomId = roomsByFKRoomId;
     }
 }

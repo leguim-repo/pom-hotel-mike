@@ -31,7 +31,7 @@ public class ClientLoginRepositoryImplementation implements ClientLoginRepositor
         Session session = this.dbConnection.openSession();
         try {
             LoginsEntity login = this.findLoginByUsername(key);
-            client = session.get(ClientsEntity.class, login.getId());
+            client = login.getClientsByFkClientId();
         } catch (Throwable ex) {
             ex.printStackTrace();
         } finally {

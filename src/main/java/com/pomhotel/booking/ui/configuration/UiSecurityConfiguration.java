@@ -81,7 +81,7 @@ Con solo meter la dependencias en el pom spring ya mete un login
                     .permitAll()
                     .and()
                 .logout()
-                    .logoutSuccessUrl("/showMyLoginPage?logout") //no entiendo que hace esto.
+                    .logoutSuccessUrl("/signin?logout") //no lo entiendo...
                     .permitAll();
         //http.csrf().disable();
 

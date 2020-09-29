@@ -1,11 +1,13 @@
 package com.pomhotel.booking.ui.controllers;
 
+import com.pomhotel.booking.application.models.BookingsModel;
+import com.pomhotel.booking.application.services.BookingsService;
+import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.ui.dto.NewBookingDTO;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.RoomTypesService;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.dto.NewClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
@@ -20,11 +22,11 @@ import java.util.List;
 public class HomeController {
     RoomsService roomsService;
     RoomTypesService roomTypesService;
+
     @Autowired
     public HomeController(RoomsService roomsService, RoomTypesService roomTypesService) {
         this.roomsService = roomsService;
         this.roomTypesService = roomTypesService;
-
     }
 
     //HOME PAGE
@@ -59,22 +61,6 @@ public class HomeController {
     @PostMapping("/rooms")
     public String roomsList() {
         return "redirect:/rooms";
-    }
-
-    @GetMapping("/bookroomnow/{id}")
-    public String bookroomnow(@PathVariable("id") long id, Model model) {
-        NewBookingDTO newBookingDTO = new NewBookingDTO();
-        newBookingDTO.room = roomsService.findById(id);
-        model.addAttribute("newBooking", newBookingDTO);
-        return "booknow";
-    }
-
-    @PostMapping("/bookroomnow")
-    public String bookroomnow(Model model, @ModelAttribute("room") @Valid RoomsModel room) {
-        NewBookingDTO newBookingDTO = new NewBookingDTO();
-        //newBookingDTO.room = room;
-        model.addAttribute("newBooking", newBookingDTO);
-        return "redirect:/home";
     }
 
 
