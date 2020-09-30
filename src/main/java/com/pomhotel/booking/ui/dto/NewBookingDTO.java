@@ -22,6 +22,10 @@ public class NewBookingDTO {
     @NotEmpty
     public String checkOut;
 
+    @NotNull
+    @NotEmpty
+    public String guests;
+
     public int totalPrice;
 
     public RoomsModel getRoom() {
@@ -54,5 +58,13 @@ public class NewBookingDTO {
 
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getGuests() {
+        return guests;
+    }
+
+    public void setGuests(String guests) {
+        this.guests = guests;
     }
 }

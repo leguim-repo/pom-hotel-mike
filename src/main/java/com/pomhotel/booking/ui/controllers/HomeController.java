@@ -8,6 +8,7 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.RoomTypesService;
 import com.pomhotel.booking.application.services.RoomsService;
+import com.pomhotel.booking.ui.dto.SearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -59,7 +62,8 @@ public class HomeController {
     }
 
     @PostMapping("/rooms")
-    public String roomsList() {
+    public String roomsList(@ModelAttribute("newSearch") @Valid SearchDTO dto) {
+        System.out.println("dto: "+dto.toString());
         return "redirect:/rooms";
     }
 
