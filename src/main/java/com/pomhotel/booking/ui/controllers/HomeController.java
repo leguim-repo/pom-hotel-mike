@@ -15,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -55,12 +57,21 @@ public class HomeController {
         List<RoomtypesModel> types = roomTypesService.findAll();
         model.addAttribute("types", types);
 
-        return "listrooms";
+        return "redirect:/listrooms";
     }
 
     @PostMapping("/rooms")
-    public String roomsList() {
-        return "redirect:/rooms";
+    public String roomsList(@RequestBody String payloadBody, @RequestHeader HttpHeaders headers, HttpServletResponse response) {
+        // Con este metodo podemos ver que paramentros enviamos con el post desde el form
+        System.out.println("\nheaders: "+headers+"\n");
+        System.out.println("\nParametros recibidos: "+payloadBody+"\n");
+        System.out.println("posteado en rooms");
+        try {
+            response.sendRedirect("/acercade.html");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "listrooms";
     }
 
 

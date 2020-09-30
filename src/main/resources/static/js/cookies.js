@@ -10,8 +10,35 @@ function saveCookies(){
         setCookie("Checkin",document.getElementById("checkin").value,90);
         setCookie("Checkout",document.getElementById("checkout").value,90);
         setCookie("Guests",document.getElementById("guests").value,90);
+  thePost();
+
 }
 
+function thePost() {
+
+    var token = $("meta[name='_csrf']").attr("content");
+    console.log("token:",token )
+
+    $.ajax({
+        url : '/rooms', // url to make request
+        headers: {"X-CSRF-TOKEN": token}, //send CSRF token in header
+        type : 'POST',
+        async: false,
+        data:   {
+            Guests: getCookie("Guests"),
+            MinPrice: getCookie("MinPrice"),
+            Checkout: getCookie("Checkout"),
+            Type: getCookie("Type"),
+            Checkin: getCookie("Checkin"),
+            MaxPrice: getCookie("MaxPrice"),
+
+        },
+        success : function(result) {
+            console.log("result: ",result);
+        }
+    })
+
+}
 //Function for read saved cookies
 function getCookies() {
     document.getElementById("checkin").value = getCookie("Checkin");
