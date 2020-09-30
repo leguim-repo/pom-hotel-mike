@@ -10,5 +10,5 @@ public interface BookingsService {
     List<BookingsModel> findAll();
     void saveOrUpdate(BookingsModel model);
     void deleteById(long id);
-    void delete(RoomsModel model);
+    void delete(BookingsModel model);
 }

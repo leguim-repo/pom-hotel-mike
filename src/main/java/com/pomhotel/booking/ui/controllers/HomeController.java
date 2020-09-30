@@ -48,7 +48,7 @@ public class HomeController {
         model.addAttribute("strNav", "Find your rest");
         model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
 
-        List<RoomsModel> rooms = roomsService.findAll();
+        List<RoomsModel> rooms = roomsService.findApplyingFilter();
         model.addAttribute("rooms", rooms);
         model.addAttribute("roomy", new RoomsModel());
 

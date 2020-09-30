@@ -9,4 +9,5 @@ public interface RoomsRepository {
     void saveOrUpdate(RoomsEntity entity);
     void deleteById(long id);
     void delete(RoomsEntity entity);
+    List<RoomsEntity> findApplyingFilter();
 }
