@@ -58,14 +58,14 @@
                         <!-- BLACK BOX SEARCHER -->
                         <div class="side search-wrap animate-box">
                             <h3 class="sidebar-heading">Find your room</h3>
-                            <form method="post" th:action="@{/rooms}"class="colorlib-form">
+                            <form method="post" th:action="@{/rooms}" th:object="${newSearch}" id="roomsSearch" class="colorlib-form">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="checkin">Check-in:</label>
                                             <div class="form-field">
                                                 <i class="icon icon-calendar2"></i>
-                                                <input type="text" id="checkin" class="form-control date" placeholder="Check-in date">
+                                                <input type="text" id="checkin" name="checkin" class="form-control date" placeholder="Check-in date">
                                             </div>
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@
                                             <label for="checkout">Check-out:</label>
                                             <div class="form-field">
                                                 <i class="icon icon-calendar2"></i>
-                                                <input type="text" id="checkout" class="form-control date" placeholder="Check-out date">
+                                                <input type="text" id="checkout" name="checkout" class="form-control date" placeholder="Check-out date">
                                             </div>
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@
                                             <label for="guests">Guest</label>
                                             <div class="form-field">
                                                 <i class="icon icon-arrow-down3"></i>
-                                                <select name="people" id="guests" class="form-control">
+                                                <select id="guests" name="guests" class="form-control">
                                                     <option value="" disabled selected>Select guests</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -101,7 +101,7 @@
                                                     <label for="guests">Price from:</label>
                                                     <div class="form-field">
                                                         <i class="icon icon-arrow-down3"></i>
-                                                        <select name="pricefrom" id="pricefrom" class="form-control">
+                                                        <select name="minprice" id="pricefrom" class="form-control">
                                                             <option value="1">1</option>
                                                             <option value="50">50</option>
                                                             <option value="100">100</option>
@@ -116,7 +116,7 @@
                                                     <label for="guests">Price to:</label>
                                                     <div class="form-field">
                                                         <i class="icon icon-arrow-down3"></i>
-                                                        <select name="priceto" id="priceto" class="form-control">
+                                                        <select name="maxprice" id="priceto" class="form-control">
                                                             <option value="100">100</option>
                                                             <option value="200">200</option>
                                                             <option value="300">300</option>
@@ -133,7 +133,7 @@
                                             <label for="guests">Room Types</label>
                                             <div class="form-field">
                                                 <i class="icon icon-arrow-down3"></i>
-                                                <select  name="roomtype" id="roomtype" class="form-control">
+                                                <select  name="type" id="roomtype" class="form-control">
                                                     <option value="0">All types</option>
                                                     <option th:each="item : ${types}" th:value="${item.id}"
                                                             th:text="${item.name}"></option>
@@ -156,7 +156,10 @@
     <div class="gototop js-top">
         <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
     </div>
-    <div th:insert="fragments/layout.html :: sources"> </div>
 </div>
+<footer>
+    <a th:href="${@RandomMusicURL.getRandomMusicURL()}" target="_blank">EasterEgg</a>
+</footer>
+<div th:insert="fragments/layout.html :: sources"> </div>
 </body>
 </html>

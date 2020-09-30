@@ -10,7 +10,7 @@
         <div class="row">
             <div class="tab-content">
                 <div id="hotel">
-                    <form class="colorlib-form">
+                    <form method="post" th:action="@{/rooms}" th:object="${newSearch}" id="homeSearch" class="colorlib-form">
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="booknow">
@@ -23,7 +23,7 @@
                                     <label for="checkin">Check-in:</label>
                                     <div class="form-field">
                                         <i class="icon icon-calendar2"></i>
-                                        <input type="text" id="checkin" class="form-control date"
+                                        <input type="text" name="checkin" id="checkin" class="form-control date"
                                                placeholder="Check-in date" />
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                                     <label for="checkout">Check-out:</label>
                                     <div class="form-field">
                                         <i class="icon icon-calendar2"></i>
-                                        <input type="text" id="checkout" class="form-control date"
+                                        <input type="text" name="checkout" id="checkout" class="form-control date"
                                                placeholder="Check-out date" />
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <input onclick="saveCookies()" type="button" name="submit" id="submit" value="Find Rooms" class="btn btn-primary btn-block">
+                                <input onclick="saveCookies()" type="submit" name="submit" id="submit" value="Find Rooms" class="btn btn-primary btn-block">
                             </div>
                         </div>
                     </form>
@@ -65,6 +65,9 @@
     </div>
 </div>
 </div>
+<footer>
+    <a th:href="${@RandomMusicURL.getRandomMusicURL()}" target="_blank">EasterEgg</a>
+</footer>
 <div th:insert="fragments/layout.html :: sources"></div>
 </body>
 </html>

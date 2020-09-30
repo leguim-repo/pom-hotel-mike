@@ -8,6 +8,7 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.RoomTypesService;
 import com.pomhotel.booking.application.services.RoomsService;
+import com.pomhotel.booking.ui.dto.SearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
@@ -57,21 +58,13 @@ public class HomeController {
         List<RoomtypesModel> types = roomTypesService.findAll();
         model.addAttribute("types", types);
 
-        return "redirect:/listrooms";
+        return "listrooms";
     }
 
     @PostMapping("/rooms")
-    public String roomsList(@RequestBody String payloadBody, @RequestHeader HttpHeaders headers, HttpServletResponse response) {
-        // Con este metodo podemos ver que paramentros enviamos con el post desde el form
-        System.out.println("\nheaders: "+headers+"\n");
-        System.out.println("\nParametros recibidos: "+payloadBody+"\n");
-        System.out.println("posteado en rooms");
-        try {
-            response.sendRedirect("/acercade.html");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "listrooms";
+    public String roomsList(@ModelAttribute("newSearch") @Valid SearchDTO dto) {
+        System.out.println("dto: "+dto.toString());
+        return "redirect:/rooms";
     }
 
 

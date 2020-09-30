@@ -10,12 +10,11 @@ function saveCookies(){
         setCookie("Checkin",document.getElementById("checkin").value,90);
         setCookie("Checkout",document.getElementById("checkout").value,90);
         setCookie("Guests",document.getElementById("guests").value,90);
-  thePost();
 
 }
 
 function thePost() {
-
+    <!-- POC para tirar un post a rooms -->
     var token = $("meta[name='_csrf']").attr("content");
     console.log("token:",token )
 
@@ -82,6 +81,8 @@ function inicializeCookies(){
         setCookie("MinPrice",1,90);
         setCookie("MaxPrice",1000,90);
         setCookie("Type",0,90);
+        setCookie("Guests",2,90);
+
     }
     getCookies();
 }
