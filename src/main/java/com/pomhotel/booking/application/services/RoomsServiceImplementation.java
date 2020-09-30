@@ -37,8 +37,8 @@ public class RoomsServiceImplementation implements RoomsService {
         }).collect(Collectors.toList());
         return models;
     }
-    public List<RoomsModel> findApplyingFilter(){
-        List<RoomsEntity> entities = repository.findApplyingFilter();
+    public List<RoomsModel> findApplyingFilter(int guests, int minPrice, int maxPrice, long idType){
+        List<RoomsEntity> entities = repository.findApplyingFilter(guests, minPrice, maxPrice, idType);
         List<RoomsModel> models = entities.stream().map(entity -> {
             return factory.createModel(entity);
         }).collect(Collectors.toList());

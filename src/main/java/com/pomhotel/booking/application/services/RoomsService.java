@@ -11,5 +11,5 @@ public interface RoomsService {
     void saveOrUpdate(RoomsModel model);
     void deleteById(long id);
     void delete(RoomsModel model);
-    List<RoomsModel> findApplyingFilter();
+    List<RoomsModel> findApplyingFilter(int guests, int minPrice, int maxPrice, long idType);
 }

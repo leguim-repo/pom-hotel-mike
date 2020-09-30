@@ -9,5 +9,5 @@ public interface RoomsRepository {
     void saveOrUpdate(RoomsEntity entity);
     void deleteById(long id);
     void delete(RoomsEntity entity);
-    List<RoomsEntity> findApplyingFilter();
+    List<RoomsEntity> findApplyingFilter(int guests, int minPrice, int maxPrice, long idType);
 }
