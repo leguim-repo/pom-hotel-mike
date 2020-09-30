@@ -55,7 +55,9 @@ public class RoomsRepositoryImplementation implements RoomsRepository {
         List<RoomsEntity> entities = null;
         Session session = this.dbConnection.openSession();
         try {
-            entities = session.createSQLQuery("SELECT r.id, r.fk_roomtype_id, r.code, r.description, r.pricePerNight, r.image, r.guests FROM rooms r LEFT JOIN bookings b ON r.id = b.fk_room_id WHERE r.guests >= 1 AND r.pricePerNight >= 20").getResultList();
+            //entities = session.createQuery("SELECT b.roomsByFkRoomId.id FROM BookingsEntity b WHERE b.roomsByFkRoomId.id = r.id AND new Date('2020-10-09') BETWEEN b.checkIn AND b.checkOut OR new Date('2020-10-15') BETWEEN b.checkIn AND b.checkOut OR (new Date('2020-10-09') <= b.checkIn AND new Date('2020-10-15') >= b.checkOut)))").getResultList();  //
+            entities = session.createQuery("SELECT r FROM RoomsEntity r LEFT JOIN BookingsEntity b ON r.id = b.roomsByFkRoomId.id WHERE r.guests >= 1 AND r.pricePerNight >= 20 AND r.pricePerNight <= 1000 AND r.roomtypesByFkRoomtypeId.id = 1").getResultList();
+            //entities = session.createSQLQuery("SELECT r.id, r.fk_roomtype_id, r.code, r.description, r.pricePerNight, r.image, r.guests FROM rooms r LEFT JOIN bookings b ON r.id = b.fk_room_id WHERE r.guests >= 1 AND r.pricePerNight >= 20").getResultList();
             //AND r.pricePerNight <= 1000 AND r.fk_roomtype_id = 1 AND NOT EXISTS( SELECT b.fk_room_id FROM bookings b WHERE b.fk_room_id = r.id AND ('2020-10-09' BETWEEN b.checkIn AND b.checkOut OR '2020-10-15' BETWEEN b.checkIn AND b.checkOut OR ('2020-10-09' <= b.checkIn AND '2020-10-15' >= b.checkOut))))")
         }catch (Throwable ex) {
             ex.printStackTrace();
