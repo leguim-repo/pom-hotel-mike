@@ -47,7 +47,9 @@
                     </div>
                     <div class="col-xs-10 text-right menu-1">
                         <ul>
-                            <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="${#authentication.name}"></span></a></li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="${@RandomMusicURL.getRandomMusicURL()}" target="_blank"><span th:text="${#authentication.name}"></span></a>
+                            </li>
                             <li><a th:href="@{/home}">Home</a></li>
                             <li><a th:href="@{/rooms}">Rooms</a></li>
                             <li><a th:href="@{/aboutus}">About</a></li>
