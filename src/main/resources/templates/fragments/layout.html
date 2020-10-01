@@ -85,15 +85,49 @@
 <div class="container">
 </div>
 
-<footer th:fragment="footer" class="text-muted bg-light">
-    <div class="container">
-        <p class="float-right">
-            <a href="#">Back to top</a>
-        </p>
-        <p>© 2020 Copyright: SC.Geekshubs - OOG</p>
-    </div>
-</footer>
-</footer>
+<div th:fragment="footer" class="text-muted bg-light">
+        <div id="colorlib-footer" role="contentinfo">
+            <div class="container">
+                <div class="row row-pb-md justify-content-center">
+                    <div class="col-12 col-md-6 col-lg-4 colorlib-widget">
+                        <h4>POM dreams</h4>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi voluptatem quisquam, labore nesciunt modi officiis alias architecto blanditiis, accusamus, aut eius? </p>
+                        <p>Dicta necessitatibus neque perferendis aperiam iste sint cum dolor fugiat nisi temporibus aut!</p>
+
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 colorlib-widget text-center">
+                        <h4>Play music</h4>
+                        <p><a th:href="${@RandomMusicURL.getRandomMusicURL()}" target="_blank"><img th:src="@{images/musica.png}" width="100rem" height="100rem" /></a></p>
+                        <p>Listen the best music in the world now!</p>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 colorlib-widget">
+                        <h4>Contact Information</h4>
+                        <ul class="colorlib-footer-links">
+                            <li>Aulas Formación B-3, <br> Carretera Nacional II (complejo seat Autovia a-2), KM 585
+                                ,
+                                Martorell
+                                ,
+                                08760
+                                ,
+                                Barcelona
+                            </li>
+                            <li><a href="tel://1234567920">+ 1235 2355 98</a></li>
+                            <li><a href="mailto:info@yoursite.com">pom@party.com</a></li>
+                            <li><a href="#">pomhotel.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>
+                            <span> Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved to <a href="https://code.seat/" target="_blank">@Z-Devs</a>  |  This webside is made by:  <a href="https://github.com/Z-devs/pom-hotel.git" target="_blank">@Miguel</a>, <a href="https://github.com/Z-devs/pom-hotel.git" target="_blank">@Oscar</a>, <a href="https://github.com/Z-devs/pom-hotel.git" target="_blank">@Pablo</a>.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
 
 <div th:fragment="sources">
     <!-- jQuery -->
