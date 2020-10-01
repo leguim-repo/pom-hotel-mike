@@ -4,7 +4,18 @@
 </head>
 <body>
 <header th:insert="fragments/layout.html :: header"></header>
+
+<!-- chapu para dar feedback al usuario si se ha procesado su reserva correctamente o no -->
+<div th:if="${param.bookedok}">
+    <div th:insert="fragments/layout.html :: bookedok"></div>
+</div>
+
+<div th:if="${param.bookedfail}">
+    <div th:insert="fragments/layout.html :: bookedfail"></div>
+</div>
+
 <div class="colorlib-loader"></div>
+
 <div id="page">
     <div id="colorlib-reservation">
         <div class="row">
@@ -166,5 +177,9 @@
 </div>
 <div th:insert="fragments/layout.html :: footer"></div>
 <div th:insert="fragments/layout.html :: sources"></div>
+
+<div th:if="${param.bookedok}" ><script>showFeedBackOk()</script></div>
+<div th:if="${param.bookedfail}" ><script>showFeedBackFail();</script></div>
+
 </body>
 </html>

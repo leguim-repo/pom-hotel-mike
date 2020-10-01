@@ -121,7 +121,7 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <p>
-                            <span> Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved to <a href="https://code.seat/" target="_blank">@Z-Devs</a>  |  This webside is made by:  <a href="https://github.com/Z-devs/pom-hotel.git" target="_blank">@Miguel</a>, <a href="https://github.com/Z-devs/pom-hotel.git" target="_blank">@Oscar</a>, <a href="https://github.com/Z-devs/pom-hotel.git" target="_blank">@Pablo</a>.</span>
+                            <span> Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved to <a href="https://code.seat/" target="_blank">@Z-Devs</a>  |  This webside is made by: <a href="https://github.com/Z-devs/pom-hotel.git" target="_blank">@Pablo</a>, <a href="https://github.com/Z-devs/pom-hotel.git" target="_blank">@Oscar</a>,<a href="https://github.com/Z-devs/pom-hotel.git" target="_blank">@Miguel</a>.</span>
                         </p>
                     </div>
                 </div>
@@ -129,6 +129,37 @@
         </div>
 </footer>
 
+<div th:fragment="bookedok">
+    <div id="myModalOK" class="modal">
+        <!-- Modal content -->
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body alert-success">
+                    <span class="close">&times;</span>
+                    <p>Booking Reservation</p>
+                    <p>Your booking has succesful correctly.</p>
+                    <p>Have a nice day!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="bookedfail">
+    <div id="myModalFail" class="modal">
+        <!-- Modal content -->
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body alert-danger">
+                    <span class="close">&times;</span>
+                    <p>Booking Reservation</p>
+                    <p>Sorry, we have a problem with your reservation and it has not been processed. Please try again later.</p>
+                    <p>Have a nice day!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:fragment="sources">
     <!-- jQuery -->
@@ -157,6 +188,9 @@
     <script type="text/javascript" th:src="@{/js/cookies.js}"></script>
     <!-- Datepickers -->
     <script type="text/javascript" th:src="@{/js/datepickers_functionality.js}"></script>
+    <!-- Feedback de Booking -->
+    <script type="text/javascript" th:src="@{/js/bookingfeedback.js}"></script>
+
 </div>
 
 </body>
