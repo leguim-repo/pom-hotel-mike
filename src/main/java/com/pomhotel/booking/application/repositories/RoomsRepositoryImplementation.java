@@ -57,7 +57,14 @@ public class RoomsRepositoryImplementation implements RoomsRepository {
         try {
             //entities = session.createQuery("SELECT b.roomsByFkRoomId.id FROM BookingsEntity b WHERE b.roomsByFkRoomId.id = r.id AND new Date('2020-10-09') BETWEEN b.checkIn AND b.checkOut OR new Date('2020-10-15') BETWEEN b.checkIn AND b.checkOut OR (new Date('2020-10-09') <= b.checkIn AND new Date('2020-10-15') >= b.checkOut)))").getResultList();  //
             // buena -> entities = session.createQuery("SELECT r FROM RoomsEntity r LEFT JOIN BookingsEntity b ON r.id = b.roomsByFkRoomId.id WHERE r.guests >= 1 AND r.pricePerNight >= 20 AND r.pricePerNight <= 1000 AND r.roomtypesByFkRoomtypeId.id = 1").getResultList();
-            entities = session.createQuery("SELECT r FROM RoomsEntity r LEFT JOIN BookingsEntity b ON r.id = b.roomsByFkRoomId.id WHERE r.guests >=" + guests + " AND r.pricePerNight >= " + minPrice + " AND r.pricePerNight <= " + maxPrice + " AND r.roomtypesByFkRoomtypeId.id = " + idType).getResultList();
+            if ( idType == 0) {
+                entities = session.createQuery("SELECT r FROM RoomsEntity r LEFT JOIN BookingsEntity b ON r.id = b.roomsByFkRoomId.id WHERE r.guests >=" + guests + " AND r.pricePerNight >= " + minPrice + " AND r.pricePerNight <= " + maxPrice).getResultList();
+
+            }
+            else {
+                entities = session.createQuery("SELECT r FROM RoomsEntity r LEFT JOIN BookingsEntity b ON r.id = b.roomsByFkRoomId.id WHERE r.guests >=" + guests + " AND r.pricePerNight >= " + minPrice + " AND r.pricePerNight <= " + maxPrice + " AND r.roomtypesByFkRoomtypeId.id = " + idType).getResultList();
+
+            }
 
 
         }catch (Throwable ex) {

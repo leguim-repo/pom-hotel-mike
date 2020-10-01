@@ -51,9 +51,8 @@ public class HomeController {
         model.addAttribute("strNav", "Find your rest");
         model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
 
-        List<RoomsModel> rooms = roomsService.findApplyingFilter(1,1,1000,3);
+        List<RoomsModel> rooms = roomsService.findAll();
         model.addAttribute("rooms", rooms);
-        model.addAttribute("roomy", new RoomsModel());
 
         List<RoomtypesModel> types = roomTypesService.findAll();
         model.addAttribute("types", types);
@@ -61,10 +60,26 @@ public class HomeController {
         return "listrooms";
     }
 
+
+
     @PostMapping("/rooms")
-    public String roomsList(@ModelAttribute("newSearch") @Valid SearchDTO dto) {
+    public String roomsList(@ModelAttribute("newSearch") @Valid SearchDTO dto, Model model) {
         System.out.println("dto: "+dto.toString());
-        return "redirect:/rooms";
+
+        model.addAttribute("strNav", "Find your rest");
+        model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
+        if ( ( dto.minprice==null) && (dto.maxprice==null) && (dto.type==null) ) {
+            dto.minprice = "1";
+            dto.maxprice = "1000";
+            dto.type = "0";
+        }
+        List<RoomsModel> rooms = roomsService.findApplyingFilter(Integer.parseInt(dto.guests),Integer.parseInt(dto.minprice),Integer.parseInt(dto.maxprice), Long.parseLong(dto.type));
+        model.addAttribute("rooms", rooms);
+
+        List<RoomtypesModel> types = roomTypesService.findAll();
+        model.addAttribute("types", types);
+
+        return "listrooms";
     }
 
 
