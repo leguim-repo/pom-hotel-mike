@@ -1,7 +1,7 @@
 package com.pomhotel.booking.application.services;
 
-import com.pomhotel.booking.application.factories.ClientsFactory;
-import com.pomhotel.booking.application.factories.LoginsFactory;
+import com.pomhotel.booking.application.domain.factories.ClientsFactory;
+import com.pomhotel.booking.application.domain.factories.LoginsFactory;
 import com.pomhotel.booking.application.models.ClientsModel;
 import com.pomhotel.booking.application.models.LoginsModel;
 import com.pomhotel.booking.application.repositories.ClientLoginRepository;

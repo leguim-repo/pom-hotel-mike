@@ -1,11 +1,8 @@
 package com.pomhotel.booking.application.services;
 
 import com.pomhotel.booking.application.domain.entities.BookingsEntity;
-import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
-import com.pomhotel.booking.application.factories.BookingsFactory;
+import com.pomhotel.booking.application.domain.factories.BookingsFactory;
 import com.pomhotel.booking.application.models.BookingsModel;
-import com.pomhotel.booking.application.models.RoomsModel;
-import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.repositories.BookingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

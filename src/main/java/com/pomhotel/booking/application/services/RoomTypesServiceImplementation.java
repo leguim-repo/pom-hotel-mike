@@ -1,7 +1,7 @@
 package com.pomhotel.booking.application.services;
 
 import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
-import com.pomhotel.booking.application.factories.RoomtypesFactory;
+import com.pomhotel.booking.application.domain.factories.RoomtypesFactory;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.repositories.RoomtypesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
