@@ -393,14 +393,8 @@ h1, h2, h3, h4, h5, h6, figure {
   background: #fafafa; }
 
 #colorlib-hotel,
-.colorlib-tour,
-.colorlib-wrap,
-#colorlib-contact,
-#colorlib-intro,
+.colorlib-spaces,
 #colorlib-testimony,
-#colorlib-blog,
-#colorlib-amenities,
-#colorlib-subscribe,
 #colorlib-footer {
   width: 100%;
   display: block;
@@ -409,16 +403,14 @@ h1, h2, h3, h4, h5, h6, figure {
   clear: both; }
   @media screen and (max-width: 768px) {
     #colorlib-hotel,
-    .colorlib-tour,
-    .colorlib-wrap,
-    #colorlib-contact,
-    #colorlib-intro,
+    .colorlib-spaces,
     #colorlib-testimony,
-    #colorlib-blog,
-    #colorlib-amenities,
-    #colorlib-subscribe,
     #colorlib-footer {
       padding: 5em 0; } }
+
+#colorlib-testimony{
+  padding: 0em 0em 8em 0em !important;
+}
 
 .colorlib-services {
   padding: 3em !important; }
@@ -581,13 +573,13 @@ h1, h2, h3, h4, h5, h6, figure {
   margin-right: 0;
   margin-left: 0; }
 
-.tour-wrap {
+.space-wrap {
   width: 100%;
   float: left;
   display: block;
   padding: 0;
   margin: 0; }
-  .tour-wrap .tour-entry {
+  .space-wrap .space-entry {
     width: 25%;
     float: left;
     position: relative;
@@ -596,12 +588,12 @@ h1, h2, h3, h4, h5, h6, figure {
     padding: 0;
     margin: 0; }
     @media screen and (max-width: 768px) {
-      .tour-wrap .tour-entry {
+      .space-wrap .space-entry {
         width: 50%; } }
     @media screen and (max-width: 480px) {
-      .tour-wrap .tour-entry {
+      .space-wrap .space-entry {
         width: 100%; } }
-    .tour-wrap .tour-entry .tour-img {
+    .space-wrap .space-entry .tour-img {
       position: absolute;
       top: 0;
       left: 0;
@@ -614,51 +606,51 @@ h1, h2, h3, h4, h5, h6, figure {
       -o-transition: 0.3s;
       transition: 0.3s; }
       @media screen and (max-width: 768px) {
-        .tour-wrap .tour-entry .tour-img {
+        .space-wrap .space-entry .tour-img {
           -webkit-box-shadow: inset 0px -195px 142px -79px rgba(0, 0, 0, 0.49);
           -moz-box-shadow: inset 0px -195px 142px -79px rgba(0, 0, 0, 0.49);
           -ms-box-shadow: inset 0px -195px 142px -79px rgba(0, 0, 0, 0.49);
           -o-box-shadow: inset 0px -195px 142px -79px rgba(0, 0, 0, 0.49);
           box-shadow: inset 0px -195px 142px -79px rgba(0, 0, 0, 0.49); } }
-    .tour-wrap .tour-entry .desc {
+    .space-wrap .space-entry .desc {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
       z-index: -1;
       padding: 15px; }
-      .tour-wrap .tour-entry .desc h2 {
+      .space-wrap .space-entry .desc h2 {
         font-size: 18px;
         text-transform: uppercase;
         margin-bottom: 10px; }
-      .tour-wrap .tour-entry .desc .city {
+      .space-wrap .space-entry .desc .desc-spaces {
         display: block;
         color: #b3b3b3;
         margin-bottom: 5px; }
-      .tour-wrap .tour-entry .desc .price {
+      .space-wrap .space-entry .desc .price {
         color: #000;
         font-size: 20px; }
-      .tour-wrap .tour-entry .desc .star {
+      .space-wrap .space-entry .desc .star {
         margin-bottom: 0;
         font-size: 12px;
         color: #b3b3b3; }
-        .tour-wrap .tour-entry .desc .star span i {
+        .space-wrap .space-entry .desc .star span i {
           color: #FFDD00; }
       @media screen and (max-width: 768px) {
-        .tour-wrap .tour-entry .desc {
+        .space-wrap .space-entry .desc {
           z-index: 2; }
-          .tour-wrap .tour-entry .desc h2 {
+          .space-wrap .space-entry .desc h2 {
             color: #fff; }
-          .tour-wrap .tour-entry .desc .city, .tour-wrap .tour-entry .desc .star {
+          .space-wrap .space-entry .desc .city, .space-wrap .space-entry .desc .star {
             color: #e6e6e6; }
-          .tour-wrap .tour-entry .desc .price {
+          .space-wrap .space-entry .desc .price {
             color: #fff;
             background: #00BBF0;
             padding: 4px 7px; } }
-    .tour-wrap .tour-entry:hover .tour-img {
+    .space-wrap .space-entry:hover .tour-img {
       top: -55%; }
       @media screen and (max-width: 768px) {
-        .tour-wrap .tour-entry:hover .tour-img {
+        .space-wrap .space-entry:hover .tour-img {
           top: 0; } }
 
 .f-tour {
