@@ -4,9 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+
+//--- Entity -------------------------------------------------------
 @Entity
 @Table(name = "roomtypes", schema = "pom_hotel")
 public class RoomtypesEntity implements Serializable {
+
+    //--- Attributes -----------------------------------------------
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -23,6 +27,7 @@ public class RoomtypesEntity implements Serializable {
     @OneToMany(mappedBy = "roomtypesByFkRoomtypeId")
     private List<RoomsEntity> roomsById;
 
+    //--- Getters & Setters ---------------------------------------
     public long getId() {
         return id;
     }
@@ -51,6 +56,7 @@ public class RoomtypesEntity implements Serializable {
         this.roomsById = roomsById;
     }
 
+    //--- Some general functions -----------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

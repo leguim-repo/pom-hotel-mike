@@ -7,11 +7,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
+//--- Service ----------------------------------------------------------
 @Service
 public class BookingLogicalServiceImplementation implements BookingLogicalService {
     DateTimeFormatter formatoDeEntrada = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     DateTimeFormatter formatoDeSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    //--- Functions ----------------------------------------------------
     @Override
     public double calculateTotalPrice(Date checkIn, Date checkOut, double pricePerNight) {
         long nights = getDaysBetweenTwoDates(checkIn, checkOut);

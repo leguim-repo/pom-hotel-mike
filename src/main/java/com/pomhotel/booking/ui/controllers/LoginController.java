@@ -15,21 +15,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+//--- Controller ----------------------------------------------------------
 @Controller
 public class LoginController {
+
+    //--- Services & Variables used ---------------------------------------
     ClientLoginService clientLoginService;
 
+    //--- Constructor -----------------------------------------------------
     @Autowired
     LoginController(ClientLoginService clientLoginService){
         this.clientLoginService = clientLoginService;
     }
 
-    //SIGN IN PAGE
+    //--- Sign In & Log Out Mappings --------------------------------------
     @GetMapping("/signin")
     public String signIn(WebRequest request, Model model){
         NewClientDTO newclient = new NewClientDTO();
@@ -38,31 +41,29 @@ public class LoginController {
         return "signin";
     }
 
-    //REGISTER NEW CLIENT
-    @PostMapping("/registernewclient")
-    public String registerNewClient(@ModelAttribute("newclient") @Valid NewClientDTO newclient, HttpServletRequest request, Errors errors) {
-        String view;
-
-        ClientsModel clientModel = new ClientsModel(newclient.name, newclient.lastname, newclient.email);
-        LoginsModel loginModel = new LoginsModel(newclient.username, newclient.password, clientModel);
-        System.out.println(loginModel);
-
-        clientLoginService.createClientAndLogin(loginModel);
-
-        if (true) {
-            view = "redirect:/home";
-        } else {
-            view = "registerfail";
-        }
-        return view;
-    }
-
     @GetMapping(value="/logout")
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
+
         return "redirect:/signin?logout";
     }
+
+    //--- Register New Client Mapping --------------------------------------
+    @PostMapping("/registernewclient")
+    public String registerNewClient(@ModelAttribute("newclient") @Valid NewClientDTO newclient, HttpServletRequest request, Errors errors) {
+        ClientsModel clientModel = new ClientsModel(newclient.name, newclient.lastname, newclient.email);
+        LoginsModel loginModel = new LoginsModel(newclient.username, newclient.password, clientModel);
+        clientLoginService.createClientAndLogin(loginModel);
+
+        if (true) {
+            return "redirect:/home";
+        } else {
+            return "registerfail";
+        }
+    }
+
 }

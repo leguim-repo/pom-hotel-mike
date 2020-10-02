@@ -2,8 +2,6 @@ package com.pomhotel.booking.application.repositories;
 
 import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import com.pomhotel.booking.application.domain.entities.LoginsEntity;
-import com.pomhotel.booking.application.models.ClientsModel;
-import com.pomhotel.booking.application.models.LoginsModel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,15 +14,20 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+//--- Repository -------------------------------------------------------
 @Repository
 public class ClientLoginRepositoryImplementation implements ClientLoginRepository {
+
+    //--- Session ------------------------------------------------------
     private static SessionFactory dbConnection;
 
+    //--- Constructor --------------------------------------------------
     @Autowired
     public ClientLoginRepositoryImplementation(SessionFactory dbConnection) {
         this.dbConnection = dbConnection;
     }
 
+    //--- Functions ----------------------------------------------------
     @Override
     public ClientsEntity findClientByUsername(String key) {
         ClientsEntity client = null;
@@ -96,4 +99,5 @@ public class ClientLoginRepositoryImplementation implements ClientLoginRepositor
         }
         return true;
     }
+
 }

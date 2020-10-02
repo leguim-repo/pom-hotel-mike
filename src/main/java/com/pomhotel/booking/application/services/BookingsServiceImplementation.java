@@ -6,21 +6,25 @@ import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.repositories.BookingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
+//--- Service ----------------------------------------------------------
 @Service
 public class BookingsServiceImplementation implements BookingsService{
+
+    //--- Repositories & Factories needed ------------------------------
     BookingsRepository repository;
     BookingsFactory factory;
 
+    //--- Constructor --------------------------------------------------
     @Autowired
     public BookingsServiceImplementation(BookingsRepository repository, BookingsFactory factory) {
         this.repository = repository;
         this.factory = factory;
     }
 
+    //--- Functions ----------------------------------------------------
     @Override
     public BookingsModel findById(long id) {
         return factory.createModel(repository.findById(id));
@@ -37,7 +41,6 @@ public class BookingsServiceImplementation implements BookingsService{
 
     @Override
     public void saveOrUpdate(BookingsModel model) {
-        //Verificar/Comprobar que todos los datos son correctos y los calculos de fechas tb.
         repository.saveOrUpdate(factory.createEntity(model));
     }
 

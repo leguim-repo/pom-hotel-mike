@@ -5,9 +5,12 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+//--- Entity -------------------------------------------------------
 @Entity
 @Table(name = "bookings", schema = "pom_hotel")
 public class BookingsEntity implements Serializable {
+
+    //--- Attributes -----------------------------------------------
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -33,7 +36,7 @@ public class BookingsEntity implements Serializable {
     @JoinColumn(name = "fk_room_id", referencedColumnName = "id", table = "bookings")
     private RoomsEntity roomsByFkRoomId;
 
-
+    //--- Getters & Setters ---------------------------------------
     public long getId() {
         return id;
     }
@@ -76,7 +79,7 @@ public class BookingsEntity implements Serializable {
         this.roomsByFkRoomId = roomsByFkRoomId;
     }
 
-
+    //--- Some general functions -----------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

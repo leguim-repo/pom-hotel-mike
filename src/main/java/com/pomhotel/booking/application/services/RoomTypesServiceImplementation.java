@@ -10,18 +10,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//--- Service ----------------------------------------------------------
 @Service
 public class RoomTypesServiceImplementation implements RoomTypesService {
 
+    //--- Repositories & Factories needed ------------------------------
     RoomtypesRepository repository;
     RoomtypesFactory factory;
 
+    //--- Constructor --------------------------------------------------
     @Autowired
     public RoomTypesServiceImplementation(RoomtypesRepository repository, RoomtypesFactory factory) {
         this.repository = repository;
         this.factory = factory;
     }
 
+    //--- Functions ----------------------------------------------------
     @Override
     public RoomtypesModel findById(long id) {
         return factory.createModel(repository.findById(id));
@@ -50,4 +54,5 @@ public class RoomTypesServiceImplementation implements RoomTypesService {
     public void delete(RoomtypesModel model) {
         repository.delete(factory.createEntity(model));
     }
+
 }

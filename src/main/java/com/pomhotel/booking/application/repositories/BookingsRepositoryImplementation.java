@@ -4,22 +4,26 @@ import com.pomhotel.booking.application.domain.entities.BookingsEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
+//--- Repository -------------------------------------------------------
 @Repository
 public class BookingsRepositoryImplementation implements BookingsRepository{
+
+    //--- Session ------------------------------------------------------
     private static SessionFactory dbConnection;
 
+    //--- Constructor --------------------------------------------------
     @Autowired
     public BookingsRepositoryImplementation(SessionFactory dbConnection) {
         this.dbConnection = dbConnection;
     }
 
+    //--- Functions ----------------------------------------------------
     @Override
     public BookingsEntity findById(long id) {
         BookingsEntity entity = null;
@@ -82,6 +86,7 @@ public class BookingsRepositoryImplementation implements BookingsRepository{
             session.close();
         }
     }
+
     @Override
     public void delete(BookingsEntity entity) {
         Session session = this.dbConnection.openSession();
@@ -97,4 +102,5 @@ public class BookingsRepositoryImplementation implements BookingsRepository{
             session.close();
         }
     }
+
 }

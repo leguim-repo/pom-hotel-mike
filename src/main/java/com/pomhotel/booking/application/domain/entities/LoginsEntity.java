@@ -4,10 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+//--- Entity -------------------------------------------------------
 @Entity
 @Table(name = "logins", schema = "pom_hotel")
 public class LoginsEntity implements Serializable {
 
+    //--- Attributes -----------------------------------------------
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -34,6 +36,7 @@ public class LoginsEntity implements Serializable {
     @JoinColumn(name = "fk_client_id", referencedColumnName = "id", table = "logins")
     private ClientsEntity clientsByFkClientId;
 
+    //--- Getters & Setters ---------------------------------------
     public long getId() {
         return id;
     }
@@ -76,6 +79,7 @@ public class LoginsEntity implements Serializable {
         this.clientsByFkClientId = clientsByFkClientId;
     }
 
+    //--- Some general functions -----------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

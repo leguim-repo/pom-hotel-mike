@@ -1,14 +1,18 @@
 package com.pomhotel.booking.application.models;
+
 import java.util.List;
 
+//--- Model --------------------------------------------------------
 public class ClientsModel {
+
+    //--- Attributes -----------------------------------------------
     public long id;
     public String name;
     public String lastname;
     public String email;
     public List<BookingsModel> bookingsById;
 
-    //Constructors
+    //--- Constructor ----------------------------------------------
     public ClientsModel() {
     }
 
@@ -18,10 +22,10 @@ public class ClientsModel {
         this.email = email;
     }
 
+    //--- Getters & Setters ----------------------------------------
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -29,7 +33,6 @@ public class ClientsModel {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -37,7 +40,6 @@ public class ClientsModel {
     public String getLastname() {
         return lastname;
     }
-
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
@@ -45,7 +47,6 @@ public class ClientsModel {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -53,7 +54,6 @@ public class ClientsModel {
     public List<BookingsModel> getBookingsById() {
         return bookingsById;
     }
-
     public void setBookingsById(List<BookingsModel> bookingsById) {
         this.bookingsById = bookingsById;
     }

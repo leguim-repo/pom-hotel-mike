@@ -8,8 +8,12 @@ import java.util.Random;
  *  EasterEgg
  *  <a th:href="${@RandomMusicURL.getRandomMusicURL()}" target="_blank">EasterEgg</a>
  */
+
+//--- Service ----------------------------------------------------------
 @Service
 public class RandomMusicURLServiceImplementation implements RandomMusicURLService {
+
+    //--- Functions ----------------------------------------------------
     @Override
     public String getRandomMusicURL() {
         String[] musicURLS = {
@@ -28,6 +32,7 @@ public class RandomMusicURLServiceImplementation implements RandomMusicURLServic
 
         };
         int rnd = new Random().nextInt(musicURLS.length);
+
         return musicURLS[rnd];
     }
 }

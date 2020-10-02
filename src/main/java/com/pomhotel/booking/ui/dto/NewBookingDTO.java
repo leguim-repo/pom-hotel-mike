@@ -5,7 +5,10 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+//--- DTO ----------------------------------------------------------
 public class NewBookingDTO {
+
+    //--- Attributes -----------------------------------------------
     @NotNull
     @NotEmpty
     public long roomId;
@@ -28,10 +31,12 @@ public class NewBookingDTO {
 
     public int totalPrice;
 
+
+    //--- Getters & Setters ----------------------------------------
+    //Note: Spring hace su magia a traves de los Getters y los Setters. Se tienen que poner si o si.
     public RoomsModel getRoom() {
         return room;
     }
-
     public void setRoom(RoomsModel room) {
         this.room = room;
     }
@@ -39,7 +44,6 @@ public class NewBookingDTO {
     public String getCheckIn() {
         return checkIn;
     }
-
     public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
@@ -47,7 +51,6 @@ public class NewBookingDTO {
     public String getCheckOut() {
         return checkOut;
     }
-
     public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
@@ -55,7 +58,6 @@ public class NewBookingDTO {
     public int getTotalPrice() {
         return totalPrice;
     }
-
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
@@ -63,8 +65,8 @@ public class NewBookingDTO {
     public String getGuests() {
         return guests;
     }
-
     public void setGuests(String guests) {
         this.guests = guests;
     }
+
 }

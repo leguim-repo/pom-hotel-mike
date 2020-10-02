@@ -8,13 +8,16 @@ import com.pomhotel.booking.application.repositories.ClientLoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//--- Service ----------------------------------------------------------
 @Service
 public class ClientLoginServiceImplementation implements ClientLoginService {
 
+    //--- Repositories & Factories needed ------------------------------
     ClientLoginRepository repository;
     LoginsFactory loginsFactory;
     ClientsFactory clientsFactory;
 
+    //--- Constructor --------------------------------------------------
     @Autowired
     public ClientLoginServiceImplementation(ClientLoginRepository repository, LoginsFactory loginsFactory, ClientsFactory clientsFactory) {
         this.repository = repository;
@@ -22,6 +25,7 @@ public class ClientLoginServiceImplementation implements ClientLoginService {
         this.clientsFactory = clientsFactory;
     }
 
+    //--- Functions ----------------------------------------------------
     @Override
     public boolean createClientAndLogin(LoginsModel login) {
         return repository.createClientAndLogin(loginsFactory.createEntity(login));
@@ -31,4 +35,5 @@ public class ClientLoginServiceImplementation implements ClientLoginService {
     public ClientsModel findClientByUsername(String username) {
         return clientsFactory.createModel(repository.findClientByUsername(username));
     }
+
 }

@@ -5,15 +5,20 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+//--- Factory -------------------------------------------------------
 @Component
 public class RoomsFactory {
+
+    //--- Needed Factories ------------------------------------------
     private RoomtypesFactory roomtypesFactory;
 
+    //--- Constructor -----------------------------------------------
     @Autowired
     public RoomsFactory(RoomtypesFactory roomtypesFactory) {
         this.roomtypesFactory = roomtypesFactory;
     }
 
+    //--- Functions -------------------------------------------------
     public RoomsEntity createEntity(RoomsModel model){
         RoomsEntity entity = new RoomsEntity();
         entity.setId(model.id);

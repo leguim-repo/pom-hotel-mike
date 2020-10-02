@@ -3,7 +3,10 @@ package com.pomhotel.booking.ui.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+//--- DTO ----------------------------------------------------------
 public class SearchDTO {
+
+    //--- Attributes -----------------------------------------------
     @NotNull
     @NotEmpty
     public String checkin;
@@ -28,10 +31,10 @@ public class SearchDTO {
     @NotEmpty
     public String type;
 
+    //--- Getters & Setters ----------------------------------------
     public String getCheckin() {
         return checkin;
     }
-
     public void setCheckin(String checkin) {
         this.checkin = checkin;
     }
@@ -39,7 +42,6 @@ public class SearchDTO {
     public String getCheckout() {
         return checkout;
     }
-
     public void setCheckout(String checkout) {
         this.checkout = checkout;
     }
@@ -47,7 +49,6 @@ public class SearchDTO {
     public String getGuests() {
         return guests;
     }
-
     public void setGuests(String guests) {
         this.guests = guests;
     }
@@ -55,7 +56,6 @@ public class SearchDTO {
     public String getMinprice() {
         return minprice;
     }
-
     public void setMinprice(String minprice) {
         this.minprice = minprice;
     }
@@ -63,7 +63,6 @@ public class SearchDTO {
     public String getMaxprice() {
         return maxprice;
     }
-
     public void setMaxprice(String maxprice) {
         this.maxprice = maxprice;
     }
@@ -71,20 +70,7 @@ public class SearchDTO {
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "SearchDTO{" +
-                "checkin='" + checkin + '\'' +
-                ", checkout='" + checkout + '\'' +
-                ", guests='" + guests + '\'' +
-                ", minprice='" + minprice + '\'' +
-                ", maxprice='" + maxprice + '\'' +
-                ", type='" + type + '\'' +
-                '}';
     }
 }

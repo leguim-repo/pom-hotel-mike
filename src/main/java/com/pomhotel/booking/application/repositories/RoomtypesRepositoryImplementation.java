@@ -1,26 +1,29 @@
 package com.pomhotel.booking.application.repositories;
 
-import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
+//--- Repository -------------------------------------------------------
 @Repository
 public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
+
+    //--- Session ------------------------------------------------------
     private static SessionFactory dbConnection;
 
+    //--- Constructor --------------------------------------------------
     @Autowired
     public RoomtypesRepositoryImplementation(SessionFactory dbConnection) {
         this.dbConnection = dbConnection;
     }
 
+    //--- Functions ----------------------------------------------------
     @Override
     public RoomtypesEntity findById(long id) {
         RoomtypesEntity entity = null;
@@ -83,6 +86,7 @@ public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
             session.close();
         }
     }
+
     @Override
     public void delete(RoomtypesEntity entity) {
         Session session = this.dbConnection.openSession();
@@ -98,4 +102,5 @@ public class RoomtypesRepositoryImplementation implements RoomtypesRepository{
             session.close();
         }
     }
+
 }

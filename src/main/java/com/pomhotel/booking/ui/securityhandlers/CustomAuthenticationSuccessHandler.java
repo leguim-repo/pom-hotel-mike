@@ -1,23 +1,16 @@
-package com.pomhotel.booking.ui.security;
+package com.pomhotel.booking.ui.securityhandlers;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
-import org.springframework.security.web.savedrequest.SavedRequest;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
+//--- Configuration for Authentication Success Handler -----------------------
 @Configuration
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -37,4 +30,5 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
 
     }
+
 }

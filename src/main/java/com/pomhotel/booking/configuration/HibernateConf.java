@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+//--- Configuration Hibernate --------------------------------------
 @Configuration
 @EnableTransactionManagement
 public class HibernateConf {
 
+    //--- Beans ----------------------------------------------------
     @Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -43,6 +45,7 @@ public class HibernateConf {
         return transactionManager;
     }
 
+    //--- Properties ------------------------------------------------
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty(

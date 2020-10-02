@@ -1,9 +1,11 @@
 package com.pomhotel.booking.application.models;
 
-import com.pomhotel.booking.application.domain.entities.ClientsEntity;
 import java.sql.Date;
 
+//--- Model --------------------------------------------------------
 public class BookingsModel {
+
+    //--- Attributes -----------------------------------------------
     public long id;
     public Date checkIn;
     public Date checkOut;
@@ -11,14 +13,14 @@ public class BookingsModel {
     public ClientsModel clientsByFkClientId;
     public RoomsModel roomsByFKRoomId;
 
-    //Constructor
+    //--- Constructor ----------------------------------------------
     public BookingsModel() {
     }
 
+    //--- Getters & Setters ----------------------------------------
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -26,7 +28,6 @@ public class BookingsModel {
     public Date getCheckIn() {
         return checkIn;
     }
-
     public void setCheckIn(Date checkIn) {
         this.checkIn = checkIn;
     }
@@ -34,7 +35,6 @@ public class BookingsModel {
     public Date getCheckOut() {
         return checkOut;
     }
-
     public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
     }
@@ -42,7 +42,6 @@ public class BookingsModel {
     public Double getTotalPrice() {
         return totalPrice;
     }
-
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
@@ -50,7 +49,6 @@ public class BookingsModel {
     public ClientsModel getClientsByFkClientId() {
         return clientsByFkClientId;
     }
-
     public void setClientsByFkClientId(ClientsModel clientsByFkClientId) {
         this.clientsByFkClientId = clientsByFkClientId;
     }
@@ -58,7 +56,6 @@ public class BookingsModel {
     public RoomsModel getRoomsByFKRoomId() {
         return roomsByFKRoomId;
     }
-
     public void setRoomsByFKRoomId(RoomsModel roomsByFKRoomId) {
         this.roomsByFKRoomId = roomsByFKRoomId;
     }

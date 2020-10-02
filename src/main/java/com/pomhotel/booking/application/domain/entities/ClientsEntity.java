@@ -5,9 +5,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+//--- Entity -------------------------------------------------------
 @Entity
 @Table(name = "clients", schema = "pom_hotel")
 public class ClientsEntity implements Serializable {
+
+    //--- Attributes -----------------------------------------------
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,6 +31,7 @@ public class ClientsEntity implements Serializable {
     @OneToMany(mappedBy = "clientsByFkClientId", fetch=FetchType.EAGER)
     private List<BookingsEntity> bookingsById;
 
+    //--- Getters & Setters ---------------------------------------
     public long getId() {
         return id;
     }
@@ -56,6 +60,15 @@ public class ClientsEntity implements Serializable {
         this.email = email;
     }
 
+
+    public List<BookingsEntity> getBookingsById() {
+        return bookingsById;
+    }
+    public void setBookingsById(List<BookingsEntity> bookingsById) {
+        this.bookingsById = bookingsById;
+    }
+
+    //--- Some general functions -----------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,12 +83,5 @@ public class ClientsEntity implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, lastname, email);
-    }
-
-    public List<BookingsEntity> getBookingsById() {
-        return bookingsById;
-    }
-    public void setBookingsById(List<BookingsEntity> bookingsById) {
-        this.bookingsById = bookingsById;
     }
 }

@@ -2,14 +2,14 @@ package com.pomhotel.booking.application.domain.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
+//--- Entity -------------------------------------------------------
 @Entity
 @Table(name = "rooms", schema = "pom_hotel")
 public class RoomsEntity implements Serializable {
+
+    //--- Attributes -----------------------------------------------
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -35,11 +35,11 @@ public class RoomsEntity implements Serializable {
     @Column(name = "image", nullable = true)
     private String image;
 
-
     @ManyToOne
     @JoinColumn(name = "fk_roomtype_id", referencedColumnName = "id", table = "rooms")
     private RoomtypesEntity roomtypesByFkRoomtypeId;
 
+    //--- Getters & Setters ---------------------------------------
     public long getId() {
         return id;
     }
@@ -89,6 +89,7 @@ public class RoomsEntity implements Serializable {
         this.roomtypesByFkRoomtypeId = roomtypesByFkRoomtypeId;
     }
 
+    //--- Some general functions -----------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

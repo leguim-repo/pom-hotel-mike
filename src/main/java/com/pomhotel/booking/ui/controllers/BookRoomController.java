@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
 
+//--- Controller ----------------------------------------------------------
 @Controller
 public class BookRoomController {
+
+    //--- Services & Variables used ---------------------------------------
     RoomsService roomsService;
     BookingsService bookingsService;
     ClientLoginService clientsService;
@@ -26,6 +28,7 @@ public class BookRoomController {
     BookingLogicalService bookingLogicalService;
     RoomsModel roomSelected;
 
+    //--- Constructor --------------------------------------------------
     @Autowired
     public BookRoomController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService, SecurityController securityController, BookingLogicalService bookingLogicalService) {
         this.roomsService = roomsService;
@@ -35,6 +38,7 @@ public class BookRoomController {
         this.bookingLogicalService = bookingLogicalService;
     }
 
+    //--- Mappings -----------------------------------------------------
     @GetMapping("/bookroomnow/{id}")
     public String bookroomnow(@PathVariable("id") long id, Model model) {
         roomSelected = roomsService.findById(id);
@@ -50,8 +54,6 @@ public class BookRoomController {
     public String bookroomnow(@ModelAttribute("newBooking") @Valid NewBookingDTO dto) {
         String view;
         BookingsModel model = new BookingsModel();
-        //Falta agregar funcionalidad en la vista (no aqui) para que cuando se cambien las fechas se cambie el precioTotal
-
 
         try {
             model.checkIn = bookingLogicalService.stringToDate(dto.checkIn);

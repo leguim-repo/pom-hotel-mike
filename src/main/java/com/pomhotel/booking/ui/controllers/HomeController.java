@@ -11,22 +11,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 import java.util.List;
 
+//--- Controller ----------------------------------------------------------
 @Controller
 public class HomeController {
+
+    //--- Services & Variables used ---------------------------------------
     RoomsService roomsService;
     RoomTypesService roomTypesService;
 
+    //--- Constructor -----------------------------------------------------
     @Autowired
     public HomeController(RoomsService roomsService, RoomTypesService roomTypesService) {
         this.roomsService = roomsService;
         this.roomTypesService = roomTypesService;
     }
 
-    //HOME PAGE
+    //--- Home Mappings -----------------------------------------------------
     @GetMapping("/")
     public String index(Model model){
         return "redirect:/home";
@@ -39,7 +42,7 @@ public class HomeController {
         return "home";
     }
 
-    //ROOM PAGE
+    //--- Rooms Mappings -----------------------------------------------------
     @GetMapping("/rooms")
     public String roomsList(Model model){
         model.addAttribute("strNav", "Find your rest");
@@ -74,7 +77,7 @@ public class HomeController {
     }
 
 
-    //ABOUT US
+    //--- About Us Mappings --------------------------------------------------
     @GetMapping("/aboutus")
     public String aboutus(Model model){
         model.addAttribute("strNav", "Our great crew");
@@ -82,7 +85,7 @@ public class HomeController {
         return "aboutus";
     }
 
-    // for test purposes
+    //--- Test Purposes Mappings -----------------------------------------------------
     @PostMapping("/mike")
     public String acceptData(@RequestBody String payloadBody, @RequestHeader HttpHeaders headers)  {
         // Con este metodo podemos ver que paramentros enviamos con el post desde el form
@@ -90,7 +93,6 @@ public class HomeController {
         return "home";
     }
 
-    // for test purposes
     @GetMapping("/petar")
     public ModelAndView forzar500(Model model) {
         // metodo para forzar un error 500 y ver la pagina de error
