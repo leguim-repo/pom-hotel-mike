@@ -16,12 +16,26 @@ select option {
 #pricefrom, #priceto{
   padding-left: 9px !important;
 }
-
-
 .textarea{
   overflow-y: scroll;
   height: 265px !important;
   resize: none;
+}
+.container-video {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.testimony .user{
+  padding-right: 5px;
 }
 
 body {
@@ -412,6 +426,9 @@ h1, h2, h3, h4, h5, h6, figure {
 
 #colorlib-testimony{
   padding: 0em 0em 8em 0em !important;
+}
+#colorlib-footer {
+  padding: 6em 0 !important;
 }
 
 .colorlib-services {
@@ -1470,7 +1487,7 @@ input[type="text"] {
   padding: 14px; }
 
 #colorlib-footer {
-  background: #2C2E3E;
+  background: #242424;
   color: rgba(255, 255, 255, 0.5) !important; }
   #colorlib-footer .colorlib-footer-links {
     padding: 0;
