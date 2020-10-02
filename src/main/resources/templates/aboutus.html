@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:insert="/fragments/layout.html :: head">
+</head>
+
+<body>
+<style>
+    .container-video {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%;
+    }
+    .video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .testimony .user{
+        padding-right: 5px;
+    }
+</style>
+<div th:insert="fragments/layout.html :: header"></div>
+<div class="colorlib-loader"></div>
+<div id="page">
+    <div class="colorlib-light-grey colorlib-wrap">
+        <div class="container">
+            <!--<div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+                    <h2>For special people...</h2>
+                    <p>We love monkeys, computers, good meals, BigBang Theory and fridays</p>
+                </div>
+            </div>-->
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 animate-box">
+                    <div class="room-wrap">
+                        <h2>Discovering new technologies</h2>
+                        <div class="testimony text-center">
+                            <div class="col-md-12 col-sm-12 container-video">
+                                <iframe class="video" src="https://www.youtube.com/embed/bab4ncfp3IA?autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+                            </div>
+                            <span class="user text-right" >Oscar Orellana</span>
+                        </div>
+                    </div>
+                    <div class="room-wrap">
+                        <h2>Working hard at any time</h2>
+                        <div class="testimony text-center">
+                            <div class="col-md-12 col-sm-12 container-video">
+                                <iframe class="video" src="https://www.youtube.com/embed/6X_cC0WbLmI?autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+                            </div>
+                            <span class="user text-right">Miguel Pablos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments/layout.html :: footer"></div>
+<div th:insert="fragments/layout.html :: sources"></div>
+</body>
+</html>

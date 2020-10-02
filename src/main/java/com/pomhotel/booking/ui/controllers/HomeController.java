@@ -1,9 +1,5 @@
 package com.pomhotel.booking.ui.controllers;
 
-import com.pomhotel.booking.application.models.BookingsModel;
-import com.pomhotel.booking.application.services.BookingsService;
-import com.pomhotel.booking.application.services.ClientLoginService;
-import com.pomhotel.booking.ui.dto.NewBookingDTO;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.RoomTypesService;
@@ -16,9 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -60,14 +54,11 @@ public class HomeController {
         return "listrooms";
     }
 
-
-
     @PostMapping("/rooms")
     public String roomsList(@ModelAttribute("newSearch") @Valid SearchDTO dto, Model model) {
-        System.out.println("dto: "+dto.toString());
-
         model.addAttribute("strNav", "Find your rest");
         model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
+
         if ( ( dto.minprice==null) && (dto.maxprice==null) && (dto.type==null) ) {
             dto.minprice = "1";
             dto.maxprice = "1000";
@@ -86,7 +77,9 @@ public class HomeController {
     //ABOUT US
     @GetMapping("/aboutus")
     public String aboutus(Model model){
-        return "redirect:/acercade.html";
+        model.addAttribute("strNav", "Our great crew");
+        model.addAttribute("imgNav", "img_bg_1.jpg");
+        return "aboutus";
     }
 
     // for test purposes

@@ -394,6 +394,7 @@ h1, h2, h3, h4, h5, h6, figure {
 
 #colorlib-hotel,
 .colorlib-spaces,
+.colorlib-wrap,
 #colorlib-testimony,
 #colorlib-footer {
   width: 100%;
@@ -405,6 +406,7 @@ h1, h2, h3, h4, h5, h6, figure {
     #colorlib-hotel,
     .colorlib-spaces,
     #colorlib-testimony,
+    #colorlib-wrap,
     #colorlib-footer {
       padding: 5em 0; } }
 
