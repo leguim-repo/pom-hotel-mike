@@ -70,6 +70,11 @@ public class HomeController {
         List<RoomtypesModel> types = roomTypesService.findAll();
         model.addAttribute("types", types);
 
+
+
+        model.addAttribute("checkin", "\""+dto.checkin+"\"");
+        model.addAttribute("checkout", "\""+dto.checkout+"\"");
+
         return "listrooms";
     }
 
