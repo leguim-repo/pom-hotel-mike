@@ -7,6 +7,7 @@ import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.ui.dto.NewBookingDTO;
 import com.pomhotel.booking.ui.servicies.BookingLogicalService;
+import com.pomhotel.booking.ui.servicies.BookingLogicalServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,18 +34,23 @@ public class BookRoomController {
         this.bookingLogicalService = bookingLogicalService;
     }
 
-    //@GetMapping("/bookroomnow/{id}")
-    //public String bookroomnow(@PathVariable("id") long id, Model model) {
-    @GetMapping("/bookroomnow")
-    public String bookroomnow(@RequestParam Map<String, String> params, Model model) {
-        System.out.println(params.toString());
-        //roomSelected = roomsService.findById(id);
+    @GetMapping("/bookroomnow/{id}")
+    public String bookroomnow(@PathVariable("id") long id, @CookieValue("Checkin") String checkin,@CookieValue("Checkout") String checkout, Model model) {
+    //@GetMapping("/bookroomnow")
+    //public String bookroomnow(@RequestParam Map<String, String> params, Model model) {
+        //System.out.println(params.toString());
+        BookingLogicalService calculadora = new BookingLogicalServiceImplementation();
+        roomSelected = roomsService.findById(id);
         model.addAttribute("imgNav", "high-performance.jpg");
 
         NewBookingDTO newBookingDTO = new NewBookingDTO();
         newBookingDTO.room = roomSelected;
-        model.addAttribute("newBooking", newBookingDTO);
+        newBookingDTO.checkIn = checkin;
+        newBookingDTO.checkOut = checkout;
 
+        newBookingDTO.totalPrice = (int) calculadora.calculateTotalPrice(calculadora.stringToDate(checkin),calculadora.stringToDate(checkout),roomSelected.pricePerNight);
+
+        model.addAttribute("newBooking", newBookingDTO);
 
         return "booknow";
     }
@@ -54,7 +60,7 @@ public class BookRoomController {
         String view;
         BookingsModel model = new BookingsModel();
         //Falta agregar funcionalidad en la vista (no aqui) para que cuando se cambien las fechas se cambie el precioTotal
-
+        System.out.println(dto.toString());
 
         try {
             model.checkIn = bookingLogicalService.stringToDate(dto.checkIn);
