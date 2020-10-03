@@ -42,10 +42,11 @@ function thePost() {
 function getCookies() {
     document.getElementById("checkin").value = getCookie("Checkin");
     document.getElementById("checkout").value = getCookie("Checkout");
+    console.log('guests: ',document.getElementById("guests").value);
     document.getElementById("guests").value = getCookie("Guests");
 
     if (document.URL.includes("rooms")){
-        document.getElementById("guests").value = getCookie("Guests");
+        //document.getElementById("guests").value = getCookie("Guests");
         document.getElementById("pricefrom").value = getCookie("MinPrice");
         document.getElementById("priceto").value = getCookie("MaxPrice");
         document.getElementById("roomtype").value= getCookie("Type");
