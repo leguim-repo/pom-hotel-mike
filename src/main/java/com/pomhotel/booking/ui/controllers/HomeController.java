@@ -44,7 +44,7 @@ public class HomeController {
 
     //--- Rooms Mappings -----------------------------------------------------
     @GetMapping("/rooms")
-    public String roomsList(Model model){
+    public String roomsList(@CookieValue("Checkin") String checkin,@CookieValue("Checkout") String checkout , Model model){
         model.addAttribute("strNav", "Find your rest");
         model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
 
@@ -53,6 +53,9 @@ public class HomeController {
 
         List<RoomtypesModel> types = roomTypesService.findAll();
         model.addAttribute("types", types);
+
+        model.addAttribute("checkin", checkin);
+        model.addAttribute("checkout", checkout);
 
         return "listrooms";
     }
@@ -72,6 +75,10 @@ public class HomeController {
 
         List<RoomtypesModel> types = roomTypesService.findAll();
         model.addAttribute("types", types);
+
+
+        model.addAttribute("checkin", "\""+dto.checkin+"\"");
+        model.addAttribute("checkout", "\""+dto.checkout+"\"");
 
         return "listrooms";
     }

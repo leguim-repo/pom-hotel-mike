@@ -7,14 +7,21 @@ import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.ui.dto.NewBookingDTO;
 import com.pomhotel.booking.ui.servicies.BookingLogicalService;
+import com.pomhotel.booking.ui.servicies.BookingLogicalServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+=======
+import org.springframework.web.bind.annotation.*;
+
+>>>>>>> feature/faildates
 import javax.validation.Valid;
+import java.util.Map;
 
 //--- Controller ----------------------------------------------------------
 @Controller
@@ -40,13 +47,23 @@ public class BookRoomController {
 
     //--- Mappings -----------------------------------------------------
     @GetMapping("/bookroomnow/{id}")
-    public String bookroomnow(@PathVariable("id") long id, Model model) {
+    public String bookroomnow(@PathVariable("id") long id, @CookieValue("Checkin") String checkin,@CookieValue("Checkout") String checkout, Model model) {
+    //@GetMapping("/bookroomnow")
+    //public String bookroomnow(@RequestParam Map<String, String> params, Model model) {
+        //System.out.println(params.toString());
+        BookingLogicalService calculadora = new BookingLogicalServiceImplementation();
         roomSelected = roomsService.findById(id);
         model.addAttribute("imgNav", "high-performance.jpg");
 
         NewBookingDTO newBookingDTO = new NewBookingDTO();
         newBookingDTO.room = roomSelected;
+        newBookingDTO.checkIn = checkin;
+        newBookingDTO.checkOut = checkout;
+
+        newBookingDTO.totalPrice = (int) calculadora.calculateTotalPrice(calculadora.stringToDate(checkin),calculadora.stringToDate(checkout),roomSelected.pricePerNight);
+
         model.addAttribute("newBooking", newBookingDTO);
+
         return "booknow";
     }
 
@@ -54,6 +71,11 @@ public class BookRoomController {
     public String bookroomnow(@ModelAttribute("newBooking") @Valid NewBookingDTO dto) {
         String view;
         BookingsModel model = new BookingsModel();
+<<<<<<< HEAD
+=======
+        //Falta agregar funcionalidad en la vista (no aqui) para que cuando se cambien las fechas se cambie el precioTotal
+        System.out.println(dto.toString());
+>>>>>>> feature/faildates
 
         try {
             model.checkIn = bookingLogicalService.stringToDate(dto.checkIn);

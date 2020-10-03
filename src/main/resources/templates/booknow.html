@@ -23,19 +23,19 @@
                             <div class="row form-group">
                                 <div class="col-md-3 padding-bottom">
                                     <label>Room Code</label>
-                                    <input type="text" th:field="*{room.code}" class="form-control" disabled>
+                                    <input type="text" th:field="*{room.code}" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-3 padding-bottom">
                                     <label>Type</label>
-                                    <input type="text" th:field="*{room.roomtypesByFkRoomtypeId.name}" class="form-control" disabled>
+                                    <input type="text" th:field="*{room.roomtypesByFkRoomtypeId.name}" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-3 padding-bottom">
                                     <label>Guests</label>
-                                    <input type="text" th:field="*{room.guests}" class="form-control" disabled>
+                                    <input type="text" th:field="*{room.guests}" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Price per night</label>
-                                    <input type="text" th:field="*{room.pricePerNight}" class="form-control" disabled>
+                                    <input type="text" th:field="*{room.pricePerNight}" class="form-control" readonly>
                                 </div>
                             </div>
 
@@ -45,18 +45,21 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Description</label>
-                                    <textarea type="text" th:field="*{room.description}"  class="form-control textarea" disabled></textarea>
+                                    <textarea type="text" th:field="*{room.description}"  class="form-control textarea" readonly></textarea>
                                 </div>
                             </div>
                             <div class="form-group col-12"><hr></div>
                             <div class="row form-group">
                                 <div class="col-md-5 padding-bottom">
                                     <label>Check In</label>
-                                    <input type="text" th:field="*{checkIn}" id="checkin" class="form-control">
+                                    <input type="text" th:field="*{checkIn}" id="checkinVisible" class="form-control" disabled>
+                                    <input type="hidden" th:field="*{checkIn}" id="checkin" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-5">
                                     <label>Check Out</label>
-                                    <input type="text" th:field="*{checkOut}" id="checkout" class="form-control">
+                                    <input type="text" th:field="*{checkOut}" id="checkoutVisible" class="form-control" disabled>
+                                    <input type="hidden" th:field="*{checkOut}" id="checkout" class="form-control" readonly>
+
                                 </div>
                                 <div class="col-md-2">
                                     <label>Total Price</label>
