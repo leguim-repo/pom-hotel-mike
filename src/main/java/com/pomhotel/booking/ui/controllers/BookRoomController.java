@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 //--- Controller ----------------------------------------------------------
 @Controller
@@ -45,9 +44,6 @@ public class BookRoomController {
     //--- Mappings -----------------------------------------------------
     @GetMapping("/bookroomnow/{id}")
     public String bookroomnow(@PathVariable("id") long id, @CookieValue("Checkin") String checkin,@CookieValue("Checkout") String checkout, Model model) {
-    //@GetMapping("/bookroomnow")
-    //public String bookroomnow(@RequestParam Map<String, String> params, Model model) {
-        //System.out.println(params.toString());
         BookingLogicalService calculadora = new BookingLogicalServiceImplementation();
         roomSelected = roomsService.findById(id);
         model.addAttribute("imgNav", "high-performance.jpg");
@@ -68,8 +64,6 @@ public class BookRoomController {
     public String bookroomnow(@ModelAttribute("newBooking") @Valid NewBookingDTO dto) {
         String view;
         BookingsModel model = new BookingsModel();
-        //Falta agregar funcionalidad en la vista (no aqui) para que cuando se cambien las fechas se cambie el precioTotal
-        System.out.println(dto.toString());
 
         try {
             model.checkIn = bookingLogicalService.stringToDate(dto.checkIn);

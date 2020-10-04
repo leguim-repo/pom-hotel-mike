@@ -13,8 +13,6 @@ function saveCookies(){
 
 }
 
-
-
 //Function for read saved cookies
 function getCookies() {
     document.getElementById("checkin").value = getCookie("Checkin");
@@ -58,7 +56,7 @@ function inicializeCookies(){
     var today = new Date();
     var tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    //console.log("today: ",ISODateString(today), " tomorrow: ", ISODateString(tomorrow));
+
     if(!getCookie("MinPrice")){
         setCookie("MinPrice",1,90);
         setCookie("MaxPrice",1000,90);
@@ -67,7 +65,9 @@ function inicializeCookies(){
         setCookie("Checkin",ISODateString(today), 90);
         setCookie("Checkout",ISODateString(tomorrow),90);
     }
+
     getCookies();
+
 }
 
 function controlSelectOptions(){
@@ -75,6 +75,7 @@ function controlSelectOptions(){
     var minSelector = document.getElementById("pricefrom");
     var maxPrice =  document.getElementById("priceto").value;
     var minPrice = document.getElementById("pricefrom").value;
+
     for (let i = 0; i < 5; i++) {
         if (parseInt(maxSelector.options[i].value) < parseInt(minPrice)) {
             maxSelector.options[i].hidden = true;

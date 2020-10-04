@@ -95,14 +95,14 @@ public class HomeController {
     //--- Test Purposes Mappings -----------------------------------------------------
     @PostMapping("/mike")
     public String acceptData(@RequestBody String payloadBody, @RequestHeader HttpHeaders headers)  {
-        // Con este metodo podemos ver que paramentros enviamos con el post desde el form
+        //Note: Con este metodo podemos ver que paramentros enviamos con el post desde el form
         System.out.println("\nParametros recibidos: "+payloadBody+"\n");
         return "home";
     }
 
     @GetMapping("/petar")
     public ModelAndView forzar500(Model model) {
-        // metodo para forzar un error 500 y ver la pagina de error
+        //Note: metodo para forzar un error 500 y ver la pagina de error
         Integer a;
         a = 1/0;
         return new ModelAndView();
