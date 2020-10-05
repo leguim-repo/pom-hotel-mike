@@ -70,7 +70,7 @@ function inicializeCookies(){
 
 }
 
-function controlSelectOptions(){
+function controlMinMaxSelect(){
     var maxSelector = document.getElementById("priceto");
     var minSelector = document.getElementById("pricefrom");
     var maxPrice =  document.getElementById("priceto").value;
