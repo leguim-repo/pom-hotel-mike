@@ -61,7 +61,8 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/book/**").hasRole("CLIENT") //protegido por el role
-                    .antMatchers("/rooms/**").permitAll()
+                //.antMatchers("/api/**").hasRole("CLIENT") //api rest de react protegida
+                .antMatchers("/rooms/**").permitAll()
                     .antMatchers("/bookroomnow/**").hasRole("CLIENT") //protegido por el role
                     .antMatchers("/finalbooking/**").hasRole("CLIENT")
                 .antMatchers(resources).permitAll()
@@ -80,7 +81,7 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutSuccessUrl("/signin?logout") //no lo entiendo...
                     .permitAll();
-        //http.csrf().disable();
+        http.csrf().disable(); //TODO Seguridad desactivada mientras migro a la api
     }
 
     @Bean
