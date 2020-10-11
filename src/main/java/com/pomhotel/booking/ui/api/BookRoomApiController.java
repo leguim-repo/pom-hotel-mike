@@ -1,28 +1,23 @@
-package com.pomhotel.booking.ui.controllers;
+package com.pomhotel.booking.ui.api;
 
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.BookingsService;
 import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
+import com.pomhotel.booking.ui.controllers.SecurityController;
 import com.pomhotel.booking.ui.dto.NewBookingDTO;
 import com.pomhotel.booking.ui.servicies.BookingLogicalService;
 import com.pomhotel.booking.ui.servicies.BookingLogicalServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-//--- Controller ----------------------------------------------------------
-@Controller
-public class BookRoomController {
 
+@RestController
+public class BookRoomApiController {
     //--- Services & Variables used ---------------------------------------
     RoomsService roomsService;
     BookingsService bookingsService;
@@ -33,7 +28,7 @@ public class BookRoomController {
 
     //--- Constructor --------------------------------------------------
     @Autowired
-    public BookRoomController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService, SecurityController securityController, BookingLogicalService bookingLogicalService) {
+    public BookRoomApiController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService, SecurityController securityController, BookingLogicalService bookingLogicalService) {
         this.roomsService = roomsService;
         this.bookingsService = bookingsService;
         this.clientsService = clientsService;
@@ -42,8 +37,9 @@ public class BookRoomController {
     }
 
     //--- Mappings -----------------------------------------------------
-    @GetMapping("/bookroomnow/{id}")
-    public String bookroomnow(@PathVariable("id") long id, @CookieValue("Checkin") String checkin ,@CookieValue("Checkout") String checkout, Model model) {
+    // para la creacion de la reserva le paso a react todos los datos de la reserva y que le ponga el boton de Confirm Booking
+    @GetMapping("/api/bookroomnow/{id}")
+    public String bookroomnow(@PathVariable("id") long id, @CookieValue("Checkin") String checkin, @CookieValue("Checkout") String checkout, Model model) {
         BookingLogicalService calculadora = new BookingLogicalServiceImplementation();
         roomSelected = roomsService.findById(id);
         model.addAttribute("imgNav", "high-performance.jpg");
@@ -60,8 +56,9 @@ public class BookRoomController {
         return "booknow";
     }
 
-    @PostMapping("/bookroomnow")
-    public String bookroomnow(@ModelAttribute("newBooking") @Valid NewBookingDTO dto) {
+    // OK Endpoint to confirm a booking ( Button BookNow )
+    @PostMapping("/api/bookroomnow")
+    public String bookRoomNowApi(@RequestBody @Valid NewBookingDTO dto) {
         String view;
         BookingsModel model = new BookingsModel();
 
@@ -69,18 +66,25 @@ public class BookRoomController {
             model.checkIn = bookingLogicalService.stringToDate(dto.checkIn);
             model.checkOut = bookingLogicalService.stringToDate(dto.checkOut);
 
-            model.roomsByFKRoomId = roomSelected; //no se como pasar bien los datos que no se editan... a ser felices así
-            model.clientsByFkClientId = clientsService.findClientByUsername(securityController.currentUsername()); //esto es una porqueria: ineficiente e inadecuado... aunque sea funcional -.-
-            model.totalPrice = bookingLogicalService.calculateTotalPrice(model.checkIn, model.checkOut, roomSelected.pricePerNight);
-            bookingsService.saveOrUpdate(model);
+            model.roomsByFKRoomId = roomsService.findById(dto.roomId);
+
+            model.clientsByFkClientId = clientsService.findClientByUsername(securityController.currentUsername());
+
+            model.totalPrice = bookingLogicalService.calculateTotalPrice(model.checkIn, model.checkOut, model.roomsByFKRoomId.pricePerNight);
+            System.out.println("bookroomnow.model: "+model.toString());
+
+            //TODO grabacion en ddbb desahbilitada para las pruebas
+            //bookingsService.saveOrUpdate(model);
 
             view="redirect:/home?bookedok";
         }
         catch (Exception e) {
             e.printStackTrace();
             view="redirect:/home?bookedfail";
+            throw new BookRoomNowException(dto);
         }
 
         return view;
     }
+
 }

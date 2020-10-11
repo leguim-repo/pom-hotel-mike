@@ -59,4 +59,16 @@ public class BookingsModel {
     public void setRoomsByFKRoomId(RoomsModel roomsByFKRoomId) {
         this.roomsByFKRoomId = roomsByFKRoomId;
     }
+
+    @Override
+    public String toString() {
+        return "BookingsModel{" +
+                "id=" + id +
+                ", checkIn=" + checkIn +
+                ", checkOut=" + checkOut +
+                ", totalPrice=" + totalPrice +
+                ", clientsByFkClientId=" + clientsByFkClientId.toString() +
+                ", roomsByFKRoomId=" + roomsByFKRoomId.toString() +
+                '}';
+    }
 }

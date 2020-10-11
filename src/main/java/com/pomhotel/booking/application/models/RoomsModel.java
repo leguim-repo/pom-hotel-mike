@@ -64,4 +64,17 @@ public class RoomsModel {
     public void setRoomtypesByFkRoomtypeId(RoomtypesModel roomtypesByFkRoomtypeId) {
         this.roomtypesByFkRoomtypeId = roomtypesByFkRoomtypeId;
     }
+
+    @Override
+    public String toString() {
+        return "RoomsModel{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                ", pricePerNight=" + pricePerNight +
+                ", image='" + image + '\'' +
+                ", guests=" + guests +
+                ", roomtypesByFkRoomtypeId=" + roomtypesByFkRoomtypeId +
+                '}';
+    }
 }

@@ -69,4 +69,15 @@ public class NewBookingDTO {
         this.guests = guests;
     }
 
+    @Override
+    public String toString() {
+        return "NewBookingDTO{" +
+                "roomId=" + roomId +
+                ", room=" + room +
+                ", checkIn='" + checkIn + '\'' +
+                ", checkOut='" + checkOut + '\'' +
+                ", guests='" + guests + '\'' +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

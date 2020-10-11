@@ -2,45 +2,50 @@ package com.pomhotel.booking.ui.api;
 
 
 import com.pomhotel.booking.application.models.RoomsModel;
+import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.RoomsService;
+import com.pomhotel.booking.ui.controllers.SecurityController;
 import com.pomhotel.booking.ui.dto.NewBookingDTO;
 import com.pomhotel.booking.ui.dto.NewClientDTO;
 import com.pomhotel.booking.ui.dto.SearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 //refererence: https://spring.io/guides/tutorials/rest/
 
 @RestController
-public class ApiProvider {
+public class HomeApiController {
     RoomsService roomsService;
+    SecurityController securityController;
+
 
     @Autowired
-    public ApiProvider(RoomsService roomsService) {
+    public HomeApiController(RoomsService roomsService, SecurityController securityController) {
         this.roomsService = roomsService;
+        this.securityController = securityController;
+
     }
 
-    //
-    @GetMapping("/api/")
-    String dummyEndPoint() {
+
+    // The new endpoint of Home
+    @GetMapping("/api")
+    String apiHome(HttpServletRequest request) {
         return "Este endpoint seguro que no es el que buscas. Te has dejado alguna cosa mas";
     }
 
-    // Get all rooms
+
+    // OK Get all rooms ( Link Rooms in NavBar )
     @GetMapping("/api/rooms")
     List<RoomsModel> getAllRoomsApi() {
         List<RoomsModel> rooms = roomsService.findAll();
         return rooms;
     }
 
-    // Endpoint to make a reservation
-    @PostMapping("/api/bookroomnow")
-    NewBookingDTO bookRoomNow(@RequestBody NewBookingDTO newBooking) {
-        System.out.println("bookRoomNow: " + newBooking.toString());
-        return newBooking;
-    }
 
     // Endpoint to new client
     @PostMapping("/api/newclient")
@@ -49,17 +54,27 @@ public class ApiProvider {
         return newClient;
     }
 
-    // Endpoint for search a room
-    @PostMapping("/api/newclient")
-    SearchDTO searchRoom(@RequestBody SearchDTO targetRoom) {
-        System.out.println("searchRoom: " + targetRoom.toString());
-        return targetRoom;
+
+    // OK Endpoint for search a room ( Button Find Rooms in Home and Rooms )
+    @PostMapping("/api/findroom")
+    List<RoomsModel> findRoomByFilterApi(@RequestBody SearchDTO dto) {
+        System.out.println("findroom: " + dto.toString());
+
+        if ( ( dto.minprice==null) && (dto.maxprice==null) && (dto.type==null) ) {
+            dto.minprice = "1";
+            dto.maxprice = "1000";
+            dto.type = "0";
+            dto.guests = "1";
+        }
+        List<RoomsModel> rooms = roomsService.findApplyingFilter(Integer.parseInt(dto.guests),Integer.parseInt(dto.minprice),Integer.parseInt(dto.maxprice), Long.parseLong(dto.type));
+
+        return rooms;
     }
 
-    // Single item...really only for tests
+
+    // Ok Single item...really without use. Only for tests
     @GetMapping("/api/rooms/{targetId}")
-    RoomsModel getRoomById(@PathVariable Long targetId) {
-        //TODO: proteger si el numero de id no existe (ej: id = 200)
+    RoomsModel findRoomByIdApi(@PathVariable Long targetId) {
         RoomsModel requestedRoom;
         try {
             requestedRoom = roomsService.findById(targetId);
@@ -67,6 +82,7 @@ public class ApiProvider {
         catch (Exception e) {
             e.printStackTrace();
             throw new RoomNotFoundException(targetId);
+
         }
         return requestedRoom;
     }
@@ -74,6 +90,7 @@ public class ApiProvider {
     // EasterEgg
     @RequestMapping(value = "/api/", method = RequestMethod.TRACE)
     String spaceCowboys() {
+
         return "SPACECOWBOYS";
     }
 }

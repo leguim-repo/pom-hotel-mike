@@ -44,7 +44,7 @@ public class HomeController {
 
     //--- Rooms Mappings -----------------------------------------------------
     @GetMapping("/rooms")
-    public String roomsList(@CookieValue("Checkin") String checkin,@CookieValue("Checkout") String checkout , Model model){
+    public String roomsList(@CookieValue(value = "Checkin", defaultValue = "01-01-2020") String checkin ,@CookieValue(value = "Checkout", defaultValue = "02-01-2020") String checkout , Model model){
         model.addAttribute("strNav", "Find your rest");
         model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
 
@@ -56,6 +56,7 @@ public class HomeController {
 
         model.addAttribute("checkin", checkin);
         model.addAttribute("checkout", checkout);
+
 
         return "listrooms";
     }

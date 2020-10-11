@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -60,18 +63,19 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/book/**").hasRole("CLIENT") //protegido por el role
-                //.antMatchers("/api/**").hasRole("CLIENT") //api rest de react protegida
-                .antMatchers("/rooms/**").permitAll()
+                //API
+                    .antMatchers("/api/bookroomnow/**").hasRole("CLIENT")
+                //MVC
                     .antMatchers("/bookroomnow/**").hasRole("CLIENT") //protegido por el role
-                    .antMatchers("/finalbooking/**").hasRole("CLIENT")
+
                 .antMatchers(resources).permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .loginPage("/signin")  // entrypoint que pasar el form de login
+                    //.loginPage("/signin")  // endpoint que pasa el form de login
+                    .loginPage("/api/signin")
                     //.loginPage("/contact.html") // de ser un static para hacerlo asin
-                    .loginProcessingUrl("/authenticateTheUser") //entrypoint gestionado por spring
+                    .loginProcessingUrl("/authenticateTheUser") //endpoint gestionado por spring
                     //.defaultSuccessUrl("/login?ok") // no me redirige quizas por el handler
                     .defaultSuccessUrl("/defaultbooknow")
                     .successHandler(successHandler)
@@ -81,8 +85,17 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutSuccessUrl("/signin?logout") //no lo entiendo...
                     .permitAll();
-        http.csrf().disable(); //TODO Seguridad desactivada mientras migro a la api
+
+        //http.csrf().disable(); //TODO Seguridad desactivada mientras migro a la api
+
+        //https://stackoverflow.com/questions/54345301/react-springboot-csrf
+        //asi creamos automaitcamente una cookie con el XSRF-TOKEN
+        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+
+
+
     }
+
 
     @Bean
     public UserDetailsManager userDetailsManager() {
