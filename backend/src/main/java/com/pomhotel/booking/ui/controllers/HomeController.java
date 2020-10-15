@@ -29,16 +29,11 @@ public class HomeController {
         this.roomTypesService = roomTypesService;
     }
 
+    //--- Home Mappings -----------------------------------------------------
     @GetMapping("/")
     public String redirectToApiReactHome() {
-        return "redirect:/reactjs/index.html";
+        return "redirect:/home";
     }
-
-    //--- Home Mappings -----------------------------------------------------
-    //@GetMapping("/")
-    //public String index(Model model){
-    //    return "redirect:/home";
-    //}
 
     @GetMapping("/home")
     public String home(Model model) {
