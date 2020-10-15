@@ -5,6 +5,7 @@ import com.pomhotel.booking.ui.securityhandlers.CustomAuthenticationSuccessHandl
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,8 +17,15 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.sql.DataSource;
+
+import java.util.Arrays;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 //--- Configuration Security -------------------------------------------
 @Configuration
@@ -38,7 +46,7 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     // Note: Cruizg, necesario para evitar que la seguridad se aplique a los resources estaticos. Como los css, imagenes y javascripts
     String[] resources = new String[]{
-            "/css/**","/fonts/**","/images/**","/js/**","/**","/home/**"
+            "/css/**","/fonts/**","/images/**","/js/**","/**","/home/**","/reactjs/**"
             };
 
     @Override
@@ -57,6 +65,12 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new PasswordEnconderPlaintText();
     }
 
+    @Bean
+    public UserDetailsManager userDetailsManager() {
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
+        jdbcUserDetailsManager.setDataSource(securityDataSource);
+        return jdbcUserDetailsManager;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -89,20 +103,32 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
         //http.csrf().disable(); //TODO Seguridad desactivada mientras migro a la api
 
         //https://stackoverflow.com/questions/54345301/react-springboot-csrf
-        //asi creamos automaitcamente una cookie con el XSRF-TOKEN
+        //asi creamos automaticamente una cookie con el XSRF-TOKEN
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
+        //CrossOrigin
+        //https://www.baeldung.com/spring-cors
+        //https://www.baeldung.com/spring-security-cors-preflight
+        //https://docs.spring.io/spring-security/site/docs/current/reference/html5/#cors
+        //http.cors(withDefaults()); //disable this line to reproduce the CORS 401
 
 
     }
 
-
+    //Cors
+    /*
     @Bean
-    public UserDetailsManager userDetailsManager() {
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
-        jdbcUserDetailsManager.setDataSource(securityDataSource);
-        return jdbcUserDetailsManager;
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
+    */
+
+
 
 }
 

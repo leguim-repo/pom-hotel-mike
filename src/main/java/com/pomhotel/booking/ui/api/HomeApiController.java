@@ -23,7 +23,6 @@ public class HomeApiController {
     RoomsService roomsService;
     SecurityController securityController;
 
-
     @Autowired
     public HomeApiController(RoomsService roomsService, SecurityController securityController) {
         this.roomsService = roomsService;
@@ -32,14 +31,7 @@ public class HomeApiController {
     }
 
 
-    // The new endpoint of Home
-    @GetMapping("/api")
-    String apiHome(HttpServletRequest request) {
-        return "Este endpoint seguro que no es el que buscas. Te has dejado alguna cosa mas";
-    }
-
-
-    // OK Get all rooms ( Link Rooms in NavBar )
+    // OK Endpoint of link [Rooms]
     @GetMapping("/api/rooms")
     List<RoomsModel> getAllRoomsApi() {
         List<RoomsModel> rooms = roomsService.findAll();
@@ -47,15 +39,7 @@ public class HomeApiController {
     }
 
 
-    // Endpoint to new client
-    @PostMapping("/api/newclient")
-    NewClientDTO createNewClient(@RequestBody NewClientDTO newClient) {
-        System.out.println("newclient: " + newClient.toString());
-        return newClient;
-    }
-
-
-    // OK Endpoint for search a room ( Button Find Rooms in Home and Rooms )
+    // OK Endpoint of button [Find Rooms] in home and [Find Room] in rooms
     @PostMapping("/api/findroom")
     List<RoomsModel> findRoomByFilterApi(@RequestBody SearchDTO dto) {
         System.out.println("findroom: " + dto.toString());
@@ -70,7 +54,6 @@ public class HomeApiController {
 
         return rooms;
     }
-
 
     // Ok Single item...really without use. Only for tests
     @GetMapping("/api/rooms/{targetId}")
