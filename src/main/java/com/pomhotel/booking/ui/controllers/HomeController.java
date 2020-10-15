@@ -29,11 +29,16 @@ public class HomeController {
         this.roomTypesService = roomTypesService;
     }
 
-    //--- Home Mappings -----------------------------------------------------
     @GetMapping("/")
-    public String index(Model model){
-        return "redirect:/home";
+    public String redirectToApiReactHome() {
+        return "redirect:/reactjs/index.html";
     }
+
+    //--- Home Mappings -----------------------------------------------------
+    //@GetMapping("/")
+    //public String index(Model model){
+    //    return "redirect:/home";
+    //}
 
     @GetMapping("/home")
     public String home(Model model) {
@@ -44,7 +49,7 @@ public class HomeController {
 
     //--- Rooms Mappings -----------------------------------------------------
     @GetMapping("/rooms")
-    public String roomsList(@CookieValue("Checkin") String checkin,@CookieValue("Checkout") String checkout , Model model){
+    public String roomsList(@CookieValue(value = "Checkin", defaultValue = "01-01-2020") String checkin ,@CookieValue(value = "Checkout", defaultValue = "02-01-2020") String checkout , Model model){
         model.addAttribute("strNav", "Find your rest");
         model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
 
@@ -56,6 +61,7 @@ public class HomeController {
 
         model.addAttribute("checkin", checkin);
         model.addAttribute("checkout", checkout);
+
 
         return "listrooms";
     }

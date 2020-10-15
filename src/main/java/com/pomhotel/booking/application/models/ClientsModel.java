@@ -57,4 +57,15 @@ public class ClientsModel {
     public void setBookingsById(List<BookingsModel> bookingsById) {
         this.bookingsById = bookingsById;
     }
+
+    @Override
+    public String toString() {
+        return "ClientsModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", bookingsById=" + bookingsById +
+                '}';
+    }
 }

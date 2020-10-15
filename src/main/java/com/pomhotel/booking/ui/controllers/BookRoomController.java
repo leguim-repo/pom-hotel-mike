@@ -43,7 +43,7 @@ public class BookRoomController {
 
     //--- Mappings -----------------------------------------------------
     @GetMapping("/bookroomnow/{id}")
-    public String bookroomnow(@PathVariable("id") long id, @CookieValue("Checkin") String checkin,@CookieValue("Checkout") String checkout, Model model) {
+    public String bookroomnow(@PathVariable("id") long id, @CookieValue("Checkin") String checkin ,@CookieValue("Checkout") String checkout, Model model) {
         BookingLogicalService calculadora = new BookingLogicalServiceImplementation();
         roomSelected = roomsService.findById(id);
         model.addAttribute("imgNav", "high-performance.jpg");
