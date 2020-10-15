@@ -1,0 +1,6 @@
+#https://attacomsian.com/blog/spring-boot-auto-reload-thymeleaf-templates
+# usado el metodo 2 Change Thymeleaf Templates Path
+# asi no necesitamos recompilar para los efectos de un cambio en los html
+spring:
+  profiles:
+    active: dev

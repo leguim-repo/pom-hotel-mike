@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+<head th:insert="/fragments/layout.html :: head"> </head>
+
+<body>
+
+<header th:insert="fragments/layout.html :: header"> </header>
+
+<div class="colorlib-loader"></div>
+
+<div id="page">
+    <div class="colorlib-wrap">
+        <div class="container">
+            <div class="row">
+
+                <!-- SECTION OF ROOMS -->
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="wrap-division">
+
+                                <!-- TITLE OF THE SECTION -->
+                                <div class="col-md-12 col-md-offset-0 heading2 animate-box">
+                                    <h2>Our Rooms</h2>
+                                </div>
+
+                                <!-- ROOM SECTION (loop) -->
+                                <div th:each="room, stat: ${rooms}" class="row" >
+                                    <div class="col-md-12 animate-box">
+                                        <div class="room-wrap">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="room-img" style="background-color: dimgrey;">
+                                                        <div class="room-img" th:style="'background-image:url(' + @{/images/{img}(img=${room.image})}+ ');'"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="desc">
+                                                        <h2 th:text="${room.roomtypesByFkRoomtypeId.name}"></h2>
+                                                        <p class="price"><span th:text="${room.pricePerNight}"></span> <small>/ night</small></p>
+                                                        <p th:text="${room.description}"></p>
+                                                        <p><a class="btn btn-primary" th:href="@{/bookroomnow/{id}(id=${room.id})}">Book Now!</a></p>
+                                                        <!-- ejemplo de como pasar multimples parametros
+                                                        <p><a class="btn btn-primary" th:href="@{/bookroomnow/(id = ${room.id} ,  checkin=${checkin}, checkout=${checkout} ) }">Book Now!</a></p>
+                                                        -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR -->
+                <div class="col-md-3">
+                    <div class="sidebar-wrap">
+                        <!-- BLACK BOX SEARCHER -->
+                        <div class="side search-wrap animate-box">
+                            <h3 class="sidebar-heading">Find your room</h3>
+                            <form method="post" th:action="@{/rooms}" th:object="${newSearch}" id="roomsSearch" class="colorlib-form">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="checkin">Check-in:</label>
+                                            <div class="form-field">
+                                                <i class="icon icon-calendar2"></i>
+                                                <input type="text" id="checkin" name="checkin" class="form-control date" placeholder="Check-in date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="checkout">Check-out:</label>
+                                            <div class="form-field">
+                                                <i class="icon icon-calendar2"></i>
+                                                <input type="text" id="checkout" name="checkout" class="form-control date" placeholder="Check-out date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="guests">Guest</label>
+                                            <div class="form-field">
+                                                <i class="icon icon-arrow-down3"></i>
+                                                <select id="guests" name="guests" class="form-control">
+                                                    <option value="1">1</option>
+                                                    <option value="2" selected>2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5+</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="guests">Price from:</label>
+                                                    <div class="form-field">
+                                                        <i class="icon icon-arrow-down3"></i>
+                                                        <select onchange="controlMinMaxSelect()" name="minprice" id="pricefrom" class="form-control">
+                                                            <option value="1">1</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                            <option value="200">200</option>
+                                                            <option value="300">300</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="guests">Price to:</label>
+                                                    <div class="form-field">
+                                                        <i class="icon icon-arrow-down3"></i>
+                                                        <select onchange="controlMinMaxSelect()" name="maxprice" id="priceto" class="form-control">
+                                                            <option value="100">100</option>
+                                                            <option value="200">200</option>
+                                                            <option value="300">300</option>
+                                                            <option value="500">500</option>
+                                                            <option value="1000">1000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="guests">Room Types</label>
+                                            <div class="form-field">
+                                                <i class="icon icon-arrow-down3"></i>
+                                                <select  name="type" id="roomtype" class="form-control">
+                                                    <option value="0">All types</option>
+                                                    <option th:each="item : ${types}" th:value="${item.id}"
+                                                            th:text="${item.name}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input onclick="saveCookies()" type="submit" name="submit" id="submit" value="Find Room" class="btn btn-primary btn-block">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+    </div>
+</div>
+<div th:insert="fragments/layout.html :: footer"></div>
+<div th:insert="fragments/layout.html :: sources"> </div>
+</body>
+</html>

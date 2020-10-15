@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:insert="/fragments/layout.html :: head">
+</head>
+<body>
+<header th:insert="fragments/layout.html :: header"></header>
+
+<!-- chapu para dar feedback al usuario si se ha procesado su reserva correctamente o no -->
+<div th:if="${param.bookedok}">
+    <div th:insert="fragments/layout.html :: bookedok"></div>
+</div>
+
+<div th:if="${param.bookedfail}">
+    <div th:insert="fragments/layout.html :: bookedfail"></div>
+</div>
+
+<div class="colorlib-loader"></div>
+
+<div id="page">
+    <div id="colorlib-reservation">
+        <div class="row">
+            <div class="tab-content">
+                <div id="hotel">
+                    <form method="post" th:action="@{/rooms}" th:object="${newSearch}" id="homeSearch" class="colorlib-form">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="booknow">
+                                    <h2>Book Now</h2>
+                                    <span>Best Price Online</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="checkin">Check-in:</label>
+                                    <div class="form-field">
+                                        <i class="icon icon-calendar2"></i>
+                                        <input type="text" name="checkin" id="checkin" class="form-control date"
+                                               placeholder="Check-in date" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="checkout">Check-out:</label>
+                                    <div class="form-field">
+                                        <i class="icon icon-calendar2"></i>
+                                        <input type="text" name="checkout" id="checkout" class="form-control date"
+                                               placeholder="Check-out date" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="guests">Guest</label>
+                                    <div class="form-field">
+                                        <i class="icon icon-arrow-down3"></i>
+                                        <select name="guests" id="guests" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2" selected>2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input onclick="saveCookies()" type="submit" name="submit" id="submit" value="Find Rooms" class="btn btn-primary btn-block">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="colorlib-spaces colorlib-light-grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+                    <h2>Popular Spaces</h2>
+                    <p>We love to tell our successful, behind the roof of our hotel, far from the current world, here live the blind texts.</p>
+                </div>
+            </div>
+        </div>
+        <div class="space-wrap">
+            <a class="space-entry animate-box">
+                <div class="tour-img" style="background-image: url(images/tour-1.jpg);">
+                </div>
+                <span class="desc">
+						<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+						<h2>Mediterranean Views</h2>
+						<span class="desc-spaces">Enjoy these amazing views</span>
+						<span class="price">From $80</span>
+					</span>
+            </a>
+            <a class="space-entry animate-box">
+                <div class="tour-img" style="background-image: url(images/camere-4.jpg);">
+                </div>
+                <span class="desc">
+						<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+						<h2>Luxury rooms</h2>
+						<span class="desc-spaces">Enjoy your sensations</span>
+						<span class="price">From $450</span>
+					</span>
+            </a>
+            <a class="space-entry animate-box">
+                <div class="tour-img" style="background-image: url(images/ok10.jpg);">
+                </div>
+                <span class="desc">
+						<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+						<h2>SPA Sauna</h2>
+						<span class="desc-spaces">Enjoy your care</span>
+						<span class="price">From $20</span>
+					</span>
+            </a>
+            <a class="space-entry animate-box">
+                <div class="tour-img" style="background-image: url(images/high-performance.jpg);">
+                </div>
+                <span class="desc">
+						<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+						<h2>Underwater special rooms</h2>
+						<span class="desc-spaces">Enjoy unique experiences</span>
+						<span class="price">Soon...</span>
+					</span>
+            </a>
+        </div>
+    </div>
+
+    <div id="colorlib-testimony" class="colorlib-light-grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+                    <h2>Our Satisfied Guests says</h2>
+                    <p>We love to tell our successful far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 animate-box">
+                    <div class="owl-carousel2">
+                        <div class="item">
+                            <div class="testimony text-center">
+                                <span class="img-user" style="background-image: url(images/person1.jpg);"></span>
+                                <span class="user">Alysha Myers</span>
+                                <small>Miami Florida, USA</small>
+                                <blockquote>
+                                    <p>" A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimony text-center">
+                                <span class="img-user" style="background-image: url(images/person2.jpg);"></span>
+                                <span class="user">James Fisher</span>
+                                <small>New York, USA</small>
+                                <blockquote>
+                                    <p>One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimony text-center">
+                                <span class="img-user" style="background-image: url(images/person3.jpg);"></span>
+                                <span class="user">Jacob Webb</span>
+                                <small>Athens, Greece</small>
+                                <blockquote>
+                                    <p>Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div th:insert="fragments/layout.html :: footer"></div>
+<div th:insert="fragments/layout.html :: sources"></div>
+
+<div th:if="${param.bookedok}" ><script>showFeedBackOk()</script></div>
+<div th:if="${param.bookedfail}" ><script>showFeedBackFail();</script></div>
+
+</body>
+</html>
