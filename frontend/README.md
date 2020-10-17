@@ -1,3 +1,22 @@
+# instalados
+
+```code
+npm add react-router-dom ;
+npm add redux react-redux redux-thunk redux-logger;
+npm add axios ;
+npm add bootstrap ;
+npm add font-awesome ;
+npm add bootstrap-social ;
+npm add react-bootstrap ;
+```
+
+https://serverless-stack.com/chapters/create-a-login-page.html
+
+https://react-bootstrap.github.io/components/alerts
+https://react-bootstrap.github.io/components/forms/
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
