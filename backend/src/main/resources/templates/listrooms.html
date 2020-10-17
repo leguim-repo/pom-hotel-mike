@@ -40,7 +40,7 @@
                                                         <h2 th:text="${room.roomtypesByFkRoomtypeId.name}"></h2>
                                                         <p class="price"><span th:text="${room.pricePerNight}"></span> <small>/ night</small></p>
                                                         <p th:text="${room.description}"></p>
-                                                        <p><a class="btn btn-primary" th:href="@{/bookroomnow/{id}(id=${room.id})}">Book Now!</a></p>
+                                                        <p><a class="btn btn-primary" th:href="@{/mvc/bookroomnow/{id}(id=${room.id})}">Book Now!</a></p>
                                                         <!-- ejemplo de como pasar multimples parametros
                                                         <p><a class="btn btn-primary" th:href="@{/bookroomnow/(id = ${room.id} ,  checkin=${checkin}, checkout=${checkout} ) }">Book Now!</a></p>
                                                         -->
@@ -61,7 +61,7 @@
                         <!-- BLACK BOX SEARCHER -->
                         <div class="side search-wrap animate-box">
                             <h3 class="sidebar-heading">Find your room</h3>
-                            <form method="post" th:action="@{/rooms}" th:object="${newSearch}" id="roomsSearch" class="colorlib-form">
+                            <form method="post" th:action="@{/mvc/rooms}" th:object="${newSearch}" id="roomsSearch" class="colorlib-form">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">

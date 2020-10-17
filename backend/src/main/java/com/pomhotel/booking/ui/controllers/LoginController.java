@@ -11,6 +11,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class LoginController {
     }
 
     //--- Sign In & Log Out Mappings --------------------------------------
-    @GetMapping("/signin")
+    @GetMapping("/mvc/signin")
     public String signIn(WebRequest request, Model model){
         NewClientDTO newclient = new NewClientDTO();
         model.addAttribute("newclient", newclient);
@@ -41,7 +42,7 @@ public class LoginController {
         return "signin";
     }
 
-    @GetMapping(value="/logout")
+    @GetMapping(value="/mvc/logout")
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -49,18 +50,18 @@ public class LoginController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
 
-        return "redirect:/signin?logout";
+        return "redirect:/mvc/signin?logout";
     }
 
     //--- Register New Client Mapping --------------------------------------
-    @PostMapping("/registernewclient")
+    @PostMapping("/mvc/registernewclient")
     public String registerNewClient(@ModelAttribute("newclient") @Valid NewClientDTO newclient, HttpServletRequest request, Errors errors) {
         ClientsModel clientModel = new ClientsModel(newclient.name, newclient.lastname, newclient.email);
         LoginsModel loginModel = new LoginsModel(newclient.username, newclient.password, clientModel);
         clientLoginService.createClientAndLogin(loginModel);
 
         if (true) {
-            return "redirect:/home";
+            return "redirect:/mvc/home";
         } else {
             return "registerfail";
         }

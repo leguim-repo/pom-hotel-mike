@@ -43,18 +43,18 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-2">
-                        <div id="colorlib-logo"><a th:href="@{/home}">POM & Spa</a></div>
+                        <div id="colorlib-logo"><a th:href="@{/mvc/home}">POM & Spa</a></div>
                     </div>
                     <div class="col-xs-10 text-right menu-1">
                         <ul>
                             <li sec:authorize="isAuthenticated()">
                                 <a th:href="${@RandomMusicURL.getRandomMusicURL()}" target="_blank"><span th:text="${#authentication.name}"></span></a>
                             </li>
-                            <li><a th:href="@{/home}">Home</a></li>
-                            <li><a th:href="@{/rooms}">Rooms</a></li>
-                            <li><a th:href="@{/aboutus}">About</a></li>
-                            <li sec:authorize="isAnonymous()"><a href="signin">Sign In</a></li>
-                            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Sign Out</a></li>
+                            <li><a th:href="@{/mvc/home}">Home</a></li>
+                            <li><a th:href="@{/mvc/rooms}">Rooms</a></li>
+                            <li><a th:href="@{/mvc/aboutus}">About</a></li>
+                            <li sec:authorize="isAnonymous()"><a href="/mvc/signin">Sign In</a></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/mvc/logout}">Sign Out</a></li>
                         </ul>
                     </div>
                 </div>

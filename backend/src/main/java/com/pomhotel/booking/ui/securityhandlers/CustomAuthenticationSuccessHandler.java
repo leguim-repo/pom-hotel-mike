@@ -26,7 +26,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             if (roles.contains("ROLE_CLIENT")) {
                 //redireccion directa cuando se accede directamente a sigin
                 //httpServletResponse.sendRedirect("/rooms");
-                httpServletResponse.sendRedirect("/api/rooms");
+                httpServletResponse.sendRedirect("/mvc/rooms");
 
             }
 

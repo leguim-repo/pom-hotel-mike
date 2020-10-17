@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.Map;
 import java.util.Objects;
 
-
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 public class BookRoomApiController {
     //--- Services & Variables used ---------------------------------------

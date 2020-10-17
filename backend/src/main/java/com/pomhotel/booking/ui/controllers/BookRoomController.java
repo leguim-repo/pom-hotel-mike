@@ -42,7 +42,7 @@ public class BookRoomController {
     }
 
     //--- Mappings -----------------------------------------------------
-    @GetMapping("/bookroomnow/{id}")
+    @GetMapping("/mvc/bookroomnow/{id}")
     public String bookroomnow(@PathVariable("id") long id, @CookieValue("Checkin") String checkin ,@CookieValue("Checkout") String checkout, Model model) {
         BookingLogicalService calculadora = new BookingLogicalServiceImplementation();
         roomSelected = roomsService.findById(id);
@@ -60,7 +60,7 @@ public class BookRoomController {
         return "booknow";
     }
 
-    @PostMapping("/bookroomnow")
+    @PostMapping("/mvc/bookroomnow")
     public String bookroomnow(@ModelAttribute("newBooking") @Valid NewBookingDTO dto) {
         String view;
         BookingsModel model = new BookingsModel();
@@ -74,11 +74,11 @@ public class BookRoomController {
             model.totalPrice = bookingLogicalService.calculateTotalPrice(model.checkIn, model.checkOut, roomSelected.pricePerNight);
             bookingsService.saveOrUpdate(model);
 
-            view="redirect:/home?bookedok";
+            view="redirect:/mvc/home?bookedok";
         }
         catch (Exception e) {
             e.printStackTrace();
-            view="redirect:/home?bookedfail";
+            view="redirect:/mvc/home?bookedfail";
         }
 
         return view;

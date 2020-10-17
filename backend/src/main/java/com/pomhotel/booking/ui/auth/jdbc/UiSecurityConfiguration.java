@@ -1,11 +1,11 @@
-package com.pomhotel.booking.ui.configuration;
+package com.pomhotel.booking.ui.auth.jdbc;
+
 
 import com.pomhotel.booking.ui.securityhandlers.CustomAuthenticationFailureHandler;
 import com.pomhotel.booking.ui.securityhandlers.CustomAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,17 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.sql.DataSource;
-
-import java.util.Arrays;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 //--- Configuration Security -------------------------------------------
 @Configuration
@@ -46,7 +37,7 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     // Note: Cruizg, necesario para evitar que la seguridad se aplique a los resources estaticos. Como los css, imagenes y javascripts
     String[] resources = new String[]{
-            "/css/**","/fonts/**","/images/**","/js/**","/**","/home/**","/reactjs/**"
+            "/css/**","/fonts/**","/images/**","/js/**","/**","/home/**"
             };
 
     @Override
@@ -78,16 +69,16 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                 //API
-                    .antMatchers("/api/bookroomnow/**").hasRole("CLIENT")
+                //    .antMatchers("/api/bookroomnow/**").hasRole("CLIENT")
                 //MVC
-                    .antMatchers("/bookroomnow/**").hasRole("CLIENT") //protegido por el role
+                    .antMatchers("/mvc/bookroomnow/**").hasRole("CLIENT") //protegido por el role
 
                 .antMatchers(resources).permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
                     //.loginPage("/signin")  // endpoint que pasa el form de login
-                    .loginPage("/api/signin")
+                    .loginPage("/mvc/signin")
                     //.loginPage("/contact.html") // de ser un static para hacerlo asin
                     .loginProcessingUrl("/authenticateTheUser") //endpoint gestionado por spring
                     //.defaultSuccessUrl("/login?ok") // no me redirige quizas por el handler
@@ -97,7 +88,7 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .and()
                 .logout()
-                    .logoutSuccessUrl("/signin?logout") //no lo entiendo...
+                    .logoutSuccessUrl("/mvc/signin?logout") //no lo entiendo...
                     .permitAll();
 
         //http.csrf().disable(); //TODO Seguridad desactivada mientras migro a la api
@@ -128,6 +119,20 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
     */
 
+/*
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(Arrays.asList("authorization", "Cache-Control", "content-type", "xsrf-token"));
+        configuration.setExposedHeaders(Arrays.asList("xsrf-token"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+*/
 
 
 }

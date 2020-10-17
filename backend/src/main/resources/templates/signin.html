@@ -18,7 +18,7 @@
 <div class="container left-panel-active">
     <!-- Sign Up -->
     <div class="container__form container--signup">
-        <form th:action="@{/registernewclient}" th:object="${newclient}" method="post" enctype="utf8" class="form" id="form1">
+        <form th:action="@{/mvc/registernewclient}" th:object="${newclient}" method="post" enctype="utf8" class="form" id="form1">
             <h2 class="form__title">Sign Up</h2>
             <input th:field="*{name}" placeholder="Name" class="input" required/>
             <input type="text" th:field="*{lastname}" placeholder="Lastname" class="input" required/>

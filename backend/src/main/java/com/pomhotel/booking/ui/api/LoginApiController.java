@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 public class LoginApiController {
 
@@ -21,7 +21,10 @@ public class LoginApiController {
 
     // TODO Endpoint to login
     @GetMapping("/api/signin")
-    String apiSignIn() {
+    String apiSignIn(WebRequest request) {
+        //CsrfToken token = (CsrfToken)request.getAttribute("username",CsrfToken.class.getName());
+        //System.out.println("token: "+token);
+        System.out.println("request: "+request);
 
         return "Aqui react tiene que pintar el login";
     }

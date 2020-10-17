@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 //--- Controller ----------------------------------------------------------
+//https://spring.io/blog/2015/06/08/cors-support-in-spring-framework
 @Controller
 public class HomeController {
 
@@ -29,13 +30,8 @@ public class HomeController {
         this.roomTypesService = roomTypesService;
     }
 
-    //--- Home Mappings -----------------------------------------------------
-    @GetMapping("/")
-    public String redirectToApiReactHome() {
-        return "redirect:/home";
-    }
 
-    @GetMapping("/home")
+    @GetMapping("/mvc/home")
     public String home(Model model) {
         model.addAttribute("strNav", "Find Emotions");
         model.addAttribute("imgNav", "chica_piscina.jpg");
@@ -43,7 +39,7 @@ public class HomeController {
     }
 
     //--- Rooms Mappings -----------------------------------------------------
-    @GetMapping("/rooms")
+    @GetMapping("/mvc/rooms")
     public String roomsList(@CookieValue(value = "Checkin", defaultValue = "01-01-2020") String checkin ,@CookieValue(value = "Checkout", defaultValue = "02-01-2020") String checkout , Model model){
         model.addAttribute("strNav", "Find your rest");
         model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
@@ -61,7 +57,7 @@ public class HomeController {
         return "listrooms";
     }
 
-    @PostMapping("/rooms")
+    @PostMapping("/mvc/rooms")
     public String roomsList(@ModelAttribute("newSearch") @Valid SearchDTO dto, Model model) {
         model.addAttribute("strNav", "Find your rest");
         model.addAttribute("imgNav", "revato-10251-13112723-111323.jpg");
@@ -86,7 +82,7 @@ public class HomeController {
 
 
     //--- About Us Mappings --------------------------------------------------
-    @GetMapping("/aboutus")
+    @GetMapping("/mvc/aboutus")
     public String aboutus(Model model){
         model.addAttribute("strNav", "Our great crew");
         model.addAttribute("imgNav", "img_bg_1.jpg");
@@ -94,14 +90,14 @@ public class HomeController {
     }
 
     //--- Test Purposes Mappings -----------------------------------------------------
-    @PostMapping("/mike")
+    @PostMapping("/mvc/mike")
     public String acceptData(@RequestBody String payloadBody, @RequestHeader HttpHeaders headers)  {
         //Note: Con este metodo podemos ver que paramentros enviamos con el post desde el form
         System.out.println("\nParametros recibidos: "+payloadBody+"\n");
         return "home";
     }
 
-    @GetMapping("/petar")
+    @GetMapping("/mvc/petar")
     public ModelAndView forzar500(Model model) {
         //Note: metodo para forzar un error 500 y ver la pagina de error
         Integer a;

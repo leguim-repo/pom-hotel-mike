@@ -1,7 +1,6 @@
-package com.pomhotel.booking.ui.configuration;
+package temporal.basic;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 class PasswordEnconderPlaintText implements PasswordEncoder {
     // Note: Debe estar en el mismo package que UiSecurityConfiguration
