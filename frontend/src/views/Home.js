@@ -26,36 +26,19 @@ function Index() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+
   return (
-    <>
+    <React.Fragment>
       <IndexNavbar />
       <div className="wrapper">
-        <IndexHeader />
+        <IndexHeader image={require("assets/img/chica_piscina.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
         <div className="main">
           <PopularSpaces></PopularSpaces>
           <GuestsOpinions></GuestsOpinions>
-          
-          
-          {/*
-          <Images />
-          <BasicElements />
-          <Navbars />
-          <Tabs />
-          <Pagination />
-          <Notifications />
-          <Typography />
-          <Javascript />
-          <Carousel />
-          <NucleoIcons />
-          <CompleteExamples />
-          <SignUp />
-          <Examples />
-          <Download />
-          */}
         </div>
         <DarkFooter />
       </div>
-    </>
+    </React.Fragment>
   );
 }
 

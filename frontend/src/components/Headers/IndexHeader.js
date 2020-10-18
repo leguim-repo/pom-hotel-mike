@@ -5,7 +5,10 @@ import React from "react";
 import { Container } from "reactstrap";
 // core components
 
-function IndexHeader() {
+function IndexHeader(props) {
+
+  console.log('image: ',props.image);
+
   let pageHeader = React.createRef();
 
   React.useEffect(() => {
@@ -23,24 +26,17 @@ function IndexHeader() {
   });
 
   return (
-    <>
+    <React.Fragment>
       <div className="page-header page-header-small clear-filter" filter-color="blue">
-        <div
-          className="page-header-image"
-          style={{
-            backgroundImage: "url(" + require("assets/img/chica_piscina.jpg") + ")",
-          }}
-          ref={pageHeader}
-        ></div>
+        <div className="page-header-image" style={{ backgroundImage: "url(" + props.image + ")",}} ref={pageHeader}></div>
         <Container>
           <div className="content-center brand">
-            <h1 className="h1-seo">Pom Hotel & SPA</h1>
-            <h3>By Z-Devs Team</h3>
+            <h1 className="h1-seo">{props.sloganBig}</h1>
+            <h3>{props.sloganLittle}</h3>
           </div>
-
         </Container>
       </div>
-    </>
+    </React.Fragment>
   );
 }
 
