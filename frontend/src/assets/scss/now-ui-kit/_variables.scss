@@ -153,8 +153,8 @@ $font-size-h6:                 .9em         !default; // ~ 12px
 
 $font-paragraph:               1.2em          !default;
 $font-size-navbar:             1em          !default;
-$font-size-mini:               0.7142em     !default;
-$font-size-small:              0.8571em     !default;
+$font-size-mini:               1.2em     !default; // ! old value 0.7142em navbar font
+$font-size-small:              1.4em     !default; // ! old value 0.8571em
 $font-size-base:               14px         !default;
 $font-size-large:              1em          !default;
 $font-size-large-navbar:       20px         !default;

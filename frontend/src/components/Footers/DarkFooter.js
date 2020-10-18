@@ -29,7 +29,7 @@ function DarkFooter() {
               <a href="#">
                 <img
                   src={require("assets/img/musica.png")}
-                  style={{ height: "3.5rem", width: "3.5rem" }}
+                  style={{ height: "3.5em", width: "3.5em" }}
                   target="_blank"
                 ></img>
               </a>

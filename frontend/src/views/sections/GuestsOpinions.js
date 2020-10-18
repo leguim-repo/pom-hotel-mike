@@ -4,7 +4,7 @@ import { Media } from 'reactstrap';
 // https://reactstrap.github.io/components/media/
 // https://www.creative-tim.com/learning-lab/reactstrap/images/argon-design-system
 
-const style = { margin: "10px", width: "14rem"};
+const style = { margin: "10px", width: "14em"};
 
 function renderOpinion(image, name, country, opinion, position) {
   
