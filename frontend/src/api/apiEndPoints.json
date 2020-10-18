@@ -1,0 +1,5 @@
+{
+    "postsEndpoint": "https://jsonplaceholder.typicode.com/posts",
+    "postEndpoint":"https://jsonplaceholder.typicode.com/posts/",
+    "commentsEndpoint": "https://jsonplaceholder.typicode.com/comments?postId="
+}

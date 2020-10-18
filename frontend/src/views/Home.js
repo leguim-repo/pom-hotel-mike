@@ -12,6 +12,7 @@ import DarkFooter from "components/Footers/DarkFooter.js";
 // sections for this page
 import PopularSpaces from "./sections/PopularSpaces.js";
 import GuestsOpinions from "./sections/GuestsOpinions.js";
+import FindRoomsSimple from "components/FindRoomsSimple.js";
 
 
 function Index() {
@@ -33,6 +34,7 @@ function Index() {
       <div className="wrapper">
         <IndexHeader image={require("assets/img/chica_piscina.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
         <div className="main">
+          <FindRoomsSimple></FindRoomsSimple>
           <PopularSpaces></PopularSpaces>
           <GuestsOpinions></GuestsOpinions>
         </div>
