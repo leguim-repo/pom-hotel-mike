@@ -6,3 +6,8 @@
   background-color: #011638;
 }
 
+.formSimple {
+  background: #011f48; /*#2C2E3E;*/
+  padding: 30px 60px; 
+  color: white;
+}

@@ -4,7 +4,7 @@ import * as actions from '../ActionTypes';
 export const initialFindRoomSimple = {
     loading: false,
     hasErrors: false,
-    erro: "",
+    error: "",
     checkin: "",
     checkout: "",
     guests: 2,

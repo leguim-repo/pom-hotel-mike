@@ -8,12 +8,17 @@ import com.pomhotel.booking.ui.controllers.SecurityController;
 import com.pomhotel.booking.ui.dto.NewBookingDTO;
 import com.pomhotel.booking.ui.dto.NewClientDTO;
 import com.pomhotel.booking.ui.dto.SearchDTO;
+import com.pomhotel.booking.ui.servicies.RandomMusicURLService;
+import com.pomhotel.booking.ui.servicies.RandomMusicURLServiceImplementation;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
 import java.util.List;
 
 //refererence: https://spring.io/guides/tutorials/rest/
@@ -27,7 +32,6 @@ public class HomeApiController {
     public HomeApiController(RoomsService roomsService, SecurityController securityController) {
         this.roomsService = roomsService;
         this.securityController = securityController;
-
     }
 
 
@@ -68,6 +72,16 @@ public class HomeApiController {
 
         }
         return requestedRoom;
+    }
+
+
+    @GetMapping(value = "/api/music")
+    String musicApi() {
+        String link="";
+        RandomMusicURLService music = new RandomMusicURLServiceImplementation();
+        // un string a pelo no se convierte a JSON. Como es simple creo el JSON a mano
+        link="{ \"link\":\""+music.getRandomMusicURL()+"\" }";
+        return link;
     }
 
     // EasterEgg

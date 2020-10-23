@@ -51,16 +51,16 @@ class FindRoomsSimple extends Component {
     }
 
     handleSubmit(e){
-      e.preventDefault();
-      console.log(e);
+      //e.preventDefault();
+      console.log('e: ',e,'\ns: ',this.state);
     }
 
     render() {
       console.log('checkin: ',this.state.checkin, ' checkout: ',this.state.checkout);
       return (
         <React.Fragment>
-          <Container className="border border-danger">
-            <Form model='formFindRoomSimple' onSubmit={(values) => this.handleSubmit(values)}>
+          <Container fluid className="formSimple border border-danger">
+            <Form model='formFindRoomSimple' onSubmit={this.handleSubmit}>
               <Row>
                 <Col>
                   <FormGroup>

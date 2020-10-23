@@ -3,6 +3,7 @@
   "version": "1.4.0",
   "private": true,
   "dependencies": {
+    "date-fns": "^2.16.1",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "moment": "2.26.0",

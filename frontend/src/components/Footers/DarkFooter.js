@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import React from "react";
 
+import EasterEgg from "../EasterEgg/EasterEgg";
 // reactstrap components
 import { Container } from "reactstrap";
 
@@ -22,20 +23,7 @@ function DarkFooter() {
             </p>
           </div>
 
-          <div className="col-12 col-md6 col-lg-4">
-            <h4 className="text-center">Play Music</h4>
-            <p className="text-center">Listen the best dance sessions</p>
-            <p className="text-center">
-              <a href="#">
-                <img
-                  src={require("assets/img/musica.png")}
-                  style={{ height: "3.5em", width: "3.5em" }}
-                  target="_blank"
-                ></img>
-              </a>
-            </p>
-            <p className="text-center">Click on the icon and enjoy</p>
-          </div>
+          <EasterEgg></EasterEgg>
 
           <div className="col-12 col-md6 col-lg-4">
             <h4>Contact Information</h4>
