@@ -5,7 +5,7 @@ import EasterEgg from "../EasterEgg/EasterEgg";
 // reactstrap components
 import { Container } from "reactstrap";
 
-function DarkFooter() {
+function PomFooter() {
   return (
     <footer className="footer" data-background-color="black">
       <Container>
@@ -51,4 +51,4 @@ function DarkFooter() {
   );
 }
 
-export default DarkFooter;
+export default PomFooter;

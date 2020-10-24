@@ -1,20 +1,3 @@
-/*
-
-=========================================================
-* Now UI Kit React - v1.4.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-kit-react
-* Copyright 2020 Creative Tim (http://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/now-ui-kit-react/blob/master/LICENSE.md)
-
-* Designed by www.invisionapp.com Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -27,15 +10,26 @@ import "assets/demo/nucleo-icons-page-styles.css?v=1.4.0";
 import './App.css';
 
 // pages for this kit
-import Home from "views/Home.js";
-import NucleoIcons from "views/NucleoIcons.js";
-import LoginPage from "views/examples/LoginPage.js";
-import LandingPage from "views/examples/LandingPage.js";
-import ProfilePage from "views/examples/ProfilePage.js";
+import Home from "pages/HomePage";
+import Rooms from "pages/RoomsPage"
+
+import NucleoIcons from "pages/NucleoIcons";
+import LoginPage from "pages/examples/LoginPage";
+import LandingPage from "pages/examples/LandingPage";
+import ProfilePage from "pages/examples/ProfilePage";
+
 import { Provider } from "react-redux";
 import { ConfigureStoreDev } from "./redux/configureStores";
 
 const store_dev = ConfigureStoreDev();
+
+const env = 'development';
+//const env = 'production';
+console.warn=()=>{};
+if (env === 'production') {
+  console.log('Bye bye console')
+  console.log = function () {};
+}
 
 ReactDOM.render(
   <Provider store={store_dev}>
@@ -43,6 +37,8 @@ ReactDOM.render(
       <Switch>
         <Switch>
           <Route exact path="/" render={(props) => <Home {...props} />} />
+          <Route exact path="/rooms" render={(props) => <Rooms {...props} />} />
+
           <Route
             path="/nucleo-icons"
             render={(props) => <NucleoIcons {...props} />}

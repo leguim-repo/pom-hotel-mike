@@ -13,7 +13,7 @@ import {
 
 // https://demos.creative-tim.com/now-ui-kit-react/#/documentation/introduction
 
-function IndexNavbar() {
+function PomNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent"); // hooks
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   React.useEffect(() => {
@@ -83,7 +83,7 @@ function IndexNavbar() {
               </NavItem>
 
               <NavItem>
-                <NavLink href="/"><p>Rooms</p></NavLink>
+                <NavLink href="/rooms"><p>Rooms</p></NavLink>
               </NavItem>
 
               <NavItem>
@@ -102,4 +102,4 @@ function IndexNavbar() {
   );
 }
 
-export default IndexNavbar;
+export default PomNavbar;

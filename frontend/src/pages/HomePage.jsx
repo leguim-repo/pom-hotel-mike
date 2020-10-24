@@ -5,14 +5,14 @@ import React from "react";
 // } from "reactstrap";
 
 // core components
-import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import IndexHeader from "components/Headers/IndexHeader.js";
-import DarkFooter from "components/Footers/DarkFooter.js";
+import PomNavbar from "components/Navbars/PomNavbar";
+import PomHeader from "components/Headers/PomHeader";
+import PomFooter from "components/Footers/PomFooter";
 
 // sections for this page
-import PopularSpaces from "./sections/PopularSpaces.js";
-import GuestsOpinions from "./sections/GuestsOpinions.js";
-import FindRoomsSimple from "components/FindRoomsSimple.js";
+import PopularSpaces from "./sections/PopularSpaces";
+import GuestsOpinions from "./sections/GuestsOpinions";
+import FindRoomsSimple from "components/FindRoomsSimple";
 
 
 function Index() {
@@ -30,15 +30,15 @@ function Index() {
 
   return (
     <React.Fragment>
-      <IndexNavbar />
+      <PomNavbar />
       <div className="wrapper">
-        <IndexHeader image={require("assets/img/chica_piscina.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
+        <PomHeader image={require("assets/img/chica_piscina.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
         <div className="main">
-          <FindRoomsSimple></FindRoomsSimple>
+        <FindRoomsSimple></FindRoomsSimple>
           <PopularSpaces></PopularSpaces>
           <GuestsOpinions></GuestsOpinions>
         </div>
-        <DarkFooter />
+        <PomFooter />
       </div>
     </React.Fragment>
   );

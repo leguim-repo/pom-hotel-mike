@@ -5,18 +5,23 @@ import React from "react";
 import { Container } from "reactstrap";
 // core components
 
-function IndexHeader(props) {
+function PomHeader(props) {
 
   console.log('image: ',props.image);
 
   let pageHeader = React.createRef();
 
+  /* * 
+  ! me peta por alguna razon cuand le tiro un hago el top en rooms
   React.useEffect(() => {
-    if (window.innerWidth > 991) {
+    console.log('pomheader.pageHeader: ',pageHeader)
+    if ((window.innerWidth > 991)) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;
-        pageHeader.current.style.transform =
-          "translate3d(0," + windowScrollTop + "px,0)";
+        if (pageHeader.current != null ) {
+          pageHeader.current.style.transform = "translate3d(0," + windowScrollTop + "px,0)";
+
+        }
       };
       window.addEventListener("scroll", updateScroll);
       return function cleanup() {
@@ -24,6 +29,8 @@ function IndexHeader(props) {
       };
     }
   });
+
+*/
 
   return (
     <React.Fragment>
@@ -40,4 +47,4 @@ function IndexHeader(props) {
   );
 }
 
-export default IndexHeader;
+export default PomHeader;

@@ -3,7 +3,7 @@ import React, { useState, useEffect} from "react";
 // https://youtu.be/mL7Gb6rcAAo
 
 const RenderEasterEgg = (props) => {
-  console.log('RenderEasterEgg.props: ',props);
+  //console.log('RenderEasterEgg.props: ',props);
   return(
     <div className="col-12 col-md6 col-lg-4">
     <h4 className="text-center">Play Music</h4>
@@ -27,7 +27,7 @@ const EasterEgg = (props) => {
   const [link, setLink] = useState("#");
   const [data, setData] = useState("");
   
-  console.log('EasterEgg.props: ',props);
+  //console.log('EasterEgg.props: ',props);
   
   useEffect(() => {
 

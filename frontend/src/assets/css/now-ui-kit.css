@@ -1881,7 +1881,7 @@ fieldset[disabled]
   filter: alpha(opacity=80); }
 
 .form-control {
-  background-color: transparent;
+  background-color: red;
   border: 1px solid #E3E3E3;
   border-radius: 30px;
   color: #2c2c2c;
