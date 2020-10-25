@@ -1,4 +1,6 @@
 import React, { Component, useState } from 'react';
+import { useHistory } from "react-router";
+
 import { Button, FormGroup, Label, Input, FormText, Col, Row, Container } from 'reactstrap';
 
 import DatePicker from 'react-datepicker';
@@ -54,31 +56,44 @@ class FindRoomsSimple extends Component {
       super(props);
     
       // TODO pasar a redux
+
       this.state = {
         checkin: new Date(),
         checkout: new Date(),
+        guests: 2,
         excludeDates: [],
       }
 
       this.handleCheckIn = this.handleCheckIn.bind(this);
       this.handleCheckOut = this.handleCheckOut.bind(this);
+      this.handleGuests = this.handleGuests.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
     handleCheckIn(checkin) {
-      console.log('handleCheckIn: ', checkin);
-      this.setState={ checkin: checkin};
+      this.setState({ checkin: checkin});
     }
 
     handleCheckOut(checkout) {
-      console.log('handleCheckOut: ', checkout);
-      this.setState={ checkout: checkout};
+      this.setState({ checkout: checkout});
+    }
+
+    handleGuests(guests) {
+      console.log('guests: ',guests.target.value)
+      this.setState({ guests: guests.target.value});
     }
 
     handleSubmit(e){
       //e.preventDefault();
-      console.log('e: ',e,'\ns: ',this.state);
+      console.log('props: ',this.props);
+      console.log('state: ',this.state);
+      console.log('e: ', e);
+      var checkin = this.state.checkin.toJSON().split("T")[0];
+      var checkout = this.state.checkout.toJSON().split("T")[0];
+      var guests = this.state.guests;
+      console.log('checkin: ', checkin, ' checkout: ',checkout, ' guests: ', guests);
+      this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
+      
     }
 
     componentDidMount(){
@@ -117,7 +132,7 @@ class FindRoomsSimple extends Component {
                   <FormGroup className="m-3">
                     <Row><Label for="guests">Guests: </Label></Row>
                     <Row>
-                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="guests" name="guests" type="select" name="select" id="guests">
+                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="guests" name="guests" type="select" name="select" id="guests" onChange={this.handleGuests} defaultValue="2">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>

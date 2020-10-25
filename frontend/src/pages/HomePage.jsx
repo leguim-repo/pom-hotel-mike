@@ -15,7 +15,7 @@ import GuestsOpinions from "./sections/GuestsOpinions";
 import FindRoomsSimple from "components/FindRoomsSimple";
 
 
-function Index() {
+function Index(props) {
   React.useEffect(() => {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -34,7 +34,7 @@ function Index() {
       <div className="wrapper">
         <PomHeader image={require("assets/img/chica_piscina.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
         <div className="main">
-        <FindRoomsSimple></FindRoomsSimple>
+        <FindRoomsSimple {...props} ></FindRoomsSimple>
           <PopularSpaces></PopularSpaces>
           <GuestsOpinions></GuestsOpinions>
         </div>

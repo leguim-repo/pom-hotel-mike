@@ -38,6 +38,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" render={(props) => <Home {...props} />} />
           <Route exact path="/rooms" render={(props) => <Rooms {...props} />} />
+          <Route path="/rooms/:params?" render={(props) => <Rooms {...props} />} />
 
           <Route
             path="/nucleo-icons"

@@ -1,4 +1,5 @@
 {
+    "getAllRooms": "http://pom-hotel.code:8080/api/rooms",
     "postsEndpoint": "https://jsonplaceholder.typicode.com/posts",
     "postEndpoint":"https://jsonplaceholder.typicode.com/posts/",
     "commentsEndpoint": "https://jsonplaceholder.typicode.com/comments?postId="
