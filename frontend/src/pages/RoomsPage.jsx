@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState} from "react";
-
+// https://youtu.be/8632Wo-GFcE
 // reactstrap components
 // import {
 // } from "reactstrap";
@@ -14,11 +14,11 @@ import "./RoomsPage.css"
 
 function Rooms() {
 
-  const [userText, setUserText] = useState('');
+  const [scrollPos, setScrollPos] = useState('');
 
   const handleOnScroll = useCallback(event => {
       console.log("handleOnScroll.event: ",event);
-      setUserText(event.target.documentElement.scrollTop);
+      setScrollPos(event.target.documentElement.scrollTop);
   }, []);
 
 
@@ -64,7 +64,7 @@ function Rooms() {
         {/*pa arriba*/}
         <div className="text-center gototop active">
           <a href="#top">
-            {userText}
+            {scrollPos}
             {/*<i className="now-ui-icons arrows-1_minimal-up flecha"/>*/}
           </a>
         </div>

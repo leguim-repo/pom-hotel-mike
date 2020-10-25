@@ -22,7 +22,7 @@ import javax.swing.*;
 import java.util.List;
 
 //refererence: https://spring.io/guides/tutorials/rest/
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
 @RestController
 public class HomeApiController {
     RoomsService roomsService;

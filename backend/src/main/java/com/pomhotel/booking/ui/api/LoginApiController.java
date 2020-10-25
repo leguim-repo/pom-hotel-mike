@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
 @RestController
 public class LoginApiController {
 

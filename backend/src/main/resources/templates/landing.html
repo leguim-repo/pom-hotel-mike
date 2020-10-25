@@ -12,13 +12,16 @@
     <div class="bgimg">
         <div class="topleft">
           <p><img height="40" src="images/seat-code-logo.svg"></p>
+            <a class="preview-link" th:href="@{'http://pom-hotel.code:8080/mvc/home'}" target="_blank">Go to MVC Project</a><br>
+            <a class="preview-link" th:href="@{'http://pom-hotel.code:3000'}" target="_blank">Go to API Project</a><br>
+            <!--
             <div th:each="ip, stat: ${ipAvailables}" class="row" >
                 <p>With ip: <span th:text="${ip}"></span></p>
                 <a class="preview-link" th:href="@{'http://'+${ip}+':8080/mvc/home'}" target="_blank">Go to MVC Project</a><br>
                 <a class="preview-link" th:href="@{'http://'+${ip}+':3000'}" target="_blank">Go to API Project</a><br>
                 <br>
-
             </div>
+            -->
         </div>
         <div class="middle-left">
 
