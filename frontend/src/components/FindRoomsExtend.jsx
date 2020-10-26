@@ -63,6 +63,7 @@ class FindRoomsExtend extends Component {
         guests: 2,
         pricemin: 1,
         pricemax: 100,
+        roomtype: 0,
         excludeDates: [],
       }
 
@@ -71,7 +72,10 @@ class FindRoomsExtend extends Component {
       this.handleGuests = this.handleGuests.bind(this);
       this.handlePriceMin = this.handlePriceMin.bind(this);
       this.handlePriceMax = this.handlePriceMax.bind(this);
+      this.handleRoomTypes = this.handleRoomTypes.bind(this);
+
       this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     handleCheckIn(checkin) {
@@ -93,6 +97,12 @@ class FindRoomsExtend extends Component {
 
     handlePriceMax(pricemax) {
       this.setState({ pricemax: pricemax.target.value});
+    }
+
+    handleRoomTypes(roomtype) {
+      console.log(roomtype.target.value)
+      this.setState({ roomtype: roomtype.target.value});
+
     }
 
     handleSubmit(){
@@ -177,6 +187,7 @@ class FindRoomsExtend extends Component {
                           </Input>
                         </Row>
                       </Col>
+
                       <Col className="m-2">
                       <Row><Label for="pricemax">Price to: </Label></Row>
                       <Row>
@@ -193,15 +204,21 @@ class FindRoomsExtend extends Component {
                   </FormGroup>
                 </Col>
 
-
-
-
-
-
-
-
-
-
+                <Col className="m-auto">
+                  <FormGroup className="m-3">
+                    <Row><Label for="roomtype">Room Types: </Label></Row>
+                    <Row>
+                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="roomtype" name="roomtype" type="select" onChange={this.handleRoomTypes} defaultValue="0">
+                        <option value="0">All types</option>
+                        <option value="1">Suite room</option>
+                        <option value="2">Individual room</option>
+                        <option value="3">Family room</option>
+                        <option value="4">Luxury room</option>
+                        <option value="5">Double room</option>
+                      </Input>
+                    </Row>
+                  </FormGroup>
+                </Col>
 
 
                 <Col className="m-auto">
