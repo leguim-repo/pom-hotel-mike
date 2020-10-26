@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState} from "react";
 import axios from "axios";
 import api from "../api/apiEndPoints.json";
+import { getRoomById } from "../api/ApiServices"
 import { Container, Row, Col, Button, Form } from "reactstrap";
 
 // core components
@@ -46,7 +47,11 @@ function RenderRoomDetails(list) {
 function Rooms(props) {
 
 
-  
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    console.log('submit: ',roomBookNow);
+}
+
 
   //https://midu.dev/urlsearchparams-como-leer-la-query-string/
   const querystring = useParams().params;
@@ -63,6 +68,7 @@ function Rooms(props) {
   //hooks
   const [rooms,setRooms] = useState('');
   const [scrollPos, setScrollPos] = useState('');
+  const [roomBookNow, setRoomBookNow] = useState('');
   
   const handleOnScroll = useCallback(event => {
       //console.log("handleOnScroll.event: ",event);
@@ -83,13 +89,7 @@ function Rooms(props) {
       console.log("parametro de la habitancio: ",props.match.params.params)
     }
 
-    async function getRoomById(id) {
-      const response = await axios(api.getRoomById+'/'+id);
-      const data = await response.data;
-      console.log('getRoomById.response: ',response)
-      console.log('getRoomById.data: ',data)
-      
-    }
+
 
     async function fetchAllRooms() {
       const response = await axios(api.getAllRooms);
@@ -116,8 +116,8 @@ function Rooms(props) {
                     <p>{room.description}</p>
                     <p>Maximum {room.guests} guests</p>
                     <Row className="justify-content-center">
-                      <Form>
-                        <Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now!</Button>
+                      <Form onSubmit={handleSubmit}>
+                        <Button type="submit" onClick={ () => setRoomBookNow(room)} className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now!</Button>
                       </Form>
                     </Row>
                   </Col>

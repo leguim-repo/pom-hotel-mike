@@ -130,8 +130,7 @@ class FindRoomsExtend extends Component {
               <Col>
                 <Col className="m-auto">
                   <FormGroup className="m-3">
-                    <Row><h3>Book NOW</h3></Row>
-                    <Row><h5>Best Price OnLine</h5></Row>
+                    <Row><h4>Find your Room</h4></Row>
                   </FormGroup>
                 </Col>
 
