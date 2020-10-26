@@ -12,9 +12,9 @@ import './App.css';
 // pages for this kit
 import Home from "pages/HomePage";
 import Rooms from "pages/RoomsPage"
+import LoginPomPage from "pages/LoginPomPage";
 
 import NucleoIcons from "pages/NucleoIcons";
-import LoginPage from "pages/examples/LoginPage";
 import LandingPage from "pages/examples/LandingPage";
 import ProfilePage from "pages/examples/ProfilePage";
 
@@ -53,8 +53,8 @@ ReactDOM.render(
             render={(props) => <ProfilePage {...props} />}
           />
           <Route
-            path="/login-page"
-            render={(props) => <LoginPage {...props} />}
+            path="/login"
+            render={(props) => <LoginPomPage {...props} />}
           />
           <Redirect to="/" />
           <Redirect from="/" to="/" />

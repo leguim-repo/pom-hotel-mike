@@ -3,6 +3,7 @@ package com.pomhotel.booking.ui.auth.jdbc;
 
 import com.pomhotel.booking.ui.securityhandlers.CustomAuthenticationFailureHandler;
 import com.pomhotel.booking.ui.securityhandlers.CustomAuthenticationSuccessHandler;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +15,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.session.SessionManagementFilter;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+import javax.servlet.*;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.util.logging.Filter;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 //--- Configuration Security -------------------------------------------
 @Configuration
@@ -39,6 +50,9 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
     String[] resources = new String[]{
             "/css/**","/fonts/**","/images/**","/js/**","/**","/home/**"
             };
+
+
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -65,7 +79,9 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
+                .addFilterBefore(new CorsFilter(), SessionManagementFilter.class)
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                 //API
@@ -102,8 +118,7 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
         //https://www.baeldung.com/spring-security-cors-preflight
         //https://docs.spring.io/spring-security/site/docs/current/reference/html5/#cors
         //http.cors(withDefaults()); //disable this line to reproduce the CORS 401
-
-
+        //http.cors();
     }
 
     //Cors
@@ -136,5 +151,6 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
 }
+
 
 

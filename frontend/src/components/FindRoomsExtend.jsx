@@ -51,7 +51,7 @@ const CheckOutPicker = (props) => {
   );
 }
 
-class FindRoomsSimple extends Component {
+class FindRoomsExtend extends Component {
     constructor(props) {
       super(props);
     
@@ -61,12 +61,16 @@ class FindRoomsSimple extends Component {
         checkin: new Date(),
         checkout: new Date(),
         guests: 2,
+        pricemin: 1,
+        pricemax: 100,
         excludeDates: [],
       }
 
       this.handleCheckIn = this.handleCheckIn.bind(this);
       this.handleCheckOut = this.handleCheckOut.bind(this);
       this.handleGuests = this.handleGuests.bind(this);
+      this.handlePriceMin = this.handlePriceMin.bind(this);
+      this.handlePriceMax = this.handlePriceMax.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -83,16 +87,23 @@ class FindRoomsSimple extends Component {
       this.setState({ guests: guests.target.value});
     }
 
-    handleSubmit(e){
+    handlePriceMin(pricemin) {
+      this.setState({ pricemin: pricemin.target.value});
+    }
+
+    handlePriceMax(pricemax) {
+      this.setState({ pricemax: pricemax.target.value});
+    }
+
+    handleSubmit(){
       //e.preventDefault();
       console.log('props: ',this.props);
       console.log('state: ',this.state);
-      console.log('e: ', e);
       var checkin = this.state.checkin.toJSON().split("T")[0];
       var checkout = this.state.checkout.toJSON().split("T")[0];
       var guests = this.state.guests;
       console.log('checkin: ', checkin, ' checkout: ',checkout, ' guests: ', guests);
-      this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
+      //this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
       
     }
 
@@ -105,9 +116,8 @@ class FindRoomsSimple extends Component {
       console.log('checkin: ',this.state.checkin, ' checkout: ',this.state.checkout);
       return (
         <React.Fragment>
-          <Container fluid className="formSimple">
-            <Form model='formFindRoomSimple' onSubmit={this.handleSubmit}>
-              <Row>
+            <Form style={{margin: '0px'}} className="formExtend border" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
+              <Col>
                 <Col className="m-auto">
                   <FormGroup className="m-3">
                     <Row><h3>Book NOW</h3></Row>
@@ -141,7 +151,7 @@ class FindRoomsSimple extends Component {
                   <FormGroup className="m-3">
                     <Row><Label for="guests">Guests: </Label></Row>
                     <Row>
-                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="guests" name="guests" type="select" name="select" id="guests" onChange={this.handleGuests} defaultValue="2">
+                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="guests" name="guests" type="select" onChange={this.handleGuests} defaultValue="2">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -151,15 +161,60 @@ class FindRoomsSimple extends Component {
                     </Row>
                   </FormGroup>
                 </Col>
+
+                <Col className="m-auto">
+                  <FormGroup className="m-3">
+                    <Row>
+                      <Col className="m-2">
+                        <Row><Label for="pricemin">Price from: </Label></Row>
+                        <Row>
+                          <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="pricemin" name="pricemin" type="select" onChange={this.handlePriceMin} defaultValue="1">
+                            <option>1</option>
+                            <option>50</option>
+                            <option>100</option>
+                            <option>200</option>
+                            <option>300</option>
+                          </Input>
+                        </Row>
+                      </Col>
+                      <Col className="m-2">
+                      <Row><Label for="pricemax">Price to: </Label></Row>
+                      <Row>
+                        <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="pricemax" name="pricemax" type="select"  onChange={this.handlePriceMax} defaultValue="100">
+                            <option>100</option>
+                            <option>200</option>
+                            <option>300</option>
+                            <option>500</option>
+                            <option>1000</option>
+                        </Input>
+                      </Row>
+                    </Col>
+                    </Row>
+                  </FormGroup>
+                </Col>
+
+
+
+
+
+
+
+
+
+
+
+
                 <Col className="m-auto">
                   <Row className="justify-content-center">Find your room now!!</Row>
-                  <Row className="justify-content-center"><Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Find Rooms</Button></Row>
+                  <Row className="justify-content-center">
+                    <Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Find Rooms</Button>
+                  </Row>
+                  <br></br>
                 </Col>
-              </Row>
+              </Col>
             </Form>
-          </Container>
         </React.Fragment>
 
       )};
 }
-export default FindRoomsSimple;
+export default FindRoomsExtend;

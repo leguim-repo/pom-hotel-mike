@@ -51,8 +51,7 @@ function PomNavbar() {
         <Container>
           <div className="navbar-translate">
             <NavbarBrand
-              href="https://demos.creative-tim.com/now-ui-kit-react/#/index?ref=nukr-index-navbar"
-              target="_blank"
+              href="#"
               id="navbar-brand">
               POM Hotel & SPA
             </NavbarBrand>
@@ -91,7 +90,7 @@ function PomNavbar() {
               </NavItem>
 
               <NavItem>
-                <NavLink href="/"><p>Sign In</p></NavLink>
+                <NavLink href="/login"><p>Sign In</p></NavLink>
               </NavItem>
 
             </Nav>

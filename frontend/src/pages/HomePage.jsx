@@ -14,6 +14,7 @@ import PopularSpaces from "./sections/PopularSpaces";
 import GuestsOpinions from "./sections/GuestsOpinions";
 import FindRoomsSimple from "components/FindRoomsSimple";
 
+import DatePicker from 'react-datepicker';
 
 function Index(props) {
   React.useEffect(() => {
@@ -34,7 +35,7 @@ function Index(props) {
       <div className="wrapper">
         <PomHeader image={require("assets/img/chica_piscina.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
         <div className="main">
-        <FindRoomsSimple {...props} ></FindRoomsSimple>
+          <FindRoomsSimple {...props} ></FindRoomsSimple>
           <PopularSpaces></PopularSpaces>
           <GuestsOpinions></GuestsOpinions>
         </div>

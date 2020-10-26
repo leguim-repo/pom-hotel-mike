@@ -60,7 +60,7 @@ public class HomeApiController {
     }
 
     // Ok Single item...really without use. Only for tests
-    @GetMapping("/api/rooms/{targetId}")
+    @GetMapping("/api/roomdetail/{targetId}")
     RoomsModel findRoomByIdApi(@PathVariable Long targetId) {
         RoomsModel requestedRoom;
         try {
