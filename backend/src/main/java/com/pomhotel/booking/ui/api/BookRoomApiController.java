@@ -75,7 +75,10 @@ public class BookRoomApiController {
             model.checkOut = bookingLogicalService.stringToDate(dto.checkOut);
 
             model.roomsByFKRoomId = roomsService.findById(dto.roomId);
-
+            
+            // TODO que hacemos con la fucking seguridad para hacer un post de reserva
+            // como obtenemos el username si no funciona el login
+            // pido el login y el usuario en el mismo formulario de confirmacion de la reservar y lo busco onfly
             model.clientsByFkClientId = clientsService.findClientByUsername(securityController.currentUsername());
 
             model.totalPrice = bookingLogicalService.calculateTotalPrice(model.checkIn, model.checkOut, model.roomsByFKRoomId.pricePerNight);
