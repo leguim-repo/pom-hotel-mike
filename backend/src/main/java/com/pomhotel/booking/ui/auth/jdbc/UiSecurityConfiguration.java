@@ -17,6 +17,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.security.web.session.SessionManagementFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -81,7 +82,7 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .addFilterBefore(new CorsFilter(), SessionManagementFilter.class)
+                //.addFilterBefore(new CorsFilter(), SessionManagementFilter.class)
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                 //API
@@ -119,6 +120,9 @@ public class UiSecurityConfiguration extends WebSecurityConfigurerAdapter {
         //https://docs.spring.io/spring-security/site/docs/current/reference/html5/#cors
         //http.cors(withDefaults()); //disable this line to reproduce the CORS 401
         //http.cors();
+
+        //last
+        http.headers().addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*"));
     }
 
     //Cors
