@@ -18,6 +18,7 @@ public class RandomMusicURLServiceImplementation implements RandomMusicURLServic
     public String getRandomMusicURL() {
         String[] musicURLS = {
                 "https://youtu.be/mL7Gb6rcAAo", // Himno Oficial del POM Hotel Albano & Romina Power - Felicità Italiano Ragazzi Dance Remix
+                "https://youtu.be/4ollgP4iCm0", //Amelie Lens all night long @ Labyrinth Club 2017 (8 hours session)
                 "https://youtu.be/GJkuTx1DQzg", //Amelie Lens at Atomium in Brussels, Belgium for Cercle
                 "https://youtu.be/Y6A_Czw8TFU", //Amelie Lens lockdown session at home
                 "https://youtu.be/_WCur8LhH8I", //Awakenings Festival 2019 Sunday - Live set Amelie Lens @ Area Y
