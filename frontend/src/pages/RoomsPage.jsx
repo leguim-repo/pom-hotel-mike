@@ -181,11 +181,9 @@ function Rooms(props) {
                 </div>
                 {rooms}
               </div>
-
               <div className="col-3">
                 <FindRoomsExtend></FindRoomsExtend>
               </div>
-
             </div>
           </div>
 

@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.controllers;
+package com.pomhotel.booking.ui.mvc;
 
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;

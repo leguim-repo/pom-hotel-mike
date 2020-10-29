@@ -2,12 +2,7 @@ package com.pomhotel.booking.ui.api;
 
 import com.pomhotel.booking.ui.dto.NewClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,11 +18,7 @@ public class LoginApiController {
     // TODO Endpoint to login
     @GetMapping("/api/signin")
     String apiSignIn(HttpServletRequest request) {
-        //https://rusyasoft.github.io/java/2019/02/15/spring-security-csrf-from-context/
-        //CsrfToken csrfToken = (CsrfToken)request.getAttribute("username",CsrfToken.class.getName());
-        //CsrfToken csrfToken = new HttpSessionCsrfTokenRepository().loadToken(request);
-        //System.out.println("token: "+csrfToken);
-        //System.out.println("request: "+request.toString());
+
         System.out.println(request.toString());
         return "Aqui react tiene que pintar el login";
     }

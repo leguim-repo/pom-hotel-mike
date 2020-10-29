@@ -5,17 +5,14 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.BookingsService;
 import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.controllers.SecurityController;
 import com.pomhotel.booking.ui.dto.NewBookingDTO;
 import com.pomhotel.booking.ui.servicies.BookingLogicalService;
 import com.pomhotel.booking.ui.servicies.BookingLogicalServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 import java.util.Objects;
 
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
@@ -25,17 +22,15 @@ public class BookRoomApiController {
     RoomsService roomsService;
     BookingsService bookingsService;
     ClientLoginService clientsService;
-    SecurityController securityController;
     BookingLogicalService bookingLogicalService;
     RoomsModel roomSelected;
 
     //--- Constructor --------------------------------------------------
     @Autowired
-    public BookRoomApiController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService, SecurityController securityController, BookingLogicalService bookingLogicalService) {
+    public BookRoomApiController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService  , BookingLogicalService bookingLogicalService) {
         this.roomsService = roomsService;
         this.bookingsService = bookingsService;
         this.clientsService = clientsService;
-        this.securityController = securityController;
         this.bookingLogicalService = bookingLogicalService;
     }
 
@@ -79,7 +74,7 @@ public class BookRoomApiController {
             // TODO que hacemos con la fucking seguridad para hacer un post de reserva
             // como obtenemos el username si no funciona el login
             // pido el login y el usuario en el mismo formulario de confirmacion de la reservar y lo busco onfly
-            model.clientsByFkClientId = clientsService.findClientByUsername(securityController.currentUsername());
+            model.clientsByFkClientId = clientsService.findClientByUsername("demos");
 
             model.totalPrice = bookingLogicalService.calculateTotalPrice(model.checkIn, model.checkOut, model.roomsByFKRoomId.pricePerNight);
             System.out.println("bookroomnow.model: "+model.toString());

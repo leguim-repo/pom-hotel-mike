@@ -2,23 +2,13 @@ package com.pomhotel.booking.ui.api;
 
 
 import com.pomhotel.booking.application.models.RoomsModel;
-import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.controllers.SecurityController;
-import com.pomhotel.booking.ui.dto.NewBookingDTO;
-import com.pomhotel.booking.ui.dto.NewClientDTO;
 import com.pomhotel.booking.ui.dto.SearchDTO;
 import com.pomhotel.booking.ui.servicies.RandomMusicURLService;
 import com.pomhotel.booking.ui.servicies.RandomMusicURLServiceImplementation;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.swing.*;
 import java.util.List;
 
 //refererence: https://spring.io/guides/tutorials/rest/
@@ -26,12 +16,10 @@ import java.util.List;
 @RestController
 public class HomeApiController {
     RoomsService roomsService;
-    SecurityController securityController;
 
     @Autowired
-    public HomeApiController(RoomsService roomsService, SecurityController securityController) {
+    public HomeApiController(RoomsService roomsService) {
         this.roomsService = roomsService;
-        this.securityController = securityController;
     }
 
 

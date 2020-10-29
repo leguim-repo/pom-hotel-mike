@@ -1,11 +1,8 @@
-package com.pomhotel.booking.ui.auth.jdbc;
+package com.pomhotel.booking.ui.configuration;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -13,7 +10,7 @@ import org.springframework.web.filter.CorsFilter;
 
 // https://spring.io/blog/2015/06/08/cors-support-in-spring-framework
 @Configuration
-public class MyConfiguration {
+public class ApiCorsConfiguration {
 
     @Bean
     public FilterRegistrationBean corsFilter() {
@@ -23,8 +20,7 @@ public class MyConfiguration {
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
-        config.addExposedHeader("Access-Control-Allow-Origin");
-
+        //config.addExposedHeader("Access-Control-Allow-Origin");
         source.registerCorsConfiguration("/**", config);
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(0);

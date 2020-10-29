@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.controllers;
+package com.pomhotel.booking.ui.mvc;
 
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
@@ -27,17 +27,15 @@ public class BookRoomController {
     RoomsService roomsService;
     BookingsService bookingsService;
     ClientLoginService clientsService;
-    SecurityController securityController;
     BookingLogicalService bookingLogicalService;
     RoomsModel roomSelected;
 
     //--- Constructor --------------------------------------------------
     @Autowired
-    public BookRoomController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService, SecurityController securityController, BookingLogicalService bookingLogicalService) {
+    public BookRoomController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService, BookingLogicalService bookingLogicalService) {
         this.roomsService = roomsService;
         this.bookingsService = bookingsService;
         this.clientsService = clientsService;
-        this.securityController = securityController;
         this.bookingLogicalService = bookingLogicalService;
     }
 
@@ -70,7 +68,7 @@ public class BookRoomController {
             model.checkOut = bookingLogicalService.stringToDate(dto.checkOut);
 
             model.roomsByFKRoomId = roomSelected; //no se como pasar bien los datos que no se editan... a ser felices así
-            model.clientsByFkClientId = clientsService.findClientByUsername(securityController.currentUsername()); //esto es una porqueria: ineficiente e inadecuado... aunque sea funcional -.-
+            model.clientsByFkClientId = clientsService.findClientByUsername("demo"); //esto es una porqueria: ineficiente e inadecuado... aunque sea funcional -.-
             model.totalPrice = bookingLogicalService.calculateTotalPrice(model.checkIn, model.checkOut, roomSelected.pricePerNight);
             bookingsService.saveOrUpdate(model);
 

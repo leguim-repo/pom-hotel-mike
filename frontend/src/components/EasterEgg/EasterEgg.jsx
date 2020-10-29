@@ -1,7 +1,22 @@
 import React, { useState, useEffect} from "react";
 
+import Loader from '../Loader/Loader';
+
 // https://youtu.be/mL7Gb6rcAAo
 
+
+const RenderLoader = () => {
+  return(
+      <div className="col-12 col-md6 col-lg-4">
+      <h4 className="text-center">Play Music</h4>
+      <p className="text-center">Listen the best dance sessions</p>
+      <p className="text-center">
+        <Loader></Loader>
+      </p>
+      <p className="text-center">Click on the icon and enjoy</p>
+      </div>
+    );
+}
 const RenderEasterEgg = (props) => {
   //console.log('RenderEasterEgg.props: ',props);
   return(
@@ -52,7 +67,7 @@ const EasterEgg = (props) => {
   
   return(
     <React.Fragment>
-      { loading ? <div>Loading...</div> : hasError ? <div>Error loading song...</div> : <RenderEasterEgg link={link} data={data}/>}
+      { loading ? <RenderLoader></RenderLoader> : hasError ? <RenderLoader></RenderLoader> : <RenderEasterEgg link={link} data={data}/>}
     </React.Fragment>
   );
   

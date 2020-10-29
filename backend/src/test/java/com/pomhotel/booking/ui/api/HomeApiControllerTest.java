@@ -2,12 +2,8 @@ package com.pomhotel.booking.ui.api;
 
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.*;
-import com.pomhotel.booking.ui.controllers.SecurityController;
-import com.pomhotel.booking.ui.servicies.BookingLogicalService;
-import com.pomhotel.booking.ui.servicies.BookingLogicalServiceImplementation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,10 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -38,7 +32,7 @@ class HomeApiControllerTest {
         fakeRoomsModel.setPricePerNight(200.00);
         var mockRoomsService = Mockito.mock(RoomsService.class);
         Mockito.when(mockRoomsService.findById(1)).thenReturn(fakeRoomsModel);
-        HomeApiController testHomeApiController = new HomeApiController(mockRoomsService,Mockito.mock(SecurityController.class));
+        HomeApiController testHomeApiController = new HomeApiController(mockRoomsService);
         assertEquals(testHomeApiController.findRoomByIdApi((long) 1), fakeRoomsModel);
 
     }

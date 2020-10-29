@@ -1,13 +1,11 @@
-package com.pomhotel.booking.ui.controllers;
+package com.pomhotel.booking.ui.mvc;
 
 import com.pomhotel.booking.application.models.ClientsModel;
 import com.pomhotel.booking.application.models.LoginsModel;
 import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.ui.dto.NewClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -42,6 +40,7 @@ public class LoginController {
         return "signin";
     }
 
+    /*
     @GetMapping(value="/mvc/logout")
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -52,6 +51,9 @@ public class LoginController {
 
         return "redirect:/mvc/signin?logout";
     }
+    */
+
+
 
     //--- Register New Client Mapping --------------------------------------
     @PostMapping("/mvc/registernewclient")
