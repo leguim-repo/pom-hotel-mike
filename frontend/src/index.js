@@ -10,8 +10,8 @@ import "assets/demo/nucleo-icons-page-styles.css?v=1.4.0";
 import './App.css';
 
 // pages for this kit
-import Home from "pages/HomePage";
-import Rooms from "pages/RoomsPage"
+import HomePage from "pages/HomePage";
+import RoomsPage from "pages/RoomsPage"
 import LoginPomPage from "pages/LoginPomPage";
 
 import NucleoIcons from "pages/NucleoIcons";
@@ -36,9 +36,9 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Switch>
-          <Route exact path="/" render={(props) => <Home {...props} />} />
-          <Route exact path="/rooms" render={(props) => <Rooms {...props} />} />
-          <Route path="/rooms/:params?" render={(props) => <Rooms {...props} />} />
+          <Route exact path="/" render={(props) => <HomePage {...props} />} />
+          <Route exact path="/rooms" render={(props) => <RoomsPage {...props} />} />
+          <Route path="/rooms/:params?" render={(props) => <RoomsPage {...props} />} />
 
           <Route
             path="/nucleo-icons"

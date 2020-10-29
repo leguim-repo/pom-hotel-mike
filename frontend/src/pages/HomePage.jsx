@@ -16,7 +16,7 @@ import FindRoomsSimple from "components/FindRoomsSimple";
 
 import DatePicker from 'react-datepicker';
 
-function Index(props) {
+function HomePage(props) {
   React.useEffect(() => {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -45,4 +45,4 @@ function Index(props) {
   );
 }
 
-export default Index;
+export default HomePage;
