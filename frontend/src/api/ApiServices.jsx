@@ -13,3 +13,11 @@ export async function getRoomById(id) {
     console.log('getRoomById.data: ',data)
     
   }
+
+
+export async function getAllRooms() {
+    const response = await axios(apiGetAllRooms);
+    const data = await response.data;
+    console.log('getAllRooms: ',data);
+    return data;
+  }
