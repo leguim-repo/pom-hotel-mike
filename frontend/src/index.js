@@ -9,12 +9,13 @@ import "assets/demo/demo.css?v=1.4.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.4.0";
 import './App.css';
 
-// pages for this kit
+// pages for this project
 import HomePage from "pages/HomePage";
 import RoomsPage from "pages/RoomsPage"
+import BookNowPage from "pages/BookNowPage";
 import LoginPomPage from "pages/LoginPomPage";
 
-import NucleoIcons from "pages/NucleoIcons";
+import NucleoIcons from "pages/examples/NucleoIcons";
 import LandingPage from "pages/examples/LandingPage";
 import ProfilePage from "pages/examples/ProfilePage";
 
@@ -39,7 +40,7 @@ ReactDOM.render(
           <Route exact path="/" render={(props) => <HomePage {...props} />} />
           <Route exact path="/rooms" render={(props) => <RoomsPage {...props} />} />
           <Route path="/rooms/:params?" render={(props) => <RoomsPage {...props} />} />
-
+          <Route exact path="/booknow" render={(props) => <BookNowPage {...props} />} />
           <Route
             path="/nucleo-icons"
             render={(props) => <NucleoIcons {...props} />}
