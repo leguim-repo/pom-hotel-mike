@@ -6,9 +6,10 @@ function RoomDetails(props) {
   const rooms = props.rooms.map( (room)=>
                     <Container key={room.id}>
                       <Row className="border border-danger mb-5">
-                        <Col>
+                        <Col className="border border-success">
                           <img src={require("assets/img/"+room.image)}></img>
                         </Col>
+
                         <Col>
                           <Row><Col><h5>{room.roomtypesByFkRoomtypeId.name}</h5></Col><Col className="text-right">{room.code}</Col></Row>
                           <p>{room.pricePerNight}€/night</p>
