@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import { useHistory } from "react-router";
 
 import { Button, FormGroup, Label, Input, FormText, Col, Row, Container } from 'reactstrap';
 

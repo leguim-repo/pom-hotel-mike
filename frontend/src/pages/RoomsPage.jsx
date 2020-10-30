@@ -32,7 +32,8 @@ class RoomsPage extends React.Component {
 
   handleBookNow(event) {
     event.preventDefault();
-    console.log('handleBookNow:', event.target.roomid.value)
+    console.log('handleBookNow:', event.target.roomid.value);
+    this.props.history.push('/booknow?room='+event.target.roomid.value);
   }
 
   render() {

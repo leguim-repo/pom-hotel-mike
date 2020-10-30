@@ -2,7 +2,8 @@ import React from "react";
 import { Container, Row, Col, Button, Form, Input } from "reactstrap";
 
 function RoomDetails(props) {
-
+  console.log('RoomDetails.props: ' ,props);
+  console.log('props.rooms: ',typeof(props.rooms));
   const rooms = props.rooms.map( (room)=>
                     <Container key={room.id}>
                       <Row className="border border-danger mb-5">
