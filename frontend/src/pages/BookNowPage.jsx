@@ -2,20 +2,7 @@ import React from "react";
 import axios from "axios";
 
 // reactstrap components
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Col,
-} from "reactstrap";
+import { Button, Card, CardHeader, CardBody, CardFooter, Form, Input, Row, FormGroup, InputGroupAddon, InputGroupText, InputGroup, Container, Col, Label} from "reactstrap";
 
 // core components
 import PomNavbar from "components/Navbars/PomNavbar";
@@ -23,10 +10,10 @@ import PomNavbar from "components/Navbars/PomNavbar";
 
 
 function BookNowPage() {
-  const [firstFocus, setFirstFocus] = React.useState(false);
-  const [lastFocus, setLastFocus] = React.useState(false);
+
+
   React.useEffect(() => {
-    document.body.classList.add("login-page");
+    //document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
     window.scrollTo(0, 0);
@@ -35,7 +22,7 @@ function BookNowPage() {
 
 
     return function cleanup() {
-      document.body.classList.remove("login-page");
+      //document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
@@ -44,41 +31,37 @@ function BookNowPage() {
   return (
     <>
       <PomNavbar />
-      <div className="page-header clear-filter" filter-color="blue">
+      <div className="page-header clear-filter" filter-color="">
         <div
           className="page-header-image"
           style={{
             backgroundImage: "url(" + require("assets/img/high-performance.jpg") + ")",
           }}
         ></div>
+
         <div className="content">
-        <Container>
-            <Col className="ml-auto mr-auto" md="4">
-              <Card className="card-login card-plain border border-success">
-                <Form action="" className="form" method="">
-                  <CardHeader className="text-center">
-                    <h1>Confirm your booking</h1>
-                  </CardHeader>
-                  <CardBody>
+          <Container className="border border-danger" >
 
-                  </CardBody>
-                  <CardFooter className="text-center">
-                    <Button
-                      block
-                      className="btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => {e.preventDefault()}}
-                      size="lg"
-                    >
-                      Confirm Book
-                    </Button>
+            <Form style={{color:'black',backgroundColor: '#f1f1f1', opacity:'0.95'}}>
 
-                  </CardFooter>
-                </Form>
-              </Card>
-            </Col>
+              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                <Label for="username" className="mr-sm-2">Username</Label><br/>
+                <Input type="username" name="text" id="username" placeholder="something@idk.cool" />
+              </FormGroup>
+              
+              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                <Label for="examplePassword" className="mr-sm-2">Password</Label>
+                <Input type="password" name="password" id="examplePassword" placeholder="don't tell!" />
+              </FormGroup>
+              
+
+
+              <Button>Submit</Button>
+
+            </Form>
+
           </Container>
+
         </div>
 
       </div>

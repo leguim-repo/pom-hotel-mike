@@ -43,8 +43,8 @@ class RoomsPage extends React.Component {
       <div id="top" className="wrapper">
         <PomHeader image={require("assets/img/revato-10251-13112723-111323.jpg")} sloganBig="Find your rest" sloganLittle="in the paradise"/>
         <div className="main">
-          <div className="container-fluid ">
-            <div className="row " style={{margin: '50px'}}>
+          <div className="container-fluid">
+            <div className="row" style={{margin: '100px'}}>
               <div className="col-9">
                 <div className="title divRoomTitle">
                   <h2 style={{margin: '0px'}}>Our Rooms</h2>
@@ -60,7 +60,7 @@ class RoomsPage extends React.Component {
         </div>
         <PomFooter />
       </div>
-    </React.Fragment>
+      </React.Fragment>
     );
   }
 }
