@@ -4,7 +4,7 @@ import PomNavbar from "../components/Navbars/PomNavbar";
 import PomHeader from "../components/Headers/PomHeader";
 import PomFooter from "../components/Footers/PomFooter";
 import FindRoomsExtend from "../components/FindRoomsExtend";
-import RoomDetails from "../components/RoomDetails";
+import RoomDetails, {RoomDetailsOLD} from "../components/RoomDetails";
 import GotoTop from "../components/GotoTop";
 import { getAllRooms } from "../api/ApiServices"
 import "./RoomsPage.css"
@@ -37,7 +37,10 @@ class RoomsPage extends React.Component {
   }
 
   render() {
-    
+    const RenderRooms = this.state.rooms.map( (e) => 
+                            <RoomDetails room={e} handelBookNow={this.handleBookNow}></RoomDetails>
+                        );
+
     return (
       <React.Fragment>
       <PomNavbar />
@@ -50,7 +53,8 @@ class RoomsPage extends React.Component {
                 <div className="title divRoomTitle">
                   <h2 style={{margin: '0px'}}>Our Rooms</h2>
                 </div>
-                <RoomDetails rooms={this.state.rooms} handelBookNow={this.handleBookNow}></RoomDetails>
+                {RenderRooms}
+                {/*<RoomDetailsOLD rooms={this.state.rooms} handelBookNow={this.handleBookNow}></RoomDetailsOLD>*/}
               </div>
               <div className="col-3">
                 <FindRoomsExtend></FindRoomsExtend>
