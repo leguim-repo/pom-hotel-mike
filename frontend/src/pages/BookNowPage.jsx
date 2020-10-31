@@ -1,8 +1,6 @@
-import React, { useState }from "react";
-import { useLocation } from "react-router-dom";
-// reactstrap components
-// import {
-// } from "reactstrap";
+import React from "react";
+import { Container, Row, Col, Button, Form, Input } from "reactstrap";
+
 
 // core components
 import PomNavbar from "components/Navbars/PomNavbar";
@@ -13,15 +11,16 @@ import RoomDetails from "components/RoomDetails";
 import { getRoomById } from "../api/ApiServices"
 
 import DatePicker from 'react-datepicker';
+import FindRoomsExtend from "components/FindRoomsExtend";
 
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
 function BookNowPage(props) {
-  const [room, setRoom] = useState([]);
+  const { room } = props.location.state
+  console.log('BookNowPage.props: ',props, ' id:',props.match.params.room)
+  console.log('room: ',room);
 
-  let query = useQuery();
+
+
 
   React.useEffect(() => {
     document.body.classList.add("index-page");
@@ -29,30 +28,31 @@ function BookNowPage(props) {
     document.documentElement.classList.remove("nav-open");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-
-
-    console.log('BookNowPage.props: ',props)
-    const roomId = query.get("room");
-    const targetRoom = async() => await getRoomById(roomId);
     
-    console.log('targetRoom: ',roomId, ' ', targetRoom,' ', typeof(targetRoom))
-    setRoom(targetRoom);
-    
-
     return function cleanup() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
+  
 
-  console.log('room: ',room);
   return (
     <React.Fragment>
       <PomNavbar />
       <div className="wrapper">
         <PomHeader image={require("assets/img/high-performance.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
         <div className="main">
-          <p>booknow here</p>
+          <h4 className="text-center">Book Now</h4>
+          <Container  className="mb-5">
+            <Row>
+            <Col md={8} className="border border-dark ">
+              <RoomDetails room={room}></RoomDetails>
+            </Col>
+            <Col md={4}>
+            <FindRoomsExtend></FindRoomsExtend>
+            </Col>
+            </Row>
+          </Container>
         </div>
         <PomFooter />
       </div>

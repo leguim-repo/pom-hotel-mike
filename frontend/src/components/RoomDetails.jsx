@@ -3,15 +3,12 @@ import { Container, Row, Col, Button, Form, Input } from "reactstrap";
 import { Link } from 'react-router-dom';
 
 function RoomDetails(props) {
-  console.log('RoomDetailsOLD.props: ' ,props);
-  console.log('props.rooms: ',typeof(props.rooms));
-  
+  console.log('RoomDetails.props: ' ,props);
+
   return(
     <React.Fragment>
-      <p>refacatorizacion en curso</p>
-      <Container key={props.room.id}>
-        <Row className="border border-danger mb-5">
-          <Col className="border border-success">
+        <Row className="">
+          <Col className="">
             <img src={require("assets/img/"+props.room.image)}></img>
           </Col>
 
@@ -20,27 +17,37 @@ function RoomDetails(props) {
             <p>{props.room.pricePerNight}€/night</p>
             <p>{props.room.description}</p>
             <p>Maximum {props.room.guests} guests</p>
-            <Row className="justify-content-center">
-              <Form  id={props.room.id} onSubmit={props.handelBookNow}>
-                <Input readOnly  type="hidden" name="roomid" value={props.room.id}></Input>
-                <Button type="submit" id={props.room.id} name={props.room.id} className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now!</Button>
-                <Link to={`/booknow/${props.room.id}`}>
-                  <button type="button">
-                    Click Me!
-                  </button>                    
-                </Link>
 
-              </Form>
-            </Row>
           </Col>
         </Row>
-      </Container>
     </React.Fragment>
 
 
   );
 
 }
+
+/*
+
+              <Form  id={props.room.id} onSubmit={props.handleBookNow}>
+                <Input readOnly  type="hidden" name="roomid" value={props.room.id}></Input>
+                {ButtonBookNow}
+
+                <Button type="submit" id={props.room.id} name={props.room.id} className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now!</Button>
+
+                <Link to= {{
+                  pathname: '/booknow',
+                  state: {
+                    room: props.room
+                    }
+                }}><button type="button">Por paramaetros</button></Link>
+
+              </Form>
+
+*/
+
+
+
 
 export function RoomDetailsOLD(props) {
   console.log('RoomDetailsOLD.props: ' ,props);

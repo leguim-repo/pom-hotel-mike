@@ -41,7 +41,7 @@ ReactDOM.render(
           <Route exact path="/" render={(props) => <HomePage {...props} />} />
           <Route exact path="/rooms" render={(props) => <RoomsPage {...props} />} />
           <Route path="/rooms/:room?" render={(props) => <RoomsPage {...props} />} />
-          <Route path="/booknow/:room?" render={(props) => <BookNowPage {...props} />} />
+          <Route exact path="/booknow" render={(props) => <BookNowPage {...props} />} />
           <Route path="/booknowold/:room?" render={(props) => <BookNowPageOLD {...props} />} />
           <Route
             path="/nucleo-icons"

@@ -4,10 +4,12 @@ import PomNavbar from "../components/Navbars/PomNavbar";
 import PomHeader from "../components/Headers/PomHeader";
 import PomFooter from "../components/Footers/PomFooter";
 import FindRoomsExtend from "../components/FindRoomsExtend";
-import RoomDetails, {RoomDetailsOLD} from "../components/RoomDetails";
+import RoomDetails from "../components/RoomDetails";
 import GotoTop from "../components/GotoTop";
 import { getAllRooms } from "../api/ApiServices"
 import "./RoomsPage.css"
+import { Container, Row, Col, Button, Form, Input } from "reactstrap";
+import { Link } from 'react-router-dom';
 
 
 
@@ -37,9 +39,22 @@ class RoomsPage extends React.Component {
   }
 
   render() {
-    const RenderRooms = this.state.rooms.map( (e) => 
-                            <RoomDetails room={e} handelBookNow={this.handleBookNow}></RoomDetails>
-                        );
+    const RenderRooms = this.state.rooms.map( (e) => (
+                            <Container className="border border-dark mb-5">
+                              <RoomDetails key={e.id} room={e}></RoomDetails>
+                              <Row className="mb-2">
+                                <Col></Col>
+                                <Col className="text-center">
+                                <Link to= {{
+                                  pathname: '/booknow',
+                                  state: {
+                                    room: e
+                                  }
+                                }}><button type="button">Book Now</button></Link>
+                                  </Col>
+                              </Row>
+                            </Container>
+    ));
 
     return (
       <React.Fragment>
@@ -53,7 +68,9 @@ class RoomsPage extends React.Component {
                 <div className="title divRoomTitle">
                   <h2 style={{margin: '0px'}}>Our Rooms</h2>
                 </div>
-                {RenderRooms}
+                <Container>
+                  {RenderRooms}
+                </Container>
                 {/*<RoomDetailsOLD rooms={this.state.rooms} handelBookNow={this.handleBookNow}></RoomDetailsOLD>*/}
               </div>
               <div className="col-3">
