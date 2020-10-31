@@ -13,6 +13,7 @@ import './App.css';
 import HomePage from "pages/HomePage";
 import RoomsPage from "pages/RoomsPage"
 import BookNowPage from "pages/BookNowPage";
+import BookNowPageOLD from "pages/BookNowPageOLD";
 import LoginPomPage from "pages/LoginPomPage";
 
 import NucleoIcons from "pages/examples/NucleoIcons";
@@ -39,8 +40,9 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" render={(props) => <HomePage {...props} />} />
           <Route exact path="/rooms" render={(props) => <RoomsPage {...props} />} />
-          <Route path="/rooms/:params?" render={(props) => <RoomsPage {...props} />} />
-          <Route exact path="/booknow" render={(props) => <BookNowPage {...props} />} />
+          <Route path="/rooms/:room?" render={(props) => <RoomsPage {...props} />} />
+          <Route path="/booknow/:room?" render={(props) => <BookNowPage {...props} />} />
+          <Route path="/booknowold/:room?" render={(props) => <BookNowPageOLD {...props} />} />
           <Route
             path="/nucleo-icons"
             render={(props) => <NucleoIcons {...props} />}
@@ -57,6 +59,7 @@ ReactDOM.render(
             path="/login"
             render={(props) => <LoginPomPage {...props} />}
           />
+          {/** redirect for 404 */}
           <Redirect to="/" />
           <Redirect from="/" to="/" />
         </Switch>
