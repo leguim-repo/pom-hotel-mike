@@ -1,6 +1,10 @@
 import React from "react";
 import { Container, Row, Col, Button, Form, Input } from "reactstrap";
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBath, faTv, faWifi, faSmokingBan } from '@fortawesome/free-solid-svg-icons'
+
+// https://fontawesome.com/icons?d=gallery&m=free
 
 function RoomDetails(props) {
   console.log('RoomDetails.props: ' ,props);
@@ -18,10 +22,11 @@ function RoomDetails(props) {
             <p>{props.room.description}</p>
             <ul>
               <li>Maximum {props.room.guests} guests</li>
-              <li>TV</li>
-              <li>Wifi</li>
+              <li><FontAwesomeIcon icon={faBath} /> Complete</li>
+              <li><FontAwesomeIcon icon={faTv} /> Flat Screen (Satellite & Terrestrial)</li>
+              <li><FontAwesomeIcon icon={faWifi} /> Free WiFi</li>
+              <li><FontAwesomeIcon icon={faSmokingBan} /> No Smoking</li>
             </ul>
-
           </Col>
         </Row>
     </React.Fragment>

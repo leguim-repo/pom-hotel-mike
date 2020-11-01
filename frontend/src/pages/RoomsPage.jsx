@@ -40,7 +40,7 @@ class RoomsPage extends React.Component {
 
   render() {
     const RenderRooms = this.state.rooms.map( (e) => (
-                            <Container className="border border-dark mb-5">
+                            <Container key={e.id} className="border border-dark mb-5">
                               <RoomDetails key={e.id} room={e}></RoomDetails>
                               <Row className="mb-2">
                                 <Col></Col>

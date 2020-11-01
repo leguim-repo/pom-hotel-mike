@@ -11,7 +11,7 @@ import RoomDetails from "components/RoomDetails";
 import { getRoomById } from "../api/ApiServices"
 
 import DatePicker from 'react-datepicker';
-import FindRoomsExtend from "components/FindRoomsExtend";
+import BookingServices from "components/BookingServices";
 
 
 function BookNowPage(props) {
@@ -45,11 +45,13 @@ function BookNowPage(props) {
           <h2 className="text-center H2Title">Book Now</h2>
           <Container  className="mb-5">
             <Row>
-            <Col md={8} className="border border-dark ">
-              <RoomDetails room={room}></RoomDetails>
+            <Col md={8}>
+              <Container className="border border-dark">
+                <RoomDetails room={room}></RoomDetails>
+              </Container>
             </Col>
             <Col md={4}>
-            <FindRoomsExtend></FindRoomsExtend>
+            <BookingServices room={room}></BookingServices>
             </Col>
             </Row>
           </Container>

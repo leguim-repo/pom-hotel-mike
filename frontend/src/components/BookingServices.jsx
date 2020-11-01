@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import { useHistory } from "react-router";
 
 import { Button, FormGroup, Label, Input, FormText, Col, Row, Container } from 'reactstrap';
 
@@ -7,7 +6,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale,  } from  "react-datepicker";
 import es from 'date-fns/locale/es';
-import {parseISO} from 'date-fns';
+import {intervalToDuration, parseISO} from 'date-fns';
 
 import { Control, Form, Errors } from 'react-redux-form';
 
@@ -22,6 +21,7 @@ const CheckInPicker = (props) => {
   return (
     <DatePicker
         //inline
+        readOnly
         locale="es"
         minDate={new Date()}
         dateFormat="dd/MM/yyyy"
@@ -41,6 +41,7 @@ const CheckOutPicker = (props) => {
   return (
     <DatePicker 
         //inline
+        readOnly
         locale="es"
         minDate={new Date()}
         dateFormat="dd/MM/yyyy"
@@ -51,12 +52,10 @@ const CheckOutPicker = (props) => {
   );
 }
 
-class FindRoomsExtend extends Component {
+class BookingServices extends Component {
     constructor(props) {
       super(props);
     
-      // TODO pasar a redux
-
       this.state = {
         checkin: new Date(),
         checkout: new Date(),
@@ -65,7 +64,9 @@ class FindRoomsExtend extends Component {
         pricemax: 100,
         roomtype: 0,
         excludeDates: [],
+        nights: 3,
       }
+      console.log('BookingServices.props: ',props);
 
       this.handleCheckIn = this.handleCheckIn.bind(this);
       this.handleCheckOut = this.handleCheckOut.bind(this);
@@ -128,15 +129,15 @@ class FindRoomsExtend extends Component {
         <React.Fragment>
             <Form style={{margin: '0px'}} className="formExtend border" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
               <Col>
-              <FormGroup className=" border border-success">
+              <FormGroup className="">
                     <Col className="m-auto">
-                      <Row><h3 className="mb-0">Find your room</h3></Row>
+                      <Row><h3 className="mb-0">Book Room & Services</h3></Row>
                     </Col>
                   </FormGroup>
 
                 <Col className="m-auto">
                   <FormGroup className="m-3">
-                    <Row><Label for="checkin">Checkin: </Label><br></br></Row>
+                    <Row><Label htmlFor="checkin">Checkin: </Label><br></br></Row>
                     <Row style={{fontSize: '1.1em'}}>
                       <CheckInPicker 
                             name="checkin" 
@@ -151,14 +152,14 @@ class FindRoomsExtend extends Component {
                 
                 <Col className="m-auto">
                   <FormGroup className="m-3">
-                    <Row><Label for="checkout">Checkin: </Label><br></br></Row>
+                    <Row><Label htmlFor="checkout">Checkin: </Label><br></br></Row>
                     <Row style={{fontSize: '1.1em'}}><CheckOutPicker id="checkout" date={this.state.checkout} handle={this.handleCheckOut}></CheckOutPicker></Row>
                   </FormGroup>
                 </Col>
 
                 <Col className="m-auto">
                   <FormGroup className="m-3">
-                    <Row><Label for="guests">Guests: </Label></Row>
+                    <Row><Label htmlFor="guests">Guests: </Label></Row>
                     <Row>
                       <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="guests" name="guests" type="select" onChange={this.handleGuests} defaultValue="2">
                         <option>1</option>
@@ -171,59 +172,55 @@ class FindRoomsExtend extends Component {
                   </FormGroup>
                 </Col>
 
+                
                 <Col className="m-auto">
+                <h6>Additional Services</h6>
+                  <FormGroup className="m-3">
+                    <input type="checkbox" className="form-check-input" id="breakfast"/>
+                    <label className="form-check-label" htmlFor="breakfast">Breakfast service at room</label>
+                  </FormGroup>
+
+                  <FormGroup className="m-3">
+                    <input type="checkbox" className="form-check-input" id="parking"/>
+                    <label className="form-check-label" htmlFor="parking">Car Parking</label>
+                  </FormGroup>
+
+                  <FormGroup className="m-3">
+                    <input type="checkbox" className="form-check-input" id="spa"/>
+                    <label className="form-check-label" htmlFor="spa">SPA Service</label>
+                  </FormGroup>
+
+                  <FormGroup className="m-3">
+                    <input type="checkbox" className="form-check-input" id="laundry"/>
+                    <label className="form-check-label" htmlFor="laundry">Laundry Service</label>
+                  </FormGroup>
+
+                  <FormGroup className="m-3">
+                    <input type="checkbox" className="form-check-input" id="shuttle"/>
+                    <label className="form-check-label" htmlFor="shuttle">Shuttle to Airport</label>
+                  </FormGroup>
+
                   <FormGroup className="m-3">
                     <Row>
-                      <Col className="m-2">
-                        <Row><Label for="pricemin">Price from: </Label></Row>
-                        <Row>
-                          <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="pricemin" name="pricemin" type="select" onChange={this.handlePriceMin} defaultValue="1">
-                            <option>1</option>
-                            <option>50</option>
-                            <option>100</option>
-                            <option>200</option>
-                            <option>300</option>
-                          </Input>
-                        </Row>
-                      </Col>
-
-                      <Col className="m-2">
-                      <Row><Label for="pricemax">Price to: </Label></Row>
-                      <Row>
-                        <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="pricemax" name="pricemax" type="select"  onChange={this.handlePriceMax} defaultValue="100">
-                            <option>100</option>
-                            <option>200</option>
-                            <option>300</option>
-                            <option>500</option>
-                            <option>1000</option>
-                        </Input>
-                      </Row>
-                    </Col>
+                      <label className="form-check-label" htmlFor="codediscount">Code Discount</label><br/>
                     </Row>
-                  </FormGroup>
-                </Col>
-
-                <Col className="m-auto">
-                  <FormGroup className="m-3">
-                    <Row><Label for="roomtype">Room Types: </Label></Row>
                     <Row>
-                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="roomtype" name="roomtype" type="select" onChange={this.handleRoomTypes} defaultValue="0">
-                        <option value="0">All types</option>
-                        <option value="1">Suite room</option>
-                        <option value="2">Individual room</option>
-                        <option value="3">Family room</option>
-                        <option value="4">Luxury room</option>
-                        <option value="5">Double room</option>
-                      </Input>
+                      <input type="text" className="form-text-input" id="codediscount"/>
                     </Row>
                   </FormGroup>
+
                 </Col>
 
+                <hr className="border border-light"/>
+                <Row className="border border-success">
+                  <Col><span>{this.props.room.pricePerNight}€ x {this.state.nights} nights</span></Col>
+                  <Col md={3}><span className="pull-left">precio€</span></Col>
+                </Row>
+                <p>Total</p>
 
                 <Col className="m-auto">
-                  <Row className="justify-content-center">Find your room now!!</Row>
                   <Row className="justify-content-center">
-                    <Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Find Rooms</Button>
+                    <Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now</Button>
                   </Row>
                   <br></br>
                 </Col>
@@ -233,4 +230,4 @@ class FindRoomsExtend extends Component {
 
       )};
 }
-export default FindRoomsExtend;
+export default BookingServices;
