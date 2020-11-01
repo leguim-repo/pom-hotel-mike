@@ -5,7 +5,7 @@ const apiBaseURL = "http://pom-hotel.code:8080/api"
 const apiGetAllRooms = apiBaseURL+"/rooms";
 const apiGetRoomById = apiBaseURL+"/roomdetail";
 const apiCalculateBook = apiBaseURL+"/calculatebook";
-const apiGetMusicLink = apiBaseURL+"/music";
+export const apiGetMusicLink = apiBaseURL+"/music";
 
 
 
@@ -33,10 +33,3 @@ export async function calculateBook(book) {
   return data;
 }
 
-export async function getMusicLink() {    
-    const response = await axios(apiGetMusicLink);
-    const data = await response.data;
-    const link = await data.link;
-    console.log('getMusicLink: ',data.link);
-    return link;
-}

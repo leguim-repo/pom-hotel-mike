@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react";
-import { getMusicLink } from "api/ApiServices";
+import { apiGetMusicLink } from "api/ApiServices";
 import Loader from '../Loader/Loader';
+import axios from "axios";
 
 
 
@@ -42,8 +43,19 @@ const EasterEgg = (props) => {
 
   //console.log('EasterEgg.props: ',props);
   
-  useEffect( async () => {
-    const songLink = await getMusicLink();
+  useEffect(() => {
+
+    // React me obliga a poner aqui la funcion de obtener datos
+    // https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
+    async function getMusicLink() {    
+      const response = await axios(apiGetMusicLink);
+      const data = await response.data;
+      const link = await data.link;
+      console.log('getMusicLink: ',data.link);
+      return link;
+  }
+
+    const songLink = getMusicLink();
     setLink(songLink);
     setLoading(false);
     console.log('link: ',link);
