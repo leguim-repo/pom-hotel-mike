@@ -1,6 +1,5 @@
 import React, { Component, useState } from 'react';
-
-import { Button, FormGroup, Label, Input, FormText, Col, Row, Container } from 'reactstrap';
+import { Button, FormGroup, Label, Input, FormText, Col, Row, Container,Form } from 'reactstrap';
 
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,7 +7,6 @@ import { registerLocale,  } from  "react-datepicker";
 import es from 'date-fns/locale/es';
 import { parseISO} from 'date-fns';
 
-import { Control, Form, Errors } from 'react-redux-form';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
@@ -83,13 +81,47 @@ function CarParkingService(props) {
     <Row className="" style={props.style}>
     <Col><span>Car Parking</span></Col>
     <Col md={3}><span className="pull-left">{props.price} €</span></Col>
-  </Row>
+    </Row>
   );
 }
 
 function SpaService(props) {
-  return();
+  return(
+    <Row className="" style={props.style}>
+    <Col><span>SPA Facilities</span></Col>
+    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    </Row>
+  );
 }
+
+function LaundryService(props) {
+  return(
+    <Row className="" style={props.style}>
+    <Col><span>Laundry Service</span></Col>
+    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    </Row>
+  );
+}
+
+function ShuttleService(props) {
+  return(
+    <Row className="" style={props.style}>
+    <Col><span>Shuttle to Airport</span></Col>
+    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    </Row>
+
+  );
+}
+
+function Discount(props) {
+  return(
+    <Row className="" style={props.style}>
+    <Col><span>Discount</span></Col>
+    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    </Row>
+  );
+}
+
 
 
 class BookingServices extends Component {
@@ -111,6 +143,7 @@ class BookingServices extends Component {
         showSpaService: false,
         showLaundryService: false,
         showShuttleService: false,
+        showDiscount: false,
 
       }
       console.log('BookingServices.props: ',props);
@@ -119,6 +152,13 @@ class BookingServices extends Component {
       this.handleCheckIn = this.handleCheckIn.bind(this);
       this.handleCheckOut = this.handleCheckOut.bind(this);
       this.handleGuests = this.handleGuests.bind(this);
+
+      this.onChangeBreakfast = this.onChangeBreakfast.bind(this);
+      this.onChangeCarParking = this.onChangeCarParking.bind(this);
+      this.onChangeSpaService = this.onChangeSpaService.bind(this);
+      this.onChangeLaundryService = this.onChangeLaundryService.bind(this);
+      this.onChangeShuttleService = this.onChangeShuttleService.bind(this);
+
 
       this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -135,6 +175,27 @@ class BookingServices extends Component {
     handleGuests(guests) {
       console.log('guests: ',guests.target.value)
       this.setState({ guests: guests.target.value});
+    }
+
+    onChangeBreakfast() {
+      this.setState({showBreakfast: !this.state.showBreakfast});
+    }
+    onChangeCarParking() {
+      this.setState({showCarParking: !this.state.showCarParking});
+    }
+    onChangeSpaService() {
+      this.setState({showSpaService: !this.state.showSpaService});
+    }
+    onChangeLaundryService() {
+      this.setState({showLaundryService: !this.state.showLaundryService});
+    }
+    onChangeShuttleService() {
+      this.setState({showShuttleService: !this.state.showShuttleService});
+    }
+
+
+    calculateBooking() {
+      console.log("")
     }
 
     handleSubmit(){
@@ -155,7 +216,7 @@ class BookingServices extends Component {
       console.log(new Date(),parseISO('2020-10-27'))
     }
     render() {
-      console.log('checkin: ',this.state.checkin, ' checkout: ',this.state.checkout);
+      console.log('state: ',this.state);
       return (
         <React.Fragment>
             <Form style={{margin: '0px'}} className="formExtend border" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
@@ -167,7 +228,7 @@ class BookingServices extends Component {
                   </FormGroup>
 
                 <Col className="m-auto">
-                  <FormGroup className="m-3">
+                  <FormGroup className="mt-1 ml-3">
                     <Row><Label htmlFor="checkin">Checkin: </Label><br></br></Row>
                     <Row style={{fontSize: '1.1em'}}>
                       <CheckInPicker 
@@ -192,7 +253,7 @@ class BookingServices extends Component {
                   <FormGroup className="m-3">
                     <Row><Label htmlFor="guests">Guests: </Label></Row>
                     <Row>
-                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="guests" name="guests" type="select" onChange={this.handleGuests} defaultValue="2">
+                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.30em'}} id="guests" name="guests" type="select" onChange={this.handleGuests} defaultValue="2">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -207,32 +268,32 @@ class BookingServices extends Component {
                 <Col className="m-auto">
                 <h6>Additional Services</h6>
 
-                  <FormGroup className="m-3">
-                    <input type="checkbox" className="form-check-input" id="breakfast"/>
+                  <FormGroup className="mb-1 mt-1 ml-3">
+                    <input type="checkbox" className="form-check-input" id="breakfast" onClick={this.onChangeBreakfast}/>
                     <label className="form-check-label" htmlFor="breakfast">Breakfast service at room</label>
                   </FormGroup>
 
-                  <FormGroup className="m-3">
-                    <input type="checkbox" className="form-check-input" id="parking"/>
+                  <FormGroup className="mb-1 mt-1 ml-3">
+                    <input type="checkbox" className="form-check-input" id="parking" onClick={this.onChangeCarParking}/>
                     <label className="form-check-label" htmlFor="parking">Car Parking</label>
                   </FormGroup>
 
-                  <FormGroup className="m-3">
-                    <input type="checkbox" className="form-check-input" id="spa"/>
+                  <FormGroup className="mb-1 mt-1 ml-3">
+                    <input type="checkbox" className="form-check-input" id="spa" onClick={this.onChangeSpaService}/>
                     <label className="form-check-label" htmlFor="spa">SPA Service</label>
                   </FormGroup>
 
-                  <FormGroup className="m-3">
-                    <input type="checkbox" className="form-check-input" id="laundry"/>
+                  <FormGroup className="mb-1 mt-1 ml-3">
+                    <input type="checkbox" className="form-check-input" id="laundry" onClick={this.onChangeLaundryService}/>
                     <label className="form-check-label" htmlFor="laundry">Laundry Service</label>
                   </FormGroup>
 
-                  <FormGroup className="m-3">
-                    <input type="checkbox" className="form-check-input" id="shuttle"/>
+                  <FormGroup className="mb-1 mt-1 ml-3">
+                    <input type="checkbox" className="form-check-input" id="shuttle" onClick={this.onChangeShuttleService}/>
                     <label className="form-check-label" htmlFor="shuttle">Shuttle to Airport</label>
                   </FormGroup>
 
-                  <FormGroup className="m-3">
+                  <FormGroup className="mb-1 mt-1 ml-3">
                     <Row>
                       <label className="form-check-label" htmlFor="codediscount">Code Discount</label><br/>
                     </Row>
@@ -246,36 +307,12 @@ class BookingServices extends Component {
                 <hr className="border border-light"/>
 
                 <PricePerNight pricePerNight={this.props.room.pricePerNight} nights={this.state.nights} />
-                <BreakfastService style={this.state.showBreakfast ? {} : { display: 'none' }} />
-                <CarParkingService style={this.state.showCarParking ? {} : { display: 'none' }} />
-
-
-
-                <Row className="">
-                  <Col><span>SPA Facilities</span></Col>
-                  <Col md={3}><span className="pull-left">price €</span></Col>
-                </Row>
-
-
-                <Row className="">
-                  <Col><span>Laundry service</span></Col>
-                  <Col md={3}><span className="pull-left">price €</span></Col>
-                </Row>
-
-                <Row className="">
-                  <Col><span>Shuttle to Airport</span></Col>
-                  <Col md={3}><span className="pull-left">price €</span></Col>
-                </Row>
-
-                <Row className="">
-                  <Col><span>Discount</span></Col>
-                  <Col md={3}><span className="pull-left">price €</span></Col>
-                </Row>
-
-                <Row className="mb-4">
-                  <Col><span></span></Col>
-                  <Col md={3}><span className="pull-left"></span></Col>
-                </Row>
+                <BreakfastService price={0} style={this.state.showBreakfast ? {} : { display: 'none' }} />
+                <CarParkingService price={0} style={this.state.showCarParking ? {} : { display: 'none' }} />
+                <SpaService price={0}  style={this.state.showSpaService ? {} : { display: 'none' }} />
+                <LaundryService price={0}  style={this.state.showLaundryService ? {} : { display: 'none' }} />
+                <ShuttleService price={0}  style={this.state.showShuttleService ? {} : { display: 'none' }} />
+                <Discount price={0}  style={this.state.showDiscount ? {} : { display: 'none' }} />
 
                 <Row>
                   <Col><span>Total</span></Col>
@@ -286,8 +323,7 @@ class BookingServices extends Component {
                 <Col className="m-auto">
                   <Row className="justify-content-center">
                     <Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now</Button>
-                  </Row>
-                  <br></br>
+                  </Row>                  
                 </Col>
 
             <Container className="mb-2 ">

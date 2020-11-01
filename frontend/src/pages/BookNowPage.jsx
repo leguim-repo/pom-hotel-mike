@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-
+import { Redirect }from "react-router";
 
 // core components
 import PomNavbar from "components/Navbars/PomNavbar";
@@ -16,13 +16,10 @@ import BookingServices from "components/BookingServices";
 
 function BookNowPage(props) {
   console.log('BookNowPage.props: ',props, ' id:',props.match.params.room)
-  const { room } = props.location.state;
-  console.log('room: ',room);
-
-
 
 
   React.useEffect(() => {
+   
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -35,6 +32,14 @@ function BookNowPage(props) {
     };
   }, []);
   
+
+  if (props.location.state === undefined) {
+    console.info('user try booknow without room selected')
+    return(<Redirect push to="/" />);
+  }
+    
+  const { room } = props.location.state;
+  console.log('room: ',room);
 
   return (
     <React.Fragment>

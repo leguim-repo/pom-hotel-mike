@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 
-import { Button, FormGroup, Label, Input, FormText, Col, Row, Container } from 'reactstrap';
+import { Button, FormGroup, Label, Input, FormText, Col, Row, Container,Form } from 'reactstrap';
 
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,7 +8,6 @@ import { registerLocale,  } from  "react-datepicker";
 import es from 'date-fns/locale/es';
 import {parseISO} from 'date-fns';
 
-import { Control, Form, Errors } from 'react-redux-form';
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker

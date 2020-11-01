@@ -1,8 +1,7 @@
 import React, { useState, useEffect} from "react";
-
+import { getMusicLink } from "api/ApiServices";
 import Loader from '../Loader/Loader';
 
-// https://youtu.be/mL7Gb6rcAAo
 
 
 const RenderLoader = () => {
@@ -40,34 +39,21 @@ const EasterEgg = (props) => {
   const [hasError, setHasError] = useState(false)
   const [loading, setLoading] = useState(true)
   const [link, setLink] = useState("#");
-  const [data, setData] = useState("");
-  
+
   //console.log('EasterEgg.props: ',props);
   
-  useEffect(() => {
-
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-    async function fetchData() {
-      //const response = await fetch("https://swapi.dev/api/people/1/");
-      const response = await fetch("http://localhost:8080/api/music", requestOptions);
-
-      response
-        .json()
-        .then(response => {
-                      setData(response); 
-                      setLoading(false); 
-                      setLink(response.link)})
-        .catch(err => { setHasError(err); console.log("e: ",err,"\nr: ",response)});
-    }
-    fetchData();
+  useEffect( async () => {
+    const songLink = await getMusicLink();
+    setLink(songLink);
+    setLoading(false);
+    console.log('link: ',link);
+    
   }, []); //Note: If you want the useEffect to behave like the componentDidMount lifecycle event, pass an array as the second argument
-  
+
+
   return(
     <React.Fragment>
-      { loading ? <RenderLoader></RenderLoader> : hasError ? <RenderLoader></RenderLoader> : <RenderEasterEgg link={link} data={data}/>}
+      { loading ? <RenderLoader></RenderLoader> : hasError ? <RenderLoader></RenderLoader> : <RenderEasterEgg link={link}/>}
     </React.Fragment>
   );
   

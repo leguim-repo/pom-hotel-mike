@@ -1,9 +1,5 @@
 import React from "react";
 
-// reactstrap components
-// import {
-// } from "reactstrap";
-
 // core components
 import PomNavbar from "components/Navbars/PomNavbar";
 import PomHeader from "components/Headers/PomHeader";
@@ -14,7 +10,6 @@ import PopularSpaces from "./sections/PopularSpaces";
 import GuestsOpinions from "./sections/GuestsOpinions";
 import FindRoomsSimple from "components/FindRoomsSimple";
 
-import DatePicker from 'react-datepicker';
 
 function HomePage(props) {
   React.useEffect(() => {
