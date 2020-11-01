@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Button, Form, Input } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 
 // core components
@@ -15,8 +15,8 @@ import BookingServices from "components/BookingServices";
 
 
 function BookNowPage(props) {
-  const { room } = props.location.state
   console.log('BookNowPage.props: ',props, ' id:',props.match.params.room)
+  const { room } = props.location.state;
   console.log('room: ',room);
 
 

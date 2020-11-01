@@ -6,9 +6,13 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale,  } from  "react-datepicker";
 import es from 'date-fns/locale/es';
-import {intervalToDuration, parseISO} from 'date-fns';
+import { parseISO} from 'date-fns';
 
 import { Control, Form, Errors } from 'react-redux-form';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
+
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
@@ -28,6 +32,7 @@ const CheckInPicker = (props) => {
         selected={checkin} 
         onChange={date => { setCheckinDate(date); props.handle(date)}}
         excludeDates={props.excludeDates}
+
         //highlightDates={props.excludeDates}
         //highlightDates={highlightWithRanges}
         />
@@ -52,6 +57,41 @@ const CheckOutPicker = (props) => {
   );
 }
 
+
+
+function PricePerNight(props) {
+
+  return(
+    <Row className="" style={props.style}>
+    <Col><span>{props.pricePerNight}€ x {props.nights} nights</span></Col>
+    <Col md={3}><span className="pull-left">price €</span></Col>
+    </Row>
+  );
+}
+
+function BreakfastService(props) {
+  return(
+    <Row className="" style={props.style}>
+    <Col><span>Breakfast service</span></Col>
+    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+  </Row>
+  );
+}
+
+function CarParkingService(props) {
+  return(
+    <Row className="" style={props.style}>
+    <Col><span>Car Parking</span></Col>
+    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+  </Row>
+  );
+}
+
+function SpaService(props) {
+  return();
+}
+
+
 class BookingServices extends Component {
     constructor(props) {
       super(props);
@@ -65,15 +105,20 @@ class BookingServices extends Component {
         roomtype: 0,
         excludeDates: [],
         nights: 3,
+
+        showBreakfast: false,
+        showCarParking: false,
+        showSpaService: false,
+        showLaundryService: false,
+        showShuttleService: false,
+
       }
       console.log('BookingServices.props: ',props);
+      console.log('BookingServices.state: ',this.state);
 
       this.handleCheckIn = this.handleCheckIn.bind(this);
       this.handleCheckOut = this.handleCheckOut.bind(this);
       this.handleGuests = this.handleGuests.bind(this);
-      this.handlePriceMin = this.handlePriceMin.bind(this);
-      this.handlePriceMax = this.handlePriceMax.bind(this);
-      this.handleRoomTypes = this.handleRoomTypes.bind(this);
 
       this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -90,20 +135,6 @@ class BookingServices extends Component {
     handleGuests(guests) {
       console.log('guests: ',guests.target.value)
       this.setState({ guests: guests.target.value});
-    }
-
-    handlePriceMin(pricemin) {
-      this.setState({ pricemin: pricemin.target.value});
-    }
-
-    handlePriceMax(pricemax) {
-      this.setState({ pricemax: pricemax.target.value});
-    }
-
-    handleRoomTypes(roomtype) {
-      console.log(roomtype.target.value)
-      this.setState({ roomtype: roomtype.target.value});
-
     }
 
     handleSubmit(){
@@ -175,6 +206,7 @@ class BookingServices extends Component {
                 
                 <Col className="m-auto">
                 <h6>Additional Services</h6>
+
                   <FormGroup className="m-3">
                     <input type="checkbox" className="form-check-input" id="breakfast"/>
                     <label className="form-check-label" htmlFor="breakfast">Breakfast service at room</label>
@@ -212,11 +244,44 @@ class BookingServices extends Component {
                 </Col>
 
                 <hr className="border border-light"/>
-                <Row className="border border-success">
-                  <Col><span>{this.props.room.pricePerNight}€ x {this.state.nights} nights</span></Col>
-                  <Col md={3}><span className="pull-left">precio€</span></Col>
+
+                <PricePerNight pricePerNight={this.props.room.pricePerNight} nights={this.state.nights} />
+                <BreakfastService style={this.state.showBreakfast ? {} : { display: 'none' }} />
+                <CarParkingService style={this.state.showCarParking ? {} : { display: 'none' }} />
+
+
+
+                <Row className="">
+                  <Col><span>SPA Facilities</span></Col>
+                  <Col md={3}><span className="pull-left">price €</span></Col>
                 </Row>
-                <p>Total</p>
+
+
+                <Row className="">
+                  <Col><span>Laundry service</span></Col>
+                  <Col md={3}><span className="pull-left">price €</span></Col>
+                </Row>
+
+                <Row className="">
+                  <Col><span>Shuttle to Airport</span></Col>
+                  <Col md={3}><span className="pull-left">price €</span></Col>
+                </Row>
+
+                <Row className="">
+                  <Col><span>Discount</span></Col>
+                  <Col md={3}><span className="pull-left">price €</span></Col>
+                </Row>
+
+                <Row className="mb-4">
+                  <Col><span></span></Col>
+                  <Col md={3}><span className="pull-left"></span></Col>
+                </Row>
+
+                <Row>
+                  <Col><span>Total</span></Col>
+                  <Col md={3}><span className="pull-left">price €</span></Col>
+                </Row>
+                
 
                 <Col className="m-auto">
                   <Row className="justify-content-center">
@@ -224,9 +289,21 @@ class BookingServices extends Component {
                   </Row>
                   <br></br>
                 </Col>
-              </Col>
-            </Form>
-        </React.Fragment>
+
+            <Container className="mb-2 ">
+              <Row>We accept:</Row>
+              <Row className="justify-content-center">
+                <FontAwesomeIcon icon={faCcVisa} size="2x" className="m-2"/>
+                <FontAwesomeIcon icon={faCcAmex} size="2x" className="m-2"/>
+                <FontAwesomeIcon icon={faCcDiscover} size="2x" className="m-2"/>
+                <FontAwesomeIcon icon={faCcApplePay} size="2x" className="m-2"/>
+                <FontAwesomeIcon icon={faCcAmazonPay} size="2x" className="m-2"/>
+                <FontAwesomeIcon icon={faCcPaypal} size="2x" className="m-2"/>
+              </Row>
+            </Container>
+          </Col>
+        </Form>
+      </React.Fragment>
 
       )};
 }

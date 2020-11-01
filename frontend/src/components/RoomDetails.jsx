@@ -22,11 +22,12 @@ function RoomDetails(props) {
             <p>{props.room.description}</p>
             <ul>
               <li>Maximum {props.room.guests} guests</li>
-              <li><FontAwesomeIcon icon={faBath} /> Complete</li>
-              <li><FontAwesomeIcon icon={faTv} /> Flat Screen (Satellite & Terrestrial)</li>
-              <li><FontAwesomeIcon icon={faWifi} /> Free WiFi</li>
-              <li><FontAwesomeIcon icon={faSmokingBan} /> No Smoking</li>
+              <li><FontAwesomeIcon icon={faBath} size="lg"/> Complete</li>
+              <li><FontAwesomeIcon icon={faTv} size="lg"/> Flat Screen (Satellite & Terrestrial)</li>
+              <li><FontAwesomeIcon icon={faWifi} size="lg"/> Free WiFi</li>
+              <li><FontAwesomeIcon icon={faSmokingBan} size="lg"/> No Smoking</li>
             </ul>
+            <br></br>
           </Col>
         </Row>
     </React.Fragment>
