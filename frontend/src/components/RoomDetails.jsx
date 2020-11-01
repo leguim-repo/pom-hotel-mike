@@ -16,7 +16,11 @@ function RoomDetails(props) {
             <Row><Col><h5>{props.room.roomtypesByFkRoomtypeId.name}</h5></Col><Col className="text-right">{props.room.code}</Col></Row>
             <p>{props.room.pricePerNight}€/night</p>
             <p>{props.room.description}</p>
-            <p>Maximum {props.room.guests} guests</p>
+            <ul>
+              <li>Maximum {props.room.guests} guests</li>
+              <li>TV</li>
+              <li>Wifi</li>
+            </ul>
 
           </Col>
         </Row>

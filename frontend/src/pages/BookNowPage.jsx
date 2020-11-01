@@ -42,7 +42,7 @@ function BookNowPage(props) {
       <div className="wrapper">
         <PomHeader image={require("assets/img/high-performance.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
         <div className="main">
-          <h4 className="text-center">Book Now</h4>
+          <h2 className="text-center H2Title">Book Now</h2>
           <Container  className="mb-5">
             <Row>
             <Col md={8} className="border border-dark ">

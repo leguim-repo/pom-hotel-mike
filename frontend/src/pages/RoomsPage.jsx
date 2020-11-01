@@ -45,12 +45,14 @@ class RoomsPage extends React.Component {
                               <Row className="mb-2">
                                 <Col></Col>
                                 <Col className="text-center">
-                                <Link to= {{
-                                  pathname: '/booknow',
-                                  state: {
-                                    room: e
-                                  }
-                                }}><button type="button">Book Now</button></Link>
+                                  <Link to= {{
+                                    pathname: '/booknow',
+                                    state: {
+                                      room: e
+                                    }
+                                    }}>
+                                    <button className="mb-3" type="button">Book Now</button>
+                                  </Link>
                                   </Col>
                               </Row>
                             </Container>
@@ -62,16 +64,19 @@ class RoomsPage extends React.Component {
       <div id="top" className="wrapper">
         <PomHeader image={require("assets/img/revato-10251-13112723-111323.jpg")} sloganBig="Find your rest" sloganLittle="in the paradise"/>
         <div className="main">
-          <div className="container-fluid">
-            <div className="row" style={{margin: '100px'}}>
+          <div className="container-fluid">     
+
+            <div className="row">
+              <div className="col">
+                <h2 className="text-center H2Title">Our Rooms</h2>
+              </div>
+            </div>
+
+            <div className="row" >
               <div className="col-9">
-                <div className="title divRoomTitle">
-                  <h2 style={{margin: '0px'}}>Our Rooms</h2>
-                </div>
                 <Container>
                   {RenderRooms}
                 </Container>
-                {/*<RoomDetailsOLD rooms={this.state.rooms} handelBookNow={this.handleBookNow}></RoomDetailsOLD>*/}
               </div>
               <div className="col-3">
                 <FindRoomsExtend></FindRoomsExtend>
