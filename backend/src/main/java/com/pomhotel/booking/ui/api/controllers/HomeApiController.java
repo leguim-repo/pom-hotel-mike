@@ -1,11 +1,12 @@
-package com.pomhotel.booking.ui.api;
+package com.pomhotel.booking.ui.api.controllers;
 
 
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.dto.SearchDTO;
-import com.pomhotel.booking.ui.servicies.RandomMusicURLService;
-import com.pomhotel.booking.ui.servicies.RandomMusicURLServiceImplementation;
+import com.pomhotel.booking.ui.api.RoomNotFoundException;
+import com.pomhotel.booking.ui.mvc.dto.SearchDTO;
+import com.pomhotel.booking.ui.services.RandomMusicURLService;
+import com.pomhotel.booking.ui.services.RandomMusicURLServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class HomeApiController {
 
     // OK Endpoint of link [Rooms]
     @GetMapping("/api/rooms")
-    List<RoomsModel> getAllRoomsApi() {
+    public List<RoomsModel> getAllRoomsApi() {
         List<RoomsModel> rooms = roomsService.findAll();
         return rooms;
     }
@@ -33,7 +34,7 @@ public class HomeApiController {
 
     // OK Endpoint of button [Find Rooms] in home and [Find Room] in rooms
     @PostMapping("/api/findroom")
-    List<RoomsModel> findRoomByFilterApi(@RequestBody SearchDTO dto) {
+    public List<RoomsModel> findRoomByFilterApi(@RequestBody SearchDTO dto) {
         System.out.println("findroom: " + dto.toString());
 
         if ( ( dto.minprice==null) && (dto.maxprice==null) && (dto.type==null) ) {
@@ -49,7 +50,7 @@ public class HomeApiController {
 
     // Ok Single item...really without use. Only for tests
     @GetMapping("/api/roomdetail/{targetId}")
-    RoomsModel findRoomByIdApi(@PathVariable Long targetId) {
+    public RoomsModel findRoomByIdApi(@PathVariable Long targetId) {
         RoomsModel requestedRoom;
         try {
             requestedRoom = roomsService.findById(targetId);
@@ -64,7 +65,7 @@ public class HomeApiController {
 
 
     @GetMapping(value = "/api/music")
-    String musicApi() {
+    public String musicApi() {
         String link="";
         RandomMusicURLService music = new RandomMusicURLServiceImplementation();
         // un string a pelo no se convierte a JSON. Como es simple creo el JSON a mano
@@ -74,7 +75,7 @@ public class HomeApiController {
 
     // EasterEgg
     @RequestMapping(value = "/api/", method = RequestMethod.TRACE)
-    String spaceCowboys() {
+    public String spaceCowboys() {
 
         return "SPACECOWBOYS";
     }

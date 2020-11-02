@@ -1,13 +1,15 @@
-package com.pomhotel.booking.ui.api;
+package com.pomhotel.booking.ui.api.controllers;
 
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.BookingsService;
 import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.dto.NewBookingDTO;
-import com.pomhotel.booking.ui.servicies.BookingLogicalService;
-import com.pomhotel.booking.ui.servicies.BookingLogicalServiceImplementation;
+import com.pomhotel.booking.ui.api.BookRoomNowException;
+import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
+import com.pomhotel.booking.ui.mvc.dto.NewBookingDTO;
+import com.pomhotel.booking.ui.services.BookingLogicalService;
+import com.pomhotel.booking.ui.services.BookingLogicalServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +37,10 @@ public class BookRoomApiController {
     }
 
     //--- Mappings -----------------------------------------------------
+    // Esto codig es de pruebas se puede eliminar
     // Este endpoint es la creacion de la reserva le paso a react todos los datos de la reserva y que le ponga el boton de Confirm Booking
     // TODO OK Endpoint of button [Book Now] Create a booking and paint button [Confirm Booking]
+    /*
     @GetMapping("/api/bookroomnow/room")
     //public NewBookingDTO bookRoomNowByIdApi(@PathVariable("id") long id, @CookieValue("Checkin") String checkin, @CookieValue("Checkout") String checkout, Model model) {
     public NewBookingDTO bookRoomNowByIdApi(@RequestParam MultiValueMap<String, String> customQuery) {
@@ -57,6 +61,18 @@ public class BookRoomApiController {
 
         return newBookingDTO;
     }
+    */
+
+    // Calculadora del precio del room en funcion de los servicios que pida el cliente
+    @PostMapping("/api/calculatebook")
+    public BookingApiDTO calculatePriceOfBook(@RequestBody @Valid BookingApiDTO booking) {
+        //llamamos al servicio de calulcadora para que devuelva el precio de la reserva
+        System.out.println("recibido: "+booking);
+        booking.setTotalPrice(9999);
+        System.out.println("calculado y enviado: "+booking);
+        return booking;
+    }
+
 
     // TODO OK Endpoint of button [Confirm Booking] save booking to DataBase and alert if correct or not
     // Valorar construir un NewBookingDTO mas ligero y sin tanto object

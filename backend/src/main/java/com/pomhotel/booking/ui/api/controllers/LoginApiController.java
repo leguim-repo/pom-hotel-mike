@@ -1,6 +1,6 @@
-package com.pomhotel.booking.ui.api;
+package com.pomhotel.booking.ui.api.controllers;
 
-import com.pomhotel.booking.ui.dto.NewClientDTO;
+import com.pomhotel.booking.ui.mvc.dto.NewClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -43,22 +43,20 @@ const EasterEgg = (props) => {
 
   //console.log('EasterEgg.props: ',props);
   
-  useEffect(() => {
+  useEffect( () => {
 
     // React me obliga a poner aqui la funcion de obtener datos
     // https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
+    // codigo de ejemplo que recomienda react: https://codesandbox.io/s/jvvkoo8pq3?file=/src/index.js:303-312
     async function getMusicLink() {    
       const response = await axios(apiGetMusicLink);
       const data = await response.data;
       const link = await data.link;
-      console.log('getMusicLink: ',data.link);
+      setLink(link);
+      setLoading(false);
       return link;
   }
-
-    const songLink = getMusicLink();
-    setLink(songLink);
-    setLoading(false);
-    console.log('link: ',link);
+    getMusicLink();
     
   }, []); //Note: If you want the useEffect to behave like the componentDidMount lifecycle event, pass an array as the second argument
 

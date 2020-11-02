@@ -8,7 +8,6 @@ const apiCalculateBook = apiBaseURL+"/calculatebook";
 export const apiGetMusicLink = apiBaseURL+"/music";
 
 
-
 export async function getRoomById(id) {
   const response = await axios(apiGetRoomById+'/'+id);
   const data = await response.data;
@@ -24,6 +23,7 @@ export async function getAllRooms() {
   console.log('getAllRooms: ',data);
   return data;
 }
+
 
 export async function calculateBook(book) {
   const response = await axios(apiCalculateBook);

@@ -4,7 +4,7 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.RoomTypesService;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.dto.SearchDTO;
+import com.pomhotel.booking.ui.mvc.dto.SearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;

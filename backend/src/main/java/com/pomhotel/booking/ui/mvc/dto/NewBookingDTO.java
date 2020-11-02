@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.dto;
+package com.pomhotel.booking.ui.mvc.dto;
 
 import com.pomhotel.booking.application.models.RoomsModel;
 
