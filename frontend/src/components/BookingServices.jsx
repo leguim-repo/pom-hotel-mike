@@ -58,31 +58,31 @@ class BookingServices extends Component {
     }
 
     handleCheckIn(checkin) {
-      this.setState({ checkin: checkin});
+      this.setState({ checkin: checkin, calculate: true});
     }
 
     handleCheckOut(checkout) {
-      this.setState({ checkout: checkout});
+      this.setState({ checkout: checkout, calculate: true});
     }
 
     onChangeGuests(event) {
-      this.setState({ guests: event.target.value});
+      this.setState({ guests: event.target.value, calculate: true});
     }
 
     onChangeBreakfast() {
-      this.setState({showBreakfast: !this.state.showBreakfast});
+      this.setState({showBreakfast: !this.state.showBreakfast, calculate: true});
 
     }
     onChangeCarParking() {
-      this.setState({showCarParking: !this.state.showCarParking});
+      this.setState({showCarParking: !this.state.showCarParking, calculate: true});
 
     }
     onChangeSpaService() {
-      this.setState({showSpaService: !this.state.showSpaService});
+      this.setState({showSpaService: !this.state.showSpaService, calculate: true});
 
     }
     onChangeLaundryService() {
-      this.setState({showLaundryService: !this.state.showLaundryService});
+      this.setState({showLaundryService: !this.state.showLaundryService, calculate: true});
 
     }
     onChangeShuttleService() {
@@ -242,8 +242,8 @@ class BookingServices extends Component {
 
                 <hr className="border border-light"/>
 
-                <PricePerNight pricePerNight={this.props.room.pricePerNight} nights={this.state.nights} />
-                <BreakfastService price={0} style={this.state.showBreakfast ? {} : { display: 'none' }} />
+                <PricePerNight book={this.state.bookCalculate} />
+                <BreakfastService book={this.state.bookCalculate} style={this.state.showBreakfast ? {} : { display: 'none' }} />
                 <CarParkingService price={0} style={this.state.showCarParking ? {} : { display: 'none' }} />
                 <SpaService price={0}  style={this.state.showSpaService ? {} : { display: 'none' }} />
                 <LaundryService price={0}  style={this.state.showLaundryService ? {} : { display: 'none' }} />
@@ -291,7 +291,7 @@ const CheckInPicker = (props) => {
   return (
     <DatePicker
         //inline
-        readOnly
+        //readOnly
         locale="es"
         minDate={new Date()}
         dateFormat="dd/MM/yyyy"
@@ -312,7 +312,7 @@ const CheckOutPicker = (props) => {
   return (
     <DatePicker 
         //inline
-        readOnly
+        //readOnly
         locale="es"
         minDate={new Date()}
         dateFormat="dd/MM/yyyy"
@@ -326,20 +326,20 @@ const CheckOutPicker = (props) => {
 
 
 function PricePerNight(props) {
-
   return(
     <Row className="" style={props.style}>
-    <Col><span>{props.pricePerNight}€ x {props.nights} nights</span></Col>
-    <Col md={3}><span className="pull-left">price €</span></Col>
+    <Col><span>{props.book.roomPricePerNight}€ x {props.book.totalNights} nights</span></Col>
+    <Col md={3}><span className="pull-left">{props.book.totalPrice} €</span></Col>
     </Row>
   );
 }
 
 function BreakfastService(props) {
+  console.log('BreakfastService.props: ',props);
   return(
     <Row className="" style={props.style}>
-    <Col><span>Breakfast service</span></Col>
-    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    <Col><span>Breakfast {props.book.breakFastPricePerNight}€ x {props.book.totalNights} nights</span></Col>
+    <Col md={3}><span className="pull-left">{props.book.breakFastTotalPrice} €</span></Col>
   </Row>
   );
 }
@@ -389,9 +389,5 @@ function Discount(props) {
     </Row>
   );
 }
-
-
-
-
 
 export default BookingServices;

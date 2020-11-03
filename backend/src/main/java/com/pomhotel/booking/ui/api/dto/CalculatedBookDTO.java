@@ -3,13 +3,17 @@ package com.pomhotel.booking.ui.api.dto;
 public class CalculatedBookDTO {
 
     public long totalNights;
-    public double breakFastPrice;
+    public double roomPricePerNight;
+    public double breakFastPricePerNight;
+    public double breakFastTotalPrice;
+
     public double carParkingPrice;
     public double spaPrice;
     public double laundryPrice;
     public double shuttlePrice;
     public double codeDiscountPrice;
     public double totalPrice;
+
 
     public long getTotalNights() {
         return totalNights;
@@ -19,12 +23,28 @@ public class CalculatedBookDTO {
         this.totalNights = totalNights;
     }
 
-    public double getBreakFastPrice() {
-        return breakFastPrice;
+    public double getRoomPricePerNight() {
+        return roomPricePerNight;
     }
 
-    public void setBreakFastPrice(double breakFastPrice) {
-        this.breakFastPrice = breakFastPrice;
+    public void setRoomPricePerNight(double roomPricePerNight) {
+        this.roomPricePerNight = roomPricePerNight;
+    }
+
+    public double getBreakFastPricePerNight() {
+        return breakFastPricePerNight;
+    }
+
+    public void setBreakFastPricePerNight(double breakFastPricePerNight) {
+        this.breakFastPricePerNight = breakFastPricePerNight;
+    }
+
+    public double getBreakFastTotalPrice() {
+        return breakFastTotalPrice;
+    }
+
+    public void setBreakFastTotalPrice(double breakFastTotalPrice) {
+        this.breakFastTotalPrice = breakFastTotalPrice;
     }
 
     public double getCarParkingPrice() {
@@ -79,7 +99,9 @@ public class CalculatedBookDTO {
     public String toString() {
         return "CalculatedBookDTO{" +
                 "totalNights=" + totalNights +
-                ", breakFastPrice=" + breakFastPrice +
+                ", roomPricePerNight=" + roomPricePerNight +
+                ", breakFastPricePerNight=" + breakFastPricePerNight +
+                ", breakFastTotalPrice=" + breakFastTotalPrice +
                 ", carParkingPrice=" + carParkingPrice +
                 ", spaPrice=" + spaPrice +
                 ", laundryPrice=" + laundryPrice +
@@ -88,5 +110,4 @@ public class CalculatedBookDTO {
                 ", totalPrice=" + totalPrice +
                 '}';
     }
-
 }
