@@ -9,6 +9,16 @@ import { faBath, faTv, faWifi, faSmokingBan } from '@fortawesome/free-solid-svg-
 function RoomDetails(props) {
   console.log('RoomDetails.props: ' ,props);
 
+  const ShowDetails = () => {
+              return(
+                <Row className="justify-content-center">
+                  <span className="m-2"><FontAwesomeIcon icon={faBath} size="lg"/> Complete</span>
+                  <span className="m-2"><FontAwesomeIcon icon={faTv} size="lg"/> Flat Screen (Satellite & Terrestrial)</span>
+                  <span className="m-2"><FontAwesomeIcon icon={faWifi} size="lg"/> Free WiFi</span>
+                  <span className="m-2"><FontAwesomeIcon icon={faSmokingBan} size="lg"/> No Smoking</span>
+                </Row>
+              )}
+
   return(
     <React.Fragment>
         <Row className="">
@@ -20,16 +30,10 @@ function RoomDetails(props) {
             <Row><Col><h5>{props.room.roomtypesByFkRoomtypeId.name}</h5></Col><Col className="text-right">{props.room.code}</Col></Row>
             <p>{props.room.pricePerNight}€/night</p>
             <p>{props.room.description}</p>
-            <ul>
-              <li>Maximum {props.room.guests} guests</li>
-              <li><FontAwesomeIcon icon={faBath} size="lg"/> Complete</li>
-              <li><FontAwesomeIcon icon={faTv} size="lg"/> Flat Screen (Satellite & Terrestrial)</li>
-              <li><FontAwesomeIcon icon={faWifi} size="lg"/> Free WiFi</li>
-              <li><FontAwesomeIcon icon={faSmokingBan} size="lg"/> No Smoking</li>
-            </ul>
-            <br></br>
+            <p>Maximum {props.room.guests} guests</p>
           </Col>
         </Row>
+        {props.showdetails ? <ShowDetails/> : <div></div>}
     </React.Fragment>
 
 

@@ -12,6 +12,7 @@ import './App.css';
 // pages for this project
 import HomePage from "pages/HomePage";
 import RoomsPage from "pages/RoomsPage"
+import DetailAndBookPage from "pages/DetailAndBookPage";
 import BookNowPage from "pages/BookNowPage";
 import BookNowPageOLD from "pages/BookNowPageOLD";
 import LoginPomPage from "pages/LoginPomPage";
@@ -39,8 +40,12 @@ ReactDOM.render(
       <Switch>
         <Switch>
           <Route exact path="/" render={(props) => <HomePage {...props} />} />
-          <Route exact path="/rooms" render={(props) => <RoomsPage {...props} />} />
-          <Route path="/rooms/:room?" render={(props) => <RoomsPage {...props} />} />
+          <Route path="/rooms/:params?" render={(props) => <RoomsPage {...props} />} />
+          <Route path="/roomdetail/:room?" render={(props) => <DetailAndBookPage {...props} />} />
+
+
+
+          {/* para borrar lo dejo para pruebas */}
           <Route exact path="/booknow" render={(props) => <BookNowPage {...props} />} />
           <Route path="/booknowold/:room?" render={(props) => <BookNowPageOLD {...props} />} />
           <Route

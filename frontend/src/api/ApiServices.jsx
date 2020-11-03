@@ -25,11 +25,19 @@ export async function getAllRooms() {
 }
 
 
-export async function calculateBook(book) {
-  const response = await axios(apiCalculateBook);
+export async function getBookPrice(book) {
+  var config = {
+    method: 'post',
+    url: apiCalculateBook,
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : book
+  };
+
+  const response = await axios(config);
   const data = await response.data;
   console.log('calculateBook.book: ',book)
   console.log('calculateBook.data: ',data);
   return data;
 }
-

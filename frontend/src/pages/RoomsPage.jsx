@@ -46,13 +46,11 @@ class RoomsPage extends React.Component {
                                 <Col></Col>
                                 <Col className="text-center">
                                   <Link to= {{
-                                    pathname: '/booknow',
-                                    state: {
-                                      room: e
-                                    }
+                                    pathname: '/roomdetail/'+e.id,
                                     }}>
-                                    <button className="mb-3" type="button">Book Now</button>
+                                    <button className="mb-3" type="button">Details & Book</button>
                                   </Link>
+
                                   </Col>
                               </Row>
                             </Container>
