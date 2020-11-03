@@ -10,7 +10,7 @@ import { parseISO} from 'date-fns';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
-import { getBookPrice } from 'api/ApiServices';
+import { apiGetBookPrice } from 'api/ApiServices';
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
@@ -20,6 +20,7 @@ class BookingServices extends Component {
       super(props);
     
       this.state = {
+        calculate: false,
         roomId: props.room.id,
         checkin: new Date(),
         checkout: new Date(),
@@ -85,12 +86,12 @@ class BookingServices extends Component {
 
     }
     onChangeShuttleService() {
-      this.setState({showShuttleService: !this.state.showShuttleService});
+      this.setState({showShuttleService: !this.state.showShuttleService, calculate: true});
     }
 
     onChangeCodeDiscount(event) {
       this.setState({discountCode: event.target.value.toUpperCase()});
-      
+
     }
 
     async getPriceOfCurrentBook() { 
@@ -106,14 +107,11 @@ class BookingServices extends Component {
           "laundryService": this.state.showLaundryService,
           "shuttleService": this.state.showShuttleService,
           "codeDiscount" : this.state.discountCode, 
-
-
           "totalPrice" : "0",
-
 
       }
       console.log('book: ',book);
-      const bookCalculate = await getBookPrice(book);
+      const bookCalculate = await apiGetBookPrice(book);
       console.log('getBookPrice: ',bookCalculate);
       return bookCalculate;
     }
@@ -131,21 +129,30 @@ class BookingServices extends Component {
     }
 
 
-    componentDidMount(){
+    // https://www.valentinog.com/blog/await-react/
+    async componentDidMount(){
       //recoger de la api que dias ya estan reservados y por lo tanto la habitacion no se puede reservar
-      this.setState({excludeDates: [parseISO('2020-10-27')]})
-      console.log(new Date(),parseISO('2020-10-27'))
+      const datos= await this.getPriceOfCurrentBook();
+      this.setState({bookCalculate: datos});
+      this.setState({excludeDates: [parseISO('2020-10-27')]});
     }
 
-    // https://medium.com/javascript-in-plain-english/understanding-react-16-8-life-cycles-hooks-context-api-lazy-and-suspense-d80760f1b8f2
-    componentDidUpdate(){
-      console.log('componentDidUpdate')
 
+    //https://sebastienlorber.com/handling-api-request-race-conditions-in-react
+    // https://medium.com/javascript-in-plain-english/understanding-react-16-8-life-cycles-hooks-context-api-lazy-and-suspense-d80760f1b8f2
+    async componentDidUpdate(){
+      console.log('componentDidUpdate')
+      if (this.state.calculate === true) {
+        const datos=await this.getPriceOfCurrentBook();
+        this.setState({bookCalculate: datos});
+        this.setState({calculate: false});
+      }
     }
 
 
     render() {
       console.log('render.state: ',this.state);
+
       return (
         <React.Fragment>
             <Form style={{margin: '0px'}} className="formExtend border" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
@@ -245,7 +252,8 @@ class BookingServices extends Component {
 
                 <Row>
                   <Col><span>Total</span></Col>
-                  <Col md={3}><span className="pull-left">{this.state.bookingTotalPrice} €</span></Col>
+                  <Col md={3}><span className="pull-left">{this.state.bookCalculate.totalPrice} €</span></Col>
+                  
                 </Row>
                 
 

@@ -7,9 +7,12 @@ import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.ui.api.BookRoomNowException;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
+import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
+import com.pomhotel.booking.ui.api.services.BusinessLogicApiService;
 import com.pomhotel.booking.ui.mvc.dto.NewBookingDTO;
 import com.pomhotel.booking.ui.services.BookingLogicalService;
 import com.pomhotel.booking.ui.services.BookingLogicalServiceImplementation;
+import org.springframework.beans.CachedIntrospectionResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -24,16 +27,16 @@ public class BookRoomApiController {
     RoomsService roomsService;
     BookingsService bookingsService;
     ClientLoginService clientsService;
-    BookingLogicalService bookingLogicalService;
+    BusinessLogicApiService businessLogicService;
     RoomsModel roomSelected;
 
     //--- Constructor --------------------------------------------------
     @Autowired
-    public BookRoomApiController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService  , BookingLogicalService bookingLogicalService) {
+    public BookRoomApiController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService  , BusinessLogicApiService businessLogicService) {
         this.roomsService = roomsService;
         this.bookingsService = bookingsService;
         this.clientsService = clientsService;
-        this.bookingLogicalService = bookingLogicalService;
+        this.businessLogicService = businessLogicService;
     }
 
     //--- Mappings -----------------------------------------------------
@@ -65,13 +68,16 @@ public class BookRoomApiController {
 
     // Calculadora del precio del room en funcion de los servicios que pida el cliente
     @PostMapping("/api/calculatebook")
-    public BookingApiDTO calculatePriceOfBook(@RequestBody @Valid BookingApiDTO booking) {
-        //llamamos al servicio de calulcadora para que devuelva el precio de la reserva
+    public CalculatedBookDTO calculatePriceOfBook(@RequestBody @Valid BookingApiDTO booking) {
+        CalculatedBookDTO bookingCalculado = new CalculatedBookDTO();
+        //llamamos al servicio de calculadora para que devuelva el precio de la reserva
         System.out.println("recibido: "+booking);
-        booking.setTotalPrice(9999);
-        System.out.println("calculado y enviado: "+booking);
-        return booking;
+        bookingCalculado = businessLogicService.bookCalculation(booking);
+        System.out.println("calculado y enviado: "+bookingCalculado);
+        return bookingCalculado;
     }
+
+
 
 
     // TODO OK Endpoint of button [Confirm Booking] save booking to DataBase and alert if correct or not
@@ -82,8 +88,8 @@ public class BookRoomApiController {
         BookingsModel model = new BookingsModel();
 
         try {
-            model.checkIn = bookingLogicalService.stringToDate(dto.checkIn);
-            model.checkOut = bookingLogicalService.stringToDate(dto.checkOut);
+            model.checkIn = businessLogicService.stringToDate(dto.checkIn);
+            model.checkOut = businessLogicService.stringToDate(dto.checkOut);
 
             model.roomsByFKRoomId = roomsService.findById(dto.roomId);
             
@@ -92,7 +98,8 @@ public class BookRoomApiController {
             // pido el login y el usuario en el mismo formulario de confirmacion de la reservar y lo busco onfly
             model.clientsByFkClientId = clientsService.findClientByUsername("demos");
 
-            model.totalPrice = bookingLogicalService.calculateTotalPrice(model.checkIn, model.checkOut, model.roomsByFKRoomId.pricePerNight);
+            //TODO pasar a businessLogicService
+            model.totalPrice = businessLogicService.calculateTotalPrice(model.checkIn, model.checkOut, model.roomsByFKRoomId.pricePerNight);
             System.out.println("bookroomnow.model: "+model.toString());
 
             //TODO grabacion en ddbb desahbilitada para las pruebas
