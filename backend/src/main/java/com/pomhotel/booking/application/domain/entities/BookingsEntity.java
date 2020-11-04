@@ -25,6 +25,42 @@ public class BookingsEntity implements Serializable {
     private Date checkOut;
 
     @Basic
+    @Column(name = "bookedDate", nullable = true)
+    private Date bookedDate;
+
+    @Basic
+    @Column(name = "clientEmail", nullable = true, length = 100)
+    private String clientEmail;
+
+    @Basic
+    @Column(name = "guests", nullable = true, precision = 0)
+    private int guests;
+
+    @Basic
+    @Column(name = "breakfast")
+    private boolean breakfast;
+
+    @Basic
+    @Column(name = "carparking")
+    private boolean carparking;
+
+    @Basic
+    @Column(name = "spa")
+    private boolean spa;
+
+    @Basic
+    @Column(name = "laundry")
+    private boolean laundry;
+
+    @Basic
+    @Column(name = "shuttle")
+    private boolean shuttle;
+
+    @Basic
+    @Column(name = "codediscount", nullable = true, length = 100)
+    private String codediscount;
+
+    @Basic
     @Column(name = "totalPrice", nullable = true, precision = 0)
     private Double totalPrice;
 

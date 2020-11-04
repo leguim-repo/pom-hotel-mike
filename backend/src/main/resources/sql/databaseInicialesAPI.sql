@@ -62,31 +62,26 @@ INSERT INTO CLIENTS VALUES (1, 'Pablo','Garcia','Garcia@seat.es'),(2, 'Oscar','G
 create table if not exists BOOKINGS
 (
     id              bigint AUTO_INCREMENT,
-    fk_client_id		bigint,
-    fk_room_id			bigint,
+    fk_client_id	bigint,
+    fk_room_id		bigint,
     checkIn         date,
     checkOut        date,
+    bookedDate		date,
+    clientEmail		varchar(100),
+    guests			int,
+    breakfast		tinyint(1),
+    carparking		tinyint(1),
+    spa 			tinyint(1),
+    laundry			tinyint(1),
+    shuttle			tinyint(1),
+    codediscount	varchar(100),
     totalPrice      double,
     PRIMARY KEY (id),
     FOREIGN KEY (fk_room_id) REFERENCES ROOMS (id),
     FOREIGN KEY (fk_client_id) REFERENCES CLIENTS (id)
 );
-INSERT INTO BOOKINGS VALUES (1, 1,1, '2020-09-10','2020-09-14',400),(2, 1,2, '2020-10-10','2020-10-14',200);
-
-
-create table if not exists APIBOOKINGS
-(
-    id              bigint AUTO_INCREMENT,
-    fk_client_id		bigint,
-    fk_room_id			bigint,
-    checkIn         date,
-    checkOut        date,
-    totalPrice      double,
-    PRIMARY KEY (id),
-    FOREIGN KEY (fk_room_id) REFERENCES ROOMS (id),
-    FOREIGN KEY (fk_client_id) REFERENCES CLIENTS (id)
-);
-INSERT INTO APIBOOKINGS VALUES (1, 1,1, '2020-09-10','2020-09-14',400),(2, 1,2, '2020-10-10','2020-10-14',200);
+INSERT INTO BOOKINGS VALUES (1, 1, 1, '2020-10-10','2020-10-11','2020-10-10','demo@demo.dot',2,1,1,1,1,1,"code",0),
+							(2, 1, 1, '2020-10-10','2020-10-11','2020-11-10','demo@demo.dot',2,1,1,1,1,1,"code",0);
 
 create table if not exists LOGINS
 (

@@ -346,7 +346,7 @@ function BreakfastService(props) {
 function CarParkingService(props) {
   return(
     <Row className="" style={props.style}>
-    <Col><span>Car Parking {props.book.carParkingPerNight}€ x {props.book.totalNights}</span></Col>
+    <Col><span>Car Parking {props.book.carParkingPricePerNight}€ x {props.book.totalNights} nights</span></Col>
     <Col md={3}><span className="pull-right">{props.book.carParkingTotalPrice} €</span></Col>
     </Row>
   );
@@ -355,7 +355,7 @@ function CarParkingService(props) {
 function SpaService(props) {
   return(
     <Row className="" style={props.style}>
-    <Col><span>SPA Facilities {props.book.spaPricePerNight}€ x {props.book.totalNights}</span></Col>
+    <Col><span>SPA Facilities {props.book.spaPricePerNight}€ x {props.book.totalNights} nights</span></Col>
     <Col md={3}><span className="pull-right">{props.book.spaTotalPrice} €</span></Col>
     </Row>
   );
@@ -364,7 +364,7 @@ function SpaService(props) {
 function LaundryService(props) {
   return(
     <Row className="" style={props.style}>
-    <Col><span>Laundry Service {props.book.laundryPricePerNight}€ x {props.book.totalNights}</span></Col>
+    <Col><span>Laundry Service {props.book.laundryPricePerNight}€ x {props.book.totalNights} nights</span></Col>
     <Col md={3}><span className="pull-right">{props.book.laundryTotalPrice} €</span></Col>
     </Row>
   );
