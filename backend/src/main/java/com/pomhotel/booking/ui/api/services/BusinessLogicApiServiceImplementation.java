@@ -53,22 +53,65 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
         room = roomsService.findById(book.roomId);
 
-        calculatedBook.setRoomPricePerNight(room.pricePerNight);
-        basePrice= this.calculateTotalPrice(Date.valueOf(book.checkIn),Date.valueOf(book.checkOut),room.pricePerNight);
 
+        calculatedBook.setRoomPricePerNight(room.pricePerNight);
         calculatedBook.setTotalNights(this.getDaysBetweenTwoDates(Date.valueOf(book.checkIn),Date.valueOf(book.checkOut)));
 
+        //TODO aqui el basePrice se debe calcular en funcion de la temporada que pendiente para hacer
+        basePrice= calculatedBook.totalNights * room.pricePerNight;
+        calculatedBook.setRoomTotalPrice(basePrice);
+
         if ( book.breakfastService ) {
-            calculatedBook.setBreakFastPricePerNight(6);
-            calculatedBook.setBreakFastTotalPrice(calculatedBook.breakFastPricePerNight*calculatedBook.totalNights);
+            calculatedBook.setBreakFastPricePerNight(4);
+            calculatedBook.setBreakFastTotalPrice(calculatedBook.totalNights * calculatedBook.breakFastPricePerNight);
             basePrice += calculatedBook.breakFastTotalPrice;
         }
-        if ( book.carParkingService ) { basePrice += 20; }
-        if ( book.spaService ) { basePrice += 30; }
-        if ( book.laundryService ) { basePrice += 40; }
-        if ( book.shuttleService ) { basePrice += 50; }
+        if ( book.carParkingService ) {
+            calculatedBook.setCarParkingPricePerNight(10);
+            calculatedBook.setCarParkingTotalPrice(calculatedBook.totalNights * calculatedBook.carParkingPricePerNight);
+            basePrice += calculatedBook.carParkingTotalPrice;
+        }
 
-        calculatedBook.setTotalPrice(basePrice);
+        if ( book.spaService ) {
+            // TODO depende del tipo de room va incluido
+            calculatedBook.setSpaPricePerNight(5);
+            calculatedBook.setSpaTotalPrice(calculatedBook.totalNights * calculatedBook.spaPricePerNight);
+            basePrice += calculatedBook.spaTotalPrice;
+        }
+
+        if ( book.laundryService ) {
+            // TODO debe depender de las noches
+            calculatedBook.setLaundryPricePerNight(50);
+            calculatedBook.setLaundryTotalPrice(calculatedBook.totalNights * calculatedBook.laundryPricePerNight);
+            basePrice += calculatedBook.laundryTotalPrice;
+        }
+
+        if ( book.shuttleService ) {
+            if (calculatedBook.totalNights >= 1){
+                calculatedBook.setShuttlePricePerNight(20);
+                calculatedBook.setShuttleTotalPrice(calculatedBook.shuttlePricePerNight);
+                basePrice += calculatedBook.shuttleTotalPrice;
+            }
+        }
+
+        // TODO realizar descuento al total por larga estancia
+
+        calculatedBook.setCodeDiscountPrice(0);
+        switch (book.codeDiscount) {
+            case "CODE05":
+                calculatedBook.setCodeDiscountPrice(-5);
+                break;
+            case "CODE10":
+                calculatedBook.setCodeDiscountPrice(-10);
+                break;
+            case "CODE15":
+                calculatedBook.setCodeDiscountPrice(-15);
+                break;
+        }
+        basePrice +=calculatedBook.codeDiscountPrice;
+
+
+        calculatedBook.setTotalBookingPrice(basePrice);
 
         System.out.println("calculatedBook: "+calculatedBook.toString());
         return calculatedBook;

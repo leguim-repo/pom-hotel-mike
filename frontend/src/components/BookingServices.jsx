@@ -244,15 +244,15 @@ class BookingServices extends Component {
 
                 <PricePerNight book={this.state.bookCalculate} />
                 <BreakfastService book={this.state.bookCalculate} style={this.state.showBreakfast ? {} : { display: 'none' }} />
-                <CarParkingService price={0} style={this.state.showCarParking ? {} : { display: 'none' }} />
-                <SpaService price={0}  style={this.state.showSpaService ? {} : { display: 'none' }} />
-                <LaundryService price={0}  style={this.state.showLaundryService ? {} : { display: 'none' }} />
-                <ShuttleService price={0}  style={this.state.showShuttleService ? {} : { display: 'none' }} />
-                <Discount price={0}  style={this.state.showDiscount ? {} : { display: 'none' }} />
+                <CarParkingService book={this.state.bookCalculate} style={this.state.showCarParking ? {} : { display: 'none' }} />
+                <SpaService book={this.state.bookCalculate} style={this.state.showSpaService ? {} : { display: 'none' }} />
+                <LaundryService book={this.state.bookCalculate} style={this.state.showLaundryService ? {} : { display: 'none' }} />
+                <ShuttleService book={this.state.bookCalculate} style={this.state.showShuttleService ? {} : { display: 'none' }} />
+                <Discount book={this.state.bookCalculate} style={this.state.showDiscount ? {} : { display: 'none' }} />
 
                 <Row>
                   <Col><span>Total</span></Col>
-                  <Col md={3}><span className="pull-left">{this.state.bookCalculate.totalPrice} €</span></Col>
+                  <Col md={3}><span className="pull-right">{this.state.bookCalculate.totalBookingPrice} €</span></Col>
                   
                 </Row>
                 
@@ -329,17 +329,16 @@ function PricePerNight(props) {
   return(
     <Row className="" style={props.style}>
     <Col><span>{props.book.roomPricePerNight}€ x {props.book.totalNights} nights</span></Col>
-    <Col md={3}><span className="pull-left">{props.book.totalPrice} €</span></Col>
+    <Col md={3}><span className="pull-right">{props.book.roomTotalPrice} €</span></Col>
     </Row>
   );
 }
 
 function BreakfastService(props) {
-  console.log('BreakfastService.props: ',props);
   return(
     <Row className="" style={props.style}>
     <Col><span>Breakfast {props.book.breakFastPricePerNight}€ x {props.book.totalNights} nights</span></Col>
-    <Col md={3}><span className="pull-left">{props.book.breakFastTotalPrice} €</span></Col>
+    <Col md={3}><span className="pull-right">{props.book.breakFastTotalPrice} €</span></Col>
   </Row>
   );
 }
@@ -347,8 +346,8 @@ function BreakfastService(props) {
 function CarParkingService(props) {
   return(
     <Row className="" style={props.style}>
-    <Col><span>Car Parking</span></Col>
-    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    <Col><span>Car Parking {props.book.carParkingPerNight}€ x {props.book.totalNights}</span></Col>
+    <Col md={3}><span className="pull-right">{props.book.carParkingTotalPrice} €</span></Col>
     </Row>
   );
 }
@@ -356,8 +355,8 @@ function CarParkingService(props) {
 function SpaService(props) {
   return(
     <Row className="" style={props.style}>
-    <Col><span>SPA Facilities</span></Col>
-    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    <Col><span>SPA Facilities {props.book.spaPricePerNight}€ x {props.book.totalNights}</span></Col>
+    <Col md={3}><span className="pull-right">{props.book.spaTotalPrice} €</span></Col>
     </Row>
   );
 }
@@ -365,8 +364,8 @@ function SpaService(props) {
 function LaundryService(props) {
   return(
     <Row className="" style={props.style}>
-    <Col><span>Laundry Service</span></Col>
-    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    <Col><span>Laundry Service {props.book.laundryPricePerNight}€ x {props.book.totalNights}</span></Col>
+    <Col md={3}><span className="pull-right">{props.book.laundryTotalPrice} €</span></Col>
     </Row>
   );
 }
@@ -374,8 +373,8 @@ function LaundryService(props) {
 function ShuttleService(props) {
   return(
     <Row className="" style={props.style}>
-    <Col><span>Shuttle to Airport</span></Col>
-    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    <Col><span>Shuttle to Airport {props.book.shuttlePricePerNight}€</span></Col>
+    <Col md={3}><span className="pull-right">{props.book.shuttleTotalPrice} €</span></Col>
     </Row>
 
   );
@@ -384,8 +383,8 @@ function ShuttleService(props) {
 function Discount(props) {
   return(
     <Row className="" style={props.style}>
-    <Col><span>Discount</span></Col>
-    <Col md={3}><span className="pull-left">{props.price} €</span></Col>
+    <Col><span>Code Discount</span></Col>
+    <Col md={3}><span className="pull-right">{props.book.codeDiscountPrice} €</span></Col>
     </Row>
   );
 }

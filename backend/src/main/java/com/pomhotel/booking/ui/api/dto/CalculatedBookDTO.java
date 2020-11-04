@@ -3,17 +3,36 @@ package com.pomhotel.booking.ui.api.dto;
 public class CalculatedBookDTO {
 
     public long totalNights;
+
     public double roomPricePerNight;
+    public double roomTotalPrice;
+
     public double breakFastPricePerNight;
     public double breakFastTotalPrice;
 
-    public double carParkingPrice;
-    public double spaPrice;
-    public double laundryPrice;
-    public double shuttlePrice;
-    public double codeDiscountPrice;
-    public double totalPrice;
+    public double carParkingPricePerNight;
+    public double carParkingTotalPrice;
 
+    public double spaPricePerNight;
+    public double spaTotalPrice;
+
+    public double laundryPricePerNight;
+    public double laundryTotalPrice;
+
+    public double shuttlePricePerNight;
+    public double shuttleTotalPrice;
+
+    public double codeDiscountPrice;
+    public double totalBookingPrice;
+
+
+    public double getRoomTotalPrice() {
+        return roomTotalPrice;
+    }
+
+    public void setRoomTotalPrice(double roomTotalPrice) {
+        this.roomTotalPrice = roomTotalPrice;
+    }
 
     public long getTotalNights() {
         return totalNights;
@@ -47,36 +66,68 @@ public class CalculatedBookDTO {
         this.breakFastTotalPrice = breakFastTotalPrice;
     }
 
-    public double getCarParkingPrice() {
-        return carParkingPrice;
+    public double getCarParkingPricePerNight() {
+        return carParkingPricePerNight;
     }
 
-    public void setCarParkingPrice(double carParkingPrice) {
-        this.carParkingPrice = carParkingPrice;
+    public void setCarParkingPricePerNight(double carParkingPricePerNight) {
+        this.carParkingPricePerNight = carParkingPricePerNight;
     }
 
-    public double getSpaPrice() {
-        return spaPrice;
+    public double getCarParkingTotalPrice() {
+        return carParkingTotalPrice;
     }
 
-    public void setSpaPrice(double spaPrice) {
-        this.spaPrice = spaPrice;
+    public void setCarParkingTotalPrice(double carParkingTotalPrice) {
+        this.carParkingTotalPrice = carParkingTotalPrice;
     }
 
-    public double getLaundryPrice() {
-        return laundryPrice;
+    public double getSpaPricePerNight() {
+        return spaPricePerNight;
     }
 
-    public void setLaundryPrice(double laundryPrice) {
-        this.laundryPrice = laundryPrice;
+    public void setSpaPricePerNight(double spaPricePerNight) {
+        this.spaPricePerNight = spaPricePerNight;
     }
 
-    public double getShuttlePrice() {
-        return shuttlePrice;
+    public double getSpaTotalPrice() {
+        return spaTotalPrice;
     }
 
-    public void setShuttlePrice(double shuttlePrice) {
-        this.shuttlePrice = shuttlePrice;
+    public void setSpaTotalPrice(double spaTotalPrice) {
+        this.spaTotalPrice = spaTotalPrice;
+    }
+
+    public double getLaundryPricePerNight() {
+        return laundryPricePerNight;
+    }
+
+    public void setLaundryPricePerNight(double laundryPricePerNight) {
+        this.laundryPricePerNight = laundryPricePerNight;
+    }
+
+    public double getLaundryTotalPrice() {
+        return laundryTotalPrice;
+    }
+
+    public void setLaundryTotalPrice(double laundryTotalPrice) {
+        this.laundryTotalPrice = laundryTotalPrice;
+    }
+
+    public double getShuttlePricePerNight() {
+        return shuttlePricePerNight;
+    }
+
+    public void setShuttlePricePerNight(double shuttlePricePerNight) {
+        this.shuttlePricePerNight = shuttlePricePerNight;
+    }
+
+    public double getShuttleTotalPrice() {
+        return shuttleTotalPrice;
+    }
+
+    public void setShuttleTotalPrice(double shuttleTotalPrice) {
+        this.shuttleTotalPrice = shuttleTotalPrice;
     }
 
     public double getCodeDiscountPrice() {
@@ -87,27 +138,33 @@ public class CalculatedBookDTO {
         this.codeDiscountPrice = codeDiscountPrice;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public double getTotalBookingPrice() {
+        return totalBookingPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotalBookingPrice(double totalBookingPrice) {
+        this.totalBookingPrice = totalBookingPrice;
     }
+
 
     @Override
     public String toString() {
         return "CalculatedBookDTO{" +
                 "totalNights=" + totalNights +
                 ", roomPricePerNight=" + roomPricePerNight +
+                ", roomTotalPrice=" + roomTotalPrice +
                 ", breakFastPricePerNight=" + breakFastPricePerNight +
                 ", breakFastTotalPrice=" + breakFastTotalPrice +
-                ", carParkingPrice=" + carParkingPrice +
-                ", spaPrice=" + spaPrice +
-                ", laundryPrice=" + laundryPrice +
-                ", shuttlePrice=" + shuttlePrice +
+                ", carParkingPricePerNight=" + carParkingPricePerNight +
+                ", carParkingTotalPrice=" + carParkingTotalPrice +
+                ", spaPricePerNight=" + spaPricePerNight +
+                ", spaTotalPrice=" + spaTotalPrice +
+                ", laundryPricePerNight=" + laundryPricePerNight +
+                ", laundryTotalPrice=" + laundryTotalPrice +
+                ", shuttlePricePerNight=" + shuttlePricePerNight +
+                ", shuttleTotalPrice=" + shuttleTotalPrice +
                 ", codeDiscountPrice=" + codeDiscountPrice +
-                ", totalPrice=" + totalPrice +
+                ", totalBookingPrice=" + totalBookingPrice +
                 '}';
     }
 }
