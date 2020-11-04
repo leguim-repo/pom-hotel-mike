@@ -1,15 +1,15 @@
 import React from "react";
 // core components
-import PomNavbar from "../components/Navbars/PomNavbar";
-import PomHeader from "../components/Headers/PomHeader";
-import PomFooter from "../components/Footers/PomFooter";
-import FindRoomsExtend from "../components/FindRoomsExtend";
-import RoomDetails from "../components/RoomDetails";
-import GotoTop from "../components/GotoTop";
-import { getAllRooms } from "../api/ApiServices"
-import "./RoomsPage.css"
-import { Container, Row, Col, Button, Form, Input } from "reactstrap";
+import PomNavbar from "../../components/Navbar/PomNavbar";
+import PomHeader from "../../components/Header/PomHeader";
+import PomFooter from "../../components/Footer/PomFooter";
+import FindRoomsExtend from "../../components/FindRoomsExtend/FindRoomsExtend";
+import RoomDetails from "../../components/RoomDetails/RoomDetails";
+import GotoTop from "../../components/GotoTop/GotoTop";
+import { getAllRooms } from "../../api/ApiServices"
+import { Container, Row, Col } from "reactstrap";
 import { Link } from 'react-router-dom';
+import "./RoomsPage.css"
 
 
 

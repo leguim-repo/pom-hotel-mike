@@ -18,7 +18,7 @@ import {
 } from "reactstrap";
 
 // core components
-import PomNavbar from "components/Navbars/PomNavbar";
+import PomNavbar from "components/Navbar/PomNavbar";
 
 
 function getToLoginAxios() {

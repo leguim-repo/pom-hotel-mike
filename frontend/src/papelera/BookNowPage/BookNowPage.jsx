@@ -3,15 +3,13 @@ import { Container, Row, Col } from "reactstrap";
 import { Redirect }from "react-router";
 
 // core components
-import PomNavbar from "components/Navbars/PomNavbar";
-import PomHeader from "components/Headers/PomHeader";
-import PomFooter from "components/Footers/PomFooter";
+import PomNavbar from "../../components/Navbar/PomNavbar";
+import PomHeader from "../../components/Header/PomHeader";
+import PomFooter from "../../components/Footer/PomFooter";
 
-import RoomDetails from "components/RoomDetails";
-import { getRoomById } from "../api/ApiServices"
+import RoomDetails from "../../components/RoomDetails/RoomDetails";
 
-import DatePicker from 'react-datepicker';
-import BookingServices from "components/BookingServices";
+import BookingServices from "../../components/BookingServices/BookingServices";
 
 
 function BookNowPage(props) {

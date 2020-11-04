@@ -23,7 +23,7 @@ function RoomDetails(props) {
     <React.Fragment>
         <Row className="">
           <Col className="">
-            <img src={require("assets/img/"+props.room.image)}></img>
+            <img alt={props.room.image} src={require("assets/img/"+props.room.image)}></img>
           </Col>
 
           <Col>
@@ -70,7 +70,7 @@ export function RoomDetailsOLD(props) {
                     <Container key={room.id}>
                       <Row className="border border-danger mb-5">
                         <Col className="border border-success">
-                          <img src={require("assets/img/"+room.image)}></img>
+                          <img alt={room.image} src={require("assets/img/"+room.image)}></img>
                         </Col>
 
                         <Col>

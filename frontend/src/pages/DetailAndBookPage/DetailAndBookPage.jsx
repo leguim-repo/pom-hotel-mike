@@ -2,16 +2,15 @@ import React, {useState} from "react";
 import { Container, Row, Col } from "reactstrap";
 
 // core components
-import PomNavbar from "components/Navbars/PomNavbar";
-import PomHeader from "components/Headers/PomHeader";
-import PomFooter from "components/Footers/PomFooter";
-import Loader from "components/Loader/Loader";
+import PomNavbar from "../../components/Navbar/PomNavbar";
+import PomHeader from "../../components/Header/PomHeader";
+import PomFooter from "../../components/Footer/PomFooter";
+import Loader from "../../components/Loader/Loader";
 
-import RoomDetails from "components/RoomDetails";
-import { getRoomById } from "../api/ApiServices"
+import RoomDetails from "../../components/RoomDetails/RoomDetails";
+import { getRoomById } from "../../api/ApiServices"
 
-import DatePicker from 'react-datepicker';
-import BookingServices from "components/BookingServices";
+import BookingServices from "../../components/BookingServices/BookingServices";
 
 
 function DetailAndBookPage(props) {
@@ -32,7 +31,7 @@ function DetailAndBookPage(props) {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, []);
+  }, [props.match.params.room]);
   
 
   return (

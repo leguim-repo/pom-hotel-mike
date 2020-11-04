@@ -4,7 +4,7 @@ import React from "react";
 import { Button, Card, CardHeader, CardBody, CardFooter, Form, Input, Row, FormGroup, InputGroupAddon, InputGroupText, InputGroup, Container, Col, Label} from "reactstrap";
 
 // core components
-import PomNavbar from "components/Navbars/PomNavbar";
+import PomNavbar from "components/Navbar/PomNavbar";
 
 import { useHistory } from "react-router";
 

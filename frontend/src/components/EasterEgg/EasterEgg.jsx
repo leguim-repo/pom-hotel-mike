@@ -24,11 +24,8 @@ const RenderEasterEgg = (props) => {
     <h4 className="text-center">Play Music</h4>
     <p className="text-center">Listen the best dance sessions</p>
     <p className="text-center">
-      <a href={props.link} target="_blank">
-        <img
-          src={require("assets/img/musica.png")}
-          style={{ height: "3.5em", width: "3.5em" }}
-          ></img>
+      <a href={props.link} target="_blank" rel="noopener noreferrer"> { /* https://mathiasbynens.github.io/rel-noopener */}
+        <img alt="logomusica" src={require("assets/img/musica.png")} style={{ height: "3.5em", width: "3.5em" }} ></img>
       </a>
     </p>
     <p className="text-center">Click on the icon and enjoy</p>
@@ -54,6 +51,7 @@ const EasterEgg = (props) => {
       const link = await data.link;
       setLink(link);
       setLoading(false);
+      setHasError(false);
       return link;
   }
     getMusicLink();

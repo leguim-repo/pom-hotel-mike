@@ -10,16 +10,10 @@ import "assets/demo/nucleo-icons-page-styles.css?v=1.4.0";
 import './App.css';
 
 // pages for this project
-import HomePage from "pages/HomePage";
-import RoomsPage from "pages/RoomsPage"
-import DetailAndBookPage from "pages/DetailAndBookPage";
-import BookNowPage from "pages/BookNowPage";
-import BookNowPageOLD from "pages/BookNowPageOLD";
-import LoginPomPage from "pages/LoginPomPage";
-
-import NucleoIcons from "pages/examples/NucleoIcons";
-import LandingPage from "pages/examples/LandingPage";
-import ProfilePage from "pages/examples/ProfilePage";
+import HomePage from "pages/HomePage/HomePage";
+import RoomsPage from "pages/RoomsPage/RoomsPage"
+import DetailAndBookPage from "pages/DetailAndBookPage/DetailAndBookPage";
+import LoginPomPage from "pages/LoginPomPage/LoginPomPage";
 
 import { Provider } from "react-redux";
 import { ConfigureStoreDev } from "./redux/configureStores";
@@ -42,28 +36,7 @@ ReactDOM.render(
           <Route exact path="/" render={(props) => <HomePage {...props} />} />
           <Route path="/rooms/:params?" render={(props) => <RoomsPage {...props} />} />
           <Route path="/roomdetail/:room?" render={(props) => <DetailAndBookPage {...props} />} />
-
-
-
-          {/* para borrar lo dejo para pruebas */}
-          <Route exact path="/booknow" render={(props) => <BookNowPage {...props} />} />
-          <Route path="/booknowold/:room?" render={(props) => <BookNowPageOLD {...props} />} />
-          <Route
-            path="/nucleo-icons"
-            render={(props) => <NucleoIcons {...props} />}
-          />
-          <Route
-            path="/landing-page"
-            render={(props) => <LandingPage {...props} />}
-          />
-          <Route
-            path="/profile-page"
-            render={(props) => <ProfilePage {...props} />}
-          />
-          <Route
-            path="/login"
-            render={(props) => <LoginPomPage {...props} />}
-          />
+          <Route path="/login" render={(props) => <LoginPomPage {...props} />} />
           {/** redirect for 404 */}
           <Redirect to="/" />
           <Redirect from="/" to="/" />

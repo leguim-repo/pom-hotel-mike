@@ -1,14 +1,14 @@
 import React from "react";
 
 // core components
-import PomNavbar from "components/Navbars/PomNavbar";
-import PomHeader from "components/Headers/PomHeader";
-import PomFooter from "components/Footers/PomFooter";
+import PomNavbar from "../../components/Navbar/PomNavbar";
+import PomHeader from "../../components/Header/PomHeader";
+import PomFooter from "../../components/Footer/PomFooter";
 
 // sections for this page
-import PopularSpaces from "./sections/PopularSpaces";
-import GuestsOpinions from "./sections/GuestsOpinions";
-import FindRoomsSimple from "components/FindRoomsSimple";
+import PopularSpaces from "../Sections/PopularSpaces";
+import GuestsOpinions from "../Sections/GuestsOpinions";
+import FindRoomsSimple from "../../components/FindRoomsSimple/FindRoomsSimple";
 
 
 function HomePage(props) {

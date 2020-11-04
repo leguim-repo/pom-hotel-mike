@@ -1,5 +1,4 @@
-import React, { useEffect, useCallback, useState} from "react";
-import { Container } from 'reactstrap';
+import React, { useEffect} from "react";
 
 // todo no es eficiente
 function Loader() {

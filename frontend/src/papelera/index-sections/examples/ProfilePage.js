@@ -15,9 +15,9 @@ import {
 } from "reactstrap";
 
 // core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
-import DefaultFooter from "components/Footers/DefaultFooter.js";
+import ExamplesNavbar from "components/Navbar/ExamplesNavbar.js";
+import ProfilePageHeader from "components/Header/ProfilePageHeader.js";
+import DefaultFooter from "components/Footer/DefaultFooter.js";
 
 function ProfilePage() {
   const [pills, setPills] = React.useState("2");
