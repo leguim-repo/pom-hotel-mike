@@ -18,6 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Objects;
 
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
@@ -65,6 +66,12 @@ public class BookRoomApiController {
         return newBookingDTO;
     }
     */
+
+    @GetMapping("/api/bookings")
+    public List<BookingsModel> getAllBookingsApi() {
+        List<BookingsModel> bookings = bookingsService.findAll();
+        return bookings;
+    }
 
     // Calculadora del precio del room en funcion de los servicios que pida el cliente
     @PostMapping("/api/calculatebook")
