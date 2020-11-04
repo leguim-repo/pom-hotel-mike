@@ -1,4 +1,9 @@
 
+para los test
+
+npm install enzyme enzyme-adapter-react-16
+
+
 https://fontawesome.com/how-to-use/on-the-web/using-with/react
 
 npm i --save @fortawesome/fontawesome-svg-core ;
