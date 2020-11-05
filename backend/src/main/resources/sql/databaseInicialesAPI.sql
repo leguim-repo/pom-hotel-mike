@@ -79,8 +79,11 @@ create table if not exists BOOKINGS
     FOREIGN KEY (fk_room_id) REFERENCES ROOMS (id),
     FOREIGN KEY (fk_client_id) REFERENCES CLIENTS (id)
 );
-INSERT INTO BOOKINGS VALUES (1, 1, 1, '2020-10-10','2020-10-11','demo@demo.dot',2,1,1,1,1,1,"code",0),
-							(2, 2, 1, '2020-10-10','2020-10-11','demo@demo.dot',2,1,1,1,1,1,"code",0);
+INSERT INTO BOOKINGS VALUES (1, 1, 1, '2020-11-10','2020-11-11','demo@demo.dot',2,1,1,1,1,1,"code",0),
+							(2, 1, 1, '2020-10-13','2020-11-14','demo@demo.dot',2,1,1,1,1,1,"code",0),
+							(3, 1, 1, '2020-10-15','2020-11-16','demo@demo.dot',2,1,1,1,1,1,"code",0),
+							(4, 1, 2, '2020-10-18','2020-11-20','demo@demo.dot',2,1,1,1,1,1,"code",0)
+							;
 
 create table if not exists LOGINS
 (

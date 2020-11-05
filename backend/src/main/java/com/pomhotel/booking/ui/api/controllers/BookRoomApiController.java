@@ -1,5 +1,6 @@
 package com.pomhotel.booking.ui.api.controllers;
 
+import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
@@ -19,8 +20,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
 @RestController
@@ -74,10 +79,10 @@ public class BookRoomApiController {
         return bookings;
     }
 
-    @GetMapping("/api/dates")
-    public List<BookingDatesModel> getAllBookingsDatesApi() {
-        List<BookingDatesModel> bookings = bookingsService.prueba(2);
-        return bookings;
+    @GetMapping("/api/dates/{targetId}")
+    public List<BookingDatesModel> getAllBookingsDatesApi(@PathVariable Long targetId) {
+        List<BookingDatesModel> fechas = bookingsService.prueba(targetId);
+        return fechas;
     }
 
 

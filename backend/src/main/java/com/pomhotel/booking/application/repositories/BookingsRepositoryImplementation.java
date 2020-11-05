@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaQuery;
+import java.lang.reflect.Array;
+import java.sql.Date;
 import java.util.List;
 
 //--- Repository -------------------------------------------------------
@@ -58,21 +60,20 @@ public class BookingsRepositoryImplementation implements BookingsRepository{
 
 
     @Override
-    public List<BookingDatesModel> prueba(long id) {
-        List<BookingDatesModel> model = null;
+    public List<Object[]> prueba(long id) {
+        List<Object[]> entities = null;
         Session session = this.dbConnection.openSession();
         try {
-            model = session.createQuery("SELECT checkIn,checkOut FROM BookingsEntity e WHERE ( e.roomsByFkRoomId.id="+id+") AND ( checkOut > current_date )" ).getResultList();
-            //model = session.createQuery("SELECT checkIn,checkOut,fk_room_id FROM BookingsEntity" ).getResultList();
-
+            entities = session.createQuery("SELECT checkIn,checkOut FROM BookingsEntity e WHERE ( e.roomsByFkRoomId.id="+id+") AND ( checkOut > current_date )" ).getResultList();
 
         }catch (Throwable ex) {
             ex.printStackTrace();
         } finally {
             session.close();
         }
-        return model;
+        return entities;
     }
+
 
 
 

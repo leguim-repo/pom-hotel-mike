@@ -7,6 +7,10 @@ import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.repositories.BookingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Array;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,16 +46,10 @@ public class BookingsServiceImplementation implements BookingsService{
 
     @Override
     public List<BookingDatesModel> prueba(long id) {
-        List<BookingDatesModel> models = repository.prueba(id);
-        /*
-        List<BookingsModel> models = entities.stream().map(entity -> {
-            return factory.createModel(entity);
-        }).collect(Collectors.toList());
-        */
+        List<Object[]> entities = repository.prueba(id);
+        List<BookingDatesModel> models = factory.createModelDates(entities);
         return models;
     }
-
-
 
     @Override
     public void saveOrUpdate(BookingsModel model) {

@@ -1,9 +1,14 @@
 package com.pomhotel.booking.application.domain.factories;
 
 import com.pomhotel.booking.application.domain.entities.BookingsEntity;
+import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 //--- Factory -------------------------------------------------------
 @Component
@@ -57,5 +62,23 @@ public class BookingsFactory {
         model.clientsByFkClientId = clientsFactory.createModel(entity.getClientsByFkClientId());
         model.roomsByFKRoomId = roomsFactory.createModel(entity.getRoomsByFkRoomId());
         return model;
+    }
+    public List<BookingDatesModel> createModelDates(List<Object[]> entities){
+        List<BookingDatesModel> listaDates = new ArrayList<>();
+
+        for (Object[] b: entities) {
+            Date checkin = (Date) b[0];
+            Date checkout = (Date) b[1];
+            System.out.println("checkin: "+checkin.toString());
+            System.out.println("checkout: "+checkout.toString());
+            BookingDatesModel model = new BookingDatesModel();
+            model.setCheckIn(checkin);
+            model.setCheckOut(checkout);
+            listaDates.add(model);
+        }
+
+
+
+        return listaDates;
     }
 }
