@@ -24,9 +24,7 @@ public class BookingsEntity implements Serializable {
     @Column(name = "checkOut", nullable = true)
     private Date checkOut;
 
-    @Basic
-    @Column(name = "bookedDate", nullable = true)
-    private Date bookedDate;
+
 
     @Basic
     @Column(name = "clientEmail", nullable = true, length = 100)
@@ -97,14 +95,6 @@ public class BookingsEntity implements Serializable {
 
     public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
-    }
-
-    public Date getBookedDate() {
-        return bookedDate;
-    }
-
-    public void setBookedDate(Date bookedDate) {
-        this.bookedDate = bookedDate;
     }
 
     public String getClientEmail() {
@@ -193,34 +183,5 @@ public class BookingsEntity implements Serializable {
 
     public void setRoomsByFkRoomId(RoomsEntity roomsByFkRoomId) {
         this.roomsByFkRoomId = roomsByFkRoomId;
-    }
-
-    //--- Some general functions -----------------------------------
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BookingsEntity that = (BookingsEntity) o;
-        return id == that.id &&
-                guests == that.guests &&
-                breakfast == that.breakfast &&
-                carparking == that.carparking &&
-                spa == that.spa &&
-                laundry == that.laundry &&
-                shuttle == that.shuttle &&
-                checkIn.equals(that.checkIn) &&
-                checkOut.equals(that.checkOut) &&
-                bookedDate.equals(that.bookedDate) &&
-                clientEmail.equals(that.clientEmail) &&
-                codediscount.equals(that.codediscount) &&
-                totalPrice.equals(that.totalPrice) &&
-                clientsByFkClientId.equals(that.clientsByFkClientId) &&
-                roomsByFkRoomId.equals(that.roomsByFkRoomId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, checkIn, checkOut, bookedDate, clientEmail, guests, breakfast, carparking, spa, laundry, shuttle, codediscount, totalPrice, clientsByFkClientId, roomsByFkRoomId);
     }
 }

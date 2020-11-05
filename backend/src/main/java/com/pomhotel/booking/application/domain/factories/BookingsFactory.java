@@ -26,7 +26,6 @@ public class BookingsFactory {
         entity.setId(model.id);
         entity.setCheckIn(model.checkIn);
         entity.setCheckOut(model.checkOut);
-        entity.setBookedDate(model.bookedDate);
         entity.setClientEmail(model.clientEmail);
         entity.setGuests(model.guests);
         entity.setBreakfast(model.breakfast);
@@ -46,7 +45,6 @@ public class BookingsFactory {
         model.id = entity.getId();
         model.checkIn = entity.getCheckIn();
         model.checkOut = entity.getCheckOut();
-        model.bookedDate = entity.getBookedDate();
         model.clientEmail = entity.getClientEmail();
         model.guests = entity.getGuests();
         model.breakfast = entity.isBreakfast();

@@ -9,7 +9,6 @@ public class BookingsModel {
     public long id;
     public Date checkIn;
     public Date checkOut;
-    public Date bookedDate;
     public String clientEmail;
     public int guests;
     public Boolean breakfast;
@@ -25,8 +24,6 @@ public class BookingsModel {
     //--- Constructor ----------------------------------------------
     public BookingsModel() {
     }
-
-    //--- Getters & Setters ----------------------------------------
 
     public long getId() {
         return id;
@@ -50,14 +47,6 @@ public class BookingsModel {
 
     public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
-    }
-
-    public Date getBookedDate() {
-        return bookedDate;
-    }
-
-    public void setBookedDate(Date bookedDate) {
-        this.bookedDate = bookedDate;
     }
 
     public String getClientEmail() {
@@ -147,4 +136,8 @@ public class BookingsModel {
     public void setRoomsByFKRoomId(RoomsModel roomsByFKRoomId) {
         this.roomsByFKRoomId = roomsByFKRoomId;
     }
+
+    //--- Getters & Setters ----------------------------------------
+
+
 }

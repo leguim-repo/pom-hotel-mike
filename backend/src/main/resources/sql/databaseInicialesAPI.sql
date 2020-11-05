@@ -66,7 +66,6 @@ create table if not exists BOOKINGS
     fk_room_id		bigint,
     checkIn         date,
     checkOut        date,
-    bookedDate		date,
     clientEmail		varchar(100),
     guests			int,
     breakfast		tinyint(1),
@@ -80,8 +79,8 @@ create table if not exists BOOKINGS
     FOREIGN KEY (fk_room_id) REFERENCES ROOMS (id),
     FOREIGN KEY (fk_client_id) REFERENCES CLIENTS (id)
 );
-INSERT INTO BOOKINGS VALUES (1, 1, 1, '2020-10-10','2020-10-11','2020-10-10','demo@demo.dot',2,1,1,1,1,1,"code",0),
-							(2, 1, 1, '2020-10-10','2020-10-11','2020-11-10','demo@demo.dot',2,1,1,1,1,1,"code",0);
+INSERT INTO BOOKINGS VALUES (1, 1, 1, '2020-10-10','2020-10-11','demo@demo.dot',2,1,1,1,1,1,"code",0),
+							(2, 2, 1, '2020-10-10','2020-10-11','demo@demo.dot',2,1,1,1,1,1,"code",0);
 
 create table if not exists LOGINS
 (
