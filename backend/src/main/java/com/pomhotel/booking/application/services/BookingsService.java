@@ -1,5 +1,6 @@
 package com.pomhotel.booking.application.services;
 
+import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
 
 import java.util.List;
@@ -10,6 +11,8 @@ public interface BookingsService {
     BookingsModel findById(long id);
 
     List<BookingsModel> findAll();
+    List<BookingDatesModel> prueba(long id);
+
 
     void saveOrUpdate(BookingsModel model);
 

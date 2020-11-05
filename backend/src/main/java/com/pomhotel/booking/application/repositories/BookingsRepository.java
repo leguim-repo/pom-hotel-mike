@@ -1,6 +1,7 @@
 package com.pomhotel.booking.application.repositories;
 
 import com.pomhotel.booking.application.domain.entities.BookingsEntity;
+import com.pomhotel.booking.application.models.BookingDatesModel;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public interface BookingsRepository {
     BookingsEntity findById(long id);
 
     List<BookingsEntity> findAll();
+    List<BookingDatesModel> prueba(long id);
 
     void saveOrUpdate(BookingsEntity entity);
 

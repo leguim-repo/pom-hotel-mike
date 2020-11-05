@@ -2,6 +2,7 @@ package com.pomhotel.booking.application.services;
 
 import com.pomhotel.booking.application.domain.entities.BookingsEntity;
 import com.pomhotel.booking.application.domain.factories.BookingsFactory;
+import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.repositories.BookingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,19 @@ public class BookingsServiceImplementation implements BookingsService{
         }).collect(Collectors.toList());
         return models;
     }
+
+    @Override
+    public List<BookingDatesModel> prueba(long id) {
+        List<BookingDatesModel> models = repository.prueba(id);
+        /*
+        List<BookingsModel> models = entities.stream().map(entity -> {
+            return factory.createModel(entity);
+        }).collect(Collectors.toList());
+        */
+        return models;
+    }
+
+
 
     @Override
     public void saveOrUpdate(BookingsModel model) {

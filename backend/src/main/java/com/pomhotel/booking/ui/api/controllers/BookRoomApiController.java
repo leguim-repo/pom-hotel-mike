@@ -1,5 +1,6 @@
 package com.pomhotel.booking.ui.api.controllers;
 
+import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.BookingsService;
@@ -72,6 +73,13 @@ public class BookRoomApiController {
         List<BookingsModel> bookings = bookingsService.findAll();
         return bookings;
     }
+
+    @GetMapping("/api/dates")
+    public List<BookingDatesModel> getAllBookingsDatesApi() {
+        List<BookingDatesModel> bookings = bookingsService.prueba(2);
+        return bookings;
+    }
+
 
     // Calculadora del precio del room en funcion de los servicios que pida el cliente
     @PostMapping("/api/calculatebook")
