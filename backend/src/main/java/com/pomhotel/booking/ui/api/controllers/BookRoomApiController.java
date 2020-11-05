@@ -14,6 +14,7 @@ import com.pomhotel.booking.ui.api.services.BusinessLogicApiService;
 import com.pomhotel.booking.ui.mvc.dto.NewBookingDTO;
 import com.pomhotel.booking.ui.services.BookingLogicalService;
 import com.pomhotel.booking.ui.services.BookingLogicalServiceImplementation;
+import jdk.jfr.DataAmount;
 import org.springframework.beans.CachedIntrospectionResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
@@ -80,9 +81,24 @@ public class BookRoomApiController {
     }
 
     @GetMapping("/api/dates/{targetId}")
-    public List<BookingDatesModel> getAllBookingsDatesApi(@PathVariable Long targetId) {
+    public List<Date> getAllBookingsDatesApi(@PathVariable long targetId) {
         List<BookingDatesModel> fechas = bookingsService.prueba(targetId);
-        return fechas;
+        // Generacion en caliente de fechas ocupadas
+        List<Date> bookedDates = new ArrayList<>();
+        for (BookingDatesModel e: fechas) {
+            long daysToGenerate = businessLogicService.getDaysBetweenTwoDates(e.checkIn,e.checkOut);
+            System.out.println("e: "+e.toString());
+            System.out.println("days: "+daysToGenerate);
+            bookedDates.add(e.checkIn);
+            for(int d=0; d<daysToGenerate; d++) {
+                Date last = bookedDates.get(bookedDates.size()-1);
+                Date newDay = new Date(last.getTime() + TimeUnit.DAYS.toMillis(1) );
+                bookedDates.add(newDay);
+
+            }
+
+        }
+        return bookedDates;
     }
 
 

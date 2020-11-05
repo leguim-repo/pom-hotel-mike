@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale,  } from  "react-datepicker";
 import es from 'date-fns/locale/es';
 import {parseISO} from 'date-fns';
+import { apiGetBookedDatesByRoomId } from 'api/ApiServices';
 
 
 //https://reactdatepicker.com/
@@ -94,13 +95,15 @@ class FindRoomsSimple extends Component {
       
     }
 
-    componentDidMount(){
+    async componentDidMount(){
       //recoger de la api que dias ya estan reservados y por lo tanto la habitacion no se puede reservar
-      this.setState({excludeDates: [parseISO('2020-10-27')]})
-      console.log(new Date(),parseISO('2020-10-27'))
+      //this.setState({excludeDates: [parseISO('2020-10-27')]})
+      const bookedDatesFromApi = await apiGetBookedDatesByRoomId(1);
+      const bookedDates = bookedDatesFromApi.map( (day) => parseISO(day));
+      this.setState({excludeDates: bookedDates})
     }
     render() {
-      console.log('checkin: ',this.state.checkin, ' checkout: ',this.state.checkout);
+      console.log('checkin: ',this.state.checkin, ' checkout: ',this.state.checkout,' excludeDates: ',this.state.excludeDates);
       return (
         <React.Fragment>
           <Container fluid className="formSimple">
