@@ -15,12 +15,15 @@ import RoomsPage from "pages/RoomsPage/RoomsPage"
 import DetailAndBookPage from "pages/DetailAndBookPage/DetailAndBookPage";
 import LoginPomPage from "pages/LoginPomPage/LoginPomPage";
 
+import StorageManager from "components/StorageManager/StorageManager";
 
 import { Provider } from "react-redux";
 import { ConfigureStoreDev } from "./redux/configureStores";
 
 
 const store_dev = ConfigureStoreDev();
+
+
 
 const env = 'development';
 //const env = 'production';
@@ -30,6 +33,7 @@ if (env === 'production') {
   console.log = function () {};
 }
 
+StorageManager.setupApplication();
 
 ReactDOM.render(
   <Provider store={store_dev}>

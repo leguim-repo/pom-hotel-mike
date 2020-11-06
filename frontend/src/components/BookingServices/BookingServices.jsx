@@ -121,6 +121,7 @@ class BookingServices extends Component {
       var checkout = this.state.checkout.toJSON().split("T")[0];
       var guests = this.state.guests;
       console.log('checkin: ', checkin, ' checkout: ',checkout, ' guests: ', guests);
+      alert("reservar para hacer")
       //this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
 
     }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 
 // core components
@@ -12,20 +12,24 @@ import { getRoomById } from "../../api/ApiServices";
 
 import BookingServices from "../../components/BookingServices/BookingServices";
 
+import StorageManager from "../../components/StorageManager/StorageManager";
+
+
 function DetailAndBookPage(props) {
   const [room, setRoom] = useState({});
   const [checkin, setCheckin] = useState(new Date());
   const [checkout, setCheckout] = useState(new Date());
 
+
   console.log("DetailAndBookPage.props: ", props, " room: ", room);
-
-
+  
   React.useEffect(() => {
     getRoomById(props.match.params.room).then((data) => setRoom(data));
     
-    
+
     setCheckin(props.location.state.checkin);
     setCheckout(props.location.state.checkout);
+
 
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -37,10 +41,9 @@ function DetailAndBookPage(props) {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, [props.match.params.room]);
+  }, []);
 
   console.log("DetailAndBookPage.props: ",props, "\nDetailAndBookPage.state: ",props.location.state);
-
   return (
     <React.Fragment>
       <PomNavbar />

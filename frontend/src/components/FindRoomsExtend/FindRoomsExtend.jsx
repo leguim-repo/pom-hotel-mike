@@ -4,6 +4,7 @@ import { Button, FormGroup, Label, Input, Col, Row, Form} from 'reactstrap';
 
 import { CheckInPicker, CheckOutPicker } from "../CustomDatePicker/CustomDatePicker";
 
+import StorageManager from "components/StorageManager/StorageManager";
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
@@ -18,8 +19,8 @@ class FindRoomsExtend extends Component {
       this.state = {
         checkin: props.parameters.checkin,
         checkout: props.parameters.checkout,
-        guests: props.parameters.guests,
-        excludeDates: props.parameters.guests,
+        guests: props.parameters.guests || 2 || StorageManager.getGuests(),
+        excludeDates: props.parameters.excludeDates || [],
         pricemin: 1,
         pricemax: 100,
         roomtype: 0,
@@ -46,6 +47,8 @@ class FindRoomsExtend extends Component {
 
     handleGuests(guests) {
       this.setState({ guests: guests.target.value});
+      StorageManager.saveGuests(guests.target.value);
+
     }
 
     handlePriceMin(pricemin) {

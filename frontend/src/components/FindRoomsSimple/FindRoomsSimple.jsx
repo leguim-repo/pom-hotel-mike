@@ -7,6 +7,7 @@ import { CheckInPicker, CheckOutPicker } from "../CustomDatePicker/CustomDatePic
 import {parseISO} from 'date-fns';
 import { getAllRooms, apiGetBookedDatesByRoomId } from 'api/ApiServices';
 
+import StorageManager from "components/StorageManager/StorageManager";
 
 
 //https://reactdatepicker.com/
@@ -44,6 +45,7 @@ class FindRoomsSimple extends Component {
 
     handleGuests(guests) {
       this.setState({ guests: guests.target.value});
+      StorageManager.saveGuests(guests.target.value);
     }
 
 

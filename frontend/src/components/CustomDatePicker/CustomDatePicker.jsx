@@ -8,9 +8,11 @@ import es from 'date-fns/locale/es';
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
 
+import StorageManager from "components/StorageManager/StorageManager";
+
 export const CheckInPicker = (props) => {
     registerLocale('es', es)
-    const [checkin, setCheckinDate] = useState(props.date);
+    //const [checkin, setCheckinDate] = useState(props.date);
     //console.log('CheckInPicker: ',checkin,' props: ',props);
     return (
       <DatePicker
@@ -18,8 +20,9 @@ export const CheckInPicker = (props) => {
           locale="es"
           minDate={new Date()}
           dateFormat="dd/MM/yyyy"
-          selected={checkin} 
-          onChange={date => { setCheckinDate(date); props.handle(date)}}
+          //selected={checkin} 
+          selected={StorageManager.getCheckin()}
+          onChange={date => { props.handle(date); StorageManager.saveCheckin(date)}}
           excludeDates={props.excludeDates}
           //highlightDates={props.excludeDates}
           //highlightDates={highlightWithRanges}
@@ -29,7 +32,7 @@ export const CheckInPicker = (props) => {
   
   
 export const CheckOutPicker = (props) => {
-    const [checkout, setCheckoutDate] = useState(props.date);
+    //const [checkout, setCheckoutDate] = useState(props.date);
     //console.log('CheckOutPicker: ',checkout,' props: ',props);
     return (
       <DatePicker 
@@ -37,8 +40,8 @@ export const CheckOutPicker = (props) => {
           locale="es"
           minDate={new Date()}
           dateFormat="dd/MM/yyyy"
-          selected={checkout} 
-          onChange={date => { setCheckoutDate(date); props.handle(date)}}
+          selected={StorageManager.getCheckout()} 
+          onChange={date => { props.handle(date); StorageManager.saveCheckout(date)}}
           excludeDates={props.excludeDates}
           />
     );

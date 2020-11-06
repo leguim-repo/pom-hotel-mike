@@ -1,6 +1,6 @@
 
 import { getAllRooms } from "api/ApiServices";
-import {parseISO} from 'date-fns';
+import {parse, parseISO} from 'date-fns';
 
 
 class StorageManager {
@@ -12,7 +12,7 @@ class StorageManager {
         rooms: rooms,
         checkin: new Date(),
         checkout: new Date(),
-        guests: 2,
+        guests: "3",
 
       }
       console.log('pom-hotel not found');
@@ -25,7 +25,12 @@ class StorageManager {
 
   getCheckin() {
     const storage = JSON.parse(localStorage.getItem('pom-hotel'));
-    return parseISO(storage.checkin);
+    if (storage === null) {
+      return((new Date()))
+    }
+    else {
+      return parseISO(storage.checkin);
+    }
   }
   
   saveCheckin(checkin) {
@@ -36,7 +41,12 @@ class StorageManager {
 
   getCheckout() {
     const storage = JSON.parse(localStorage.getItem('pom-hotel'));
-    return parseISO(storage.checkout);
+    if (storage === null) {
+      return((new Date()))
+    }
+    else {
+      return parseISO(storage.checkout);
+    }
   }
   saveCheckout(checkout) {
     const storage = JSON.parse(localStorage.getItem('pom-hotel'));
@@ -47,7 +57,12 @@ class StorageManager {
 
   getGuests() {
     const storage = JSON.parse(localStorage.getItem('pom-hotel'));
-    return parseISO(storage.guests);
+    if (storage === null) {
+      return("2")
+    }
+    else {
+      return parseISO(storage.guests);
+    } 
   }
   saveGuests(guests) {
     const storage = JSON.parse(localStorage.getItem('pom-hotel'));
@@ -60,7 +75,7 @@ class StorageManager {
     const storage = JSON.parse(localStorage.getItem('pom-hotel'));
     return storage;
   }
+
+
 }
-
-
 export default new StorageManager();
