@@ -1,10 +1,7 @@
 import React, { Component, useState } from 'react';
 import { Button, FormGroup, Label, Input, Col, Row, Container,Form } from 'reactstrap';
 
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale,  } from  "react-datepicker";
-import es from 'date-fns/locale/es';
+import { CheckInPicker, CheckOutPicker } from '../CustomDatePicker/CustomDatePicker';
 import { parseISO} from 'date-fns';
 
 
@@ -22,9 +19,9 @@ class BookingServices extends Component {
       this.state = {
         calculate: false,
         roomId: props.room.id,
-        checkin: new Date(),
-        checkout: new Date(),
-        guests: 2,
+        checkin: props.checkin,
+        checkout: props.checkout,
+        guests: props.room.guests,
         excludeDates: [],
 
         showBreakfast: false,
@@ -189,13 +186,15 @@ class BookingServices extends Component {
                   <FormGroup className="m-3">
                     <Row><Label htmlFor="guests">Guests: </Label></Row>
                     <Row>
-                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.30em'}} id="guests" name="guests" type="select" onChange={this.onChangeGuests} defaultValue="2">
+                      <Input readOnly className="bg-white" style={{fontSize: '1.0em', padding: '0.30em'}} id="guests" name="guests" type="text" onChange={this.onChangeGuests} defaultValue="2">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>+5</option>
                       </Input>
+
+                      
                     </Row>
                   </FormGroup>
                 </Col>
@@ -280,49 +279,6 @@ class BookingServices extends Component {
 
       )};
 }
-
-
-
-const CheckInPicker = (props) => {
-  registerLocale('es', es)
-  const [checkin, setCheckinDate] = useState(props.date);
-  //console.log('CheckInPicker: ',checkin,' props: ',props);
-
-  return (
-    <DatePicker
-        //inline
-        //readOnly
-        locale="es"
-        minDate={new Date()}
-        dateFormat="dd/MM/yyyy"
-        selected={checkin} 
-        onChange={date => { setCheckinDate(date); props.handle(date)}}
-        excludeDates={props.excludeDates}
-
-        //highlightDates={props.excludeDates}
-        //highlightDates={highlightWithRanges}
-        />
-  );
-}
-
-
-const CheckOutPicker = (props) => {
-  const [checkout, setCheckoutDate] = useState(props.date);
-  //console.log('CheckOutPicker: ',checkout,' props: ',props);
-  return (
-    <DatePicker 
-        //inline
-        //readOnly
-        locale="es"
-        minDate={new Date()}
-        dateFormat="dd/MM/yyyy"
-        selected={checkout} 
-        onChange={date => { setCheckoutDate(date); props.handle(date)}}
-        excludeDates={props.excludeDates}
-        />
-  );
-}
-
 
 
 function PricePerNight(props) {

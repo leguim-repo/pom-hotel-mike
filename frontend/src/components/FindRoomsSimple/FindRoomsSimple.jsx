@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import StorageManager from "components/StorageManager/StorageManager";
 
 import { Link } from 'react-router-dom';
 import { Button, FormGroup, Label, Input, Col, Row, Container,Form } from 'reactstrap';
@@ -18,6 +17,7 @@ import { getAllRooms, apiGetBookedDatesByRoomId } from 'api/ApiServices';
 class FindRoomsSimple extends Component {
     constructor(props) {
       super(props);
+      
       this.state = {
         rooms: [],
         excludeDates: [],
@@ -29,16 +29,16 @@ class FindRoomsSimple extends Component {
       this.handleCheckIn = this.handleCheckIn.bind(this);
       this.handleCheckOut = this.handleCheckOut.bind(this);
       this.handleGuests = this.handleGuests.bind(this);
+
+
     }
 
     handleCheckIn(checkin) {
       this.setState({ checkin: checkin});
-      StorageManager.saveCheckin(checkin);
     }
 
     handleCheckOut(checkout) {
       this.setState({ checkout: checkout});
-      StorageManager.saveCheckout(checkout);
 
     }
 
@@ -55,6 +55,7 @@ class FindRoomsSimple extends Component {
       const excludeDates = bookedDatesFromApi.map( (day) => parseISO(day));
       const rooms = await getAllRooms();
       this.setState({excludeDates: excludeDates, rooms: rooms});
+
 
     }
     render() {
@@ -88,7 +89,7 @@ class FindRoomsSimple extends Component {
                 
                 <Col className="m-auto">
                   <FormGroup className="m-3">
-                    <Row><Label for="checkout">Checkin: </Label><br></br></Row>
+                    <Row><Label for="checkout">Checkout: </Label><br></br></Row>
                     <Row style={{fontSize: '1.1em'}}>
                       <CheckOutPicker id="checkout" date={this.state.checkout} handle={this.handleCheckOut}></CheckOutPicker>
                     </Row>

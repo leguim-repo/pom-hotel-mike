@@ -19,7 +19,6 @@ import LoginPomPage from "pages/LoginPomPage/LoginPomPage";
 import { Provider } from "react-redux";
 import { ConfigureStoreDev } from "./redux/configureStores";
 
-import StorageManager from "components/StorageManager/StorageManager";
 
 const store_dev = ConfigureStoreDev();
 
@@ -31,7 +30,6 @@ if (env === 'production') {
   console.log = function () {};
 }
 
-StorageManager.setupApplication();
 
 ReactDOM.render(
   <Provider store={store_dev}>

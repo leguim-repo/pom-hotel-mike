@@ -14,10 +14,18 @@ import BookingServices from "../../components/BookingServices/BookingServices";
 
 function DetailAndBookPage(props) {
   const [room, setRoom] = useState({});
+  const [checkin, setCheckin] = useState(new Date());
+  const [checkout, setCheckout] = useState(new Date());
+
   console.log("DetailAndBookPage.props: ", props, " room: ", room);
+
 
   React.useEffect(() => {
     getRoomById(props.match.params.room).then((data) => setRoom(data));
+    
+    
+    setCheckin(props.location.state.checkin);
+    setCheckout(props.location.state.checkout);
 
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -31,7 +39,7 @@ function DetailAndBookPage(props) {
     };
   }, [props.match.params.room]);
 
-  console.log("DetailAndBookPage.props: ",props);
+  console.log("DetailAndBookPage.props: ",props, "\nDetailAndBookPage.state: ",props.location.state);
 
   return (
     <React.Fragment>
@@ -60,7 +68,7 @@ function DetailAndBookPage(props) {
                 </Container>
               </Col>
               <Col lg={4} xl={3} className="border border-danger">
-                {room.image === undefined ? (<Loader />) : (<BookingServices room={room}></BookingServices>)}
+                {room.image === undefined ? (<Loader />) : (<BookingServices room={room} checkin={checkin} checkout={checkout}></BookingServices>)}
               </Col>
             </Row>
           </Container>
