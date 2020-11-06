@@ -40,7 +40,7 @@ class RoomsPage extends React.Component {
 
   render() {
     const RenderRooms = this.state.rooms.map( (e) => (
-                            <Container key={e.id} className="border border-dark mb-5">
+                            <Container fluid key={e.id} className="border border-dark mb-5">
                               <RoomDetails key={e.id} room={e}></RoomDetails>
                               <Row className="mb-2">
                                 <Col></Col>
@@ -63,23 +63,19 @@ class RoomsPage extends React.Component {
         <PomHeader image={require("assets/img/revato-10251-13112723-111323.jpg")} sloganBig="Find your rest" sloganLittle="in the paradise"/>
         <div className="main">
           <div className="container-fluid">     
-
-            <div className="row">
-              <div className="col">
+            <Row>
+              <Col>
                 <h2 className="text-center H2Title">Our Rooms</h2>
-              </div>
-            </div>
-
-            <div className="row" >
-              <div className="col-9">
-                <Container>
+              </Col>
+            </Row>
+            <Row >
+              <Col md={9} className="border border-danger">
                   {RenderRooms}
-                </Container>
-              </div>
-              <div className="col-3">
+              </Col>
+              <Col md={3} className="border border-danger">
                 <FindRoomsExtend></FindRoomsExtend>
-              </div>
-            </div>
+              </Col>
+            </Row>
           </div>
           <GotoTop></GotoTop>
         </div>
