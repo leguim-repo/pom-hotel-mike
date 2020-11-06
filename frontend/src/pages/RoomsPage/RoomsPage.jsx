@@ -7,7 +7,7 @@ import FindRoomsExtend from "../../components/FindRoomsExtend/FindRoomsExtend";
 import RoomDetails from "../../components/RoomDetails/RoomDetails";
 import GotoTop from "../../components/GotoTop/GotoTop";
 import { getAllRooms } from "../../api/ApiServices"
-import { Container, Row, Col } from "reactstrap";
+import { Button, Container, Row, Col } from "reactstrap";
 import { Link } from 'react-router-dom';
 import "./RoomsPage.css"
 
@@ -16,9 +16,14 @@ import "./RoomsPage.css"
 class RoomsPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {rooms: []};
-
-    console.log('RoomsPage: ',props);
+    this.state = {
+          rooms: props.location.state.rooms,
+          excludeDates: props.location.state.excludeDates,
+          checkin: props.location.state.checkin,
+          checkout: props.location.state.checkout,
+          guests: props.location.state.guests,
+        };
+        
     this.handleBookNow = this.handleBookNow.bind(this);
 
   }
@@ -28,8 +33,8 @@ class RoomsPage extends React.Component {
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
 
-    const rooms = await getAllRooms();
-    this.setState({rooms: rooms});
+    //const rooms = await getAllRooms();
+    //this.setState({rooms: rooms});
   }
 
   handleBookNow(event) {
@@ -45,17 +50,15 @@ class RoomsPage extends React.Component {
                               <Row className="mb-2">
                                 <Col></Col>
                                 <Col className="text-center">
-                                  <Link to= {{
-                                    pathname: '/roomdetail/'+e.id,
-                                    }}>
-                                    <button className="mb-3" type="button">Details & Book</button>
+                                  <Link to= {{pathname: '/roomdetail/'+e.id, state: this.state}}>
+                                    <Button className="bg-warning mb-3 " style={{fontSize: '1.2em', padding: '0.5em'}}>Details & Book</Button>
                                   </Link>
-
-                                  </Col>
+                                </Col>
                               </Row>
                             </Container>
     ));
 
+    console.log("RoomPage.state: ",this.state, "\nRoomPage.props: ",this.props);
     return (
       <React.Fragment>
       <PomNavbar />
@@ -73,7 +76,7 @@ class RoomsPage extends React.Component {
                   {RenderRooms}
               </Col>
               <Col md={3} className="border border-danger">
-                <FindRoomsExtend></FindRoomsExtend>
+                <FindRoomsExtend parameters={this.state}></FindRoomsExtend>
               </Col>
             </Row>
           </div>

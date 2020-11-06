@@ -1,109 +1,64 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
+import StorageManager from "components/StorageManager/StorageManager";
 
+import { Link } from 'react-router-dom';
 import { Button, FormGroup, Label, Input, Col, Row, Container,Form } from 'reactstrap';
 
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale,  } from  "react-datepicker";
-import es from 'date-fns/locale/es';
+import { CheckInPicker, CheckOutPicker } from "../CustomDatePicker/CustomDatePicker";
 import {parseISO} from 'date-fns';
-import { apiGetBookedDatesByRoomId } from 'api/ApiServices';
+import { getAllRooms, apiGetBookedDatesByRoomId } from 'api/ApiServices';
+
 
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
 
-const CheckInPicker = (props) => {
-  registerLocale('es', es)
-  const [checkin, setCheckinDate] = useState(props.date);
-  //console.log('CheckInPicker: ',checkin,' props: ',props);
 
-  return (
-    <DatePicker
-        //inline
-        locale="es"
-        minDate={new Date()}
-        dateFormat="dd/MM/yyyy"
-        selected={checkin} 
-        onChange={date => { setCheckinDate(date); props.handle(date)}}
-        excludeDates={props.excludeDates}
-        //highlightDates={props.excludeDates}
-        //highlightDates={highlightWithRanges}
-        />
-  );
-}
-
-
-const CheckOutPicker = (props) => {
-  const [checkout, setCheckoutDate] = useState(props.date);
-  //console.log('CheckOutPicker: ',checkout,' props: ',props);
-  return (
-    <DatePicker 
-        //inline
-        locale="es"
-        minDate={new Date()}
-        dateFormat="dd/MM/yyyy"
-        selected={checkout} 
-        onChange={date => { setCheckoutDate(date); props.handle(date)}}
-        excludeDates={props.excludeDates}
-        />
-  );
-}
 
 class FindRoomsSimple extends Component {
     constructor(props) {
       super(props);
-    
-      // TODO pasar a redux
-
       this.state = {
+        rooms: [],
+        excludeDates: [],
         checkin: new Date(),
         checkout: new Date(),
         guests: 2,
-        excludeDates: [],
       }
 
       this.handleCheckIn = this.handleCheckIn.bind(this);
       this.handleCheckOut = this.handleCheckOut.bind(this);
       this.handleGuests = this.handleGuests.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleCheckIn(checkin) {
       this.setState({ checkin: checkin});
+      StorageManager.saveCheckin(checkin);
     }
 
     handleCheckOut(checkout) {
       this.setState({ checkout: checkout});
+      StorageManager.saveCheckout(checkout);
+
     }
 
     handleGuests(guests) {
-      console.log('guests: ',guests.target.value)
       this.setState({ guests: guests.target.value});
     }
 
-    handleSubmit(e){
-      //e.preventDefault();
-      console.log('props: ',this.props);
-      console.log('state: ',this.state);
-      console.log('e: ', e);
-      var checkin = this.state.checkin.toJSON().split("T")[0];
-      var checkout = this.state.checkout.toJSON().split("T")[0];
-      var guests = this.state.guests;
-      console.log('checkin: ', checkin, ' checkout: ',checkout, ' guests: ', guests);
-      this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
-      
-    }
 
     async componentDidMount(){
-      //recoger de la api que dias ya estan reservados y por lo tanto la habitacion no se puede reservar
-      //this.setState({excludeDates: [parseISO('2020-10-27')]})
+
+      // TODO fetch de todas las rooms y todas las booked dates
+
       const bookedDatesFromApi = await apiGetBookedDatesByRoomId(1);
-      const bookedDates = bookedDatesFromApi.map( (day) => parseISO(day));
-      this.setState({excludeDates: bookedDates})
+      const excludeDates = bookedDatesFromApi.map( (day) => parseISO(day));
+      const rooms = await getAllRooms();
+      this.setState({excludeDates: excludeDates, rooms: rooms});
+
     }
     render() {
-      console.log('checkin: ',this.state.checkin, ' checkout: ',this.state.checkout,' excludeDates: ',this.state.excludeDates);
+      console.log("FindRoomSimple.state: ",this.state, "\nRoomFindRoomSimplePage.props: ",this.props);
       return (
         <React.Fragment>
           <Container fluid className="formSimple">
@@ -134,7 +89,9 @@ class FindRoomsSimple extends Component {
                 <Col className="m-auto">
                   <FormGroup className="m-3">
                     <Row><Label for="checkout">Checkin: </Label><br></br></Row>
-                    <Row style={{fontSize: '1.1em'}}><CheckOutPicker id="checkout" date={this.state.checkout} handle={this.handleCheckOut}></CheckOutPicker></Row>
+                    <Row style={{fontSize: '1.1em'}}>
+                      <CheckOutPicker id="checkout" date={this.state.checkout} handle={this.handleCheckOut}></CheckOutPicker>
+                    </Row>
                   </FormGroup>
                 </Col>
 
@@ -154,7 +111,11 @@ class FindRoomsSimple extends Component {
                 </Col>
                 <Col className="m-auto">
                   <Row className="justify-content-center">Find your room now!!</Row>
-                  <Row className="justify-content-center"><Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Find Rooms</Button></Row>
+                  <Row className="justify-content-center">
+                    <Link to= {{pathname: '/rooms', state: this.state}}>
+                      <Button className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Find Rooms</Button>
+                    </Link>  
+                  </Row>
                 </Col>
               </Row>
             </Form>
@@ -164,3 +125,26 @@ class FindRoomsSimple extends Component {
       )};
 }
 export default FindRoomsSimple;
+
+
+/* 
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+
+
+    handleSubmit(e){
+      //e.preventDefault();
+      /*
+      console.log('props: ',this.props);
+      console.log('state: ',this.state);
+      console.log('e: ', e);
+      var checkin = this.state.checkin.toJSON().split("T")[0];
+      var checkout = this.state.checkout.toJSON().split("T")[0];
+      var guests = this.state.guests;
+      console.log('checkin: ', checkin, ' checkout: ',checkout, ' guests: ', guests);
+      this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
+      
+    }
+
+*/

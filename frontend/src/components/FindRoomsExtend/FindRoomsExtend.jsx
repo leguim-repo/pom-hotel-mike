@@ -2,51 +2,12 @@ import React, { Component, useState } from 'react';
 
 import { Button, FormGroup, Label, Input, Col, Row, Form} from 'reactstrap';
 
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale,  } from  "react-datepicker";
-import es from 'date-fns/locale/es';
-import {parseISO} from 'date-fns';
+import { CheckInPicker, CheckOutPicker } from "../CustomDatePicker/CustomDatePicker";
+
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
 
-const CheckInPicker = (props) => {
-  registerLocale('es', es)
-  const [checkin, setCheckinDate] = useState(props.date);
-  //console.log('CheckInPicker: ',checkin,' props: ',props);
-
-  return (
-    <DatePicker
-        //inline
-        locale="es"
-        minDate={new Date()}
-        dateFormat="dd/MM/yyyy"
-        selected={checkin} 
-        onChange={date => { setCheckinDate(date); props.handle(date)}}
-        excludeDates={props.excludeDates}
-        //highlightDates={props.excludeDates}
-        //highlightDates={highlightWithRanges}
-        />
-  );
-}
-
-
-const CheckOutPicker = (props) => {
-  const [checkout, setCheckoutDate] = useState(props.date);
-  //console.log('CheckOutPicker: ',checkout,' props: ',props);
-  return (
-    <DatePicker 
-        //inline
-        locale="es"
-        minDate={new Date()}
-        dateFormat="dd/MM/yyyy"
-        selected={checkout} 
-        onChange={date => { setCheckoutDate(date); props.handle(date)}}
-        excludeDates={props.excludeDates}
-        />
-  );
-}
 
 class FindRoomsExtend extends Component {
     constructor(props) {
@@ -55,13 +16,13 @@ class FindRoomsExtend extends Component {
       // TODO pasar a redux
 
       this.state = {
-        checkin: new Date(),
-        checkout: new Date(),
-        guests: 2,
+        checkin: props.parameters.checkin,
+        checkout: props.parameters.checkout,
+        guests: props.parameters.guests,
+        excludeDates: props.parameters.guests,
         pricemin: 1,
         pricemax: 100,
         roomtype: 0,
-        excludeDates: [],
       }
 
       this.handleCheckIn = this.handleCheckIn.bind(this);
@@ -84,7 +45,6 @@ class FindRoomsExtend extends Component {
     }
 
     handleGuests(guests) {
-      console.log('guests: ',guests.target.value)
       this.setState({ guests: guests.target.value});
     }
 
@@ -102,8 +62,9 @@ class FindRoomsExtend extends Component {
 
     }
 
-    handleSubmit(){
-      //e.preventDefault();
+    handleSubmit(e){
+      e.preventDefault();
+      alert('aqui ejecuto el filtro')
       console.log('props: ',this.props);
       console.log('state: ',this.state);
       var checkin = this.state.checkin.toJSON().split("T")[0];
@@ -116,11 +77,10 @@ class FindRoomsExtend extends Component {
 
     componentDidMount(){
       //recoger de la api que dias ya estan reservados y por lo tanto la habitacion no se puede reservar
-      this.setState({excludeDates: [parseISO('2020-10-27')]})
-      console.log(new Date(),parseISO('2020-10-27'))
+
     }
     render() {
-      console.log('checkin: ',this.state.checkin, ' checkout: ',this.state.checkout);
+      console.log("FindRoomsExtend.state: ",this.state, "\nFindRoomsExtend.props: ",this.props);
       return (
         <React.Fragment>
             <Form style={{margin: '0px'}} className="formExtend border" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
@@ -148,8 +108,15 @@ class FindRoomsExtend extends Component {
                 
                 <Col className="m-auto">
                   <FormGroup className="m-3">
-                    <Row><Label for="checkout">Checkin: </Label><br></br></Row>
-                    <Row style={{fontSize: '1.1em'}}><CheckOutPicker id="checkout" date={this.state.checkout} handle={this.handleCheckOut}></CheckOutPicker></Row>
+                    <Row><Label for="checkout">Checkout: </Label><br></br></Row>
+                    <Row style={{fontSize: '1.1em'}}>
+                      <CheckOutPicker 
+                              id="checkout" 
+                              date={this.state.checkout}
+                              excludeDates={this.state.excludeDates}
+                              handle={this.handleCheckOut}>
+                      </CheckOutPicker>
+                    </Row>
                   </FormGroup>
                 </Col>
 
@@ -157,7 +124,7 @@ class FindRoomsExtend extends Component {
                   <FormGroup className="m-3">
                     <Row><Label for="guests">Guests: </Label></Row>
                     <Row>
-                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="guests" name="guests" type="select" onChange={this.handleGuests} defaultValue="2">
+                      <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="guests" name="guests" type="select" onChange={this.handleGuests} defaultValue={this.props.parameters.guests}>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>

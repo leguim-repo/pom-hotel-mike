@@ -31,6 +31,8 @@ function DetailAndBookPage(props) {
     };
   }, [props.match.params.room]);
 
+  console.log("DetailAndBookPage.props: ",props);
+
   return (
     <React.Fragment>
       <PomNavbar />
