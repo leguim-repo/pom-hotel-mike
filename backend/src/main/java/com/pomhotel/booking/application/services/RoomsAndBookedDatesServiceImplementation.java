@@ -32,7 +32,7 @@ public class RoomsAndBookedDatesServiceImplementation implements RoomsAndBookedD
             List<Date> bookedDate;
 
             room.setRoom(r);
-            bookedDate = bookingsService.generateBookedDatesInRunTime(bookingsService.getBookedDatesByRoomId(r.roomtypesByFkRoomtypeId.getId()));
+            bookedDate = bookingsService.generateBookedDatesInRunTime(bookingsService.getBookedDatesByRoomId(r.getId()));
 
             room.setBookedDates(bookedDate);
 
