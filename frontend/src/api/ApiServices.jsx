@@ -7,6 +7,7 @@ const apiGetRoomById = apiBaseURL+"/roomdetail";
 const apiCalculateBook = apiBaseURL+"/calculatebook";
 const apiBookedDatesByRoomId = apiBaseURL+"/dates";
 const apiRoomsAndBookedDates = apiBaseURL+"/roomsandbookeddates";
+const apiGetDataBookingById = apiBaseURL+"/booking";
 export const apiGetMusicLink = apiBaseURL+"/music";
 
 
@@ -63,5 +64,13 @@ export async function apiGetBookedDatesByRoomId(roomId) {
   const data = await response.data;
   console.log('apiGetBookedDatesByRoomId.response: ',response)
   console.log('apiGetBookedDatesByRoomId.data: ',data)
+  return data;
+}
+
+export async function apiGetBookingById(bookingId) {
+  const response = await axios(apiGetDataBookingById+'/'+bookingId);
+  const data = await response.data;
+  console.log('apiGetBookingById.response: ',response)
+  console.log('apiGetBookingById.data: ',data)
   return data;
 }
