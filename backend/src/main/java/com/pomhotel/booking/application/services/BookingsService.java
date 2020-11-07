@@ -13,8 +13,8 @@ public interface BookingsService {
     BookingsModel findById(long id);
 
     List<BookingsModel> findAll();
-    List<BookingDatesModel> prueba(long id);
-
+    List<BookingDatesModel> getBookedDatesByRoomId(long id);
+    List<Date> generateBookedDatesInRunTime(List<BookingDatesModel> model);
 
 
     void saveOrUpdate(BookingsModel model);

@@ -1,6 +1,5 @@
 package com.pomhotel.booking.ui.api.controllers;
 
-import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
@@ -12,20 +11,13 @@ import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
 import com.pomhotel.booking.ui.api.services.BusinessLogicApiService;
 import com.pomhotel.booking.ui.mvc.dto.NewBookingDTO;
-import com.pomhotel.booking.ui.services.BookingLogicalService;
-import com.pomhotel.booking.ui.services.BookingLogicalServiceImplementation;
-import jdk.jfr.DataAmount;
-import org.springframework.beans.CachedIntrospectionResults;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
@@ -82,22 +74,8 @@ public class BookRoomApiController {
 
     @GetMapping("/api/dates/{targetId}")
     public List<Date> getAllBookingsDatesApi(@PathVariable long targetId) {
-        List<BookingDatesModel> fechas = bookingsService.prueba(targetId);
-        // Generacion en caliente de fechas ocupadas
-        List<Date> bookedDates = new ArrayList<>();
-        for (BookingDatesModel e: fechas) {
-            long daysToGenerate = businessLogicService.getDaysBetweenTwoDates(e.checkIn,e.checkOut);
-            System.out.println("e: "+e.toString());
-            System.out.println("days: "+daysToGenerate);
-            bookedDates.add(e.checkIn);
-            for(int d=0; d<daysToGenerate; d++) {
-                Date last = bookedDates.get(bookedDates.size()-1);
-                Date newDay = new Date(last.getTime() + TimeUnit.DAYS.toMillis(1) );
-                bookedDates.add(newDay);
-
-            }
-
-        }
+        List<BookingDatesModel> listBooked = bookingsService.getBookedDatesByRoomId(targetId);
+        List<Date> bookedDates = bookingsService.generateBookedDatesInRunTime(listBooked);
         return bookedDates;
     }
 
@@ -105,7 +83,7 @@ public class BookRoomApiController {
     // Calculadora del precio del room en funcion de los servicios que pida el cliente
     @PostMapping("/api/calculatebook")
     public CalculatedBookDTO calculatePriceOfBook(@RequestBody @Valid BookingApiDTO booking) {
-        CalculatedBookDTO bookingCalculado = new CalculatedBookDTO();
+        CalculatedBookDTO bookingCalculado;
         //llamamos al servicio de calculadora para que devuelva el precio de la reserva
         System.out.println("recibido: "+booking);
         bookingCalculado = businessLogicService.bookCalculation(booking);

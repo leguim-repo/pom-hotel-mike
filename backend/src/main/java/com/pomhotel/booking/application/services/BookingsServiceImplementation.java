@@ -5,13 +5,15 @@ import com.pomhotel.booking.application.domain.factories.BookingsFactory;
 import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.repositories.BookingsRepository;
+import com.pomhotel.booking.ui.api.services.BusinessLogicApiService;
+import com.pomhotel.booking.ui.api.services.BusinessLogicApiServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 //--- Service ----------------------------------------------------------
@@ -45,10 +47,29 @@ public class BookingsServiceImplementation implements BookingsService{
     }
 
     @Override
-    public List<BookingDatesModel> prueba(long id) {
-        List<Object[]> entities = repository.prueba(id);
+    public List<BookingDatesModel> getBookedDatesByRoomId(long id) {
+        List<Object[]> entities = repository.getBookedDatesByRoomId(id);
         List<BookingDatesModel> models = factory.createModelDates(entities);
         return models;
+    }
+
+    @Override
+    public List<Date> generateBookedDatesInRunTime(List<BookingDatesModel> model) {
+        BusinessLogicApiService businessLogicService = new BusinessLogicApiServiceImplementation();
+        List<Date> bookedDates = new ArrayList<>();
+        for (BookingDatesModel e: model) {
+            long daysToGenerate = businessLogicService.getDaysBetweenTwoDates(e.checkIn, e.checkOut);
+            System.out.println("e: " + e.toString());
+            System.out.println("days: " + daysToGenerate);
+            bookedDates.add(e.checkIn);
+            for (int d = 0; d < daysToGenerate; d++) {
+                Date last = bookedDates.get(bookedDates.size() - 1);
+                Date newDay = new Date(last.getTime() + TimeUnit.DAYS.toMillis(1));
+                bookedDates.add(newDay);
+            }
+        }
+
+        return bookedDates;
     }
 
     @Override

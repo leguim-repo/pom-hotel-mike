@@ -60,7 +60,7 @@ public class BookingsRepositoryImplementation implements BookingsRepository{
 
 
     @Override
-    public List<Object[]> prueba(long id) {
+    public List<Object[]> getBookedDatesByRoomId(long id) {
         List<Object[]> entities = null;
         Session session = this.dbConnection.openSession();
         try {

@@ -25,6 +25,10 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         this.roomsService = roomsService;
     }
 
+    public BusinessLogicApiServiceImplementation() {
+    }
+
+
     //--- Functions ----------------------------------------------------
     @Override
     public double calculateTotalPrice(Date checkIn, Date checkOut, double pricePerNight) {

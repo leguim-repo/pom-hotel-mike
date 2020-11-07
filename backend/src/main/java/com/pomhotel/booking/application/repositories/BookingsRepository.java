@@ -13,7 +13,7 @@ public interface BookingsRepository {
     BookingsEntity findById(long id);
 
     List<BookingsEntity> findAll();
-    List<Object[]> prueba(long id);
+    List<Object[]> getBookedDatesByRoomId(long id);
 
     void saveOrUpdate(BookingsEntity entity);
 
