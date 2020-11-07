@@ -35,7 +35,7 @@ const SearchForm = (props) => {
       'rawCheckin': date,
     }
     setFilter(newFilter);
-    StorageManager.saveCheckin(theDate);
+    StorageManager.saveCheckin(date);
     props.onChangeFilter(newFilter);
   }
 
@@ -49,7 +49,7 @@ const SearchForm = (props) => {
       'rawCheckout': date,
     }
     setFilter(newFilter);
-    StorageManager.saveCheckout(theDate);
+    StorageManager.saveCheckout(date);
     props.onChangeFilter(newFilter);
   }
 
@@ -108,7 +108,7 @@ const SearchForm = (props) => {
               <Row style={{fontSize: '1.1em'}}>
               <DatePicker
                 name="checkout"
-                minDate={new Date()}
+                minDate={StorageManager.getCheckin()}
                 locale="es"
                 dateFormat="dd/MM/yyyy"
                 selected={StorageManager.getCheckout()}
