@@ -5,7 +5,8 @@ const apiBaseURL = "http://pom-hotel.code:8080/api"
 const apiGetAllRooms = apiBaseURL+"/rooms";
 const apiGetRoomById = apiBaseURL+"/roomdetail";
 const apiCalculateBook = apiBaseURL+"/calculatebook";
-const apiBookedDatesByRoomId = apiBaseURL+"/dates"
+const apiBookedDatesByRoomId = apiBaseURL+"/dates";
+const apiRoomsAndBookedDates = apiBaseURL+"/roomsandbookeddates";
 export const apiGetMusicLink = apiBaseURL+"/music";
 
 
@@ -25,6 +26,20 @@ export async function getAllRooms() {
   return data;
 }
 
+export async function getAllRoomsAndBookedDates() {
+  const response = await axios(apiRoomsAndBookedDates);
+  const data = await response.data;
+  console.log('getAllRoomsAndBookedDates: ',data);
+  //metemos el objecto de bookedDates dentro de rooms
+  let roomsAndBookedDates = [];
+  for (let i=0; i<data.length; i++){
+    let objRoom = data[i].room;
+    let objDates = data[i].bookedDates;
+    objRoom.bookedDates = objDates;
+    roomsAndBookedDates.push(objRoom);
+  }
+  return roomsAndBookedDates;
+}
 
 export async function apiGetBookPrice(book) {
   var config = {

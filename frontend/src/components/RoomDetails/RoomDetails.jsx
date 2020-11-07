@@ -7,7 +7,7 @@ import { faBath, faTv, faWifi, faSmokingBan } from '@fortawesome/free-solid-svg-
 // https://fontawesome.com/icons?d=gallery&m=free
 
 function RoomDetails(props) {
-  console.log('RoomDetails.props: ' ,props);
+  //console.log('RoomDetails.props: ' ,props);
 
   const ShowDetails = () => {
               return(

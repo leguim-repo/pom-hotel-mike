@@ -1,5 +1,5 @@
 
-import { getAllRooms } from "api/ApiServices";
+import { getAllRooms, getAllRoomsAndBookedDates } from "api/ApiServices";
 import {parse, parseISO} from 'date-fns';
 
 
@@ -8,11 +8,13 @@ class StorageManager {
     const data =localStorage.getItem("pom-hotel");
     if (data === null ) {
       const rooms = await getAllRooms();
+      const roomsAndBookedDates = await getAllRoomsAndBookedDates();
       const dataset = {
         rooms: rooms,
         checkin: new Date(),
         checkout: new Date(),
         guests: "3",
+        roomsAndBookedDates: roomsAndBookedDates,
 
       }
       console.log('pom-hotel not found');

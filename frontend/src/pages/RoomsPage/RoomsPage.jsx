@@ -19,7 +19,7 @@ class RoomsPage extends React.Component {
   constructor(props) {
     super(props);
     console.log('RoomsPage.constructor: ',props);
-    if (props.location.state != undefined) {
+    if (props.location.state !== undefined) {
 
       this.state = {
         rooms: props.location.state.rooms,

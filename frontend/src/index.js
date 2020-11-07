@@ -12,6 +12,8 @@ import './App.css';
 // pages for this project
 import HomePage from "pages/HomePage/HomePage";
 import RoomsPage from "pages/RoomsPage/RoomsPage"
+import RoomPageFilter from "pages/RoomsPage/RoomPageFilter"
+
 import DetailAndBookPage from "pages/DetailAndBookPage/DetailAndBookPage";
 import LoginPomPage from "pages/LoginPomPage/LoginPomPage";
 
@@ -42,6 +44,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" render={(props) => <HomePage {...props} />} />
           <Route path="/rooms/:params?" render={(props) => <RoomsPage {...props} />} />
+          <Route path="/filter" render={(props)=><RoomPageFilter {...props}></RoomPageFilter>}></Route>
           <Route path="/roomdetail/:room?" render={(props) => <DetailAndBookPage {...props} />} />
           <Route path="/login" render={(props) => <LoginPomPage {...props} />} />
           {/** redirect for 404 */}
