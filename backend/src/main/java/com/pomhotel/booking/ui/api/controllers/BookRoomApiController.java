@@ -72,6 +72,18 @@ public class BookRoomApiController {
         return bookings;
     }
 
+    @GetMapping("/api/booking/{targetId}")
+    public BookingsModel getBookingsByIdApi(@PathVariable long targetId) {
+        BookingsModel booking = new BookingsModel();
+        try {
+            booking = bookingsService.findById(targetId);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return booking;
+    }
+
     @GetMapping("/api/dates/{targetId}")
     public List<Date> getAllBookingsDatesApi(@PathVariable long targetId) {
         List<BookingDatesModel> listBooked = bookingsService.getBookedDatesByRoomId(targetId);

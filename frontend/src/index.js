@@ -20,6 +20,7 @@ import StorageManager from "components/StorageManager/StorageManager";
 
 import { Provider } from "react-redux";
 import { ConfigureStoreDev } from "./redux/configureStores";
+import ThankYouPage from "pages/ThankYouPage/ThankYouPage";
 
 
 const store_dev = ConfigureStoreDev();
@@ -44,6 +45,7 @@ ReactDOM.render(
           <Route exact path="/" render={(props) => <HomePage {...props} />} />
           <Route path="/rooms" render={(props) => <RoomsPage {...props} />} />
           <Route path="/roomdetail/:room?" render={(props) => <DetailAndBookPage {...props} />} />
+          <Route path="/thankyou/:booking?" render={(props) => <ThankYouPage {...props} />} />
           <Route path="/login" render={(props) => <LoginPomPage {...props} />} />
           {/** redirect for 404 */}
           <Redirect to="/" />
