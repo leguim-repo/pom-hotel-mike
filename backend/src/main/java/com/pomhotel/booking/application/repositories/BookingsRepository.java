@@ -15,6 +15,7 @@ public interface BookingsRepository {
     List<BookingsEntity> findAll();
     List<Object[]> getBookedDatesByRoomId(long id);
 
+
     void saveOrUpdate(BookingsEntity entity);
 
     void deleteById(long id);

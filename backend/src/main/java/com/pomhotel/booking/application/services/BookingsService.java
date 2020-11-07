@@ -14,8 +14,8 @@ public interface BookingsService {
 
     List<BookingsModel> findAll();
     List<BookingDatesModel> getBookedDatesByRoomId(long id);
-    List<Date> generateBookedDatesInRunTime(List<BookingDatesModel> model);
 
+    List<Date> generateBookedDatesInRunTime(List<BookingDatesModel> model);
 
     void saveOrUpdate(BookingsModel model);
 

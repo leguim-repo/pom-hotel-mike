@@ -8,7 +8,6 @@ import java.sql.Date;
 public class BookingDatesModel {
     public Date checkIn;
     public Date checkOut;
-    private String id;
 
     public BookingDatesModel() {
     }

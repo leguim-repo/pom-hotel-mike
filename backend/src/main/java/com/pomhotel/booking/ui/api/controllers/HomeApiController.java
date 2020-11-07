@@ -1,7 +1,9 @@
 package com.pomhotel.booking.ui.api.controllers;
 
 
+import com.pomhotel.booking.application.models.RoomWithBookedDatesModel;
 import com.pomhotel.booking.application.models.RoomsModel;
+import com.pomhotel.booking.application.services.RoomsAndBookedDatesService;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.ui.api.RoomNotFoundException;
 import com.pomhotel.booking.ui.mvc.dto.SearchDTO;
@@ -17,11 +19,19 @@ import java.util.List;
 @RestController
 public class HomeApiController {
     RoomsService roomsService;
+    RoomsAndBookedDatesService roomsAndBookedDatesService;
 
     @Autowired
+    public HomeApiController(RoomsService roomsService, RoomsAndBookedDatesService roomsAndBookedDatesService) {
+        this.roomsService = roomsService;
+        this.roomsAndBookedDatesService = roomsAndBookedDatesService;
+    }
+
     public HomeApiController(RoomsService roomsService) {
         this.roomsService = roomsService;
     }
+
+
 
 
     // OK Endpoint of link [Rooms]
@@ -31,6 +41,11 @@ public class HomeApiController {
         return rooms;
     }
 
+    @GetMapping("/api/roomsandbookeddates")
+    public List<RoomWithBookedDatesModel> getAllRoomsWithBookedDates() {
+        List<RoomWithBookedDatesModel> rooms = roomsAndBookedDatesService.findAllRoomsAndBookedDates();
+        return rooms;
+    }
 
     // OK Endpoint of button [Find Rooms] in home and [Find Room] in rooms
     @PostMapping("/api/findroom")
