@@ -149,11 +149,11 @@ class BookingServices extends Component {
 
 
     render() {
-      console.log('render.state: ',this.state);
+      console.log('BookingServices.props: ',this.props);
 
       return (
         <React.Fragment>
-            <Form style={{margin: '0px'}} className="formExtend border" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
+            <Form style={{margin: '0px'}} className="formExtend border mb-5" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
               <Col>
               <FormGroup className="">
                     <Col className="m-auto">
@@ -169,7 +169,7 @@ class BookingServices extends Component {
                             name="checkin" 
                             id="checkin" 
                             date={this.state.checkin} 
-                            excludeDates={this.state.excludeDates} 
+                            excludeDates={this.props.excludeDates} 
                             handle={this.handleCheckIn}>
                         </CheckInPicker>
                     </Row>
@@ -179,7 +179,13 @@ class BookingServices extends Component {
                 <Col className="m-auto">
                   <FormGroup className="m-3">
                     <Row><Label htmlFor="checkout">Checkin: </Label><br></br></Row>
-                    <Row style={{fontSize: '1.1em'}}><CheckOutPicker id="checkout" date={this.state.checkout} handle={this.handleCheckOut}></CheckOutPicker></Row>
+                    <Row style={{fontSize: '1.1em'}}>
+                      <CheckOutPicker 
+                            id="checkout" 
+                            date={this.state.checkout} 
+                            excludeDates={this.props.excludeDates} 
+                            handle={this.handleCheckOut}
+                      ></CheckOutPicker></Row>
                   </FormGroup>
                 </Col>
 
@@ -187,15 +193,7 @@ class BookingServices extends Component {
                   <FormGroup className="m-3">
                     <Row><Label htmlFor="guests">Guests: </Label></Row>
                     <Row>
-                      <Input readOnly className="bg-white" style={{fontSize: '1.0em', padding: '0.30em'}} id="guests" name="guests" type="text" onChange={this.onChangeGuests} defaultValue="2">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>+5</option>
-                      </Input>
-
-                      
+                      <Input readOnly className="bg-white" style={{fontSize: '1.0em', padding: '0.30em'}} id="guests" name="guests" type="text" onChange={this.onChangeGuests} defaultValue={this.props.room.guests}></Input>
                     </Row>
                   </FormGroup>
                 </Col>

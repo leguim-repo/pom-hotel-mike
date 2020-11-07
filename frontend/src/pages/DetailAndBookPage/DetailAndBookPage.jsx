@@ -8,7 +8,7 @@ import PomFooter from "../../components/Footer/PomFooter";
 import Loader from "../../components/Loader/Loader";
 
 import RoomDetails from "../../components/RoomDetails/RoomDetails";
-import { getRoomById } from "../../api/ApiServices";
+import { getRoomById, apiGetBookedDatesByRoomId } from "../../api/ApiServices";
 
 import BookingServices from "../../components/BookingServices/BookingServices";
 
@@ -19,16 +19,16 @@ function DetailAndBookPage(props) {
   const [room, setRoom] = useState({});
   const [checkin, setCheckin] = useState(new Date());
   const [checkout, setCheckout] = useState(new Date());
-
+  const [bookedDates, setBookedDates] = useState([]);
 
   console.log("DetailAndBookPage.props: ", props, " room: ", room);
   
   React.useEffect(() => {
     getRoomById(props.match.params.room).then((data) => setRoom(data));
-    
+    apiGetBookedDatesByRoomId(props.match.params.room).then((data) => setBookedDates(data));
 
-    setCheckin(props.location.state.checkin);
-    setCheckout(props.location.state.checkout);
+    setCheckin(StorageManager.getCheckin());
+    setCheckout(StorageManager.getCheckout());
 
 
     document.body.classList.add("index-page");
@@ -43,7 +43,9 @@ function DetailAndBookPage(props) {
     };
   }, []);
 
-  console.log("DetailAndBookPage.props: ",props, "\nDetailAndBookPage.state: ",props.location.state);
+  if (room !== undefined) {
+    console.log("DetailAndBookPage.room: ",room, ' bookedDate: ',bookedDates);
+  }
   return (
     <React.Fragment>
       <PomNavbar />
@@ -64,14 +66,14 @@ function DetailAndBookPage(props) {
             </Row>
 
             <Row>
-              <Col lg={4} xl={9} className="border border-danger">
+              <Col lg={4} xl={9} className="">
                 <Container fluid className="border border-dark">
                   {/* Doble render -> https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects*/}
                   {room.image === undefined ? (<Loader />) : (<RoomDetails showdetails room={room} />)}
                 </Container>
               </Col>
-              <Col lg={4} xl={3} className="border border-danger">
-                {room.image === undefined ? (<Loader />) : (<BookingServices room={room} checkin={checkin} checkout={checkout}></BookingServices>)}
+              <Col lg={4} xl={3} className="">
+                {room.image === undefined ? (<Loader />) : (<BookingServices room={room} checkin={checkin} checkout={checkout} excludeDates={bookedDates}></BookingServices>)}
               </Col>
             </Row>
           </Container>

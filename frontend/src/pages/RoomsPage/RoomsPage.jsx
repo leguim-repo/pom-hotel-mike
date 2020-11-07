@@ -1,104 +1,147 @@
-import React from "react";
-// core components
+import React, { useEffect, useState } from 'react';
+import { Button, Container, Row, Col } from "reactstrap";
+
+import FindRoomsExtend from '../../components/FindRoomsExtend/FindRoomsExtend';
+import { getAllRoomsAndBookedDates } from '../../api/ApiServices';
+import { isDateBetween } from '../../services/date.service';
+import RoomDetails from "../../components/RoomDetails/RoomDetails";
+
 import PomNavbar from "../../components/Navbar/PomNavbar";
 import PomHeader from "../../components/Header/PomHeader";
 import PomFooter from "../../components/Footer/PomFooter";
-import FindRoomsExtend from "../../components/FindRoomsExtend/FindRoomsExtend";
-import RoomDetails from "../../components/RoomDetails/RoomDetails";
 import GotoTop from "../../components/GotoTop/GotoTop";
 import Loading from "../../components/Loader/Loader";
-import { getAllRooms } from "../../api/ApiServices"
-import { Button, Container, Row, Col } from "reactstrap";
-import { Link } from 'react-router-dom';
 import "./RoomsPage.css"
+import { Link } from 'react-router-dom';
 
-import StorageManager from "../../components/StorageManager/StorageManager";
 
 
-class RoomsPage extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log('RoomsPage.constructor: ',props);
-    if (props.location.state !== undefined) {
+const initialFilter = {
+  pricefrom: '',
+  priceto: '',
+  roomtype: '',
+  guests: '',
+  checkin: '',
+  checkout:  '',
+};
 
-      this.state = {
-        rooms: props.location.state.rooms,
-        excludeDates: props.location.state.excludeDates,
-        checkin: props.location.state.checkin,
-        checkout: props.location.state.checkout,
-        guests: props.location.state.guests,
-      };
-    }
-        
-    this.handleBookNow = this.handleBookNow.bind(this);
-
-  }
-
-  async componentDidMount(){
-    StorageManager.setupApplication();
-
-    console.log("RoomsPage.componentDidMount")
+function RoomsPage() {
+  const [rooms, setRooms] = useState([]);
+  const [filter, setFilter] = useState(initialFilter);
+  useEffect(() => {
+    getAllRoomsAndBookedDates().then((data) => setRooms(data));
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
 
-    const rooms = await getAllRooms();
-    this.setState({rooms: rooms});
+    return function cleanup() {
+      document.body.classList.remove("index-page");
+      document.body.classList.remove("sidebar-collapse");
+    };
+  }, []);
+
+
+  function resetFilter(event) {
+    setFilter(initialFilter);
   }
 
-  handleBookNow(event) {
-    event.preventDefault();
-    console.log('handleBookNow:', event.target.roomid.value);
-    this.props.history.push('/booknowold?room='+event.target.roomid.value);
-  }
+  const roomsFiltered = rooms.filter((room) => {
+    let validPricePerNightFrom = filter.pricefrom
+      ? room.pricePerNight >= +filter.pricefrom
+      : true;
+    let validPricePerNightTo = filter.priceto
+      ? room.pricePerNight <= +filter.priceto
+      : true;
+    let validGuest = filter.guests
+      ? room.guests === +filter.guests
+      : true;
+    let validType = filter.roomtype ? room.roomtypesByFkRoomtypeId.id === +filter.roomtype : true;
+    //let validType = room.code.includes(filter.roomtype);
+    let validDate = !room.bookedDates.some(
+      (date) =>
+        isDateBetween(date, filter.checkin, filter.checkout),
+    );
 
-  render() {
-    console.log("Romspage.props: ", this.props,"\nRoomsPage.state: ",this.state);
-    if (this.state === null) {
-      return(<div><Loading></Loading></div>)
-    }
-    const RenderRooms = this.state.rooms.map( (e) => (
-                            <Container fluid key={e.id} className="border border-dark mb-5">
-                              <RoomDetails key={e.id} room={e}></RoomDetails>
-                              <Row className="mb-2">
-                                <Col></Col>
-                                <Col className="text-center">
-                                  <Link to= {{pathname: '/roomdetail/'+e.id, state: this.state}} onClick={() => {console.log('click button link')}} >
-                                    <Button className="bg-warning mb-3 " style={{fontSize: '1.2em', padding: '0.5em'}}>Details & Book</Button>
-                                  </Link>
-                                </Col>
-                              </Row>
-                            </Container>
-    ));
-
-    console.log("RoomPage.state: ",this.state, "\nRoomPage.props: ",this.props);
     return (
-      <React.Fragment>
+      validPricePerNightFrom &&
+      validPricePerNightTo &&
+      validGuest &&
+      validType &&
+      validDate
+    );
+  });
+
+
+
+  const RenderRooms = roomsFiltered.map( (room) => (
+                        <Container fluid key={room.id} className="border border-dark mb-5">
+                          <RoomDetails key={room.id} room={room}></RoomDetails>
+                          <div className='booked border border-danger'>
+                            <p>Booked Dates. Only for development purposes</p>
+                            {room.bookedDates.map((date) => (
+                              <div key={date}>{date}</div>
+                              ))}
+                          </div>
+                          <Row className="mb-2">
+                            <Col></Col>
+                            <Col className="text-center">
+                              <Link to= {{pathname: '/roomdetail/'+room.id}} onClick={() => {console.log('click button link')}} >
+                                <Button className="bg-warning mb-3 " style={{fontSize: '1.2em', padding: '0.5em'}}>Details & Book</Button>
+                              </Link>
+                            </Col>
+                          </Row>
+                        </Container>
+                      ));
+  
+  console.log('RoomsPage.filter: ',filter);
+
+  return (
+    <React.Fragment>
       <PomNavbar />
-      <div id="top" className="wrapper">
-        <PomHeader image={require("assets/img/revato-10251-13112723-111323.jpg")} sloganBig="Find your rest" sloganLittle="in the paradise"/>
-        <div className="main">
-          <div className="container-fluid">     
+        <div className="wrapper">
+          <PomHeader image={require("assets/img/revato-10251-13112723-111323.jpg")} sloganBig="Find your rest" sloganLittle="in the paradise"/>
+          <div className="main">
+            <Container fluid>
             <Row>
               <Col>
                 <h2 className="text-center H2Title">Our Rooms</h2>
               </Col>
             </Row>
             <Row >
-              <Col md={9} className="border border-danger">
-                  {RenderRooms}
+              <Col md={9} className="">
+                {RenderRooms}
               </Col>
-              <Col md={3} className="border border-danger">
-                <FindRoomsExtend parameters={this.state}></FindRoomsExtend>
+              <Col md={3} className="">
+                <FindRoomsExtend onChangeFilter={setFilter} onClickClear={resetFilter}/>
               </Col>
             </Row>
+            </Container>
+            <GotoTop></GotoTop>
           </div>
-          <GotoTop></GotoTop>
+          <PomFooter />
         </div>
-        <PomFooter />
-      </div>
-      </React.Fragment>
-    );
-  }
+    </React.Fragment>
+  );
 }
+
 export default RoomsPage;
+
+
+/*
+
+
+                {roomsFiltered.map((room) => (
+                  <div key={room.id}>
+                    <span>{room.id}</span>
+                    <RoomDetails key={room.id} room={room}></RoomDetails>
+                    <div className='booked'>
+                      {room.bookedDates.map((date) => (
+                        <div key={date}>{date}</div>
+                        ))}
+                    </div>
+                  </div>
+                ))}
+
+*/
