@@ -12,6 +12,60 @@ import { apiGetBookPrice } from 'api/ApiServices';
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
 
+
+class BookingApiDTO {
+  constructor() {
+    console.log('BookingApiDTO.constructor: ');
+    this.roomId = 0;
+    this.checkIn = new Date();
+    this.checkOut = new Date();
+    this.guests = 2;
+    this.breakfastService = false;
+    this.carParkingService = false;
+    this.spaService = false;
+    this.laundryService = false;
+    this.shuttleService = false;
+    this.codeDiscount = "";
+    this.email = "email@email.dot";
+    console.info('this: ',this);
+  }
+
+  setRoomId(value) {
+    this.roomId = value;
+  }
+  setCheckIn(value) {
+    this.checkIn = value;
+  }
+  setCheckOut(value) {
+    this.checkOut = value;
+  }
+  setGuests(value) {
+    this.guests = value;
+  }
+  setBreakfastService(value) {
+    this.breakfastService = value;
+  }
+  setCarParkingService(value) {
+    this.carParkingService = value;
+  }
+  setSpaService(value) {
+    this.spaService = value;
+  }
+  setLaundryService(value) {
+    this.laundryService = value;
+  }
+  setShuttleService(value) {
+    this.shuttleService = value;
+  }
+  setCodeDiscount(value) {
+    this.codeDiscount = value;
+  }
+  setEmail(value) {
+    this.email = value;
+  }
+}
+
+
 class BookingServices extends Component {
     constructor(props) {
       super(props);
@@ -30,13 +84,12 @@ class BookingServices extends Component {
         showLaundryService: false,
         showShuttleService: false,
         discountCode: "",
-
+        email: "",
         bookCalculate: {},
 
-
       }
-      console.log('BookingServices.props: ',props);
-      console.log('BookingServices.state: ',this.state);
+      console.log('BookingServices.constructor.props: ',props);
+      console.log('BookingServices.constructor.state: ',this.state);
 
       this.handleCheckIn = this.handleCheckIn.bind(this);
       this.handleCheckOut = this.handleCheckOut.bind(this);
@@ -48,6 +101,7 @@ class BookingServices extends Component {
       this.onChangeLaundryService = this.onChangeLaundryService.bind(this);
       this.onChangeShuttleService = this.onChangeShuttleService.bind(this);
       this.onChangeCodeDiscount = this.onChangeCodeDiscount.bind(this);
+      this.onChangeEmail = this.onChangeEmail.bind(this);
 
 
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -88,29 +142,28 @@ class BookingServices extends Component {
 
     onChangeCodeDiscount(event) {
       this.setState({discountCode: event.target.value.toUpperCase()});
+    }
 
+    onChangeEmail(event) {
+      this.setState({email: event.target.value});
     }
 
     async getPriceOfCurrentBook() { 
-      console.log('getPriceOfCurrentBook.state: ',this.state);
-      const book = {
-          "roomId" : this.state.roomId,
-          "checkIn" : this.state.checkin.toJSON().split("T")[0],
-          "checkOut" : this.state.checkout.toJSON().split("T")[0],
-          "guests" : this.state.guests,
-          "breakfastService": this.state.showBreakfast,
-          "carParkingService": this.state.showCarParking,
-          "spaService": this.state.showSpaService,
-          "laundryService": this.state.showLaundryService,
-          "shuttleService": this.state.showShuttleService,
-          "codeDiscount" : this.state.discountCode, 
-          "totalPrice" : "0",
+      const bookToCalculate = new BookingApiDTO();
+      bookToCalculate.setRoomId(this.state.roomId);
+      bookToCalculate.setCheckIn(this.state.checkin.toJSON().split("T")[0]);
+      bookToCalculate.setCheckOut(this.state.checkout.toJSON().split("T")[0]);
+      bookToCalculate.setGuests(this.state.guests);
+      bookToCalculate.setBreakfastService(this.state.showBreakfast);
+      bookToCalculate.setCarParkingService(this.state.showCarParking);
+      bookToCalculate.setSpaService(this.state.showSpaService);
+      bookToCalculate.setLaundryService(this.state.showLaundryService);
+      bookToCalculate.setShuttleService(this.state.showShuttleService);
+      bookToCalculate.setCodeDiscount(this.state.discountCode);
+      bookToCalculate.setEmail(this.state.email);
 
-      }
-      console.log('book: ',book);
-      const bookCalculate = await apiGetBookPrice(book);
-      console.log('getBookPrice: ',bookCalculate);
-      return bookCalculate;
+      const bookCalculated = await apiGetBookPrice(bookToCalculate);
+      return bookCalculated;
     }
 
     handleSubmit(e){
@@ -121,9 +174,22 @@ class BookingServices extends Component {
       var checkout = this.state.checkout.toJSON().split("T")[0];
       var guests = this.state.guests;
       console.log('checkin: ', checkin, ' checkout: ',checkout, ' guests: ', guests);
-      alert("reservar para hacer")
+      //alert("reservar para hacer")
       //this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
-
+      console.log('handle.state: ',this.state);
+      const reserva = new BookingApiDTO();
+      reserva.setRoomId(this.state.roomId);
+      reserva.setCheckIn(this.state.checkin.toJSON().split("T")[0]);
+      reserva.setCheckOut(this.state.checkout.toJSON().split("T")[0]);
+      reserva.setGuests(this.state.guests);
+      reserva.setBreakfastService(this.state.showBreakfast);
+      reserva.setCarParkingService(this.state.showCarParking);
+      reserva.setSpaService(this.state.showSpaService);
+      reserva.setLaundryService(this.state.showLaundryService);
+      reserva.setShuttleService(this.state.showShuttleService);
+      reserva.setCodeDiscount(this.state.discountCode);
+      reserva.setEmail(this.state.email);
+      console.log('handleSubmitBookNow: ',reserva);
     }
 
 
@@ -150,16 +216,17 @@ class BookingServices extends Component {
 
     render() {
       console.log('BookingServices.props: ',this.props);
+      console.log('BookingServices.state: ',this.state);
 
       return (
         <React.Fragment>
             <Form style={{margin: '0px'}} className="formExtend border mb-5" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
               <Col>
-              <FormGroup className="">
-                    <Col className="m-auto">
-                      <Row><h3 className="mb-0">Book Room & Services</h3></Row>
-                    </Col>
-                  </FormGroup>
+                <FormGroup className="">
+                  <Col className="m-auto">
+                    <Row><h3 className="mb-0">Book Room & Services</h3></Row>
+                  </Col>
+                </FormGroup>
 
                 <Col className="m-auto">
                   <FormGroup className="mt-1 ml-3">
@@ -191,9 +258,9 @@ class BookingServices extends Component {
 
                 <Col className="m-auto">
                   <FormGroup className="m-3">
-                    <Row><Label htmlFor="guests">Guests: </Label></Row>
+                    <Row><Label htmlFor="guests">Maximum Guests: </Label></Row>
                     <Row>
-                      <Input readOnly className="bg-white" style={{fontSize: '1.0em', padding: '0.30em'}} id="guests" name="guests" type="text" onChange={this.onChangeGuests} defaultValue={this.props.room.guests}></Input>
+                      <input readOnly className="form-input bg-white" style={{fontSize: '1.0em', padding: '0.30em'}} id="guests" name="guests" type="text" onChange={this.onChangeGuests} defaultValue={this.props.room.guests}/>
                     </Row>
                   </FormGroup>
                 </Col>
@@ -251,9 +318,19 @@ class BookingServices extends Component {
                 <Row>
                   <Col><span>Total</span></Col>
                   <Col md={3}><span className="pull-right">{this.state.bookCalculate.totalBookingPrice} €</span></Col>
-                  
                 </Row>
-                
+
+                <hr className="border border-light"/>
+
+                <Col className="m-auto">
+                  <FormGroup className="mt-1 ml-3">
+                    <Row><Label htmlFor="checkin">Email for send your booking: </Label><br></br></Row>
+                    <Row style={{fontSize: '1.1em'}}>
+                      <input type="email" className="" id="email" aria-describedby="emailHelp" placeholder="Enter email"/>
+                    </Row>
+                  </FormGroup>
+                </Col>
+
 
                 <Col className="m-auto">
                   <Row className="justify-content-center">

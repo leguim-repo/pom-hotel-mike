@@ -29,16 +29,20 @@ public class BookingApiDTO {
     public Boolean laundryService;
     public Boolean shuttleService;
     public String codeDiscount;
-
-    public int totalPrice;
+    public String email;
 
 
     //--- Getters & Setters ----------------------------------------
     //Note: Spring hace su magia a traves de los Getters y los Setters. Se tienen que poner si o si.
 
+
+    public BookingApiDTO() {
+    }
+
     public long getRoomId() {
         return roomId;
     }
+
     public void setRoomId(long roomId) {
         this.roomId = roomId;
     }
@@ -46,6 +50,7 @@ public class BookingApiDTO {
     public String getCheckIn() {
         return checkIn;
     }
+
     public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
@@ -53,20 +58,15 @@ public class BookingApiDTO {
     public String getCheckOut() {
         return checkOut;
     }
+
     public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
-    }
-
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public String getGuests() {
         return guests;
     }
+
     public void setGuests(String guests) {
         this.guests = guests;
     }
@@ -74,6 +74,7 @@ public class BookingApiDTO {
     public Boolean getBreakfastService() {
         return breakfastService;
     }
+
     public void setBreakfastService(Boolean breakfastService) {
         this.breakfastService = breakfastService;
     }
@@ -81,6 +82,7 @@ public class BookingApiDTO {
     public Boolean getCarParkingService() {
         return carParkingService;
     }
+
     public void setCarParkingService(Boolean carParkingService) {
         this.carParkingService = carParkingService;
     }
@@ -88,6 +90,7 @@ public class BookingApiDTO {
     public Boolean getSpaService() {
         return spaService;
     }
+
     public void setSpaService(Boolean spaService) {
         this.spaService = spaService;
     }
@@ -95,6 +98,7 @@ public class BookingApiDTO {
     public Boolean getLaundryService() {
         return laundryService;
     }
+
     public void setLaundryService(Boolean laundryService) {
         this.laundryService = laundryService;
     }
@@ -102,6 +106,7 @@ public class BookingApiDTO {
     public Boolean getShuttleService() {
         return shuttleService;
     }
+
     public void setShuttleService(Boolean shuttleService) {
         this.shuttleService = shuttleService;
     }
@@ -109,8 +114,17 @@ public class BookingApiDTO {
     public String getCodeDiscount() {
         return codeDiscount;
     }
+
     public void setCodeDiscount(String codeDiscount) {
         this.codeDiscount = codeDiscount;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -126,7 +140,7 @@ public class BookingApiDTO {
                 ", laundryService=" + laundryService +
                 ", shuttleService=" + shuttleService +
                 ", codeDiscount='" + codeDiscount + '\'' +
-                ", totalPrice=" + totalPrice +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
