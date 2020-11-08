@@ -1,5 +1,6 @@
 package com.pomhotel.booking.ui.api.services;
 
+import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
@@ -15,5 +16,7 @@ public interface BusinessLogicApiService {
 
     long getDaysBetweenTwoDates(Date date1, Date date2);
 
-    CalculatedBookDTO bookCalculation(BookingApiDTO book);
+    CalculatedBookDTO calculateBooking(BookingApiDTO book);
+    CalculatedBookDTO calculateBooking(BookingsModel book);
+    CalculatedBookDTO calculateBook(BookingApiDTO book);
 }

@@ -25,6 +25,9 @@ public class CalculatedBookDTO {
     public double codeDiscountPrice;
     public double totalBookingPrice;
 
+    public CalculatedBookDTO() {
+    }
+
 
     public double getRoomTotalPrice() {
         return roomTotalPrice;

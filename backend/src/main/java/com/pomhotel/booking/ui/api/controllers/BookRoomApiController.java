@@ -7,6 +7,7 @@ import com.pomhotel.booking.application.services.BookingsService;
 import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.ui.api.dto.BookNowResponseDTO;
+import com.pomhotel.booking.ui.api.dto.BookingWithPricesDTO;
 import com.pomhotel.booking.ui.api.exceptions.BookingApiException;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
@@ -44,18 +45,22 @@ public class BookRoomApiController {
     }
 
     @GetMapping("/api/booking/{targetId}")
-    public BookingsModel getBookingsByIdApi(@PathVariable long targetId) {
+    public BookingWithPricesDTO getBookingsByIdApi(@PathVariable long targetId) {
+        BookingWithPricesDTO response = new BookingWithPricesDTO();
         BookingsModel booking = new BookingsModel();
-        CalculatedBookDTO bookingCalculado;
-        //bookingCalculado = businessLogicService.bookCalculation(booking);
+        CalculatedBookDTO prices = new CalculatedBookDTO();
 
         try {
             booking = bookingsService.findById(targetId);
+            prices = businessLogicService.calculateBooking(booking);
+            response.setBook(booking);
+            response.setPrices(prices);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return booking;
+        //TODO devolver el booking y los precios calculado en un object
+        return response;
     }
 
     @GetMapping("/api/dates/{targetId}")
@@ -72,7 +77,7 @@ public class BookRoomApiController {
         CalculatedBookDTO bookingCalculado;
         //llamamos al servicio de calculadora para que devuelva el precio de la reserva
         System.out.println("recibido: "+booking);
-        bookingCalculado = businessLogicService.bookCalculation(booking);
+        bookingCalculado = businessLogicService.calculateBooking(booking);
         System.out.println("calculado y enviado: "+bookingCalculado);
         return bookingCalculado;
     }
@@ -103,7 +108,7 @@ public class BookRoomApiController {
             model.codediscount = dto.codeDiscount;
             model.clientEmail = dto.email;
             model.roomsByFKRoomId = room;
-            bookingCalculado = businessLogicService.bookCalculation(dto);
+            bookingCalculado = businessLogicService.calculateBooking(dto);
             model.totalPrice = bookingCalculado.totalBookingPrice;
             System.out.println("bookroomnow.model: "+model.toString());
 

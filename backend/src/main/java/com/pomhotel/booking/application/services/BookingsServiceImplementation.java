@@ -69,7 +69,6 @@ public class BookingsServiceImplementation implements BookingsService{
                 bookedDates.add(newDay);
             }
         }
-
         return bookedDates;
     }
 

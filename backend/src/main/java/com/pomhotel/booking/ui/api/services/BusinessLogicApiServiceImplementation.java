@@ -1,5 +1,7 @@
 package com.pomhotel.booking.ui.api.services;
 
+import com.pomhotel.booking.application.domain.factories.BookingsFactory;
+import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.application.services.RoomsServiceImplementation;
@@ -17,12 +19,14 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class BusinessLogicApiServiceImplementation implements BusinessLogicApiService {
     RoomsService roomsService;
+    BookingsFactory bookingsFactory;
     DateTimeFormatter formatoDeEntrada = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     DateTimeFormatter formatoDeSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Autowired
-    public BusinessLogicApiServiceImplementation(RoomsService roomsService) {
+    public BusinessLogicApiServiceImplementation(RoomsService roomsService,BookingsFactory bookingsFactory) {
         this.roomsService = roomsService;
+        this.bookingsFactory = bookingsFactory;
     }
 
     public BusinessLogicApiServiceImplementation() {
@@ -48,7 +52,17 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
     }
 
     @Override
-    public CalculatedBookDTO bookCalculation(BookingApiDTO book) {
+    public CalculatedBookDTO calculateBooking(BookingApiDTO book) {
+        return calculateBook(book);
+    }
+
+    @Override
+    public CalculatedBookDTO calculateBooking(BookingsModel book) {
+        return calculateBook(bookingsFactory.createDTO(book));
+    }
+
+    @Override
+    public CalculatedBookDTO calculateBook(BookingApiDTO book) {
         CalculatedBookDTO calculatedBook = new CalculatedBookDTO();
         RoomsModel room;
         double basePrice=0;
@@ -56,7 +70,6 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         System.out.println("book: "+book.toString());
 
         room = roomsService.findById(book.roomId);
-
 
         calculatedBook.setRoomPricePerNight(room.pricePerNight);
         calculatedBook.setTotalNights(this.getDaysBetweenTwoDates(Date.valueOf(book.checkIn),Date.valueOf(book.checkOut)));
@@ -120,5 +133,6 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         System.out.println("calculatedBook: "+calculatedBook.toString());
         return calculatedBook;
     }
+
 
 }

@@ -3,6 +3,7 @@ package com.pomhotel.booking.application.domain.factories;
 import com.pomhotel.booking.application.domain.entities.BookingsEntity;
 import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
+import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -63,6 +64,24 @@ public class BookingsFactory {
         model.roomsByFKRoomId = roomsFactory.createModel(entity.getRoomsByFkRoomId());
         return model;
     }
+
+    public BookingApiDTO createDTO(BookingsModel model){
+        BookingApiDTO dto = new BookingApiDTO();
+        dto.roomId = model.roomsByFKRoomId.id;
+        dto.checkIn = model.checkIn.toString();
+        dto.checkOut = model.checkOut.toString();
+        dto.guests = String.valueOf(model.guests);
+        dto.breakfastService = model.breakfast;
+        dto.carParkingService = model.carparking;
+        dto.spaService = model.spa;
+        dto.laundryService = model.laundry;
+        dto.shuttleService = model.shuttle;
+        dto.codeDiscount = model.codediscount;
+        dto.email = model.clientEmail;
+        return dto;
+    }
+
+
     public List<BookingDatesModel> createModelDates(List<Object[]> entities){
         List<BookingDatesModel> listaDates = new ArrayList<>();
 
@@ -76,9 +95,7 @@ public class BookingsFactory {
             model.setCheckOut(checkout);
             listaDates.add(model);
         }
-
-
-
         return listaDates;
     }
+
 }
