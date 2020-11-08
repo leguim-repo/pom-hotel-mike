@@ -18,6 +18,8 @@ public interface BookingsService {
     List<Date> generateBookedDatesInRunTime(List<BookingDatesModel> model);
 
     void saveOrUpdate(BookingsModel model);
+    Integer save(BookingsModel model);
+
 
     void deleteById(long id);
 

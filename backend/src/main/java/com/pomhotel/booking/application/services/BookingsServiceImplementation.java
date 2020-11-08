@@ -8,6 +8,7 @@ import com.pomhotel.booking.application.repositories.BookingsRepository;
 import com.pomhotel.booking.ui.api.services.BusinessLogicApiService;
 import com.pomhotel.booking.ui.api.services.BusinessLogicApiServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jmx.export.naming.IdentityNamingStrategy;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -70,6 +71,13 @@ public class BookingsServiceImplementation implements BookingsService{
         }
 
         return bookedDates;
+    }
+
+    @Override
+    public Integer save(BookingsModel model) {
+        Integer id = 0;
+        id = repository.save(factory.createEntity(model));
+        return id;
     }
 
     @Override

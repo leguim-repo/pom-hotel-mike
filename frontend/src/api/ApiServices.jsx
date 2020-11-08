@@ -8,6 +8,7 @@ const apiCalculateBook = apiBaseURL+"/calculatebook";
 const apiBookedDatesByRoomId = apiBaseURL+"/dates";
 const apiRoomsAndBookedDates = apiBaseURL+"/roomsandbookeddates";
 const apiGetDataBookingById = apiBaseURL+"/booking";
+const apiBookRoomNow = apiBaseURL+"/bookroomnow";
 export const apiGetMusicLink = apiBaseURL+"/music";
 
 
@@ -44,7 +45,7 @@ export async function getAllRoomsAndBookedDates() {
 
 export async function apiGetBookPrice(book) {
   var config = {
-    method: 'post',
+    method: 'POST',
     url: apiCalculateBook,
     headers: { 
       'Content-Type': 'application/json'
@@ -64,6 +65,23 @@ export async function apiGetBookedDatesByRoomId(roomId) {
   const data = await response.data;
   console.log('apiGetBookedDatesByRoomId.response: ',response)
   console.log('apiGetBookedDatesByRoomId.data: ',data)
+  return data;
+}
+
+export async function apiPostBookRoomNow(book) {
+  var config = {
+    method: 'POST',
+    url: apiBookRoomNow,
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : book
+  };
+
+  const response = await axios(config);
+  const data = await response.data;
+  console.log('apiPostBookRoomNow.book: ',book)
+  console.log('apiPostBookRoomNow.data: ',data);
   return data;
 }
 

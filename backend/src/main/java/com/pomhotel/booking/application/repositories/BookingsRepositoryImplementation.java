@@ -74,12 +74,26 @@ public class BookingsRepositoryImplementation implements BookingsRepository{
         return entities;
     }
 
+    @Override
+    public Integer save(BookingsEntity entity) {
+        Integer bookingId = 0;
+        Object objectSaved = null;
+        Session session = this.dbConnection.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            objectSaved= session.save(entity);
+            transaction.commit();
 
-
-
-
-
-
+        }catch (Throwable ex) {
+            if (transaction!=null) transaction.rollback();
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+        bookingId = Integer.parseInt(objectSaved.toString());
+        return bookingId;
+    }
 
     @Override
     public void saveOrUpdate(BookingsEntity entity) {

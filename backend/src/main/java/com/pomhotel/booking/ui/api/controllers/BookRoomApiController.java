@@ -7,6 +7,7 @@ import com.pomhotel.booking.application.services.BookingsService;
 import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.ui.api.BookRoomNowException;
+import com.pomhotel.booking.ui.api.BookingApiException;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
 import com.pomhotel.booking.ui.api.services.BusinessLogicApiService;
@@ -109,35 +110,39 @@ public class BookRoomApiController {
     // TODO OK Endpoint of button [Confirm Booking] save booking to DataBase and alert if correct or not
     // Valorar construir un NewBookingDTO mas ligero y sin tanto object
     @PostMapping("/api/bookroomnow")
-    public String bookRoomNowApi(@RequestBody @Valid NewBookingDTO dto) {
+    public String bookRoomNowApi(@RequestBody @Valid BookingApiDTO dto) {
+        RoomsModel room;
+        Integer bookingId = 0;
         String view;
         BookingsModel model = new BookingsModel();
-
         try {
-            model.checkIn = businessLogicService.stringToDate(dto.checkIn);
-            model.checkOut = businessLogicService.stringToDate(dto.checkOut);
+            room = roomsService.findById(dto.roomId);
 
-            model.roomsByFKRoomId = roomsService.findById(dto.roomId);
-            
-            // TODO que hacemos con la fucking seguridad para hacer un post de reserva
-            // como obtenemos el username si no funciona el login
-            // pido el login y el usuario en el mismo formulario de confirmacion de la reservar y lo busco onfly
-            model.clientsByFkClientId = clientsService.findClientByUsername("demos");
-
-            //TODO pasar a businessLogicService
-            model.totalPrice = businessLogicService.calculateTotalPrice(model.checkIn, model.checkOut, model.roomsByFKRoomId.pricePerNight);
+            model.checkIn = Date.valueOf(dto.checkIn);
+            model.checkOut = Date.valueOf(dto.checkOut);
+            model.guests = room.guests;
+            model.clientsByFkClientId = clientsService.findClientByUsername("miguel"); // asignado a un cliente por defecto al no tener login
+            model.breakfast = dto.breakfastService;
+            model.carparking = dto.carParkingService;
+            model.spa = dto.spaService;
+            model.laundry = dto.laundryService;
+            model.shuttle = dto.shuttleService;
+            model.codediscount = dto.codeDiscount;
+            model.clientEmail = dto.email;
+            model.roomsByFKRoomId = room;
+            model.totalPrice = businessLogicService.bookCalculation(dto).totalBookingPrice;
             System.out.println("bookroomnow.model: "+model.toString());
 
             //TODO grabacion en ddbb desahbilitada para las pruebas
-            //bookingsService.saveOrUpdate(model);
+            bookingId=bookingsService.save(model);
 
-            view="redirect:/home?bookedok";
+            view="redirect:/home?bookedok&id="+bookingId;
             //throw new BookRoomNowException(dto);
         }
         catch (Exception e) {
             e.printStackTrace();
             view="redirect:/home?bookedfail";
-            throw new BookRoomNowException(dto);
+            throw new BookingApiException(dto);
             // cuando peta d
         }
 

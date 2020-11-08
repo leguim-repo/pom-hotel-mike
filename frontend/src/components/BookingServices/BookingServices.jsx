@@ -7,7 +7,7 @@ import { parseISO} from 'date-fns';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
-import { apiGetBookPrice } from 'api/ApiServices';
+import { apiGetBookPrice, apiPostBookRoomNow } from 'api/ApiServices';
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
@@ -177,19 +177,22 @@ class BookingServices extends Component {
       //alert("reservar para hacer")
       //this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
       console.log('handle.state: ',this.state);
-      const reserva = new BookingApiDTO();
-      reserva.setRoomId(this.state.roomId);
-      reserva.setCheckIn(this.state.checkin.toJSON().split("T")[0]);
-      reserva.setCheckOut(this.state.checkout.toJSON().split("T")[0]);
-      reserva.setGuests(this.state.guests);
-      reserva.setBreakfastService(this.state.showBreakfast);
-      reserva.setCarParkingService(this.state.showCarParking);
-      reserva.setSpaService(this.state.showSpaService);
-      reserva.setLaundryService(this.state.showLaundryService);
-      reserva.setShuttleService(this.state.showShuttleService);
-      reserva.setCodeDiscount(this.state.discountCode);
-      reserva.setEmail(this.state.email);
-      console.log('handleSubmitBookNow: ',reserva);
+      const finalBook = new BookingApiDTO();
+      finalBook.setRoomId(this.state.roomId);
+      finalBook.setCheckIn(this.state.checkin.toJSON().split("T")[0]);
+      finalBook.setCheckOut(this.state.checkout.toJSON().split("T")[0]);
+      finalBook.setGuests(this.state.guests);
+      finalBook.setBreakfastService(this.state.showBreakfast);
+      finalBook.setCarParkingService(this.state.showCarParking);
+      finalBook.setSpaService(this.state.showSpaService);
+      finalBook.setLaundryService(this.state.showLaundryService);
+      finalBook.setShuttleService(this.state.showShuttleService);
+      finalBook.setCodeDiscount(this.state.discountCode);
+      finalBook.setEmail(this.state.email);
+      console.log('handleSubmitBookNow: ',finalBook);
+
+      const response = apiPostBookRoomNow(finalBook).then((data) => data);
+      console.log(response);
     }
 
 
@@ -326,7 +329,7 @@ class BookingServices extends Component {
                   <FormGroup className="mt-1 ml-3">
                     <Row><Label htmlFor="checkin">Email for send your booking: </Label><br></br></Row>
                     <Row style={{fontSize: '1.1em'}}>
-                      <input type="email" className="" id="email" aria-describedby="emailHelp" placeholder="Enter email"/>
+                      <input type="email" className="" id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.onChangeEmail}/>
                     </Row>
                   </FormGroup>
                 </Col>

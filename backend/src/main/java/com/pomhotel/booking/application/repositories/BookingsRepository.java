@@ -18,6 +18,9 @@ public interface BookingsRepository {
 
     void saveOrUpdate(BookingsEntity entity);
 
+    Integer save(BookingsEntity entity);
+
+
     void deleteById(long id);
 
     void delete(BookingsEntity entity);
