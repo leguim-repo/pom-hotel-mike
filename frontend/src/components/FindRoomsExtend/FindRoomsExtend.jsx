@@ -123,7 +123,7 @@ const SearchForm = (props) => {
 
           <Col className="m-auto">
             <FormGroup className="m-3">
-              <Row><Label for="guests">Guests: </Label></Row>
+              <Row><Label for="guests">Maximum Guests: </Label></Row>
               <Row>
                 <Input className="bg-white" style={{fontSize: '1.0em', padding: '0.45em'}} id="guests" name="guests" type="select" value={filter.guests} onChange={handleChange}>
                   <option value="">No filter</option>

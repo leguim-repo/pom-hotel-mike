@@ -1,4 +1,6 @@
 
+ribbon effect: https://codepen.io/nxworld/pen/oLdoWb
+
 para los test
 
 npm install enzyme enzyme-adapter-react-16

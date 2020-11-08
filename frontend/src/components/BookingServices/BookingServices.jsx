@@ -8,6 +8,7 @@ import { parseISO} from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
 import { apiGetBookPrice, apiPostBookRoomNow } from 'api/ApiServices';
+import { Redirect } from 'react-router';
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
@@ -86,6 +87,7 @@ class BookingServices extends Component {
         discountCode: "",
         email: "",
         bookCalculate: {},
+        bookNowResult: {},
 
       }
       console.log('BookingServices.constructor.props: ',props);
@@ -166,7 +168,7 @@ class BookingServices extends Component {
       return bookCalculated;
     }
 
-    handleSubmit(e){
+    async handleSubmit(e){
       e.preventDefault();
       console.log('props: ',this.props);
       console.log('state: ',this.state);
@@ -191,8 +193,9 @@ class BookingServices extends Component {
       finalBook.setEmail(this.state.email);
       console.log('handleSubmitBookNow: ',finalBook);
 
-      const response = apiPostBookRoomNow(finalBook).then((data) => data);
-      console.log(response);
+      const bookNowResult = await apiPostBookRoomNow(finalBook);
+      this.setState({bookNowResult: bookNowResult});
+      
     }
 
 
@@ -217,10 +220,20 @@ class BookingServices extends Component {
     }
 
 
+    
     render() {
+
+      
       console.log('BookingServices.props: ',this.props);
       console.log('BookingServices.state: ',this.state);
+      if ('bookNowResult' in this.state.bookNowResult) {
+        console.log('Redirect by.bookNowResult: ',this.state.bookNowResult)
 
+        return(<Redirect push to={this.state.bookNowResult.bookLink}></Redirect>)
+      }
+      else {
+        console.log('no redirect');
+      }
       return (
         <React.Fragment>
             <Form style={{margin: '0px'}} className="formExtend border mb-5" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
@@ -374,7 +387,7 @@ function BreakfastService(props) {
     <Row className="" style={props.style}>
     <Col><span>Breakfast {props.book.breakFastPricePerNight}€ x {props.book.totalNights} nights</span></Col>
     <Col md={3}><span className="pull-right">{props.book.breakFastTotalPrice} €</span></Col>
-  </Row>
+    </Row>
   );
 }
 

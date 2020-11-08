@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.api;
+package com.pomhotel.booking.ui.api.exceptions;
 
 public class RoomNotFoundException extends RuntimeException{
 

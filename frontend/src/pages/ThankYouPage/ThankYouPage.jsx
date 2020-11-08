@@ -1,11 +1,14 @@
 import React, {useState} from "react";
+import { Col, Row, Container } from 'reactstrap';
 
 // core components
 import PomNavbar from "../../components/Navbar/PomNavbar";
 import PomHeader from "../../components/Header/PomHeader";
 import PomFooter from "../../components/Footer/PomFooter";
+import RoomDetailsThankYou from "../../components/RoomDetailsThankYou/RoomDetailsThankYou";
+import BookingDetailsThankYou from "../../components/BookingDetailsThankYou/BookingDetailsThankYou";
+import Loader from "../../components/Loader/Loader";
 import { apiGetBookingById } from "api/ApiServices";
-// sections for this page
 
 
 
@@ -13,7 +16,7 @@ function ThankYouPage(props) {
   const [booking, setBooking] = useState({});
  
   React.useEffect(() => {
-    apiGetBookingById(props.match.params.booking).then((data) => setBooking(data));
+    apiGetBookingById(props.match.params.id).then((data) => setBooking(data));
 
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -26,20 +29,43 @@ function ThankYouPage(props) {
     };
   }, [props]);
 
+
   console.log('ThankYouPage.booking: ',booking);
-  return (
-    <React.Fragment>
+  if ( 'roomsByFKRoomId' in booking) {
+    return (
+      <React.Fragment>
       <PomNavbar />
       <div className="wrapper">
-        <PomHeader image={require("assets/img/chica_piscina.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
-        <div className="main">
-            <p>datos de la reservar y gracias</p>
-
+        <PomHeader image={require("assets/img/img_bg_1.jpg")} thankyoupage sloganBig="Thank you for Booking" sloganLittle="See you soon!!"/>
+        <div className="main" style={{ backgroundImage: "url(" + require("assets/img/pattern.png") + ")",}}>
+          <Container fluid>
+            <Row>
+              <Col>
+                <h2 className="text-center H2Title">Your Booking Details</h2>
+              </Col>
+            </Row>
+            <Row >
+              <Col md={9} className="border border-dark">
+                <RoomDetailsThankYou showdetails room={booking.roomsByFKRoomId}/>
+              </Col>
+              <Col md={3} className="border border-dark">
+                <BookingDetailsThankYou booking={booking}/>
+              </Col>
+            </Row>
+          </Container>
         </div>
         <PomFooter />
       </div>
-    </React.Fragment>
-  );
+      </React.Fragment>
+    );
+  }
+  else {
+    return(<Loader></Loader>)
+  }
 }
 
 export default ThankYouPage;
+
+
+/*
+*/

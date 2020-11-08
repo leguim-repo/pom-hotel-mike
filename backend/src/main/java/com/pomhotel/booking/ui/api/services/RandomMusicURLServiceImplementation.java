@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.services;
+package com.pomhotel.booking.ui.api.services;
 
 import org.springframework.stereotype.Service;
 

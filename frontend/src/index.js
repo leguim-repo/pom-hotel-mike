@@ -45,7 +45,7 @@ ReactDOM.render(
           <Route exact path="/" render={(props) => <HomePage {...props} />} />
           <Route path="/rooms" render={(props) => <RoomsPage {...props} />} />
           <Route path="/roomdetail/:room?" render={(props) => <DetailAndBookPage {...props} />} />
-          <Route path="/thankyou/:booking?" render={(props) => <ThankYouPage {...props} />} />
+          <Route path="/thankyou/:id?" render={(props) => <ThankYouPage {...props} />} />
           <Route path="/login" render={(props) => <LoginPomPage {...props} />} />
           {/** redirect for 404 */}
           <Redirect to="/" />

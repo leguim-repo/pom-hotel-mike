@@ -55,7 +55,7 @@ function DetailAndBookPage(props) {
           sloganBig="POM HOTEL & SPA"
           sloganLittle="By Z-Devs Team"
         />
-        <div className="main">
+        <div className="main" style={{ backgroundImage: "url(" + require("assets/img/pattern.png") + ")",}}>
           <Container fluid>
             <Row>
               <Col>

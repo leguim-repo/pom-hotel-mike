@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.api;
+package com.pomhotel.booking.ui.api.exceptions;
 
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.mvc.dto.NewBookingDTO;

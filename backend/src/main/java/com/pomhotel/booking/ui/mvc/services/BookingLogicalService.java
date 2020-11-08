@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.services;
+package com.pomhotel.booking.ui.mvc.services;
 
 import java.sql.Date;
 

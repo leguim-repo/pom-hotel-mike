@@ -102,7 +102,7 @@ function RoomsPage() {
       <PomNavbar />
         <div className="wrapper">
           <PomHeader image={require("assets/img/revato-10251-13112723-111323.jpg")} sloganBig="Find your rest" sloganLittle="in the paradise"/>
-          <div className="main">
+          <div className="main" style={{ backgroundImage: "url(" + require("assets/img/pattern.png") + ")",}}>
             <Container fluid>
             <Row>
               <Col>

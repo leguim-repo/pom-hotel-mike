@@ -41,26 +41,6 @@ function RoomDetails(props) {
 
 }
 
-/*
-
-              <Form  id={props.room.id} onSubmit={props.handleBookNow}>
-                <Input readOnly  type="hidden" name="roomid" value={props.room.id}></Input>
-                {ButtonBookNow}
-
-                <Button type="submit" id={props.room.id} name={props.room.id} className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now!</Button>
-
-                <Link to= {{
-                  pathname: '/booknow',
-                  state: {
-                    room: props.room
-                    }
-                }}><button type="button">Por paramaetros</button></Link>
-
-              </Form>
-
-*/
-
-
 
 
 export function RoomDetailsOLD(props) {

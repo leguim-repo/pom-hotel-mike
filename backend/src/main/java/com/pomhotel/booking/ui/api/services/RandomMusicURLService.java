@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.services;
+package com.pomhotel.booking.ui.api.services;
 
 //--- Service Interface -------------------------------------------
 public interface RandomMusicURLService {

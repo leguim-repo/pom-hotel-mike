@@ -29,7 +29,7 @@ function HomePage(props) {
       <PomNavbar />
       <div className="wrapper">
         <PomHeader image={require("assets/img/chica_piscina.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
-        <div className="main">
+        <div className="main" style={{ backgroundImage: "url(" + require("assets/img/pattern.png") + ")",}}>
           <FindRoomsSimple {...props} ></FindRoomsSimple>
           <PopularSpaces></PopularSpaces>
           <GuestsOpinions></GuestsOpinions>
