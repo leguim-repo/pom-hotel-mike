@@ -13,7 +13,7 @@ import { apiGetBookingById } from "api/ApiServices";
 
 
 function ThankYouPage(props) {
-  const [booking, setBooking] = useState({});
+  const [bookingDatas, setBooking] = useState({});
  
   React.useEffect(() => {
     apiGetBookingById(props.match.params.id).then((data) => setBooking(data));
@@ -30,8 +30,8 @@ function ThankYouPage(props) {
   }, [props]);
 
 
-  console.log('ThankYouPage.booking: ',booking);
-  if ( 'roomsByFKRoomId' in booking) {
+  console.log('ThankYouPage.bookingDatas: ',bookingDatas);
+  if ( 'book' in bookingDatas) {
     return (
       <React.Fragment>
       <PomNavbar />
@@ -46,10 +46,10 @@ function ThankYouPage(props) {
             </Row>
             <Row >
               <Col md={9} className="border border-dark">
-                <RoomDetailsThankYou showdetails room={booking.roomsByFKRoomId}/>
+                <RoomDetailsThankYou showdetails booking={bookingDatas}/>
               </Col>
               <Col md={3} className="border border-dark">
-                <BookingDetailsThankYou booking={booking}/>
+                <BookingDetailsThankYou booking={bookingDatas}/>
               </Col>
             </Row>
           </Container>
