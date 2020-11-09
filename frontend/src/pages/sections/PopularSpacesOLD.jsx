@@ -1,15 +1,7 @@
 import React from "react";
-import { Button, Col } from "reactstrap";
 import Spaces from "../../components/Spaces/Spaces";
-import { Link } from 'react-router-dom';
 
-import{
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-  CardText,
-} from "reactstrap";
+//TODO for better performance should be a functional component
 
 class PopularSpaces extends React.Component {
   constructor(props) {
@@ -18,7 +10,7 @@ class PopularSpaces extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container mt-0">
+        <div className="container mt-5">
 
             <h2 className="text-center">Popular Spaces</h2>
             <p>We love to tell our successful, behind the roof of our hotel, far from the current world, here live the blind texts.</p>
@@ -38,15 +30,7 @@ class PopularSpaces extends React.Component {
                     title="SPA"
                     description="Enjoy of our SPA">        
             </Spaces>
-            <Card className="text-center" style={{ margin: "2px",width: "18rem" }}>
-              <CardBody className="p-5">
-                <h3>Book Now</h3>
-                <h5>Best Price OnLine</h5>
-                <Link to= {{pathname: '/rooms', state: this.state}}>
-                    <Button className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Find Rooms</Button>
-                </Link>  
-              </CardBody>
-            </Card>
+
           </div>
         </div>
       </React.Fragment>

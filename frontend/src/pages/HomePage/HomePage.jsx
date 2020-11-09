@@ -31,7 +31,7 @@ function HomePage(props) {
       <div className="wrapper">
         <PomHeader image={require("assets/img/chica_piscina.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
         <div className="main" style={{ backgroundImage: "url(" + require("assets/img/pattern.png") + ")",}}>
-            <FindRoomsSimple {...props} ></FindRoomsSimple>
+            {/*<FindRoomsSimple {...props} ></FindRoomsSimple>*/}
             <PopularSpaces></PopularSpaces>
             <GuestsOpinions></GuestsOpinions>
         </div>
