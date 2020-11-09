@@ -28,6 +28,7 @@ class BookingApiDTO {
     this.shuttleService = false;
     this.codeDiscount = "";
     this.email = "email@email.dot";
+    this.errors = {email: "Fill with a valid email"}
     console.info('this: ',this);
   }
 
@@ -88,6 +89,7 @@ class BookingServices extends Component {
         email: "",
         bookCalculate: {},
         bookNowResult: {},
+        errors: {email: ""},
 
       }
       console.log('BookingServices.constructor.props: ',props);
@@ -168,33 +170,49 @@ class BookingServices extends Component {
       return bookCalculated;
     }
 
+
+    isValidEmail(email) {
+      const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if(!email || reg.test(email) === false){
+          this.setState({errors: {email:"Email Field is Invalid"} });
+          return false;
+      } else {
+          this.setState({errors: {email:""} });
+      
+          return true;
+      }
+    }
+
     async handleSubmit(e){
       e.preventDefault();
-      console.log('props: ',this.props);
-      console.log('state: ',this.state);
-      var checkin = this.state.checkin.toJSON().split("T")[0];
-      var checkout = this.state.checkout.toJSON().split("T")[0];
-      var guests = this.state.guests;
-      console.log('checkin: ', checkin, ' checkout: ',checkout, ' guests: ', guests);
-      //alert("reservar para hacer")
-      //this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
-      console.log('handle.state: ',this.state);
-      const finalBook = new BookingApiDTO();
-      finalBook.setRoomId(this.state.roomId);
-      finalBook.setCheckIn(this.state.checkin.toJSON().split("T")[0]);
-      finalBook.setCheckOut(this.state.checkout.toJSON().split("T")[0]);
-      finalBook.setGuests(this.state.guests);
-      finalBook.setBreakfastService(this.state.showBreakfast);
-      finalBook.setCarParkingService(this.state.showCarParking);
-      finalBook.setSpaService(this.state.showSpaService);
-      finalBook.setLaundryService(this.state.showLaundryService);
-      finalBook.setShuttleService(this.state.showShuttleService);
-      finalBook.setCodeDiscount(this.state.discountCode);
-      finalBook.setEmail(this.state.email);
-      console.log('handleSubmitBookNow: ',finalBook);
 
-      const bookNowResult = await apiPostBookRoomNow(finalBook);
-      this.setState({bookNowResult: bookNowResult});
+      if (this.isValidEmail(this.state.email) ){
+        console.log('props: ',this.props);
+        console.log('state: ',this.state);
+        var checkin = this.state.checkin.toJSON().split("T")[0];
+        var checkout = this.state.checkout.toJSON().split("T")[0];
+        var guests = this.state.guests;
+        console.log('checkin: ', checkin, ' checkout: ',checkout, ' guests: ', guests);
+        //alert("reservar para hacer")
+        //this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
+        console.log('handle.state: ',this.state);
+        const finalBook = new BookingApiDTO();
+        finalBook.setRoomId(this.state.roomId);
+        finalBook.setCheckIn(this.state.checkin.toJSON().split("T")[0]);
+        finalBook.setCheckOut(this.state.checkout.toJSON().split("T")[0]);
+        finalBook.setGuests(this.state.guests);
+        finalBook.setBreakfastService(this.state.showBreakfast);
+        finalBook.setCarParkingService(this.state.showCarParking);
+        finalBook.setSpaService(this.state.showSpaService);
+        finalBook.setLaundryService(this.state.showLaundryService);
+        finalBook.setShuttleService(this.state.showShuttleService);
+        finalBook.setCodeDiscount(this.state.discountCode);
+        finalBook.setEmail(this.state.email);
+        console.log('handleSubmitBookNow: ',finalBook);
+
+        const bookNowResult = await apiPostBookRoomNow(finalBook);
+        this.setState({bookNowResult: bookNowResult});
+      }
       
     }
 
@@ -218,12 +236,8 @@ class BookingServices extends Component {
         this.setState({calculate: false});
       }
     }
-
-
-    
     render() {
 
-      
       console.log('BookingServices.props: ',this.props);
       console.log('BookingServices.state: ',this.state);
       if ('bookNowResult' in this.state.bookNowResult) {
@@ -369,6 +383,7 @@ class BookingServices extends Component {
                       <br></br></Row>
                     <Row className="" style={{fontSize: '1.1em'}}>
                       <input type="email" className="" id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.onChangeEmail}/>
+                      <div className="text-danger">{this.state.errors.email}</div>
                     </Row>
                     <Row className="justify-content-center mb-2">
                     <Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now</Button>
