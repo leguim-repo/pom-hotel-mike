@@ -30,44 +30,10 @@ function BookingDetailsThankYou(props) {
             </Col>
           </FormGroup>
 
-
-          <Col className="m-auto">
-              <FormGroup className="m-3">
-                <Row><Label for="checkin">Checkin: </Label><br></br></Row>
-                <Row style={{fontSize: '1.1em'}}>
-                <input readOnly className="" style={{fontSize: '1.0em', padding: '0.30em'}} value={new Date(room.checkIn).toLocaleDateString('es-ES')} name="checkIn" type="text"/>
-                </Row>
-              </FormGroup>
-          </Col>
-
-          <Col className="m-auto">
-              <FormGroup className="m-3">
-                <Row><Label for="checkin">Checkout: </Label><br></br></Row>
-                <Row style={{fontSize: '1.1em'}}>
-                <input readOnly className="" style={{fontSize: '1.0em', padding: '0.30em'}} value={new Date(room.checkOut).toLocaleDateString('es-ES')} name="checkOut" type="text"/>
-                </Row>
-              </FormGroup>
-          </Col>
-
-
-          <Col className="m-auto">
-              <FormGroup className="m-3">
-                <Row><Label for="guests">Maximum Guests: </Label></Row>
-                <Row>
-                <input readOnly className="" style={{fontSize: '1.0em', padding: '0.30em'}} value={room.guests} name="guests" type="text"/>
-                </Row>
-              </FormGroup>
-          </Col>
-
-          <Col className="m-auto">
-              <FormGroup className="m-3">
-                <Row><Label for="roomtype">Room Types: </Label></Row>
-                <Row>
-                <input readOnly className="" style={{fontSize: '1.0em', padding: '0.30em'}} value={room.roomsByFKRoomId.roomtypesByFkRoomtypeId.name} name="roomtype" type="text"/>
-                </Row>
-              </FormGroup>
-          </Col>
-
+          <Col>CheckIn:&nbsp; <span>{new Date(room.checkIn).toLocaleDateString('es-ES')}</span></Col>
+          <Col>CheckOut:&nbsp; <span>{new Date(room.checkOut).toLocaleDateString('es-ES')}</span></Col>
+          <Col>Maximum Guests:&nbsp; <span>{room.guests}</span></Col>
+          <Col>Maximum Guests:&nbsp; <span>{room.roomsByFKRoomId.roomtypesByFkRoomtypeId.name}</span></Col>
 
 
           <Col className="m-auto mb-5">
@@ -79,7 +45,7 @@ function BookingDetailsThankYou(props) {
               </Row>
 
             <Row className="" style={room.carparking ? {} : { display: 'none' }}>
-              <Col><span>Car Parking {prices.carparkingPricePerNight}€ x {prices.totalNights} nights</span></Col>
+              <Col><span>Car Parking {prices.carParkingPricePerNight}€ x {prices.totalNights} nights</span></Col>
               <Col md={3}><span className="pull-right">{prices.carParkingTotalPrice} €</span></Col>
               </Row>
 

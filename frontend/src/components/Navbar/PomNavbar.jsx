@@ -86,7 +86,7 @@ function PomNavbar() {
               </NavItem>
 
               <NavItem>
-                <NavLink href="/"><p>About</p></NavLink>
+                <NavLink href="/about"><p>About</p></NavLink>
               </NavItem>
 
               <NavItem>

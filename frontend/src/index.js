@@ -12,7 +12,7 @@ import './App.css';
 // pages for this project
 import HomePage from "pages/HomePage/HomePage";
 import RoomsPage from "pages/RoomsPage/RoomsPage"
-
+import AboutPage from "pages/AboutPage/AboutPage";
 import DetailAndBookPage from "pages/DetailAndBookPage/DetailAndBookPage";
 import LoginPomPage from "pages/LoginPomPage/LoginPomPage";
 
@@ -47,6 +47,8 @@ ReactDOM.render(
           <Route path="/roomdetail/:room?" render={(props) => <DetailAndBookPage {...props} />} />
           <Route path="/thankyou/:id?" render={(props) => <ThankYouPage {...props} />} />
           <Route path="/login" render={(props) => <LoginPomPage {...props} />} />
+          <Route path="/about" render={(props) => <AboutPage {...props} />} />
+
           {/** redirect for 404 */}
           <Redirect to="/" />
           <Redirect from="/" to="/" />
