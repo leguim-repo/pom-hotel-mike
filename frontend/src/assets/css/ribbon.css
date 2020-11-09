@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:700);
+/* la clase body estropea las clase body principal */
+/*
 body {
   display: flex;
   justify-content: center;
@@ -6,6 +8,7 @@ body {
   min-height: 100vh;
   background: #f0f0f0;
 }
+*/
 .box {
   position: relative;
   max-width: 600px;
