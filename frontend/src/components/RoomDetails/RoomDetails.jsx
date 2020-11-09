@@ -1,9 +1,9 @@
 import React from "react";
-import { Container, Row, Col, Button, Form, Input } from "reactstrap";
+import { Container, Row, Col, Button, Form, Input } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBath, faTv, faWifi, faSmokingBan } from '@fortawesome/free-solid-svg-icons'
-
 // https://fontawesome.com/icons?d=gallery&m=free
 
 function RoomDetails(props) {
@@ -21,6 +21,30 @@ function RoomDetails(props) {
 
   return(
     <React.Fragment>
+
+
+      <Row>
+        <Col md={6}>
+          <Card>
+              <CardImg src={require("assets/img/"+props.room.image)} alt="Card image cap" />
+          </Card>
+        </Col>
+
+        <Col>
+          <Card md={6}>
+            <CardBody>
+              <CardTitle tag="h5">
+                <Row><Col>{props.room.roomtypesByFkRoomtypeId.name}</Col><Col className="text-right">{props.room.code}</Col></Row></CardTitle>
+              <CardSubtitle tag="h6" className="mb-2 text-muted">{props.room.pricePerNight}€/night</CardSubtitle>
+              <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+              <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+              <Button>Button</Button>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+
+
         <Row className="">
           <Col className="">
             <img alt={props.room.image} src={require("assets/img/"+props.room.image)}></img>
