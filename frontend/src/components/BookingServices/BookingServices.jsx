@@ -240,7 +240,9 @@ class BookingServices extends Component {
               <Col>
                 <FormGroup className="">
                   <Col className="m-auto">
-                    <Row><h3 className="mb-0">Book Room & Services</h3></Row>
+                    <Row className="justify-content-center">
+                      <h3 className="mb-0 ">Book Room & Services</h3>
+                    </Row>
                   </Col>
                 </FormGroup>
 
@@ -322,6 +324,9 @@ class BookingServices extends Component {
                 </Col>
 
                 <hr className="border border-light"/>
+                <h6>Services & Prices</h6>
+
+
 
                 <PricePerNight book={this.state.bookCalculate} />
                 <BreakfastService book={this.state.bookCalculate} style={this.state.showBreakfast ? {} : { display: 'none' }} />
@@ -331,40 +336,47 @@ class BookingServices extends Component {
                 <ShuttleService book={this.state.bookCalculate} style={this.state.showShuttleService ? {} : { display: 'none' }} />
                 <Discount book={this.state.bookCalculate} style={this.state.showDiscount ? {} : { display: 'none' }} />
 
+                <hr className="border border-light"/>
                 <Row>
                   <Col><span>Total</span></Col>
                   <Col md={3}><span className="pull-right">{this.state.bookCalculate.totalBookingPrice} €</span></Col>
                 </Row>
 
-                <hr className="border border-light"/>
 
                 <Col className="m-auto">
-                  <FormGroup className="mt-1 ml-3">
-                    <Row><Label htmlFor="checkin">Email for send your booking: </Label><br></br></Row>
-                    <Row style={{fontSize: '1.1em'}}>
+                  <Row className="mt-2 mb-0 justify-content-center">
+                    <p>Payment in our facilites</p>
+                  </Row>
+                </Col>
+
+
+                <Container className="mb-2 ">
+                  <Row>We accept:</Row>
+                  <Row className="justify-content-center">
+                    <FontAwesomeIcon icon={faCcVisa} size="2x" className="m-2"/>
+                    <FontAwesomeIcon icon={faCcAmex} size="2x" className="m-2"/>
+                    <FontAwesomeIcon icon={faCcDiscover} size="2x" className="m-2"/>
+                    <FontAwesomeIcon icon={faCcApplePay} size="2x" className="m-2"/>
+                    <FontAwesomeIcon icon={faCcAmazonPay} size="2x" className="m-2"/>
+                    <FontAwesomeIcon icon={faCcPaypal} size="2x" className="m-2"/>
+                  </Row>
+                </Container>
+
+                <Col className="m-auto ">
+                  <FormGroup className="mt-5 ml-3">
+                    <Row className="">
+                      <Label htmlFor="checkin">Please fill with your email for confirm your booking: </Label>
+                      <br></br></Row>
+                    <Row className="" style={{fontSize: '1.1em'}}>
                       <input type="email" className="" id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.onChangeEmail}/>
                     </Row>
+                    <Row className="justify-content-center mb-2">
+                    <Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now</Button>
+                  </Row>
                   </FormGroup>
                 </Col>
 
 
-                <Col className="m-auto">
-                  <Row className="justify-content-center">
-                    <Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now</Button>
-                  </Row>
-                </Col>
-
-            <Container className="mb-2 ">
-              <Row>We accept:</Row>
-              <Row className="justify-content-center">
-                <FontAwesomeIcon icon={faCcVisa} size="2x" className="m-2"/>
-                <FontAwesomeIcon icon={faCcAmex} size="2x" className="m-2"/>
-                <FontAwesomeIcon icon={faCcDiscover} size="2x" className="m-2"/>
-                <FontAwesomeIcon icon={faCcApplePay} size="2x" className="m-2"/>
-                <FontAwesomeIcon icon={faCcAmazonPay} size="2x" className="m-2"/>
-                <FontAwesomeIcon icon={faCcPaypal} size="2x" className="m-2"/>
-              </Row>
-            </Container>
           </Col>
         </Form>
       </React.Fragment>

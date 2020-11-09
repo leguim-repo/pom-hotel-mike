@@ -51,7 +51,7 @@ function DetailAndBookPage(props) {
       <PomNavbar />
       <div className="wrapper">
         <PomHeader
-          image={require("assets/img/high-performance.jpg")}
+          image={require("assets/img/high-performance2.jpg")}
           sloganBig="POM HOTEL & SPA"
           sloganLittle="By Z-Devs Team"
         />

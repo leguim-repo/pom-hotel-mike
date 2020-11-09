@@ -10,10 +10,15 @@ import BookingDetailsThankYou from "../../components/BookingDetailsThankYou/Book
 import Loader from "../../components/Loader/Loader";
 import { apiGetBookingById } from "api/ApiServices";
 
+//confetti
+import useWindowSize from 'react-use/lib/useWindowSize';
+import Confetti from 'react-confetti'; // https://github.com/alampros/react-confetti
+
 
 
 function ThankYouPage(props) {
   const [bookingDatas, setBooking] = useState({});
+  const { width, height } = useWindowSize()
  
   React.useEffect(() => {
     apiGetBookingById(props.match.params.id).then((data) => setBooking(data));
@@ -38,6 +43,7 @@ function ThankYouPage(props) {
       <div className="wrapper">
         <PomHeader image={require("assets/img/img_bg_1.jpg")} thankyoupage sloganBig="Thank you for Booking" sloganLittle="See you soon!!"/>
         <div className="main" style={{ backgroundImage: "url(" + require("assets/img/pattern.png") + ")",}}>
+          <Confetti width={width} height={height} recycle={false} numberOfPieces={250}/>
           <Container fluid>
             <Row>
               <Col>
@@ -45,10 +51,10 @@ function ThankYouPage(props) {
               </Col>
             </Row>
             <Row >
-              <Col md={9} className="border border-dark">
+              <Col md={9} className="">
                 <RoomDetailsThankYou showdetails booking={bookingDatas}/>
               </Col>
-              <Col md={3} className="border border-dark">
+              <Col md={3} className="">
                 <BookingDetailsThankYou booking={bookingDatas}/>
               </Col>
             </Row>

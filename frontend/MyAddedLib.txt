@@ -15,6 +15,9 @@ npm install --save @fortawesome/free-brands-svg-icons ;
 npm install --save @fortawesome/free-regular-svg-icons ;
 
 
+npm install react-confetti
+npm install react-use
+
 
 
 https://scotch.io/tutorials/asynchronous-javascript-using-async-await

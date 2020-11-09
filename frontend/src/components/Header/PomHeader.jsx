@@ -18,7 +18,7 @@ function PomHeader(props) {
         {/*<div className="page-header page-header-small clear-filter" filter-color="blue">*/}
         <div className="page-header page-header-small" filter-color="">
           <div className="page-header-image" style={{ backgroundImage: "url(" + props.image + ")",}} ref={pageHeader}></div>
-          <Container fluid className="border border-danger">
+          <Container fluid className="">
             <div className="content-center brand">
               <h1 className="h2-seo" style={{color: 'white'}}>{props.sloganBig}</h1>
               <h2 className="h2-seo" style={{color: 'white'}}>{props.sloganLittle}</h2>
