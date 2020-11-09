@@ -3,14 +3,16 @@ import { Button, FormGroup, Label, Input, Col, Row, Container,Form } from 'react
 import Loader from '../Loader/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
+import { QRCode } from 'react-qrcode-logo';
+
 function BookingDetailsThankYou(props) {
-  const [room, setRoom] = useState({});
+  const [book, setBook] = useState({});
   const [prices, setPrices] = useState({});
   
   console.log('BookingDetailsThankYou.booking: ',props.booking)
 
   React.useEffect(() => {
-    setRoom(props.booking.book);
+    setBook(props.booking.book);
     setPrices(props.booking.prices);
 
     return function cleanup() {
@@ -19,7 +21,7 @@ function BookingDetailsThankYou(props) {
   }, [props]);
 
 
-  if ( 'roomsByFKRoomId' in room) {
+  if ( 'roomsByFKRoomId' in book) {
 
     return (
       <React.Fragment>
@@ -30,42 +32,42 @@ function BookingDetailsThankYou(props) {
             </Col>
           </FormGroup>
 
-          <Col>CheckIn:&nbsp; <span>{new Date(room.checkIn).toLocaleDateString('es-ES')}</span></Col>
-          <Col>CheckOut:&nbsp; <span>{new Date(room.checkOut).toLocaleDateString('es-ES')}</span></Col>
-          <Col>Maximum Guests:&nbsp; <span>{room.guests}</span></Col>
-          <Col>Maximum Guests:&nbsp; <span>{room.roomsByFKRoomId.roomtypesByFkRoomtypeId.name}</span></Col>
+          <Col>CheckIn:&nbsp; <span>{new Date(book.checkIn).toLocaleDateString('es-ES')}</span></Col>
+          <Col>CheckOut:&nbsp; <span>{new Date(book.checkOut).toLocaleDateString('es-ES')}</span></Col>
+          <Col>Maximum Guests:&nbsp; <span>{book.guests}</span></Col>
+          <Col>Maximum Guests:&nbsp; <span>{book.roomsByFKRoomId.roomtypesByFkRoomtypeId.name}</span></Col>
 
 
           <Col className="m-auto mb-5">
             <hr className="border border-light"/>
             <h6>Services & Prices</h6>
-              <Row className="" style={room.breakfast ? {} : { display: 'none' }}>
+              <Row className="" style={book.breakfast ? {} : { display: 'none' }}>
               <Col><span>Breakfast {prices.breakFastPricePerNight}€ x {prices.totalNights} nights</span></Col>
               <Col md={3}><span className="pull-right">{prices.breakFastTotalPrice} €</span></Col>
               </Row>
 
-            <Row className="" style={room.carparking ? {} : { display: 'none' }}>
+            <Row className="" style={book.carparking ? {} : { display: 'none' }}>
               <Col><span>Car Parking {prices.carParkingPricePerNight}€ x {prices.totalNights} nights</span></Col>
               <Col md={3}><span className="pull-right">{prices.carParkingTotalPrice} €</span></Col>
               </Row>
 
-            <Row className="" style={room.spa ? {} : { display: 'none' }}>
+            <Row className="" style={book.spa ? {} : { display: 'none' }}>
               <Col><span>SPA Service {prices.spaPricePerNight}€ x {prices.totalNights} nights</span></Col>
               <Col md={3}><span className="pull-right">{prices.spaTotalPrice} €</span></Col>
             </Row>
 
-            <Row className="" style={room.laundry ? {} : { display: 'none' }}>
+            <Row className="" style={book.laundry ? {} : { display: 'none' }}>
               <Col><span>Laundry Service {prices.laundryPricePerNight}€ x {prices.totalNights} nights</span></Col>
               <Col md={3}><span className="pull-right">{prices.laundryTotalPrice} €</span></Col>
             </Row>
 
-            <Row className="" style={room.shuttle ? {} : { display: 'none' }}>
+            <Row className="" style={book.shuttle ? {} : { display: 'none' }}>
               <Col><span>Shuttle to Airport {prices.shuttlePricePerNight}€ x {prices.totalNights} nights</span></Col>
               <Col md={3}><span className="pull-right">{prices.shuttleTotalPrice} €</span></Col>
             </Row>
 
-            <Row className="" style={room.shuttle ? {} : { display: 'none' }}>
-            <Col><span>Code Discount: {room.codediscount}</span></Col>
+            <Row className="" style={book.shuttle ? {} : { display: 'none' }}>
+            <Col><span>Code Discount: {book.codediscount}</span></Col>
               <Col md={3}><span className="pull-right">{prices.codeDiscountPrice} €</span></Col>
             </Row>
 
@@ -83,7 +85,7 @@ function BookingDetailsThankYou(props) {
               </Row>
             </Col>
 
-            <Container className="mb-2">
+            <Container className="mb-0">
               <Row>We accept:</Row>
               <Row className="justify-content-center">
                 <FontAwesomeIcon icon={faCcVisa} size="2x" className="m-2"/>
@@ -94,6 +96,13 @@ function BookingDetailsThankYou(props) {
                 <FontAwesomeIcon icon={faCcPaypal} size="2x" className="m-2"/>
               </Row>
             </Container>
+
+            <Col className="m-auto">
+              <Row className="mt-2 mb-3 justify-content-center">
+                <p>Your current booking</p>
+                <QRCode value={`http://pom-hotel.code:3000/thankyou/${book.id}`} />
+              </Row>
+            </Col>
 
           </Col>
         </Form>
