@@ -41,7 +41,9 @@ function RoomDetails(props) {
                 <CardText>{props.room.description}</CardText>
                 <CardText>Maximum {props.room.guests} guests</CardText>
               </Container>
-              <div className="pull-right">{props.linkButton}</div>
+              <Container  className="mt-5 text-center ">
+                {props.linkButton}
+              </Container>
               <div className="mt-auto mx-auto p-2 align-text-bottom">
                 {props.showdetails ? <ShowDetails/> : <></>}
               </div>
