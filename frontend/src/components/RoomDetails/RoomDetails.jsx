@@ -1,68 +1,55 @@
 import React from "react";
 import { Container, Row, Col, Button, Form, Input } from 'reactstrap';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardFooter } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBath, faTv, faWifi, faSmokingBan } from '@fortawesome/free-solid-svg-icons'
 // https://fontawesome.com/icons?d=gallery&m=free
+import '../../assets/css/ribbon.css';
 
 function RoomDetails(props) {
   //console.log('RoomDetails.props: ' ,props);
 
   const ShowDetails = () => {
               return(
-                <Row className="justify-content-center">
+                <React.Fragment>
                   <span className="m-2"><FontAwesomeIcon icon={faBath} size="lg"/> Complete</span>
-                  <span className="m-2"><FontAwesomeIcon icon={faTv} size="lg"/> Flat Screen (Satellite & Terrestrial)</span>
+                  <span className="m-2"><FontAwesomeIcon icon={faTv} size="lg"/> Satellite & Terrestrial</span>
                   <span className="m-2"><FontAwesomeIcon icon={faWifi} size="lg"/> Free WiFi</span>
                   <span className="m-2"><FontAwesomeIcon icon={faSmokingBan} size="lg"/> No Smoking</span>
-                </Row>
+                </React.Fragment>
               )}
+
+  //const ButtonLink = props.buttonLink ? props.buttonLink : <div></div>
 
   return(
     <React.Fragment>
+      <Row className="" style={{backgroundColor: 'white'}}>
+          <Col md={6} >
+            <div className="mt-auto mx-auto">
+              <img src={require("assets/img/"+props.room.image)} alt={props.room.image} />
+              <div className="ribbon ribbon-top-left"><span>{props.room.pricePerNight} €</span></div>
+            </div>
+          </Col>
 
-
-      <Row>
-        <Col md={6}>
-          <Card>
-              <CardImg src={require("assets/img/"+props.room.image)} alt="Card image cap" />
-          </Card>
-        </Col>
-
-        <Col>
-          <Card md={6}>
-            <CardBody>
-              <CardTitle tag="h5">
-                <Row><Col>{props.room.roomtypesByFkRoomtypeId.name}</Col><Col className="text-right">{props.room.code}</Col></Row></CardTitle>
-              <CardSubtitle tag="h6" className="mb-2 text-muted">{props.room.pricePerNight}€/night</CardSubtitle>
-              <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-              <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-              <Button>Button</Button>
-            </CardBody>
-          </Card>
-        </Col>
+          <Col md={6} > 
+            <Row className="h-100">
+              <Container >
+                <CardTitle tag="h5">
+                  <Row><Col>{props.room.roomtypesByFkRoomtypeId.name}</Col><Col className="text-right">{props.room.code}</Col></Row></CardTitle>
+                <CardSubtitle tag="h6" className="mb-2 text-muted">{props.room.pricePerNight}€/night</CardSubtitle>
+                <CardText>{props.room.description}</CardText>
+                <CardText>Maximum {props.room.guests} guests</CardText>
+              </Container>
+              <div className="pull-right">{props.linkButton}</div>
+              <div className="mt-auto mx-auto p-2 align-text-bottom">
+                {props.showdetails ? <ShowDetails/> : <></>}
+              </div>
+            </Row>
+          </Col>
       </Row>
-
-
-        <Row className="">
-          <Col className="">
-            <img alt={props.room.image} src={require("assets/img/"+props.room.image)}></img>
-          </Col>
-
-          <Col>
-            <Row><Col><h5>{props.room.roomtypesByFkRoomtypeId.name}</h5></Col><Col className="text-right">{props.room.code}</Col></Row>
-            <p>{props.room.pricePerNight}€/night</p>
-            <p>{props.room.description}</p>
-            <p>Maximum {props.room.guests} guests</p>
-          </Col>
-        </Row>
-        {props.showdetails ? <ShowDetails/> : <div></div>}
     </React.Fragment>
-
-
   );
-
 }
 
 
@@ -91,7 +78,6 @@ export function RoomDetailsOLD(props) {
                                   Click Me!
                                 </button>                    
                               </Link>
-
                             </Form>
                           </Row>
                         </Col>
@@ -106,3 +92,22 @@ export function RoomDetailsOLD(props) {
 }
 
 export default RoomDetails;
+
+
+/*
+
+        <Row className="">
+          <Col className="">
+            <img alt={props.room.image} src={require("assets/img/"+props.room.image)}></img>
+          </Col>
+
+          <Col>
+            <Row><Col><h5>{props.room.roomtypesByFkRoomtypeId.name}</h5></Col><Col className="text-right">{props.room.code}</Col></Row>
+            <p>{props.room.pricePerNight}€/night</p>
+            <p>{props.room.description}</p>
+            <p>Maximum {props.room.guests} guests</p>
+          </Col>
+        </Row>
+        {props.showdetails ? <ShowDetails/> : <div></div>}
+
+*/

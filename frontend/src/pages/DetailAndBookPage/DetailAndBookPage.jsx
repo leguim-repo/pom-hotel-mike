@@ -67,7 +67,7 @@ function DetailAndBookPage(props) {
 
             <Row>
               <Col lg={4} xl={9} className="">
-                <Container fluid className="border border-dark">
+                <Container fluid className="">
                   {/* Doble render -> https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects*/}
                   {room.image === undefined ? (<Loader />) : (<RoomDetails showdetails room={room} />)}
                 </Container>

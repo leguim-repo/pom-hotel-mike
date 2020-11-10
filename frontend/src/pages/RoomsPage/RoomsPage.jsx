@@ -75,25 +75,20 @@ function RoomsPage() {
 
 
 
-  const RenderRooms = roomsFiltered.map( (room) => (
-                        <Container fluid key={room.id} className="border border-dark mb-5">
-                          <RoomDetails key={room.id} room={room}></RoomDetails>
-                          <div className='booked border border-danger'>
-                            <p>Booked Dates. Only for development purposes</p>
-                            {room.bookedDates.map((date) => (
-                              <div key={date}>{date}</div>
-                              ))}
-                          </div>
-                          <Row className="mb-2">
-                            <Col></Col>
-                            <Col className="text-center">
-                              <Link to= {{pathname: '/roomdetail/'+room.id}} onClick={() => {console.log('click button link')}} >
-                                <Button className="bg-warning mb-3 " style={{fontSize: '1.2em', padding: '0.5em'}}>Details & Book</Button>
-                              </Link>
-                            </Col>
-                          </Row>
+  const RenderRooms = roomsFiltered.map( (room) => { 
+                      const buttonDeLink = <Link to= {{pathname: '/roomdetail/'+room.id}} onClick={() => {console.log('click button link')}} >
+                                            <Button className="bg-warning mb-3 " style={{fontSize: '1.2em', padding: '0.5em'}}>Details & Book</Button>
+                                          </Link>
+                      return(
+                        <Container fluid key={room.id} className="mb-5" style={{backgroundColor: 'white'}}>
+                          <RoomDetails 
+                            key={room.id} 
+                            room={room}
+                            linkButton = {buttonDeLink}
+                            />
                         </Container>
-                      ));
+                        );}
+                      );
   
   console.log('RoomsPage.filter: ',filter);
 
