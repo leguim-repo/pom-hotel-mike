@@ -28,7 +28,7 @@ function BookingDetailsThankYou(props) {
         <Form style={{margin: '0px'}} className="formExtend border mb-5">
           <FormGroup className="">
             <Col className="m-auto">
-              <Row className="justify-content-center"><h3 className="mb-0">Booking in Detail</h3></Row>
+              <Row className="justify-content-center"><h3 className="mt-3 mb-1">Booking in Detail</h3></Row>
             </Col>
           </FormGroup>
 
@@ -98,8 +98,10 @@ function BookingDetailsThankYou(props) {
             </Container>
 
             <Col className="m-auto">
-              <Row className="mt-2 mb-3 justify-content-center">
+              <Row className="mt-5 mb-1 justify-content-center">
                 <p>Your current booking</p>
+              </Row>
+              <Row className="justify-content-center mb-4">
                 <QRCode value={`http://pom-hotel.code:3000/thankyou/${book.id}`} />
               </Row>
             </Col>

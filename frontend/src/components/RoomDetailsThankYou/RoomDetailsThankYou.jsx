@@ -31,7 +31,7 @@ function RoomDetailsThankYou(props) {
     return(
       <React.Fragment>
         <Card>
-          <div >
+          <div className="">
             <CardImg top width="100%" src={require("assets/img/"+room.roomsByFKRoomId.image)} alt="Card image cap" />
             <div className="ribbon ribbon-top-left"><span>{room.roomsByFKRoomId.pricePerNight} €</span></div>
           </div>
@@ -41,7 +41,8 @@ function RoomDetailsThankYou(props) {
             <CardText>{room.roomsByFKRoomId.description}</CardText>
             {props.showdetails ? <ShowDetails/> : <div></div>}
           </CardBody>
-        </Card>    </React.Fragment>
+        </Card>    
+      </React.Fragment>
     );
   }
   else {

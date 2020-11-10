@@ -21,7 +21,7 @@ import StorageManager from "components/StorageManager/StorageManager";
 import { Provider } from "react-redux";
 import { ConfigureStoreDev } from "./redux/configureStores";
 import ThankYouPage from "pages/ThankYouPage/ThankYouPage";
-
+import Error404 from "pages/Errors/404";
 
 const store_dev = ConfigureStoreDev();
 
@@ -50,8 +50,7 @@ ReactDOM.render(
           <Route path="/about" render={(props) => <AboutPage {...props} />} />
 
           {/** redirect for 404 */}
-          <Redirect to="/" />
-          <Redirect from="/" to="/" />
+          <Route component={Error404} />
         </Switch>
       </Switch>
     </BrowserRouter>

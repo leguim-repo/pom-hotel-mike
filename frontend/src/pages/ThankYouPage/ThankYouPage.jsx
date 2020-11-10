@@ -9,7 +9,7 @@ import RoomDetailsThankYou from "../../components/RoomDetailsThankYou/RoomDetail
 import BookingDetailsThankYou from "../../components/BookingDetailsThankYou/BookingDetailsThankYou";
 import Loader from "../../components/Loader/Loader";
 import { apiGetBookingById } from "api/ApiServices";
-
+import BookingNotFound from "../Errors/BookingNotFound";
 //confetti
 import useWindowSize from 'react-use/lib/useWindowSize';
 import Confetti from 'react-confetti'; // https://github.com/alampros/react-confetti
@@ -35,8 +35,12 @@ function ThankYouPage(props) {
   }, [props]);
 
 
+  
   console.log('ThankYouPage.bookingDatas: ',bookingDatas);
   if ( 'book' in bookingDatas) {
+    if (bookingDatas.book === null) {
+      return(<BookingNotFound></BookingNotFound>);
+    }
     return (
       <React.Fragment>
       <PomNavbar />
