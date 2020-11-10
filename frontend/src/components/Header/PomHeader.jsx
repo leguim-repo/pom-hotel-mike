@@ -16,7 +16,7 @@ function PomHeader(props) {
     return(
       <React.Fragment>
         {/*<div className="page-header page-header-small clear-filter" filter-color="blue">*/}
-        <div className="page-header page-header-small" filter-color="">
+        <div className="page-header " filter-color="">
           <div className="page-header-image" style={{ backgroundImage: "url(" + props.image + ")",}} ref={pageHeader}></div>
           <Container fluid className="">
             <div className="content-center brand">

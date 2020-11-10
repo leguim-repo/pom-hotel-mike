@@ -9,6 +9,10 @@ import PomFooter from "../../components/Footer/PomFooter";
 
 import YouTube from "@u-wave/react-youtube";
 import "./AboutPage.css";
+
+import useWindowSize from 'react-use/lib/useWindowSize';
+
+
 const videos = [
   { id: "mL7Gb6rcAAo", name: "Felicità Italiano Ragazzi Dance Remix" },
   { id: "GJkuTx1DQzg", name: "Amelie Lens at Atomium in Brussels, Belgium for Cercle" },
@@ -24,6 +28,10 @@ const videos = [
 
 function AboutPage(props) {
   const [video, setVideo] = useState("mL7Gb6rcAAo");
+  const [targetWidht, setTargetWidht] = useState(1280);
+  const [targetHeight, settargetHeight] = useState(800);
+  const { width, height } = useWindowSize()
+
 
   function handleClick(e) {
     //e.preventDefault();
@@ -43,13 +51,13 @@ function AboutPage(props) {
   }, [props]);
 
   console.log("AboutPage: ", props);
-  console.log("videos: ", videos);
+  console.log("size: ", width," x ",height);
 
   return (
     <React.Fragment>
       <PomNavbar />
       <div className="wrapper">
-        <PomHeader thankyoupage image={require("assets/img/img_bg_1.jpg")} sloganBig="About Page" sloganLittle="Z-Devs Team"/>
+        <PomHeader thankyoupage image={require("assets/img/ZDevsTeam.jpg")} sloganBig="About Page" sloganLittle="Z-Devs Team"/>
         <div className="main" style={{backgroundImage: "url(" + require("assets/img/pattern.png") + ")",}}>
           <Container fluid className=""> 
             <Row>
@@ -58,8 +66,8 @@ function AboutPage(props) {
               </Col>
             </Row>
             <Row className="mb-2 justify-content-center ">
-              <Col md={4} className="justify-content-center ">
-                <Container className="bg-blank">
+              <Col md={4} lg={4} className="justify-content-center ">
+                <Container fluid className="bg-blank">
                   <div className="collection">
                     {videos.map((choice, index) => (
                       <Container fluid key={index}>
@@ -74,11 +82,11 @@ function AboutPage(props) {
                   </div>
                 </Container>
               </Col>
-              <Col md={6} className="">
+              <Col md={6} lg={8} className=" ">
                 <YouTube
                   video={video}
-                  width={640}
-                  height={480}
+                  width={targetWidht}
+                  height={targetHeight}
                   controls={true}
                   modestBranding
                 />
