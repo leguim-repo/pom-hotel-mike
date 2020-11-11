@@ -11,7 +11,7 @@ import com.pomhotel.booking.ui.api.dto.BookingWithPricesDTO;
 import com.pomhotel.booking.ui.api.exceptions.BookingApiException;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
-import com.pomhotel.booking.ui.api.services.BusinessLogicApiService;
+import com.pomhotel.booking.application.services.BusinessLogicApiService;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

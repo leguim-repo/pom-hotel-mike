@@ -1,15 +1,12 @@
-package com.pomhotel.booking.ui.api.services;
+package com.pomhotel.booking.application.services;
 
 import com.pomhotel.booking.application.domain.factories.BookingsFactory;
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
-import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.application.services.RoomsServiceImplementation;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ReactiveHttpOutputMessage;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;

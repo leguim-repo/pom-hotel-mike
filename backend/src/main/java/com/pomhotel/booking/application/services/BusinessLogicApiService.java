@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.api.services;
+package com.pomhotel.booking.application.services;
 
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.services.RoomsService;
