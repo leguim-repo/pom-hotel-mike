@@ -34,7 +34,7 @@ class HomeApiControllerTest {
         var mockRoomsService = Mockito.mock(RoomsService.class);
         Mockito.when(mockRoomsService.findById(1)).thenReturn(fakeRoomsModel);
         HomeApiController testHomeApiController = new HomeApiController(mockRoomsService);
-        assertEquals(testHomeApiController.findRoomByIdApi((long) 1), fakeRoomsModel);
+        assertEquals(testHomeApiController.findRoomByIdApi("1"), fakeRoomsModel);
 
     }
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
@@ -45,13 +46,14 @@ public class BookRoomApiController {
     }
 
     @GetMapping("/api/booking/{targetId}")
-    public BookingWithPricesDTO getBookingsByIdApi(@PathVariable long targetId) {
+    public BookingWithPricesDTO getBookingsByIdApi(@PathVariable String targetId) {
+
         BookingWithPricesDTO response = new BookingWithPricesDTO();
         BookingsModel booking = new BookingsModel();
         CalculatedBookDTO prices = new CalculatedBookDTO();
 
         try {
-            booking = bookingsService.findById(targetId);
+            booking = bookingsService.findById(Long.parseLong(targetId));
             prices = businessLogicService.calculateBooking(booking);
             response.setBook(booking);
             response.setPrices(prices);
@@ -64,9 +66,16 @@ public class BookRoomApiController {
     }
 
     @GetMapping("/api/dates/{targetId}")
-    public List<Date> getAllBookingsDatesApi(@PathVariable long targetId) {
-        List<BookingDatesModel> listBooked = bookingsService.getBookedDatesByRoomId(targetId);
-        List<Date> bookedDates = bookingsService.generateBookedDatesInRunTime(listBooked);
+    public List<Date> getAllBookingsDatesApi(@PathVariable String targetId) {
+        List<Date> bookedDates = new ArrayList<>();
+        try {
+            List<BookingDatesModel> listBooked = bookingsService.getBookedDatesByRoomId(Long.parseLong(targetId));
+            bookedDates = bookingsService.generateBookedDatesInRunTime(listBooked);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return bookedDates;
     }
 
@@ -81,8 +90,6 @@ public class BookRoomApiController {
         System.out.println("calculado y enviado: "+bookingCalculado);
         return bookingCalculado;
     }
-
-
 
 
     // TODO OK Endpoint of button [Confirm Booking] save booking to DataBase and alert if correct or not
@@ -111,10 +118,7 @@ public class BookRoomApiController {
             bookingCalculado = businessLogicService.calculateBooking(dto);
             model.totalPrice = bookingCalculado.totalBookingPrice;
             System.out.println("bookroomnow.model: "+model.toString());
-
-            //TODO grabacion en ddbb desahbilitada para las pruebas
             bookingId=bookingsService.save(model);
-
 
             response.bookNowResult=true;
             response.bookingId=bookingId;
@@ -127,35 +131,7 @@ public class BookRoomApiController {
             response.bookLink="";
             throw new BookingApiException(dto);
         }
-
         return response;
     }
-
-    //--- Mappings -----------------------------------------------------
-    // Esto codig es de pruebas se puede eliminar
-    // Este endpoint es la creacion de la reserva le paso a react todos los datos de la reserva y que le ponga el boton de Confirm Booking
-    // TODO OK Endpoint of button [Book Now] Create a booking and paint button [Confirm Booking]
-    /*
-    @GetMapping("/api/bookroomnow/room")
-    //public NewBookingDTO bookRoomNowByIdApi(@PathVariable("id") long id, @CookieValue("Checkin") String checkin, @CookieValue("Checkout") String checkout, Model model) {
-    public NewBookingDTO bookRoomNowByIdApi(@RequestParam MultiValueMap<String, String> customQuery) {
-
-        BookingLogicalService calculadora = new BookingLogicalServiceImplementation();
-        NewBookingDTO newBookingDTO = new NewBookingDTO();
-
-        //model.addAttribute("imgNav", "high-performance.jpg");
-        roomSelected = roomsService.findById(Long.parseLong(Objects.requireNonNull(customQuery.getFirst("id"))));
-        newBookingDTO.roomId = roomSelected.id;
-        newBookingDTO.room = roomSelected;
-        newBookingDTO.checkIn = customQuery.getFirst("checkin");
-        newBookingDTO.checkOut = customQuery.getFirst("checkout");;
-        newBookingDTO.guests = customQuery.getFirst("guests");
-        newBookingDTO.totalPrice = (int) calculadora.calculateTotalPrice(calculadora.stringToDate(newBookingDTO.checkIn),calculadora.stringToDate(newBookingDTO.checkOut),roomSelected.pricePerNight);
-
-        //model.addAttribute("newBooking", newBookingDTO);
-
-        return newBookingDTO;
-    }
-    */
 
 }

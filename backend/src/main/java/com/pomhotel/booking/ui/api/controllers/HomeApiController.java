@@ -10,6 +10,8 @@ import com.pomhotel.booking.ui.mvc.dto.SearchDTO;
 import com.pomhotel.booking.ui.api.services.RandomMusicURLService;
 import com.pomhotel.booking.ui.api.services.RandomMusicURLServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,10 +67,10 @@ public class HomeApiController {
 
     // Ok Single item...really without use. Only for tests
     @GetMapping("/api/roomdetail/{targetId}")
-    public RoomsModel findRoomByIdApi(@PathVariable Long targetId) {
-        RoomsModel requestedRoom;
+    public RoomsModel findRoomByIdApi(@PathVariable String targetId) {
+        RoomsModel requestedRoom=new RoomsModel();
         try {
-            requestedRoom = roomsService.findById(targetId);
+            requestedRoom = roomsService.findById(Long.parseLong(targetId));
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -78,21 +80,15 @@ public class HomeApiController {
         return requestedRoom;
     }
 
-
     @GetMapping(value = "/api/music")
-    public String musicApi() {
+    public ResponseEntity<String> musicApi() {
         String link="";
         RandomMusicURLService music = new RandomMusicURLServiceImplementation();
         // un string a pelo no se convierte a JSON. Como es simple creo el JSON a mano
         link="{ \"link\":\""+music.getRandomMusicURL()+"\" }";
-        return link;
+        //return link;
+        return new ResponseEntity(link, HttpStatus.OK);
     }
 
-    // EasterEgg
-    @RequestMapping(value = "/api/", method = RequestMethod.TRACE)
-    public String spaceCowboys() {
-
-        return "SPACECOWBOYS";
-    }
 }
 
