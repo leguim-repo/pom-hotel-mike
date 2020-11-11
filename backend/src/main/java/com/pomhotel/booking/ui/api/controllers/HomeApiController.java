@@ -6,6 +6,7 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.RoomsAndBookedDatesService;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.ui.api.exceptions.RoomNotFoundException;
+import org.apache.commons.logging.LogFactory;
 import toDelete.sandbox.mvc.dto.SearchDTO;
 import com.pomhotel.booking.ui.api.services.RandomMusicURLService;
 import com.pomhotel.booking.ui.api.services.RandomMusicURLServiceImplementation;
@@ -20,6 +21,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
 @RestController
 public class HomeApiController {
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("HomeApiController.class");
     RoomsService roomsService;
     RoomsAndBookedDatesService roomsAndBookedDatesService;
 
@@ -52,7 +54,7 @@ public class HomeApiController {
     // OK Endpoint of button [Find Rooms] in home and [Find Room] in rooms
     @PostMapping("/api/findroom")
     public List<RoomsModel> findRoomByFilterApi(@RequestBody SearchDTO dto) {
-        System.out.println("findroom: " + dto.toString());
+        Logger.info("findroom: " + dto.toString());
 
         if ( ( dto.minprice==null) && (dto.maxprice==null) && (dto.type==null) ) {
             dto.minprice = "1";

@@ -1,5 +1,6 @@
 package com.pomhotel.booking.ui.controllers;
 
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 public class LandingController {
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("LandingController.class");
 
     private List<String> ipAvailables = new ArrayList<>();
     @Autowired
@@ -27,11 +29,11 @@ public class LandingController {
                 if ( (nif.isUp()) && (!nif.isLoopback())) {
                     for (int i=0; i < nif.getInterfaceAddresses().size(); i++) {
                         if (nif.getInterfaceAddresses().get(i).getAddress().isSiteLocalAddress()) {
-                            System.out.println("ip: "+nif.getInterfaceAddresses().get(i).getAddress().getHostAddress());
-                            System.out.println("isLinkLocalAddress: "+nif.getInterfaceAddresses().get(i).getAddress().isLinkLocalAddress());
-                            System.out.println("isAnyLocalAddress: "+nif.getInterfaceAddresses().get(i).getAddress().isAnyLocalAddress());
-                            System.out.println("isSiteLocalAddress: "+nif.getInterfaceAddresses().get(i).getAddress().isSiteLocalAddress());
-                            System.out.println("-------------------------");
+                            Logger.info("ip: "+nif.getInterfaceAddresses().get(i).getAddress().getHostAddress());
+                            Logger.info("isLinkLocalAddress: "+nif.getInterfaceAddresses().get(i).getAddress().isLinkLocalAddress());
+                            Logger.info("isAnyLocalAddress: "+nif.getInterfaceAddresses().get(i).getAddress().isAnyLocalAddress());
+                            Logger.info("isSiteLocalAddress: "+nif.getInterfaceAddresses().get(i).getAddress().isSiteLocalAddress());
+                            Logger.info("-------------------------");
                             ipAvailables.add(nif.getInterfaceAddresses().get(i).getAddress().getHostAddress());
                         }
                     }
@@ -46,7 +48,7 @@ public class LandingController {
     @GetMapping("/")
     public String landingController(Model model) {
         //return "redirect:/home";
-        System.out.println("ipAvailables: "+ipAvailables.toString());
+        Logger.info("ipAvailables: "+ipAvailables.toString());
         model.addAttribute("ipAvailables", ipAvailables);
         return "landing";
     }

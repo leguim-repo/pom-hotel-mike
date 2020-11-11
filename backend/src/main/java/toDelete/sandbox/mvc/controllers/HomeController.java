@@ -4,6 +4,7 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.application.services.RoomTypesService;
 import com.pomhotel.booking.application.services.RoomsService;
+import org.apache.commons.logging.LogFactory;
 import toDelete.sandbox.mvc.dto.SearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +19,7 @@ import java.util.List;
 //https://spring.io/blog/2015/06/08/cors-support-in-spring-framework
 @Controller
 public class HomeController {
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("HomeController.class");
 
     //--- Services & Variables used ---------------------------------------
     RoomsService roomsService;
@@ -93,7 +95,7 @@ public class HomeController {
     @PostMapping("/mvc/mike")
     public String acceptData(@RequestBody String payloadBody, @RequestHeader HttpHeaders headers)  {
         //Note: Con este metodo podemos ver que paramentros enviamos con el post desde el form
-        System.out.println("\nParametros recibidos: "+payloadBody+"\n");
+        Logger.info("\nParametros recibidos: "+payloadBody+"\n");
         return "home";
     }
 

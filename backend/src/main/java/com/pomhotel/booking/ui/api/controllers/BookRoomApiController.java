@@ -12,6 +12,7 @@ import com.pomhotel.booking.ui.api.exceptions.BookingApiException;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
 import com.pomhotel.booking.ui.api.services.BusinessLogicApiService;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
 @RestController
 public class BookRoomApiController {
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("BookRoomApiController.class");
+
     //--- Services & Variables used ---------------------------------------
     RoomsService roomsService;
     BookingsService bookingsService;
@@ -85,9 +88,9 @@ public class BookRoomApiController {
     public CalculatedBookDTO calculatePriceOfBook(@RequestBody @Valid BookingApiDTO booking) {
         CalculatedBookDTO bookingCalculado;
         //llamamos al servicio de calculadora para que devuelva el precio de la reserva
-        System.out.println("recibido: "+booking);
+        Logger.info("recibido: "+booking);
         bookingCalculado = businessLogicService.calculateBooking(booking);
-        System.out.println("calculado y enviado: "+bookingCalculado);
+        Logger.info("calculado y enviado: "+bookingCalculado);
         return bookingCalculado;
     }
 
@@ -117,7 +120,7 @@ public class BookRoomApiController {
             model.roomsByFKRoomId = room;
             bookingCalculado = businessLogicService.calculateBooking(dto);
             model.totalPrice = bookingCalculado.totalBookingPrice;
-            System.out.println("bookroomnow.model: "+model.toString());
+            Logger.info("bookroomnow.model: "+model.toString());
             bookingId=bookingsService.save(model);
 
             response.bookNowResult=true;

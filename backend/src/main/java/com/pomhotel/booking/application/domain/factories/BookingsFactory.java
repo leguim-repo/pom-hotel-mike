@@ -4,6 +4,7 @@ import com.pomhotel.booking.application.domain.entities.BookingsEntity;
 import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,8 @@ public class BookingsFactory {
     //--- Needed Factories ------------------------------------------
     ClientsFactory clientsFactory;
     RoomsFactory roomsFactory;
+
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("BookingsFactory.class");
 
     //--- Constructor -----------------------------------------------
     @Autowired
@@ -88,8 +91,8 @@ public class BookingsFactory {
         for (Object[] b: entities) {
             Date checkin = (Date) b[0];
             Date checkout = (Date) b[1];
-            System.out.println("checkin: "+checkin.toString());
-            System.out.println("checkout: "+checkout.toString());
+            Logger.info("checkin: "+checkin.toString());
+            Logger.info("checkout: "+checkout.toString());
             BookingDatesModel model = new BookingDatesModel();
             model.setCheckIn(checkin);
             model.setCheckOut(checkout);

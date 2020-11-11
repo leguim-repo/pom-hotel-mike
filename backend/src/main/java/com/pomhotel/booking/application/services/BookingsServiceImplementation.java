@@ -7,6 +7,7 @@ import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.repositories.BookingsRepository;
 import com.pomhotel.booking.ui.api.services.BusinessLogicApiService;
 import com.pomhotel.booking.ui.api.services.BusinessLogicApiServiceImplementation;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jmx.export.naming.IdentityNamingStrategy;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 //--- Service ----------------------------------------------------------
 @Service
 public class BookingsServiceImplementation implements BookingsService{
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("BookingsServiceImplementation.class");
 
     //--- Repositories & Factories needed ------------------------------
     BookingsRepository repository;
@@ -60,8 +62,8 @@ public class BookingsServiceImplementation implements BookingsService{
         List<Date> bookedDates = new ArrayList<>();
         for (BookingDatesModel e: model) {
             long daysToGenerate = businessLogicService.getDaysBetweenTwoDates(e.checkIn, e.checkOut);
-            System.out.println("e: " + e.toString());
-            System.out.println("days: " + daysToGenerate);
+            Logger.info("e: " + e.toString());
+            Logger.info("days: " + daysToGenerate);
             bookedDates.add(e.checkIn);
             for (int d = 0; d < daysToGenerate; d++) {
                 Date last = bookedDates.get(bookedDates.size() - 1);

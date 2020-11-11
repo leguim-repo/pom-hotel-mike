@@ -7,6 +7,7 @@ import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.application.services.RoomsServiceImplementation;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ReactiveHttpOutputMessage;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class BusinessLogicApiServiceImplementation implements BusinessLogicApiService {
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("BusinessLogicApiServiceImplementation.class");
+
     RoomsService roomsService;
     BookingsFactory bookingsFactory;
     DateTimeFormatter formatoDeEntrada = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -66,8 +69,8 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         CalculatedBookDTO calculatedBook = new CalculatedBookDTO();
         RoomsModel room;
         double basePrice=0;
-        System.out.println("bookCalculation *******");
-        System.out.println("book: "+book.toString());
+        Logger.info("bookCalculation *******");
+        Logger.info("book: "+book.toString());
 
         room = roomsService.findById(book.roomId);
 
@@ -131,7 +134,7 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
         calculatedBook.setTotalBookingPrice(basePrice);
 
-        System.out.println("calculatedBook: "+calculatedBook.toString());
+        Logger.info("calculatedBook: "+calculatedBook.toString());
         return calculatedBook;
     }
 

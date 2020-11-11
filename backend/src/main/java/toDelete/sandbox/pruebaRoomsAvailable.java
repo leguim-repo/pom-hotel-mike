@@ -2,6 +2,7 @@ package toDelete.sandbox;
 
 import com.pomhotel.booking.application.domain.entities.BookingsEntity;
 import com.pomhotel.booking.application.domain.entities.RoomsEntity;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -10,15 +11,17 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class pruebaRoomsAvailable {
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("pruebaRoomsAvailable.class");
+
     private static SessionFactory dbConnection;
 
     public static void MyPrint(String TituloLista, List<RoomsEntity> lista) {
-        System.out.println("** ** " + TituloLista + " ** **");
-        System.out.println("En esta tabla hay " + lista.size() + " registros");
+        Logger.info("** ** " + TituloLista + " ** **");
+        Logger.info("En esta tabla hay " + lista.size() + " registros");
         for (RoomsEntity e : lista) {
-            System.out.println("ID: " + e.getId());
-            System.out.println("Descripcion:" + e.getDescription());
-            System.out.println("");
+            Logger.info("ID: " + e.getId());
+            Logger.info("Descripcion:" + e.getDescription());
+            Logger.info("");
         }
     }
 
