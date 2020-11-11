@@ -1,4 +1,4 @@
-package com.pomhotel.booking.sandbox;
+package toDelete.sandbox;
 
 import com.pomhotel.booking.application.domain.entities.LoginsEntity;
 import com.pomhotel.booking.application.domain.entities.RoomsEntity;
@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import javax.persistence.criteria.CriteriaQuery;
-import javax.security.auth.login.LoginException;
 import java.util.List;
 
 public class pruebaLoginEntity {

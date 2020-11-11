@@ -46,7 +46,6 @@ ReactDOM.render(
           <Route path="/thankyou/:id?" render={(props) => <ThankYouPage {...props} />} />
           <Route path="/login" render={(props) => <LoginPomPage {...props} />} />
           <Route path="/about" render={(props) => <AboutPage {...props} />} />
-
           {/** redirect for 404 */}
           <Route component={Error404} />
         </Switch>
