@@ -82,13 +82,7 @@ public class HomeApiController {
         return requestedRoom;
     }
 
-    @GetMapping(value = "/api/music")
-    public ResponseEntity<String> musicApi() {
-        String link="";
-        RandomMusicURLService music = new RandomMusicURLServiceImplementation();
-        link="{ \"link\":\""+music.getRandomMusicURL()+"\" }";
-        return new ResponseEntity(link, HttpStatus.OK);
-    }
+
 
 }
 

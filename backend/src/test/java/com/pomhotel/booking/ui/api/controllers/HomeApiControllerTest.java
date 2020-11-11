@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.api;
+package com.pomhotel.booking.ui.api.controllers;
 
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.*;
@@ -28,11 +28,14 @@ class HomeApiControllerTest {
     @Test
     @DisplayName("Test usando Mockito sobre la api findRoomByIdApi")
     void findRoomByIdApi() {
+        // Mock del Modelo
         RoomsModel fakeRoomsModel = new RoomsModel();
         fakeRoomsModel.setId(1);
         fakeRoomsModel.setPricePerNight(200.00);
+        // Mock del service a testear
         var mockRoomsService = Mockito.mock(RoomsService.class);
         Mockito.when(mockRoomsService.findById(1)).thenReturn(fakeRoomsModel);
+        //Test sobre la Api
         HomeApiController testHomeApiController = new HomeApiController(mockRoomsService);
         assertEquals(testHomeApiController.findRoomByIdApi("1"), fakeRoomsModel);
 
@@ -60,7 +63,6 @@ class HomeApiControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.pricePerNight").value(285.00))
                 .andExpect(jsonPath("$.code").value("SU4"));
-
 
     }
 
