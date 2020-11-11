@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.mvc.dto;
+package toDelete.sandbox.mvc.dto;
 
 import com.pomhotel.booking.application.models.RoomsModel;
 

@@ -1,9 +1,9 @@
-package com.pomhotel.booking.ui.mvc.controllers;
+package toDelete.sandbox.mvc.controllers;
 
 import com.pomhotel.booking.application.models.ClientsModel;
 import com.pomhotel.booking.application.models.LoginsModel;
 import com.pomhotel.booking.application.services.ClientLoginService;
-import com.pomhotel.booking.ui.mvc.dto.NewClientDTO;
+import toDelete.sandbox.mvc.dto.NewClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;

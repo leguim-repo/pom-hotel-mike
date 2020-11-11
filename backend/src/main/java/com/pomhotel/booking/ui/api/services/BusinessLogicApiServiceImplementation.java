@@ -75,6 +75,7 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         calculatedBook.setTotalNights(this.getDaysBetweenTwoDates(Date.valueOf(book.checkIn),Date.valueOf(book.checkOut)));
 
         //TODO aqui el basePrice se debe calcular en funcion de la temporada que pendiente para hacer
+        //Atencion el Checkin marca el precio de temporada
         basePrice= calculatedBook.totalNights * room.pricePerNight;
         calculatedBook.setRoomTotalPrice(basePrice);
 

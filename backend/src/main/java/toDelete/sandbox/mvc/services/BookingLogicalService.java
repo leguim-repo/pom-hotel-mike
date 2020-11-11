@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.mvc.services;
+package toDelete.sandbox.mvc.services;
 
 import java.sql.Date;
 

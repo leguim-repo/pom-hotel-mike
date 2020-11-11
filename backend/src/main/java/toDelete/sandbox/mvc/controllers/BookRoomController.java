@@ -1,13 +1,13 @@
-package com.pomhotel.booking.ui.mvc.controllers;
+package toDelete.sandbox.mvc.controllers;
 
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.BookingsService;
 import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.mvc.dto.NewBookingDTO;
-import com.pomhotel.booking.ui.mvc.services.BookingLogicalService;
-import com.pomhotel.booking.ui.mvc.services.BookingLogicalServiceImplementation;
+import toDelete.sandbox.mvc.dto.NewBookingDTO;
+import toDelete.sandbox.mvc.services.BookingLogicalService;
+import toDelete.sandbox.mvc.services.BookingLogicalServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

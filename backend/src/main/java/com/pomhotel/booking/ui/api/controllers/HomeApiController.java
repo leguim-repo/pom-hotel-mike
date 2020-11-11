@@ -6,7 +6,7 @@ import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.RoomsAndBookedDatesService;
 import com.pomhotel.booking.application.services.RoomsService;
 import com.pomhotel.booking.ui.api.exceptions.RoomNotFoundException;
-import com.pomhotel.booking.ui.mvc.dto.SearchDTO;
+import toDelete.sandbox.mvc.dto.SearchDTO;
 import com.pomhotel.booking.ui.api.services.RandomMusicURLService;
 import com.pomhotel.booking.ui.api.services.RandomMusicURLServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.pomhotel.booking.ui.api.exceptions;
 
-import com.pomhotel.booking.ui.mvc.dto.NewBookingDTO;
+import toDelete.sandbox.mvc.dto.NewBookingDTO;
 
 public class BookRoomNowException extends RuntimeException{
 
