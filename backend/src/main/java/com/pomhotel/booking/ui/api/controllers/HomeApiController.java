@@ -84,9 +84,7 @@ public class HomeApiController {
     public ResponseEntity<String> musicApi() {
         String link="";
         RandomMusicURLService music = new RandomMusicURLServiceImplementation();
-        // un string a pelo no se convierte a JSON. Como es simple creo el JSON a mano
         link="{ \"link\":\""+music.getRandomMusicURL()+"\" }";
-        //return link;
         return new ResponseEntity(link, HttpStatus.OK);
     }
 

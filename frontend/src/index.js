@@ -25,8 +25,6 @@ import Error404 from "pages/Errors/404";
 
 const store_dev = ConfigureStoreDev();
 
-
-
 const env = 'development';
 //const env = 'production';
 console.warn=()=>{};

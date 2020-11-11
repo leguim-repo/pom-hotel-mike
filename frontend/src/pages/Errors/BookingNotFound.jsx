@@ -5,7 +5,6 @@ import { Col, Row, Container } from 'reactstrap';
 import PomNavbar from "../../components/Navbar/PomNavbar";
 import PomHeader from "../../components/Header/PomHeader";
 import PomFooter from "../../components/Footer/PomFooter";
-import Loader from "../../components/Loader/Loader";
 
 const BookingNotFound = () => {
     return (

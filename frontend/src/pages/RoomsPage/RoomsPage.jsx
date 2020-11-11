@@ -13,7 +13,7 @@ import GotoTop from "../../components/GotoTop/GotoTop";
 import Loading from "../../components/Loader/Loader";
 import "./RoomsPage.css"
 import { Link } from 'react-router-dom';
-
+import EmptyRoom from '../Errors/EmptyRoom';
 
 
 const initialFilter = {
@@ -91,6 +91,8 @@ function RoomsPage() {
                       );
   
   console.log('RoomsPage.filter: ',filter);
+  console.log('RoomsPage.roomsFiltered: ',roomsFiltered);
+  console.log('RoomsPage.RenderRooms: ',RenderRooms);
 
   return (
     <React.Fragment>
@@ -106,7 +108,7 @@ function RoomsPage() {
             </Row>
             <Row >
               <Col md={9} className="">
-                {RenderRooms}
+                {RenderRooms.length !== 0 ? RenderRooms : <EmptyRoom/>}
               </Col>
               <Col md={3} className="">
                 <FindRoomsExtend onChangeFilter={setFilter} onClickClear={resetFilter}/>
