@@ -9,7 +9,7 @@ const EmptyRoom = () => {
           <CardBody>
             <CardTitle tag="h5">Unnamed Room</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">Price per Night undefined</CardSubtitle>
-            <CardText>Sorry your room is under construction</CardText>
+            <CardText>Sorry your room is under construction. Please, redefine find filter.</CardText>
           </CardBody>
         </Card>
       </React.Fragment>

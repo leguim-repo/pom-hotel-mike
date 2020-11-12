@@ -20,7 +20,7 @@ class Spaces extends React.Component {
           src={this.props.img}
           top >
         </CardImg>
-        <CardTitle>{this.props.title}</CardTitle>
+        <CardTitle className="ml-2 mt-2">{this.props.title}</CardTitle>
         <CardBody>
           <CardText>{this.props.description}</CardText>
         </CardBody>
