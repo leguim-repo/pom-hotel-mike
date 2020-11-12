@@ -57,7 +57,7 @@ public class BookRoomApiController {
 
         try {
             booking = bookingsService.findById(Long.parseLong(targetId));
-            prices = businessLogicService.calculateBooking(booking);
+            prices = businessLogicService.callToCalculateBooking(booking);
             response.setBook(booking);
             response.setPrices(prices);
         }
@@ -88,7 +88,7 @@ public class BookRoomApiController {
         CalculatedBookDTO bookingCalculado;
         //llamamos al servicio de calculadora para que devuelva el precio de la reserva
         Logger.info("recibido: "+booking);
-        bookingCalculado = businessLogicService.calculateBooking(booking);
+        bookingCalculado = businessLogicService.callToCalculateBooking(booking);
         Logger.info("calculado y enviado: "+bookingCalculado);
         return bookingCalculado;
     }
@@ -117,7 +117,7 @@ public class BookRoomApiController {
             model.codediscount = dto.codeDiscount;
             model.clientEmail = dto.email;
             model.roomsByFKRoomId = room;
-            bookingCalculado = businessLogicService.calculateBooking(dto);
+            bookingCalculado = businessLogicService.callToCalculateBooking(dto);
             model.totalPrice = bookingCalculado.totalBookingPrice;
             Logger.info("bookroomnow.model: "+model.toString());
             bookingId=bookingsService.save(model);

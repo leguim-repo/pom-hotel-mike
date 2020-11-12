@@ -3,6 +3,7 @@ package com.pomhotel.booking.application.services;
 import com.pomhotel.booking.application.domain.factories.BookingsFactory;
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
+import com.pomhotel.booking.application.models.RoomtypesModel;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
 import org.apache.commons.logging.LogFactory;
@@ -33,7 +34,7 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
     }
 
 
-    //--- Functions ----------------------------------------------------
+    //--- Auxiliar Functions ----------------------------------------------------
     @Override
     public double calculateTotalPrice(Date checkIn, Date checkOut, double pricePerNight) {
         long nights = getDaysBetweenTwoDates(checkIn, checkOut);
@@ -52,17 +53,54 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
     }
 
     @Override
-    public CalculatedBookDTO calculateBooking(BookingApiDTO book) {
-        return calculateBook(book);
+    public CalculatedBookDTO callToCalculateBooking(BookingApiDTO book) {
+        return calculateTotalPriceBooking(book);
     }
 
     @Override
-    public CalculatedBookDTO calculateBooking(BookingsModel book) {
-        return calculateBook(bookingsFactory.createDTO(book));
+    public CalculatedBookDTO callToCalculateBooking(BookingsModel book) {
+        return calculateTotalPriceBooking(bookingsFactory.createDTO(book));
+    }
+
+    //--- Methods of Our Business Logical
+    @Override
+    public double calculateBasePrice(long totalNights, double pricePerNight, Date checkIn) {
+        // checkIn nos marca la temporada
+        return totalNights * pricePerNight;
     }
 
     @Override
-    public CalculatedBookDTO calculateBook(BookingApiDTO book) {
+    public double calculateBreakFastService(long totalNights, double pricePerNight) {
+        return totalNights * pricePerNight;
+    }
+
+    @Override
+    public double calculateCarParkingService(long totalNights, double pricePerNight) {
+        return 0;
+    }
+
+    @Override
+    public double calculateSpaService(long totalNights, double pricePerNight, RoomtypesModel roomType) {
+        return 0;
+    }
+
+    @Override
+    public double calculateLaundryService(long totalNights, double pricePerNight) {
+        return 0;
+    }
+
+    @Override
+    public double calculateShuttleService(long totalNights, double pricePerNight) {
+        return 0;
+    }
+
+    @Override
+    public double calculateCodeDiscount(String code) {
+        return 0;
+    }
+
+    @Override
+    public CalculatedBookDTO calculateTotalPriceBooking(BookingApiDTO book) {
         CalculatedBookDTO calculatedBook = new CalculatedBookDTO();
         RoomsModel room;
         double basePrice=0;
@@ -74,14 +112,13 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         calculatedBook.setRoomPricePerNight(room.pricePerNight);
         calculatedBook.setTotalNights(this.getDaysBetweenTwoDates(Date.valueOf(book.checkIn),Date.valueOf(book.checkOut)));
 
-        //TODO aqui el basePrice se debe calcular en funcion de la temporada que pendiente para hacer
-        //Atencion el Checkin marca el precio de temporada
-        basePrice= calculatedBook.totalNights * room.pricePerNight;
+        basePrice = calculateBasePrice(calculatedBook.totalNights, room.pricePerNight, Date.valueOf(book.checkIn));
         calculatedBook.setRoomTotalPrice(basePrice);
+
 
         if ( book.breakfastService ) {
             calculatedBook.setBreakFastPricePerNight(4);
-            calculatedBook.setBreakFastTotalPrice(calculatedBook.totalNights * calculatedBook.breakFastPricePerNight);
+            calculatedBook.setBreakFastTotalPrice(calculateBreakFastService(calculatedBook.totalNights,calculatedBook.breakFastPricePerNight));
             basePrice += calculatedBook.breakFastTotalPrice;
         }
         if ( book.carParkingService ) {
@@ -134,6 +171,7 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         Logger.info("calculatedBook: "+calculatedBook.toString());
         return calculatedBook;
     }
+
 
     @Override
     public String dummyFunction() {
