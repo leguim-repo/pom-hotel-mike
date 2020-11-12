@@ -135,5 +135,10 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         return calculatedBook;
     }
 
+    @Override
+    public String dummyFunction() {
+        return null;
+    }
+
 
 }

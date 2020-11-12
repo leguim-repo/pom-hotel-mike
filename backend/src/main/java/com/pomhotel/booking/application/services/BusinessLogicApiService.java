@@ -19,4 +19,6 @@ public interface BusinessLogicApiService {
     CalculatedBookDTO calculateBooking(BookingApiDTO book);
     CalculatedBookDTO calculateBooking(BookingsModel book);
     CalculatedBookDTO calculateBook(BookingApiDTO book);
+
+    String dummyFunction();
 }

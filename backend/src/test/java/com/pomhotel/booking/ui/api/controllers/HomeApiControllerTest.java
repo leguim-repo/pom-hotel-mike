@@ -65,8 +65,4 @@ class HomeApiControllerTest {
                 .andExpect(jsonPath("$.code").value("SU4"));
 
     }
-
-
-
-
 }
