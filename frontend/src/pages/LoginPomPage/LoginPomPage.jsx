@@ -107,12 +107,7 @@ function LoginPomPage() {
               <Card className="card-login card-plain">
                 <Form action="" className="form" method="">
                   <CardHeader className="text-center">
-                    <div className="logo-container">
-                      <img
-                        alt="..."
-                        src={require("assets/img/now-logo.png")}
-                      ></img>
-                    </div>
+                    <div></div>
                   </CardHeader>
                   <CardBody>
                     <InputGroup

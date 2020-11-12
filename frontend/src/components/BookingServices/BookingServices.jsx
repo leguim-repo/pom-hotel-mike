@@ -290,9 +290,8 @@ class BookingServices extends Component {
 
                 <Col className="m-auto">
                   <FormGroup className="m-3">
-                    <Row><Label htmlFor="guests">Maximum Guests: </Label></Row>
                     <Row>
-                      <input readOnly className="form-input bg-white" style={{fontSize: '1.0em', padding: '0.30em'}} id="guests" name="guests" type="text" onChange={this.onChangeGuests} defaultValue={this.props.room.guests}/>
+                      <Label htmlFor="guests">Maximum Guests:&nbsp;<span>{this.props.room.guests}&nbsp;pax</span></Label>
                     </Row>
                   </FormGroup>
                 </Col>
@@ -339,7 +338,6 @@ class BookingServices extends Component {
 
                 <hr className="border border-light"/>
                 <h6>Services & Prices</h6>
-
 
 
                 <PricePerNight book={this.state.bookCalculate} />
@@ -390,8 +388,6 @@ class BookingServices extends Component {
                   </Row>
                   </FormGroup>
                 </Col>
-
-
           </Col>
         </Form>
       </React.Fragment>

@@ -74,7 +74,6 @@ public class BookRoomApiController {
         try {
             List<BookingDatesModel> listBooked = bookingsService.getBookedDatesByRoomId(Long.parseLong(targetId));
             bookedDates = bookingsService.generateBookedDatesInRunTime(listBooked);
-
         }
         catch (Exception e) {
             e.printStackTrace();

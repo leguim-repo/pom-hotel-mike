@@ -68,7 +68,6 @@ class MusicApiControllerTest {
                                     .andReturn();
 
         String link = JsonPath.read(mvcResponse.getResponse().getContentAsString(), "$.link");
-
         assertTrue(link.contains("https://youtu.be/"));
 
     }

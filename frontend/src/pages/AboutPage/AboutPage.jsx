@@ -85,8 +85,8 @@ function AboutPage(props) {
               <Col md={6} lg={8} className=" ">
                 <YouTube
                   video={video}
-                  width={targetWidht}
-                  height={targetHeight}
+                  width="100%"
+                  height="100%"
                   controls={true}
                   modestBranding
                 />
