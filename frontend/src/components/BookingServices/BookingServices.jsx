@@ -145,7 +145,14 @@ class BookingServices extends Component {
     }
 
     onChangeCodeDiscount(event) {
-      this.setState({discountCode: event.target.value.toUpperCase()});
+      const code = event.target.value;
+      if ( code.length >= 6) {
+        this.setState({discountCode: event.target.value.toUpperCase(), calculate: true});
+        console.log('onChangeCodeDiscount: calculate!');
+      }
+      else {
+        this.setState({discountCode: event.target.value.toUpperCase()});
+      }
     }
 
     onChangeEmail(event) {
@@ -193,8 +200,6 @@ class BookingServices extends Component {
         var checkout = this.state.checkout.toJSON().split("T")[0];
         var guests = this.state.guests;
         console.log('checkin: ', checkin, ' checkout: ',checkout, ' guests: ', guests);
-        //alert("reservar para hacer")
-        //this.props.history.push('/rooms/checkin='+checkin+'&checkout='+checkout+'&guests='+guests);
         console.log('handle.state: ',this.state);
         const finalBook = new BookingApiDTO();
         finalBook.setRoomId(this.state.roomId);
@@ -240,14 +245,17 @@ class BookingServices extends Component {
 
       console.log('BookingServices.props: ',this.props);
       console.log('BookingServices.state: ',this.state);
+
+
       if ('bookNowResult' in this.state.bookNowResult) {
         console.log('Redirect by.bookNowResult: ',this.state.bookNowResult)
 
         return(<Redirect push to={this.state.bookNowResult.bookLink}></Redirect>)
       }
       else {
-        console.log('no redirect');
+        console.log('no redirect need');
       }
+
       return (
         <React.Fragment>
             <Form style={{margin: '0px'}} className="formExtend border mb-5" model='formFindRoomExtend' onSubmit={this.handleSubmit}>
@@ -346,7 +354,7 @@ class BookingServices extends Component {
                 <SpaService book={this.state.bookCalculate} style={this.state.showSpaService ? {} : { display: 'none' }} />
                 <LaundryService book={this.state.bookCalculate} style={this.state.showLaundryService ? {} : { display: 'none' }} />
                 <ShuttleService book={this.state.bookCalculate} style={this.state.showShuttleService ? {} : { display: 'none' }} />
-                <Discount book={this.state.bookCalculate} style={this.state.showDiscount ? {} : { display: 'none' }} />
+                <Discount book={this.state.bookCalculate} style={this.state.bookCalculate.codeDiscountPrice<0 ? {} : { display: 'none' }} />
 
                 <hr className="border border-light"/>
                 <Row>

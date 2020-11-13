@@ -41,10 +41,16 @@ function BookingDetailsThankYou(props) {
           <Col className="m-auto mb-5">
             <hr className="border border-light"/>
             <h6>Services & Prices</h6>
-              <Row className="" style={book.breakfast ? {} : { display: 'none' }}>
+
+            <Row className="">
+              <Col><span>{book.roomsByFKRoomId.pricePerNight}€ x {prices.totalNights} nights</span></Col>
+              <Col md={3}><span className="pull-right">{prices.totalBookingPrice} €</span></Col>
+            </Row>
+
+            <Row className="" style={book.breakfast ? {} : { display: 'none' }}>
               <Col><span>Breakfast {prices.breakFastPricePerNight}€ x {prices.totalNights} nights</span></Col>
               <Col md={3}><span className="pull-right">{prices.breakFastTotalPrice} €</span></Col>
-              </Row>
+            </Row>
 
             <Row className="" style={book.carparking ? {} : { display: 'none' }}>
               <Col><span>Car Parking {prices.carParkingPricePerNight}€ x {prices.totalNights} nights</span></Col>
@@ -66,7 +72,7 @@ function BookingDetailsThankYou(props) {
               <Col md={3}><span className="pull-right">{prices.shuttleTotalPrice} €</span></Col>
             </Row>
 
-            <Row className="" style={book.shuttle ? {} : { display: 'none' }}>
+            <Row className="" style={prices.codeDiscountPrice < 0 ? {} : { display: 'none' }}>
             <Col><span>Code Discount: {book.codediscount}</span></Col>
               <Col md={3}><span className="pull-right">{prices.codeDiscountPrice} €</span></Col>
             </Row>

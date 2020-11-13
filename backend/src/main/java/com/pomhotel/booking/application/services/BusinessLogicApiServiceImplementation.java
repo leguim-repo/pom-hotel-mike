@@ -162,12 +162,19 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
             case "CODE15":
                 calculatedBook.setCodeDiscountPrice(-15);
                 break;
+            case "CODE20":
+                calculatedBook.setCodeDiscountPrice(-20);
+                break;
+            case "CODE25":
+                calculatedBook.setCodeDiscountPrice(-25);
+                break;
+            case "CODE50":
+                calculatedBook.setCodeDiscountPrice(-50);
+                break;
         }
+
         basePrice +=calculatedBook.codeDiscountPrice;
-
-
         calculatedBook.setTotalBookingPrice(basePrice);
-
         Logger.info("calculatedBook: "+calculatedBook.toString());
         return calculatedBook;
     }
