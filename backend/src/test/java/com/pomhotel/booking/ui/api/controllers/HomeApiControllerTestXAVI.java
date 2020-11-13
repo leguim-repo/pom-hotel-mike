@@ -3,6 +3,7 @@ package com.pomhotel.booking.ui.api.controllers;
 import com.pomhotel.booking.BookingApplication;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.RoomsService;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -23,17 +26,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // https://dzone.com/articles/rest-endpoint-testing-with-mockmvc
 
 @AutoConfigureMockMvc
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = BookingApplication.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = BookingApplication.class)
 class HomeApiControllerTestXAVI {
-    @MockBean(name="hola")
+    @MockBean
     private RoomsService mockRoomService;
+
+    @Autowired
+    private WebApplicationContext context;
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private HomeApiController homeApiController;
-    
+
+    @Before("")
+    public void setup(){
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .build();
+    }
+
     @Test
     @DisplayName("Test usando Mockito sobre la api findRoomByIdApi")
     void findRoomByIdApi() {

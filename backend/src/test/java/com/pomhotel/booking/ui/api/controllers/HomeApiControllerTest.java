@@ -29,7 +29,6 @@ class HomeApiControllerTest {
     @Autowired
     private HomeApiController homeApiController;
 
-    @MockBean
     private RoomsService mockRoomService;
 
     @Test
