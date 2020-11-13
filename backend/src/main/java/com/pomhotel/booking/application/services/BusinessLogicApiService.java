@@ -24,7 +24,7 @@ public interface BusinessLogicApiService {
     double calculateCarParkingService(long totalNights, double pricePerNight);
     double calculateSpaService(long totalNights, double pricePerNight, RoomtypesModel roomType);
     double calculateLaundryService(long totalNights, double pricePerNight);
-    double calculateShuttleService(long totalNights, double pricePerNight);
+    double calculateShuttleService(double servicePrice);
     double calculateCodeDiscount(String code);
 
 

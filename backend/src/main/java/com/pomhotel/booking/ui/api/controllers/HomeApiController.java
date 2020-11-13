@@ -68,17 +68,20 @@ public class HomeApiController {
     }
 
     // Ok Single item...really without use. Only for tests
-    @GetMapping("/api/roomdetail/{targetId}")
+    @GetMapping(value = "/api/roomdetail/{targetId}", produces = "application/json")
+    //public ResponseEntity<RoomsModel> findRoomByIdApi(@PathVariable String targetId) {
     public RoomsModel findRoomByIdApi(@PathVariable String targetId) {
         RoomsModel requestedRoom=new RoomsModel();
         try {
             requestedRoom = roomsService.findById(Long.parseLong(targetId));
+            Logger.debug(requestedRoom.getCode());
         }
         catch (Exception e) {
             e.printStackTrace();
             throw new RoomNotFoundException(targetId);
 
         }
+        //return new ResponseEntity(requestedRoom,HttpStatus.OK);
         return requestedRoom;
     }
 

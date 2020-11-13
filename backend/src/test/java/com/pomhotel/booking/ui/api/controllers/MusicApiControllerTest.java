@@ -1,5 +1,7 @@
 package com.pomhotel.booking.ui.api.controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jayway.jsonpath.JsonPath;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
@@ -46,7 +48,8 @@ class MusicApiControllerTest {
     @Test
     public void CheckIfReturnedIsOkAndJSONObjectContainsAKeyNamedLinkAndNotIsEmpty() throws  Exception{
 
-        mvc.perform(get("/api/music").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/music")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.link").exists())
@@ -59,11 +62,12 @@ class MusicApiControllerTest {
         MvcResult mvcResponse = mvc.perform(get("/api/music")
                                     .contentType(MediaType.APPLICATION_JSON))
                                     .andDo(print())
+                                    .andExpect(status().isOk())
                                     .andReturn()
                                     ;
 
         String link = JsonPath.read(mvcResponse.getResponse().getContentAsString(), "$.link");
         assertTrue(link.contains("https://youtu.be/"));
-
     }
+
 }

@@ -145,14 +145,8 @@ class BookingServices extends Component {
     }
 
     onChangeCodeDiscount(event) {
-      const code = event.target.value;
-      if ( code.length >= 6) {
-        this.setState({discountCode: event.target.value.toUpperCase(), calculate: true});
-        console.log('onChangeCodeDiscount: calculate!');
-      }
-      else {
-        this.setState({discountCode: event.target.value.toUpperCase()});
-      }
+      this.setState({discountCode: event.target.value.toUpperCase(), calculate: true});
+
     }
 
     onChangeEmail(event) {

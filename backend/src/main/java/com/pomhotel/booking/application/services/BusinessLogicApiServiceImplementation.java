@@ -62,10 +62,12 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         return calculateTotalPriceBooking(bookingsFactory.createDTO(book));
     }
 
+
+
     //--- Methods of Our Business Logical
     @Override
     public double calculateBasePrice(long totalNights, double pricePerNight, Date checkIn) {
-        // checkIn nos marca la temporada
+        // TODO realizar descuento al total por larga estancia. CheckIn nos marca la temporada
         return totalNights * pricePerNight;
     }
 
@@ -76,27 +78,51 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
     @Override
     public double calculateCarParkingService(long totalNights, double pricePerNight) {
-        return 0;
+        return totalNights * pricePerNight;
     }
 
     @Override
     public double calculateSpaService(long totalNights, double pricePerNight, RoomtypesModel roomType) {
-        return 0;
+        // TODO depende del tipo de room va incluido
+
+        return totalNights * pricePerNight;
     }
 
     @Override
     public double calculateLaundryService(long totalNights, double pricePerNight) {
-        return 0;
+        // TODO debe depender de las noches
+        return totalNights * pricePerNight;
     }
 
     @Override
-    public double calculateShuttleService(long totalNights, double pricePerNight) {
-        return 0;
+    public double calculateShuttleService(double servicePrice) {
+        return servicePrice;
     }
 
     @Override
     public double calculateCodeDiscount(String code) {
-        return 0;
+        double discount = 0;
+        switch (code) {
+            case "CODE05":
+                discount=-5;
+                break;
+            case "CODE10":
+                discount=-10;
+                break;
+            case "CODE15":
+                discount=-15;
+                break;
+            case "CODE20":
+                discount=-20;
+                break;
+            case "CODE25":
+                discount=-25;
+                break;
+            case "CODE50":
+                discount=-50;
+                break;
+        }
+        return discount;
     }
 
     @Override
@@ -123,57 +149,32 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         }
         if ( book.carParkingService ) {
             calculatedBook.setCarParkingPricePerNight(10);
-            calculatedBook.setCarParkingTotalPrice(calculatedBook.totalNights * calculatedBook.carParkingPricePerNight);
+            calculatedBook.setCarParkingTotalPrice(calculateCarParkingService(calculatedBook.totalNights,calculatedBook.carParkingPricePerNight));
             basePrice += calculatedBook.carParkingTotalPrice;
         }
 
         if ( book.spaService ) {
-            // TODO depende del tipo de room va incluido
             calculatedBook.setSpaPricePerNight(5);
-            calculatedBook.setSpaTotalPrice(calculatedBook.totalNights * calculatedBook.spaPricePerNight);
+            calculatedBook.setSpaTotalPrice(calculateSpaService(calculatedBook.totalNights, calculatedBook.spaPricePerNight, room.roomtypesByFkRoomtypeId));
             basePrice += calculatedBook.spaTotalPrice;
         }
 
         if ( book.laundryService ) {
-            // TODO debe depender de las noches
             calculatedBook.setLaundryPricePerNight(50);
-            calculatedBook.setLaundryTotalPrice(calculatedBook.totalNights * calculatedBook.laundryPricePerNight);
+            calculatedBook.setLaundryTotalPrice(calculateLaundryService(calculatedBook.totalNights, calculatedBook.laundryPricePerNight));
             basePrice += calculatedBook.laundryTotalPrice;
         }
 
         if ( book.shuttleService ) {
             if (calculatedBook.totalNights >= 1){
                 calculatedBook.setShuttlePricePerNight(20);
-                calculatedBook.setShuttleTotalPrice(calculatedBook.shuttlePricePerNight);
+                calculatedBook.setShuttleTotalPrice(calculateShuttleService(calculatedBook.shuttlePricePerNight));
                 basePrice += calculatedBook.shuttleTotalPrice;
             }
         }
 
-        // TODO realizar descuento al total por larga estancia
-
-        calculatedBook.setCodeDiscountPrice(0);
-        switch (book.codeDiscount) {
-            case "CODE05":
-                calculatedBook.setCodeDiscountPrice(-5);
-                break;
-            case "CODE10":
-                calculatedBook.setCodeDiscountPrice(-10);
-                break;
-            case "CODE15":
-                calculatedBook.setCodeDiscountPrice(-15);
-                break;
-            case "CODE20":
-                calculatedBook.setCodeDiscountPrice(-20);
-                break;
-            case "CODE25":
-                calculatedBook.setCodeDiscountPrice(-25);
-                break;
-            case "CODE50":
-                calculatedBook.setCodeDiscountPrice(-50);
-                break;
-        }
-
-        basePrice +=calculatedBook.codeDiscountPrice;
+        calculatedBook.setCodeDiscountPrice(calculateCodeDiscount(book.codeDiscount));
+        basePrice +=calculateCodeDiscount(book.codeDiscount);
         calculatedBook.setTotalBookingPrice(basePrice);
         Logger.info("calculatedBook: "+calculatedBook.toString());
         return calculatedBook;

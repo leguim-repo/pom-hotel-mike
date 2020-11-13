@@ -44,7 +44,7 @@ function BookingDetailsThankYou(props) {
 
             <Row className="">
               <Col><span>{book.roomsByFKRoomId.pricePerNight}€ x {prices.totalNights} nights</span></Col>
-              <Col md={3}><span className="pull-right">{prices.totalBookingPrice} €</span></Col>
+              <Col md={3}><span className="pull-right">{prices.roomTotalPrice} €</span></Col>
             </Row>
 
             <Row className="" style={book.breakfast ? {} : { display: 'none' }}>
