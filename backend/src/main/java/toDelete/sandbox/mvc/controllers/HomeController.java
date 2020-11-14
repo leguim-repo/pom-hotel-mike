@@ -1,7 +1,7 @@
 package toDelete.sandbox.mvc.controllers;
 
 import com.pomhotel.booking.application.models.RoomsModel;
-import com.pomhotel.booking.application.models.RoomtypesModel;
+import com.pomhotel.booking.application.models.RoomTypesModel;
 import com.pomhotel.booking.application.services.RoomTypesService;
 import com.pomhotel.booking.application.services.RoomsService;
 import org.apache.commons.logging.LogFactory;
@@ -49,7 +49,7 @@ public class HomeController {
         List<RoomsModel> rooms = roomsService.findAll();
         model.addAttribute("rooms", rooms);
 
-        List<RoomtypesModel> types = roomTypesService.findAll();
+        List<RoomTypesModel> types = roomTypesService.findAll();
         model.addAttribute("types", types);
 
         model.addAttribute("checkin", checkin);
@@ -72,7 +72,7 @@ public class HomeController {
         List<RoomsModel> rooms = roomsService.findApplyingFilter(Integer.parseInt(dto.guests),Integer.parseInt(dto.minprice),Integer.parseInt(dto.maxprice), Long.parseLong(dto.type));
         model.addAttribute("rooms", rooms);
 
-        List<RoomtypesModel> types = roomTypesService.findAll();
+        List<RoomTypesModel> types = roomTypesService.findAll();
         model.addAttribute("types", types);
 
 

@@ -2,7 +2,7 @@ package com.pomhotel.booking.application.models;
 
 import java.util.List;
 
-public class RoomtypesModel {
+public class RoomTypesModel {
 
     //--- Attributes -----------------------------------------------
     public long id;
@@ -11,7 +11,7 @@ public class RoomtypesModel {
     public List<RoomsModel> roomsById;
 
     //--- Constructor ----------------------------------------------
-    public RoomtypesModel() {
+    public RoomTypesModel() {
     }
 
     //--- Getters & Setters ----------------------------------------

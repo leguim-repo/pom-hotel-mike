@@ -1,19 +1,19 @@
 package com.pomhotel.booking.application.services;
 
-import com.pomhotel.booking.application.models.RoomtypesModel;
+import com.pomhotel.booking.application.models.RoomTypesModel;
 import java.util.List;
 
 //--- Service Interface -------------------------------------------
 public interface RoomTypesService {
 
-    RoomtypesModel findById(long id);
+    RoomTypesModel findById(long id);
 
-    List<RoomtypesModel> findAll();
+    List<RoomTypesModel> findAll();
 
-    void saveOrUpdate(RoomtypesModel model);
+    void saveOrUpdate(RoomTypesModel model);
 
     void deleteById(long id);
 
-    void delete(RoomtypesModel model);
+    void delete(RoomTypesModel model);
 
 }

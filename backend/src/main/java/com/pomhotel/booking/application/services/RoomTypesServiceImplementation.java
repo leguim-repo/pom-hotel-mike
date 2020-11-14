@@ -2,7 +2,7 @@ package com.pomhotel.booking.application.services;
 
 import com.pomhotel.booking.application.domain.entities.RoomtypesEntity;
 import com.pomhotel.booking.application.domain.factories.RoomtypesFactory;
-import com.pomhotel.booking.application.models.RoomtypesModel;
+import com.pomhotel.booking.application.models.RoomTypesModel;
 import com.pomhotel.booking.application.repositories.RoomtypesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,21 +27,21 @@ public class RoomTypesServiceImplementation implements RoomTypesService {
 
     //--- Functions ----------------------------------------------------
     @Override
-    public RoomtypesModel findById(long id) {
+    public RoomTypesModel findById(long id) {
         return factory.createModel(repository.findById(id));
     }
 
     @Override
-    public List<RoomtypesModel> findAll() {
+    public List<RoomTypesModel> findAll() {
         List<RoomtypesEntity> entities = repository.findAll();
-        List<RoomtypesModel> models = entities.stream().map(entity -> {
+        List<RoomTypesModel> models = entities.stream().map(entity -> {
             return factory.createModel(entity);
         }).collect(Collectors.toList());
         return models;
     }
 
     @Override
-    public void saveOrUpdate(RoomtypesModel model) {
+    public void saveOrUpdate(RoomTypesModel model) {
         repository.saveOrUpdate(factory.createEntity(model));
     }
 
@@ -51,7 +51,7 @@ public class RoomTypesServiceImplementation implements RoomTypesService {
     }
 
     @Override
-    public void delete(RoomtypesModel model) {
+    public void delete(RoomTypesModel model) {
         repository.delete(factory.createEntity(model));
     }
 

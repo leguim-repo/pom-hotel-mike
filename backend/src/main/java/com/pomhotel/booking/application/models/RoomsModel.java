@@ -9,7 +9,7 @@ public class RoomsModel {
     public Double pricePerNight;
     public String image;
     public int guests;
-    public RoomtypesModel roomtypesByFkRoomtypeId;
+    public RoomTypesModel roomtypesByFkRoomtypeId;
 
     //--- Constructor ----------------------------------------------
     public RoomsModel() {
@@ -58,10 +58,10 @@ public class RoomsModel {
         this.guests = guests;
     }
 
-    public RoomtypesModel getRoomtypesByFkRoomtypeId() {
+    public RoomTypesModel getRoomtypesByFkRoomtypeId() {
         return roomtypesByFkRoomtypeId;
     }
-    public void setRoomtypesByFkRoomtypeId(RoomtypesModel roomtypesByFkRoomtypeId) {
+    public void setRoomtypesByFkRoomtypeId(RoomTypesModel roomtypesByFkRoomtypeId) {
         this.roomtypesByFkRoomtypeId = roomtypesByFkRoomtypeId;
     }
 

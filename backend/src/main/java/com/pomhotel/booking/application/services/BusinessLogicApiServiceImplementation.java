@@ -3,7 +3,7 @@ package com.pomhotel.booking.application.services;
 import com.pomhotel.booking.application.domain.factories.BookingsFactory;
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomsModel;
-import com.pomhotel.booking.application.models.RoomtypesModel;
+import com.pomhotel.booking.application.models.RoomTypesModel;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
 import org.apache.commons.logging.LogFactory;
@@ -36,13 +36,6 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
     //--- Auxiliar Functions ----------------------------------------------------
     @Override
-    public double calculateTotalPrice(Date checkIn, Date checkOut, double pricePerNight) {
-        long nights = getDaysBetweenTwoDates(checkIn, checkOut);
-        double totalPrice = nights * pricePerNight;
-        return totalPrice;
-    }
-
-    @Override
     public Date stringToDate(String date) {
         return Date.valueOf( LocalDate.parse(date, formatoDeEntrada).format(formatoDeSalida) );
     }
@@ -66,9 +59,18 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
     //--- Methods of Our Business Logical
     @Override
-    public double calculateBasePrice(long totalNights, double pricePerNight, Date checkIn) {
-        // TODO realizar descuento al total por larga estancia. CheckIn nos marca la temporada
-        return totalNights * pricePerNight;
+    public double calculateBasePrice(long totalNights, double pricePerNight) {
+        // Feature of calc pricePerNight in function of season pending because I need intercept prices from DB before show in frontentd!!
+        double price = 0;
+        double basePrice =0;
+        if ( (totalNights >= 20) ) {
+            basePrice = pricePerNight - (pricePerNight * 0.20);
+        }
+        else {
+            basePrice = pricePerNight;
+        }
+        price = basePrice * totalNights;
+        return price;
     }
 
     @Override
@@ -82,16 +84,21 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
     }
 
     @Override
-    public double calculateSpaService(long totalNights, double pricePerNight, RoomtypesModel roomType) {
-        // TODO depende del tipo de room va incluido
-
-        return totalNights * pricePerNight;
+    public double calculateSpaService(long totalNights, double pricePerNight, RoomTypesModel roomType) {
+        // depende del tipo de room va incluido. Suite (1) y Luxury (4) spa incluido
+        double price = switch ((int) roomType.id) {
+            case 1,4 -> 0;
+            case 2, 3, 5 -> totalNights * pricePerNight;
+            default -> totalNights * pricePerNight;
+        };
+        return price;
     }
 
     @Override
     public double calculateLaundryService(long totalNights, double pricePerNight) {
-        // TODO debe depender de las noches
-        return totalNights * pricePerNight;
+        double price = 0;
+        price = totalNights * pricePerNight;
+        return price;
     }
 
     @Override
@@ -101,27 +108,15 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
     @Override
     public double calculateCodeDiscount(String code) {
-        double discount = 0;
-        switch (code) {
-            case "CODE05":
-                discount=-5;
-                break;
-            case "CODE10":
-                discount=-10;
-                break;
-            case "CODE15":
-                discount=-15;
-                break;
-            case "CODE20":
-                discount=-20;
-                break;
-            case "CODE25":
-                discount=-25;
-                break;
-            case "CODE50":
-                discount=-50;
-                break;
-        }
+        double discount = switch (code) {
+            case "CODE05" -> -5;
+            case "CODE10" -> -10;
+            case "CODE15" -> -15;
+            case "CODE20" -> -20;
+            case "CODE25" -> -25;
+            case "CODE50" -> -50;
+            default -> 0;
+        };
         return discount;
     }
 
@@ -138,7 +133,7 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         calculatedBook.setRoomPricePerNight(room.pricePerNight);
         calculatedBook.setTotalNights(this.getDaysBetweenTwoDates(Date.valueOf(book.checkIn),Date.valueOf(book.checkOut)));
 
-        basePrice = calculateBasePrice(calculatedBook.totalNights, room.pricePerNight, Date.valueOf(book.checkIn));
+        basePrice = calculateBasePrice(calculatedBook.totalNights, room.pricePerNight);
         calculatedBook.setRoomTotalPrice(basePrice);
 
 
@@ -160,7 +155,7 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         }
 
         if ( book.laundryService ) {
-            calculatedBook.setLaundryPricePerNight(50);
+            calculatedBook.setLaundryPricePerNight(2);
             calculatedBook.setLaundryTotalPrice(calculateLaundryService(calculatedBook.totalNights, calculatedBook.laundryPricePerNight));
             basePrice += calculatedBook.laundryTotalPrice;
         }
@@ -178,12 +173,6 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         calculatedBook.setTotalBookingPrice(basePrice);
         Logger.info("calculatedBook: "+calculatedBook.toString());
         return calculatedBook;
-    }
-
-
-    @Override
-    public String dummyFunction() {
-        return null;
     }
 
 
