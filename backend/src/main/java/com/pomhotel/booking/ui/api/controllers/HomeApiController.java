@@ -37,7 +37,6 @@ public class HomeApiController {
 
 
 
-
     // OK Endpoint of link [Rooms]
     @GetMapping("/api/rooms")
     public List<RoomsModel> getAllRoomsApi() {
@@ -51,25 +50,11 @@ public class HomeApiController {
         return rooms;
     }
 
-    // OK Endpoint of button [Find Rooms] in home and [Find Room] in rooms
-    @PostMapping("/api/findroom")
-    public List<RoomsModel> findRoomByFilterApi(@RequestBody SearchDTO dto) {
-        Logger.info("findroom: " + dto.toString());
-
-        if ( ( dto.minprice==null) && (dto.maxprice==null) && (dto.type==null) ) {
-            dto.minprice = "1";
-            dto.maxprice = "1000";
-            dto.type = "0";
-            dto.guests = "1";
-        }
-        List<RoomsModel> rooms = roomsService.findApplyingFilter(Integer.parseInt(dto.guests),Integer.parseInt(dto.minprice),Integer.parseInt(dto.maxprice), Long.parseLong(dto.type));
-
-        return rooms;
-    }
 
     // Ok Single item...really without use. Only for tests
-    @GetMapping(value = "/api/roomdetail/{targetId}", produces = "application/json")
+    //@GetMapping(value = "/api/roomdetail/{targetId}", produces = "application/json")
     //public ResponseEntity<RoomsModel> findRoomByIdApi(@PathVariable String targetId) {
+    @GetMapping("/api/roomdetail/{targetId}")
     public RoomsModel findRoomByIdApi(@PathVariable String targetId) {
         RoomsModel requestedRoom=new RoomsModel();
         try {

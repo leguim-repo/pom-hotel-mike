@@ -52,16 +52,10 @@ class HomeApiControllerTestXAVI {
     @Test
     @DisplayName("Test usando Mockito sobre la api findRoomByIdApi")
     void findRoomByIdApi() {
-        // Mock del Modelo
         RoomsModel fakeRoomsModel = new RoomsModel();
         fakeRoomsModel.setId(1);
         fakeRoomsModel.setPricePerNight(200.00);
-        // Mock del service a testear
-        //var mockRoomsService = Mockito.mock(RoomsService.class);
-        //Mockito.when(mockRoomsService.findById(1)).thenReturn(fakeRoomsModel);
-        //Test sobre la Api
-        //HomeApiController testHomeApiController = new HomeApiController(mockRoomsService);
-        //assertEquals(testHomeApiController.findRoomByIdApi("1"), fakeRoomsModel);
+
         when(mockRoomService.findById(1)).thenReturn(fakeRoomsModel);
         assertEquals(homeApiController.findRoomByIdApi("1"), fakeRoomsModel);
 
@@ -69,8 +63,6 @@ class HomeApiControllerTestXAVI {
 
     @Test
     @DisplayName("Test usando MockBean")
-    //@Disabled("Disabled because this test crash for unknown reasons")
-    // https://github.com/leguim-repo/pom-hotel-mike/blob/ec2a4e988865e198f80e6a9c6844b170c18358e0/backend/src/test/java/com/pomhotel/booking/ui/api/controllers/HomeApiControllerTestXAVI.java
     void findRoomByIdApi_mockMvc() throws Exception {
         RoomsModel theRoom = new RoomsModel();
         theRoom.setId(1);

@@ -10,7 +10,7 @@ import java.sql.Date;
 public interface BusinessLogicApiService {
 
     //--- Auxiliar Functions ----------------------------------------------------
-    Date stringToDate(String date);
+    //Date stringToDate(String date);
     long getDaysBetweenTwoDates(Date date1, Date date2);
 
 

@@ -64,12 +64,11 @@ public class BookRoomApiController {
         catch (Exception e) {
             e.printStackTrace();
         }
-        //TODO devolver el booking y los precios calculado en un object
         return response;
     }
 
     @GetMapping("/api/dates/{targetId}")
-    public List<Date> getAllBookingsDatesApi(@PathVariable String targetId) {
+    public List<Date> getAllBookingsDatesByRoomIdApi(@PathVariable String targetId) {
         List<Date> bookedDates = new ArrayList<>();
         try {
             List<BookingDatesModel> listBooked = bookingsService.getBookedDatesByRoomId(Long.parseLong(targetId));
