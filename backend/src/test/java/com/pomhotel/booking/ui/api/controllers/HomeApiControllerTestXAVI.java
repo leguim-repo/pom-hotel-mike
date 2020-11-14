@@ -4,6 +4,7 @@ import com.pomhotel.booking.BookingApplication;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.RoomsService;
 import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -26,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // https://dzone.com/articles/rest-endpoint-testing-with-mockmvc
 
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = BookingApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = BookingApplication.class)
 class HomeApiControllerTestXAVI {
     @MockBean
     private RoomsService mockRoomService;
@@ -44,6 +46,7 @@ class HomeApiControllerTestXAVI {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .build();
+
     }
 
     @Test
@@ -65,33 +68,20 @@ class HomeApiControllerTestXAVI {
     }
 
     @Test
-    @DisplayName("Test usando mockMvc sobre la api findRoomByIdApi")
+    @DisplayName("Test usando MockBean")
+    //@Disabled("Disabled because this test crash for unknown reasons")
+    // https://github.com/leguim-repo/pom-hotel-mike/blob/ec2a4e988865e198f80e6a9c6844b170c18358e0/backend/src/test/java/com/pomhotel/booking/ui/api/controllers/HomeApiControllerTestXAVI.java
     void findRoomByIdApi_mockMvc() throws Exception {
+        RoomsModel theRoom = new RoomsModel();
+        theRoom.setId(1);
+        theRoom.setPricePerNight(300.00);
+        theRoom.setCode("SU1");
+        when(mockRoomService.findById(1)).thenReturn(theRoom);
         this.mockMvc.perform(get("/api/roomdetail/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                //.andExpect(jsonPath("$.pricePerNight").value(300.00))
+                .andExpect(jsonPath("$.pricePerNight").value(300.00))
                 .andExpect(jsonPath("$.code").value("SU1"));
-
-
-
-        /*
-        this.mockMvc.perform(get("/api/roomdetail/2").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.pricePerNight").value(320.00))
-                .andExpect(jsonPath("$.code").value("SU2"));
-
-        this.mockMvc.perform(get("/api/roomdetail/3").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.pricePerNight").value(290.00))
-                .andExpect(jsonPath("$.code").value("SU3"));
-
-        this.mockMvc.perform(get("/api/roomdetail/4").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.pricePerNight").value(285.00))
-                .andExpect(jsonPath("$.code").value("SU4"));
-        */
-
     }
 }

@@ -28,7 +28,6 @@ class HomeApiControllerTest {
 
     @Autowired
     private HomeApiController homeApiController;
-
     private RoomsService mockRoomService;
 
     @Test
@@ -49,6 +48,7 @@ class HomeApiControllerTest {
 
     @Test
     @DisplayName("Test usando mockMvc sobre la api findRoomByIdApi")
+    // De esta forma se hace un test hasta la BD
     void findRoomByIdApi_mockMvc() throws Exception {
         this.mockMvc.perform(get("/api/roomdetail/1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
