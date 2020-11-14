@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = BookingApplication.class)
-class HomeApiControllerTestXAVI {
+class HomeApiControllerTest_MockBean {
     @MockBean
     private RoomsService mockRoomService;
 
@@ -50,7 +50,7 @@ class HomeApiControllerTestXAVI {
     }
 
     @Test
-    @DisplayName("Test usando Mockito sobre la api findRoomByIdApi")
+    @DisplayName("MockBean Endpoint: \"/api/roomdetail/{targetId}\"")
     void findRoomByIdApi() {
         RoomsModel fakeRoomsModel = new RoomsModel();
         fakeRoomsModel.setId(1);
@@ -62,7 +62,7 @@ class HomeApiControllerTestXAVI {
     }
 
     @Test
-    @DisplayName("Test usando MockBean")
+    @DisplayName("MockBean Endpoint: \"/api/roomdetail/{targetId}\"")
     void findRoomByIdApi_mockMvc() throws Exception {
         RoomsModel theRoom = new RoomsModel();
         theRoom.setId(1);

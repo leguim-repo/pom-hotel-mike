@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-class HomeApiControllerTestMike {
+class HomeApiControllerTest_Mockito {
     @Autowired
     private MockMvc mockMvc;
 
@@ -31,7 +31,7 @@ class HomeApiControllerTestMike {
     private RoomsService mockRoomService;
 
     @Test
-    @DisplayName("Test usando Mockito sobre la api findRoomByIdApi")
+    @DisplayName("Mockito Endpoint: \"/api/roomdetail/{targetId}\"")
     void findRoomByIdApi() {
         // Mock del Modelo
         RoomsModel fakeRoomsModel = new RoomsModel();
@@ -47,7 +47,7 @@ class HomeApiControllerTestMike {
     }
 
     @Test
-    @DisplayName("Test usando mockMvc sobre la api findRoomByIdApi")
+    @DisplayName("MockMvc Endpoint: \"/api/roomdetail/{targetId}\"")
     // De esta forma se hace un test hasta la BD
     void findRoomByIdApi_mockMvc() throws Exception {
         this.mockMvc.perform(get("/api/roomdetail/1").accept(MediaType.APPLICATION_JSON))

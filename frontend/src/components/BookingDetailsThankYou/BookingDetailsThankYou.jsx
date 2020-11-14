@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, FormGroup, Label, Input, Col, Row, Container,Form } from 'reactstrap';
 import Loader from '../Loader/Loader';
+import { NormalPrice, SpecialPrice } from '../NormalAndSpecialPrice/NormalAndSpecialPrice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
 import { QRCode } from 'react-qrcode-logo';
@@ -8,13 +9,16 @@ import { QRCode } from 'react-qrcode-logo';
 function BookingDetailsThankYou(props) {
   const [book, setBook] = useState({});
   const [prices, setPrices] = useState({});
-  
+  const [global, setGlobal] = useState({});
   console.log('BookingDetailsThankYou.booking: ',props.booking)
 
   React.useEffect(() => {
     setBook(props.booking.book);
     setPrices(props.booking.prices);
+    let dummyObj = {};
+    dummyObj.book = {...props.booking.book, ...props.booking.prices}; //chapu
 
+    setGlobal(dummyObj);
     return function cleanup() {
 
     };
@@ -22,7 +26,7 @@ function BookingDetailsThankYou(props) {
 
 
   if ( 'roomsByFKRoomId' in book) {
-
+    console.log('global: ',global);
     return (
       <React.Fragment>
         <Form style={{margin: '0px'}} className="formExtend border mb-5">
@@ -43,8 +47,9 @@ function BookingDetailsThankYou(props) {
             <h6>Services & Prices</h6>
 
             <Row className="">
-              <Col><span>{book.roomsByFKRoomId.pricePerNight}€ x {prices.totalNights} nights</span></Col>
-              <Col md={3}><span className="pull-right">{prices.roomTotalPrice} €</span></Col>
+              <Col>
+                { prices.longStay ? <SpecialPrice {...global} /> : <NormalPrice {...props} /> }
+              </Col>
             </Row>
 
             <Row className="" style={book.breakfast ? {} : { display: 'none' }}>

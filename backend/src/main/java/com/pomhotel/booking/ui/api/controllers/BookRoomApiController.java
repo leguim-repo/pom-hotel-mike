@@ -103,6 +103,7 @@ public class BookRoomApiController {
         Integer bookingId = 0;
         BookingsModel model = new BookingsModel();
         try {
+            //esto es muy feo aqui debe pasarse a un servicio
             room = roomsService.findById(dto.roomId);
             model.checkIn = Date.valueOf(dto.checkIn);
             model.checkOut = Date.valueOf(dto.checkOut);

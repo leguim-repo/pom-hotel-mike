@@ -3,9 +3,12 @@ package com.pomhotel.booking.ui.api.dto;
 public class CalculatedBookDTO {
 
     public long totalNights;
-
+    public boolean longStay;
     public double roomPricePerNight;
     public double roomTotalPrice;
+
+    public double roomSpecialPricePerNight;
+    public double roomSpecialTotalPrice;
 
     public double breakFastPricePerNight;
     public double breakFastTotalPrice;
@@ -28,6 +31,29 @@ public class CalculatedBookDTO {
     public CalculatedBookDTO() {
     }
 
+    public boolean isLongStay() {
+        return longStay;
+    }
+
+    public double getRoomSpecialPricePerNight() {
+        return roomSpecialPricePerNight;
+    }
+
+    public void setRoomSpecialPricePerNight(double roomSpecialPricePerNight) {
+        this.roomSpecialPricePerNight = roomSpecialPricePerNight;
+    }
+
+    public double getRoomSpecialTotalPrice() {
+        return roomSpecialTotalPrice;
+    }
+
+    public void setRoomSpecialTotalPrice(double roomSpecialTotalPrice) {
+        this.roomSpecialTotalPrice = roomSpecialTotalPrice;
+    }
+
+    public void setLongStay(boolean longStay) {
+        this.longStay = longStay;
+    }
 
     public double getRoomTotalPrice() {
         return roomTotalPrice;

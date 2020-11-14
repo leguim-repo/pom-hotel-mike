@@ -19,6 +19,7 @@ public interface BusinessLogicApiService {
 
     //--- Methods of Our Business Logical
     double calculateBasePrice(long totalNights, double pricePerNight);
+    double calculateSpecialPrice(long totalNights, double pricePerNight); // TODO TEST
     double calculateBreakFastService(long totalNights, double pricePerNight);
     double calculateCarParkingService(long totalNights, double pricePerNight);
     double calculateSpaService(long totalNights, double pricePerNight, RoomTypesModel roomType);

@@ -19,7 +19,7 @@ public interface BookingsService {
 
     void saveOrUpdate(BookingsModel model);
     Integer save(BookingsModel model);
-    
+
     void deleteById(long id);
 
     void delete(BookingsModel model);

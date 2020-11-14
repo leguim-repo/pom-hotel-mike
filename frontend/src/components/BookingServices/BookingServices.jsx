@@ -1,6 +1,8 @@
 import React, { Component, useState } from 'react';
 import { Button, FormGroup, Label, Input, Col, Row, Container,Form } from 'reactstrap';
 
+import {NormalPrice, SpecialPrice } from '../NormalAndSpecialPrice/NormalAndSpecialPrice';
+
 import { CheckInPicker, CheckOutPicker } from '../CustomDatePicker/CustomDatePicker';
 import { parseISO} from 'date-fns';
 
@@ -398,12 +400,14 @@ class BookingServices extends Component {
 }
 
 
-function PricePerNight(props) {
+
+function PricePerNight(props) { 
+
   return(
-    <Row className="" style={props.style}>
-    <Col><span>{props.book.roomPricePerNight}€ x {props.book.totalNights} nights</span></Col>
-    <Col md={3}><span className="pull-right">{props.book.roomTotalPrice} €</span></Col>
-    </Row>
+    <React.Fragment>
+      { props.book.longStay ? <SpecialPrice {...props} /> : <NormalPrice {...props} /> }
+    </React.Fragment>
+
   );
 }
 

@@ -58,16 +58,19 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
 
     //--- Methods of Our Business Logical
+
     @Override
     public double calculateBasePrice(long totalNights, double pricePerNight) {
+        return totalNights * pricePerNight;
+    }
+
+    @Override
+    public double calculateSpecialPrice(long totalNights, double pricePerNight) {
         // Feature of calc pricePerNight in function of season pending because I need intercept prices from DB before show in frontentd!!
         double price = 0;
         double basePrice =0;
         if ( (totalNights >= 20) ) {
             basePrice = pricePerNight - (pricePerNight * 0.20);
-        }
-        else {
-            basePrice = pricePerNight;
         }
         price = basePrice * totalNights;
         return price;
@@ -124,7 +127,9 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
     public CalculatedBookDTO calculateTotalPriceBooking(BookingApiDTO book) {
         CalculatedBookDTO calculatedBook = new CalculatedBookDTO();
         RoomsModel room;
-        double basePrice=0;
+        double accumulated = 0;
+        double basePrice = 0;
+        double specialPrice = 0;
         Logger.info("bookCalculation *******");
         Logger.info("book: "+book.toString());
 
@@ -136,41 +141,57 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         basePrice = calculateBasePrice(calculatedBook.totalNights, room.pricePerNight);
         calculatedBook.setRoomTotalPrice(basePrice);
 
+        specialPrice = calculateSpecialPrice(calculatedBook.totalNights, room.pricePerNight);
+
+        if (specialPrice != 0) {
+            accumulated = specialPrice;
+            calculatedBook.setRoomSpecialPricePerNight(room.pricePerNight - (room.pricePerNight * 0.20));
+            calculatedBook.setRoomSpecialTotalPrice(specialPrice);
+            calculatedBook.setLongStay(true);
+        }
+        else {
+            accumulated = basePrice;
+        }
+
+
+        // check si es larga estancia
+        calculatedBook.setLongStay(calculatedBook.getTotalNights() >= 20);
 
         if ( book.breakfastService ) {
             calculatedBook.setBreakFastPricePerNight(4);
             calculatedBook.setBreakFastTotalPrice(calculateBreakFastService(calculatedBook.totalNights,calculatedBook.breakFastPricePerNight));
-            basePrice += calculatedBook.breakFastTotalPrice;
+            accumulated += calculatedBook.breakFastTotalPrice;
         }
         if ( book.carParkingService ) {
             calculatedBook.setCarParkingPricePerNight(10);
             calculatedBook.setCarParkingTotalPrice(calculateCarParkingService(calculatedBook.totalNights,calculatedBook.carParkingPricePerNight));
-            basePrice += calculatedBook.carParkingTotalPrice;
+            accumulated += calculatedBook.carParkingTotalPrice;
         }
 
         if ( book.spaService ) {
             calculatedBook.setSpaPricePerNight(5);
             calculatedBook.setSpaTotalPrice(calculateSpaService(calculatedBook.totalNights, calculatedBook.spaPricePerNight, room.roomtypesByFkRoomtypeId));
-            basePrice += calculatedBook.spaTotalPrice;
+            accumulated += calculatedBook.spaTotalPrice;
         }
 
         if ( book.laundryService ) {
             calculatedBook.setLaundryPricePerNight(2);
             calculatedBook.setLaundryTotalPrice(calculateLaundryService(calculatedBook.totalNights, calculatedBook.laundryPricePerNight));
-            basePrice += calculatedBook.laundryTotalPrice;
+            accumulated += calculatedBook.laundryTotalPrice;
         }
 
         if ( book.shuttleService ) {
             if (calculatedBook.totalNights >= 1){
                 calculatedBook.setShuttlePricePerNight(20);
                 calculatedBook.setShuttleTotalPrice(calculateShuttleService(calculatedBook.shuttlePricePerNight));
-                basePrice += calculatedBook.shuttleTotalPrice;
+                accumulated += calculatedBook.shuttleTotalPrice;
             }
         }
 
+
         calculatedBook.setCodeDiscountPrice(calculateCodeDiscount(book.codeDiscount));
-        basePrice +=calculateCodeDiscount(book.codeDiscount);
-        calculatedBook.setTotalBookingPrice(basePrice);
+        accumulated +=calculateCodeDiscount(book.codeDiscount);
+        calculatedBook.setTotalBookingPrice(accumulated);
         Logger.info("calculatedBook: "+calculatedBook.toString());
         return calculatedBook;
     }

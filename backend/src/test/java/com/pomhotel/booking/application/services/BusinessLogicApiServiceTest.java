@@ -45,14 +45,14 @@ class BusinessLogicApiServiceTest {
     void calculateBasePrice() throws Exception {
         assertEquals(1000, businessService.calculateBasePrice(10,100));
         assertEquals(1900, businessService.calculateBasePrice(19,100));
-        assertEquals(1600, businessService.calculateBasePrice(20,100));
-        assertEquals(1680, businessService.calculateBasePrice(21,100));
+        assertEquals(2000, businessService.calculateBasePrice(20,100));
+        assertEquals(2100, businessService.calculateBasePrice(21,100));
 
         assertEquals(320, businessService.calculateBasePrice(10,32));
-        assertEquals(512, businessService.calculateBasePrice(20,32));
+        assertEquals(640, businessService.calculateBasePrice(20,32));
 
         assertEquals(4500, businessService.calculateBasePrice(10,450));
-        assertEquals(7200, businessService.calculateBasePrice(20,450));
+        assertEquals(9000, businessService.calculateBasePrice(20,450));
 
     }
 
