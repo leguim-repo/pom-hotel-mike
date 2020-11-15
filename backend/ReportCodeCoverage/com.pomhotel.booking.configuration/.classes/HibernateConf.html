@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HibernateConf</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.pomhotel.booking.configuration</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HibernateConf (com.pomhotel.booking.configuration)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HibernateConf</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/ 19)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HibernateConf$$EnhancerBySpringCGLIB$$e6dc9e93</td>
+  </tr>
+  <tr>
+    <td class="name">HibernateConf$$EnhancerBySpringCGLIB$$e6dc9e93$$FastClassBySpringCGLIB$$b64d6d21</td>
+  </tr>
+  <tr>
+    <td class="name">HibernateConf$$FastClassBySpringCGLIB$$63354cee</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/ 19)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.pomhotel.booking.configuration;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.springframework.boot.jdbc.DataSourceBuilder;
+<i>4</i>&nbsp;import org.springframework.context.annotation.Bean;
+<i>5</i>&nbsp;import org.springframework.context.annotation.Configuration;
+<i>6</i>&nbsp;import org.springframework.orm.hibernate5.HibernateTransactionManager;
+<i>7</i>&nbsp;import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+<i>8</i>&nbsp;import org.springframework.transaction.PlatformTransactionManager;
+<i>9</i>&nbsp;import org.springframework.transaction.annotation.EnableTransactionManagement;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import javax.sql.DataSource;
+<i>12</i>&nbsp;import java.util.Properties;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;//--- Configuration Hibernate --------------------------------------
+<i>15</i>&nbsp;@Configuration
+<i>16</i>&nbsp;@EnableTransactionManagement
+<b class="fc"><i>17</i>&nbsp;public class HibernateConf {</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    //--- Beans ----------------------------------------------------
+<i>20</i>&nbsp;    @Bean(name=&quot;entityManagerFactory&quot;)
+<i>21</i>&nbsp;    public LocalSessionFactoryBean sessionFactory() {
+<b class="fc"><i>22</i>&nbsp;        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();</b>
+<b class="fc"><i>23</i>&nbsp;        sessionFactory.setDataSource(dataSource());</b>
+<b class="fc"><i>24</i>&nbsp;        sessionFactory.setPackagesToScan(&quot;com.pomhotel.booking.application.domain.entities&quot;);</b>
+<b class="fc"><i>25</i>&nbsp;        sessionFactory.setHibernateProperties(hibernateProperties());</b>
+<b class="fc"><i>26</i>&nbsp;        return sessionFactory;</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Bean
+<i>30</i>&nbsp;    public DataSource dataSource() {
+<b class="fc"><i>31</i>&nbsp;        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();</b>
+<b class="fc"><i>32</i>&nbsp;        dataSourceBuilder.driverClassName(&quot;com.mysql.cj.jdbc.Driver&quot;);</b>
+<b class="fc"><i>33</i>&nbsp;        dataSourceBuilder.url(&quot;jdbc:mysql://localhost:3306/pom_hotel?serverTimezone=UTC&quot;);</b>
+<b class="fc"><i>34</i>&nbsp;        dataSourceBuilder.username(&quot;root&quot;);</b>
+<b class="fc"><i>35</i>&nbsp;        dataSourceBuilder.password(&quot;secret1234&quot;);</b>
+<i>36</i>&nbsp;
+<b class="fc"><i>37</i>&nbsp;        return dataSourceBuilder.build();</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    @Bean(name=&quot;transactionManager&quot;)
+<i>41</i>&nbsp;    public PlatformTransactionManager hibernateTransactionManager() {
+<b class="fc"><i>42</i>&nbsp;        HibernateTransactionManager transactionManager</b>
+<i>43</i>&nbsp;                = new HibernateTransactionManager();
+<b class="fc"><i>44</i>&nbsp;        transactionManager.setSessionFactory(sessionFactory().getObject());</b>
+<b class="fc"><i>45</i>&nbsp;        return transactionManager;</b>
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    //--- Properties ------------------------------------------------
+<i>49</i>&nbsp;    private final Properties hibernateProperties() {
+<b class="fc"><i>50</i>&nbsp;        Properties hibernateProperties = new Properties();</b>
+<b class="fc"><i>51</i>&nbsp;        hibernateProperties.setProperty(</b>
+<i>52</i>&nbsp;                &quot;hibernate.hbm2ddl.auto&quot;, &quot;update&quot;);
+<b class="fc"><i>53</i>&nbsp;        hibernateProperties.setProperty(</b>
+<i>54</i>&nbsp;                &quot;hibernate.dialect&quot;, &quot;org.hibernate.dialect.MySQL5InnoDBDialect&quot;);
+<i>55</i>&nbsp;
+<b class="fc"><i>56</i>&nbsp;        return hibernateProperties;</b>
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-15 10:03</div>
+</div>
+</body>
+</html>

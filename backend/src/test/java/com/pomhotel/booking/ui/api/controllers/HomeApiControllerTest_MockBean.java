@@ -51,7 +51,7 @@ class HomeApiControllerTest_MockBean {
 
     @Test
     @DisplayName("MockBean Endpoint: \"/api/roomdetail/{targetId}\"")
-    void findRoomByIdApi() {
+    void GetFindRoomByIdApi() {
         RoomsModel fakeRoomsModel = new RoomsModel();
         fakeRoomsModel.setId(1);
         fakeRoomsModel.setPricePerNight(200.00);

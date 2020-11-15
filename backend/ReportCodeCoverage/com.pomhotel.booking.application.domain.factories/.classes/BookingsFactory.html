@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BookingsFactory</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.pomhotel.booking.application.domain.factories</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BookingsFactory (com.pomhotel.booking.application.domain.factories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BookingsFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33,3%
+  </span>
+  <span class="absValue">
+    (2/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    8,1%
+  </span>
+  <span class="absValue">
+    (5/ 62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.pomhotel.booking.application.domain.factories;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.pomhotel.booking.application.domain.entities.BookingsEntity;
+<i>4</i>&nbsp;import com.pomhotel.booking.application.models.BookingDatesModel;
+<i>5</i>&nbsp;import com.pomhotel.booking.application.models.BookingsModel;
+<i>6</i>&nbsp;import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
+<i>7</i>&nbsp;import org.apache.commons.logging.LogFactory;
+<i>8</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>9</i>&nbsp;import org.springframework.stereotype.Component;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import java.sql.Date;
+<i>12</i>&nbsp;import java.util.ArrayList;
+<i>13</i>&nbsp;import java.util.List;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;//--- Factory -------------------------------------------------------
+<i>16</i>&nbsp;@Component
+<i>17</i>&nbsp;public class BookingsFactory {
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    //--- Needed Factories ------------------------------------------
+<i>20</i>&nbsp;    ClientsFactory clientsFactory;
+<i>21</i>&nbsp;    RoomsFactory roomsFactory;
+<i>22</i>&nbsp;
+<b class="fc"><i>23</i>&nbsp;    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog(&quot;BookingsFactory.class&quot;);</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    //--- Constructor -----------------------------------------------
+<i>26</i>&nbsp;    @Autowired
+<b class="fc"><i>27</i>&nbsp;    public BookingsFactory(ClientsFactory clientsFactory, RoomsFactory roomsFactory) {</b>
+<b class="fc"><i>28</i>&nbsp;        this.clientsFactory = clientsFactory;</b>
+<b class="fc"><i>29</i>&nbsp;        this.roomsFactory = roomsFactory;</b>
+<b class="fc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    //--- Functions -------------------------------------------------
+<i>33</i>&nbsp;    public BookingsEntity createEntity(BookingsModel model){
+<b class="nc"><i>34</i>&nbsp;        BookingsEntity entity = new BookingsEntity();</b>
+<b class="nc"><i>35</i>&nbsp;        entity.setId(model.id);</b>
+<b class="nc"><i>36</i>&nbsp;        entity.setCheckIn(model.checkIn);</b>
+<b class="nc"><i>37</i>&nbsp;        entity.setCheckOut(model.checkOut);</b>
+<b class="nc"><i>38</i>&nbsp;        entity.setClientEmail(model.clientEmail);</b>
+<b class="nc"><i>39</i>&nbsp;        entity.setGuests(model.guests);</b>
+<b class="nc"><i>40</i>&nbsp;        entity.setBreakfast(model.breakfast);</b>
+<b class="nc"><i>41</i>&nbsp;        entity.setCarparking(model.carparking);</b>
+<b class="nc"><i>42</i>&nbsp;        entity.setSpa(model.spa);</b>
+<b class="nc"><i>43</i>&nbsp;        entity.setLaundry(model.laundry);</b>
+<b class="nc"><i>44</i>&nbsp;        entity.setShuttle(model.shuttle);</b>
+<b class="nc"><i>45</i>&nbsp;        entity.setCodediscount(model.codediscount);</b>
+<b class="nc"><i>46</i>&nbsp;        entity.setTotalPrice(model.totalPrice);</b>
+<b class="nc"><i>47</i>&nbsp;        entity.setClientsByFkClientId(clientsFactory.createEntity(model.clientsByFkClientId));</b>
+<b class="nc"><i>48</i>&nbsp;        entity.setRoomsByFkRoomId(roomsFactory.createEntity(model.roomsByFKRoomId));</b>
+<b class="nc"><i>49</i>&nbsp;        return entity;</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public BookingsModel createModel(BookingsEntity entity){
+<b class="nc"><i>53</i>&nbsp;        BookingsModel model = new BookingsModel();</b>
+<b class="nc"><i>54</i>&nbsp;        model.id = entity.getId();</b>
+<b class="nc"><i>55</i>&nbsp;        model.checkIn = entity.getCheckIn();</b>
+<b class="nc"><i>56</i>&nbsp;        model.checkOut = entity.getCheckOut();</b>
+<b class="nc"><i>57</i>&nbsp;        model.clientEmail = entity.getClientEmail();</b>
+<b class="nc"><i>58</i>&nbsp;        model.guests = entity.getGuests();</b>
+<b class="nc"><i>59</i>&nbsp;        model.breakfast = entity.isBreakfast();</b>
+<b class="nc"><i>60</i>&nbsp;        model.carparking = entity.isCarparking();</b>
+<b class="nc"><i>61</i>&nbsp;        model.spa = entity.isSpa();</b>
+<b class="nc"><i>62</i>&nbsp;        model.laundry = entity.isLaundry();</b>
+<b class="nc"><i>63</i>&nbsp;        model.shuttle = entity.isShuttle();</b>
+<b class="nc"><i>64</i>&nbsp;        model.codediscount = entity.getCodediscount();</b>
+<b class="nc"><i>65</i>&nbsp;        model.totalPrice = entity.getTotalPrice();</b>
+<b class="nc"><i>66</i>&nbsp;        model.clientsByFkClientId = clientsFactory.createModel(entity.getClientsByFkClientId());</b>
+<b class="nc"><i>67</i>&nbsp;        model.roomsByFKRoomId = roomsFactory.createModel(entity.getRoomsByFkRoomId());</b>
+<b class="nc"><i>68</i>&nbsp;        return model;</b>
+<i>69</i>&nbsp;    }
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    public BookingApiDTO createDTO(BookingsModel model){
+<b class="nc"><i>72</i>&nbsp;        BookingApiDTO dto = new BookingApiDTO();</b>
+<b class="nc"><i>73</i>&nbsp;        dto.roomId = model.roomsByFKRoomId.id;</b>
+<b class="nc"><i>74</i>&nbsp;        dto.checkIn = model.checkIn.toString();</b>
+<b class="nc"><i>75</i>&nbsp;        dto.checkOut = model.checkOut.toString();</b>
+<b class="nc"><i>76</i>&nbsp;        dto.guests = String.valueOf(model.guests);</b>
+<b class="nc"><i>77</i>&nbsp;        dto.breakfastService = model.breakfast;</b>
+<b class="nc"><i>78</i>&nbsp;        dto.carParkingService = model.carparking;</b>
+<b class="nc"><i>79</i>&nbsp;        dto.spaService = model.spa;</b>
+<b class="nc"><i>80</i>&nbsp;        dto.laundryService = model.laundry;</b>
+<b class="nc"><i>81</i>&nbsp;        dto.shuttleService = model.shuttle;</b>
+<b class="nc"><i>82</i>&nbsp;        dto.codeDiscount = model.codediscount;</b>
+<b class="nc"><i>83</i>&nbsp;        dto.email = model.clientEmail;</b>
+<b class="nc"><i>84</i>&nbsp;        return dto;</b>
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    public List&lt;BookingDatesModel&gt; createModelDates(List&lt;Object[]&gt; entities){
+<b class="nc"><i>89</i>&nbsp;        List&lt;BookingDatesModel&gt; listaDates = new ArrayList&lt;&gt;();</b>
+<i>90</i>&nbsp;
+<b class="nc"><i>91</i>&nbsp;        for (Object[] b: entities) {</b>
+<b class="nc"><i>92</i>&nbsp;            Date checkin = (Date) b[0];</b>
+<b class="nc"><i>93</i>&nbsp;            Date checkout = (Date) b[1];</b>
+<b class="nc"><i>94</i>&nbsp;            Logger.info(&quot;checkin: &quot;+checkin.toString());</b>
+<b class="nc"><i>95</i>&nbsp;            Logger.info(&quot;checkout: &quot;+checkout.toString());</b>
+<b class="nc"><i>96</i>&nbsp;            BookingDatesModel model = new BookingDatesModel();</b>
+<b class="nc"><i>97</i>&nbsp;            model.setCheckIn(checkin);</b>
+<b class="nc"><i>98</i>&nbsp;            model.setCheckOut(checkout);</b>
+<b class="nc"><i>99</i>&nbsp;            listaDates.add(model);</b>
+<b class="nc"><i>100</i>&nbsp;        }</b>
+<b class="nc"><i>101</i>&nbsp;        return listaDates;</b>
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-15 10:03</div>
+</div>
+</body>
+</html>

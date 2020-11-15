@@ -93,8 +93,38 @@ public class BookRoomApiController {
     }
 
 
-    // TODO OK Endpoint of button [Confirm Booking] save booking to DataBase and alert if correct or not
-    // Valorar construir un NewBookingDTO mas ligero y sin tanto object
+    @PostMapping("/api/bookroomnow")
+    public BookNowResponseDTO bookRoomNowApi(@RequestBody @Valid BookingApiDTO dto) {
+        BookNowResponseDTO response = new BookNowResponseDTO();
+        Integer bookingId;
+
+        try {
+            bookingId=bookingsService.SaveNewBooking(dto);
+            if (bookingId !=0) {
+                response.bookNowResult=true;
+                response.bookingId=bookingId;
+                response.bookLink="/thankyou/"+bookingId;
+            }
+            else {
+                response.bookNowResult=false;
+                response.bookingId=0;
+                response.bookLink="";
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            response.bookNowResult=false;
+            response.bookingId=0;
+            response.bookLink="";
+            throw new BookingApiException(dto);
+        }
+        return response;
+    }
+
+}
+
+/*
+
     @PostMapping("/api/bookroomnow")
     public BookNowResponseDTO bookRoomNowApi(@RequestBody @Valid BookingApiDTO dto) {
         BookNowResponseDTO response = new BookNowResponseDTO();
@@ -103,7 +133,6 @@ public class BookRoomApiController {
         Integer bookingId = 0;
         BookingsModel model = new BookingsModel();
         try {
-            //esto es muy feo aqui debe pasarse a un servicio
             room = roomsService.findById(dto.roomId);
             model.checkIn = Date.valueOf(dto.checkIn);
             model.checkOut = Date.valueOf(dto.checkOut);
@@ -136,4 +165,4 @@ public class BookRoomApiController {
         return response;
     }
 
-}
+ */

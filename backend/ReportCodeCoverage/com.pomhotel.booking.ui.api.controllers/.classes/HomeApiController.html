@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HomeApiController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.pomhotel.booking.ui.api.controllers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HomeApiController (com.pomhotel.booking.ui.api.controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HomeApiController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33,3%
+  </span>
+  <span class="absValue">
+    (2/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (5/ 20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.pomhotel.booking.ui.api.controllers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import com.pomhotel.booking.application.models.RoomWithBookedDatesModel;
+<i>5</i>&nbsp;import com.pomhotel.booking.application.models.RoomsModel;
+<i>6</i>&nbsp;import com.pomhotel.booking.application.services.RoomsAndBookedDatesService;
+<i>7</i>&nbsp;import com.pomhotel.booking.application.services.RoomsService;
+<i>8</i>&nbsp;import com.pomhotel.booking.ui.api.exceptions.RoomNotFoundException;
+<i>9</i>&nbsp;import org.apache.commons.logging.LogFactory;
+<i>10</i>&nbsp;import toDelete.sandbox.mvc.dto.SearchDTO;
+<i>11</i>&nbsp;import com.pomhotel.booking.ui.api.services.RandomMusicURLService;
+<i>12</i>&nbsp;import com.pomhotel.booking.ui.api.services.RandomMusicURLServiceImplementation;
+<i>13</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>14</i>&nbsp;import org.springframework.http.HttpStatus;
+<i>15</i>&nbsp;import org.springframework.http.ResponseEntity;
+<i>16</i>&nbsp;import org.springframework.web.bind.annotation.*;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;import java.util.List;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;//refererence: https://spring.io/guides/tutorials/rest/
+<i>21</i>&nbsp;@CrossOrigin(origins = &quot;http://pom-hotel.code:3000&quot;, maxAge = 3600)
+<i>22</i>&nbsp;@RestController
+<i>23</i>&nbsp;public class HomeApiController {
+<b class="fc"><i>24</i>&nbsp;    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog(&quot;HomeApiController.class&quot;);</b>
+<i>25</i>&nbsp;    RoomsService roomsService;
+<i>26</i>&nbsp;    RoomsAndBookedDatesService roomsAndBookedDatesService;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Autowired
+<b class="fc"><i>29</i>&nbsp;    public HomeApiController(RoomsService roomsService, RoomsAndBookedDatesService roomsAndBookedDatesService) {</b>
+<b class="fc"><i>30</i>&nbsp;        this.roomsService = roomsService;</b>
+<b class="fc"><i>31</i>&nbsp;        this.roomsAndBookedDatesService = roomsAndBookedDatesService;</b>
+<b class="fc"><i>32</i>&nbsp;    }</b>
+<i>33</i>&nbsp;
+<b class="nc"><i>34</i>&nbsp;    public HomeApiController(RoomsService roomsService) {</b>
+<b class="nc"><i>35</i>&nbsp;        this.roomsService = roomsService;</b>
+<b class="nc"><i>36</i>&nbsp;    }</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    // OK Endpoint of link [Rooms]
+<i>41</i>&nbsp;    @GetMapping(&quot;/api/rooms&quot;)
+<i>42</i>&nbsp;    public List&lt;RoomsModel&gt; getAllRoomsApi() {
+<b class="nc"><i>43</i>&nbsp;        List&lt;RoomsModel&gt; rooms = roomsService.findAll();</b>
+<b class="nc"><i>44</i>&nbsp;        return rooms;</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    @GetMapping(&quot;/api/roomsandbookeddates&quot;)
+<i>48</i>&nbsp;    public List&lt;RoomWithBookedDatesModel&gt; getAllRoomsWithBookedDates() {
+<b class="nc"><i>49</i>&nbsp;        List&lt;RoomWithBookedDatesModel&gt; rooms = roomsAndBookedDatesService.findAllRoomsAndBookedDates();</b>
+<b class="nc"><i>50</i>&nbsp;        return rooms;</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    // Ok Single item...really without use. Only for tests
+<i>55</i>&nbsp;    //@GetMapping(value = &quot;/api/roomdetail/{targetId}&quot;, produces = &quot;application/json&quot;)
+<i>56</i>&nbsp;    //public ResponseEntity&lt;RoomsModel&gt; findRoomByIdApi(@PathVariable String targetId) {
+<i>57</i>&nbsp;    @GetMapping(&quot;/api/roomdetail/{targetId}&quot;)
+<i>58</i>&nbsp;    public RoomsModel findRoomByIdApi(@PathVariable String targetId) {
+<b class="nc"><i>59</i>&nbsp;        RoomsModel requestedRoom=new RoomsModel();</b>
+<i>60</i>&nbsp;        try {
+<b class="nc"><i>61</i>&nbsp;            requestedRoom = roomsService.findById(Long.parseLong(targetId));</b>
+<b class="nc"><i>62</i>&nbsp;            Logger.debug(requestedRoom.getCode());</b>
+<i>63</i>&nbsp;        }
+<b class="nc"><i>64</i>&nbsp;        catch (Exception e) {</b>
+<b class="nc"><i>65</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>66</i>&nbsp;            throw new RoomNotFoundException(targetId);</b>
+<i>67</i>&nbsp;
+<b class="nc"><i>68</i>&nbsp;        }</b>
+<i>69</i>&nbsp;        //return new ResponseEntity(requestedRoom,HttpStatus.OK);
+<b class="nc"><i>70</i>&nbsp;        return requestedRoom;</b>
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;}
+<i>76</i>&nbsp;
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-15 10:03</div>
+</div>
+</body>
+</html>

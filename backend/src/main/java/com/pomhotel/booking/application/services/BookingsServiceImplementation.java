@@ -4,7 +4,10 @@ import com.pomhotel.booking.application.domain.entities.BookingsEntity;
 import com.pomhotel.booking.application.domain.factories.BookingsFactory;
 import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
+import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.repositories.BookingsRepository;
+import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
+import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +26,18 @@ public class BookingsServiceImplementation implements BookingsService{
     //--- Repositories & Factories needed ------------------------------
     BookingsRepository repository;
     BookingsFactory factory;
+    RoomsService roomsService;
+    ClientLoginService clientsService;
+    BusinessLogicApiService businessLogicService;
 
     //--- Constructor --------------------------------------------------
     @Autowired
-    public BookingsServiceImplementation(BookingsRepository repository, BookingsFactory factory) {
+    public BookingsServiceImplementation(BookingsRepository repository, BookingsFactory factory,RoomsService roomsService,ClientLoginService clientsService  , BusinessLogicApiService businessLogicService) {
         this.repository = repository;
         this.factory = factory;
+        this.roomsService = roomsService;
+        this.clientsService = clientsService;
+        this.businessLogicService = businessLogicService;
     }
 
     //--- Functions ----------------------------------------------------
@@ -93,4 +102,38 @@ public class BookingsServiceImplementation implements BookingsService{
         repository.delete(factory.createEntity(model));
     }
 
+    @Override
+    public Integer SaveNewBooking(BookingApiDTO dto) {
+        CalculatedBookDTO bookingCalculado;
+        RoomsModel room;
+        Integer bookingId = 0;
+        BookingsModel model = new BookingsModel();
+
+        try {
+            room = roomsService.findById(dto.roomId);
+            model.checkIn = Date.valueOf(dto.checkIn);
+            model.checkOut = Date.valueOf(dto.checkOut);
+            model.guests = room.guests;
+            model.clientsByFkClientId = clientsService.findClientByUsername("miguel"); // asignado a un cliente por defecto al no tener login
+            model.breakfast = dto.breakfastService;
+            model.carparking = dto.carParkingService;
+            model.spa = dto.spaService;
+            model.laundry = dto.laundryService;
+            model.shuttle = dto.shuttleService;
+            model.codediscount = dto.codeDiscount;
+            model.clientEmail = dto.email;
+            model.roomsByFKRoomId = room;
+            bookingCalculado = businessLogicService.callToCalculateBooking(dto);
+            model.totalPrice = bookingCalculado.totalBookingPrice;
+            Logger.info("bookroomnow.model: "+model.toString());
+            bookingId=this.save(model);
+
+        }
+        catch (Exception e) {
+            bookingId=0;
+
+        }
+
+        return bookingId;
+    }
 }

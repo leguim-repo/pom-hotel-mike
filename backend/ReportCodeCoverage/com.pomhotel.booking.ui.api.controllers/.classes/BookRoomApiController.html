@@ -1,0 +1,222 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BookRoomApiController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.pomhotel.booking.ui.api.controllers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BookRoomApiController (com.pomhotel.booking.ui.api.controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BookRoomApiController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28,6%
+  </span>
+  <span class="absValue">
+    (2/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11,3%
+  </span>
+  <span class="absValue">
+    (7/ 62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.pomhotel.booking.ui.api.controllers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.pomhotel.booking.application.models.BookingDatesModel;
+<i>4</i>&nbsp;import com.pomhotel.booking.application.models.BookingsModel;
+<i>5</i>&nbsp;import com.pomhotel.booking.application.models.RoomsModel;
+<i>6</i>&nbsp;import com.pomhotel.booking.application.services.BookingsService;
+<i>7</i>&nbsp;import com.pomhotel.booking.application.services.ClientLoginService;
+<i>8</i>&nbsp;import com.pomhotel.booking.application.services.RoomsService;
+<i>9</i>&nbsp;import com.pomhotel.booking.ui.api.dto.BookNowResponseDTO;
+<i>10</i>&nbsp;import com.pomhotel.booking.ui.api.dto.BookingWithPricesDTO;
+<i>11</i>&nbsp;import com.pomhotel.booking.ui.api.exceptions.BookingApiException;
+<i>12</i>&nbsp;import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
+<i>13</i>&nbsp;import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
+<i>14</i>&nbsp;import com.pomhotel.booking.application.services.BusinessLogicApiService;
+<i>15</i>&nbsp;import org.apache.commons.logging.LogFactory;
+<i>16</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>17</i>&nbsp;import org.springframework.web.bind.annotation.*;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;import javax.validation.Valid;
+<i>20</i>&nbsp;import java.sql.Date;
+<i>21</i>&nbsp;import java.util.ArrayList;
+<i>22</i>&nbsp;import java.util.List;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;@CrossOrigin(origins = &quot;http://pom-hotel.code:3000&quot;, maxAge = 3600)
+<i>25</i>&nbsp;@RestController
+<i>26</i>&nbsp;public class BookRoomApiController {
+<b class="fc"><i>27</i>&nbsp;    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog(&quot;BookRoomApiController.class&quot;);</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    //--- Services &amp; Variables used ---------------------------------------
+<i>30</i>&nbsp;    RoomsService roomsService;
+<i>31</i>&nbsp;    BookingsService bookingsService;
+<i>32</i>&nbsp;    ClientLoginService clientsService;
+<i>33</i>&nbsp;    BusinessLogicApiService businessLogicService;
+<i>34</i>&nbsp;    RoomsModel roomSelected;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    //--- Constructor --------------------------------------------------
+<i>37</i>&nbsp;    @Autowired
+<b class="fc"><i>38</i>&nbsp;    public BookRoomApiController(RoomsService roomsService, BookingsService bookingsService, ClientLoginService clientsService  , BusinessLogicApiService businessLogicService) {</b>
+<b class="fc"><i>39</i>&nbsp;        this.roomsService = roomsService;</b>
+<b class="fc"><i>40</i>&nbsp;        this.bookingsService = bookingsService;</b>
+<b class="fc"><i>41</i>&nbsp;        this.clientsService = clientsService;</b>
+<b class="fc"><i>42</i>&nbsp;        this.businessLogicService = businessLogicService;</b>
+<b class="fc"><i>43</i>&nbsp;    }</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    @GetMapping(&quot;/api/bookings&quot;)
+<i>46</i>&nbsp;    public List&lt;BookingsModel&gt; getAllBookingsApi() {
+<b class="nc"><i>47</i>&nbsp;        List&lt;BookingsModel&gt; bookings = bookingsService.findAll();</b>
+<b class="nc"><i>48</i>&nbsp;        return bookings;</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    @GetMapping(&quot;/api/booking/{targetId}&quot;)
+<i>52</i>&nbsp;    public BookingWithPricesDTO getBookingsByIdApi(@PathVariable String targetId) {
+<i>53</i>&nbsp;
+<b class="nc"><i>54</i>&nbsp;        BookingWithPricesDTO response = new BookingWithPricesDTO();</b>
+<b class="nc"><i>55</i>&nbsp;        BookingsModel booking = new BookingsModel();</b>
+<b class="nc"><i>56</i>&nbsp;        CalculatedBookDTO prices = new CalculatedBookDTO();</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;        try {
+<b class="nc"><i>59</i>&nbsp;            booking = bookingsService.findById(Long.parseLong(targetId));</b>
+<b class="nc"><i>60</i>&nbsp;            prices = businessLogicService.callToCalculateBooking(booking);</b>
+<b class="nc"><i>61</i>&nbsp;            response.setBook(booking);</b>
+<b class="nc"><i>62</i>&nbsp;            response.setPrices(prices);</b>
+<i>63</i>&nbsp;        }
+<b class="nc"><i>64</i>&nbsp;        catch (Exception e) {</b>
+<b class="nc"><i>65</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>66</i>&nbsp;        }</b>
+<b class="nc"><i>67</i>&nbsp;        return response;</b>
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    @GetMapping(&quot;/api/dates/{targetId}&quot;)
+<i>71</i>&nbsp;    public List&lt;Date&gt; getAllBookingsDatesByRoomIdApi(@PathVariable String targetId) {
+<b class="nc"><i>72</i>&nbsp;        List&lt;Date&gt; bookedDates = new ArrayList&lt;&gt;();</b>
+<i>73</i>&nbsp;        try {
+<b class="nc"><i>74</i>&nbsp;            List&lt;BookingDatesModel&gt; listBooked = bookingsService.getBookedDatesByRoomId(Long.parseLong(targetId));</b>
+<b class="nc"><i>75</i>&nbsp;            bookedDates = bookingsService.generateBookedDatesInRunTime(listBooked);</b>
+<i>76</i>&nbsp;        }
+<b class="nc"><i>77</i>&nbsp;        catch (Exception e) {</b>
+<b class="nc"><i>78</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>79</i>&nbsp;        }</b>
+<b class="nc"><i>80</i>&nbsp;        return bookedDates;</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    // Calculadora del precio del room en funcion de los servicios que pida el cliente
+<i>85</i>&nbsp;    @PostMapping(&quot;/api/calculatebook&quot;)
+<i>86</i>&nbsp;    public CalculatedBookDTO calculatePriceOfBook(@RequestBody @Valid BookingApiDTO booking) {
+<i>87</i>&nbsp;        CalculatedBookDTO bookingCalculado;
+<i>88</i>&nbsp;        //llamamos al servicio de calculadora para que devuelva el precio de la reserva
+<b class="nc"><i>89</i>&nbsp;        Logger.info(&quot;recibido: &quot;+booking);</b>
+<b class="nc"><i>90</i>&nbsp;        bookingCalculado = businessLogicService.callToCalculateBooking(booking);</b>
+<b class="nc"><i>91</i>&nbsp;        Logger.info(&quot;calculado y enviado: &quot;+bookingCalculado);</b>
+<b class="nc"><i>92</i>&nbsp;        return bookingCalculado;</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    // TODO OK Endpoint of button [Confirm Booking] save booking to DataBase and alert if correct or not
+<i>97</i>&nbsp;    // Valorar construir un NewBookingDTO mas ligero y sin tanto object
+<i>98</i>&nbsp;    @PostMapping(&quot;/api/bookroomnow&quot;)
+<i>99</i>&nbsp;    public BookNowResponseDTO bookRoomNowApi(@RequestBody @Valid BookingApiDTO dto) {
+<b class="nc"><i>100</i>&nbsp;        BookNowResponseDTO response = new BookNowResponseDTO();</b>
+<i>101</i>&nbsp;        CalculatedBookDTO bookingCalculado;
+<i>102</i>&nbsp;        RoomsModel room;
+<b class="nc"><i>103</i>&nbsp;        Integer bookingId = 0;</b>
+<b class="nc"><i>104</i>&nbsp;        BookingsModel model = new BookingsModel();</b>
+<i>105</i>&nbsp;        try {
+<i>106</i>&nbsp;            //esto es muy feo aqui debe pasarse a un servicio
+<b class="nc"><i>107</i>&nbsp;            room = roomsService.findById(dto.roomId);</b>
+<b class="nc"><i>108</i>&nbsp;            model.checkIn = Date.valueOf(dto.checkIn);</b>
+<b class="nc"><i>109</i>&nbsp;            model.checkOut = Date.valueOf(dto.checkOut);</b>
+<b class="nc"><i>110</i>&nbsp;            model.guests = room.guests;</b>
+<b class="nc"><i>111</i>&nbsp;            model.clientsByFkClientId = clientsService.findClientByUsername(&quot;miguel&quot;); // asignado a un cliente por defecto al no tener login</b>
+<b class="nc"><i>112</i>&nbsp;            model.breakfast = dto.breakfastService;</b>
+<b class="nc"><i>113</i>&nbsp;            model.carparking = dto.carParkingService;</b>
+<b class="nc"><i>114</i>&nbsp;            model.spa = dto.spaService;</b>
+<b class="nc"><i>115</i>&nbsp;            model.laundry = dto.laundryService;</b>
+<b class="nc"><i>116</i>&nbsp;            model.shuttle = dto.shuttleService;</b>
+<b class="nc"><i>117</i>&nbsp;            model.codediscount = dto.codeDiscount;</b>
+<b class="nc"><i>118</i>&nbsp;            model.clientEmail = dto.email;</b>
+<b class="nc"><i>119</i>&nbsp;            model.roomsByFKRoomId = room;</b>
+<b class="nc"><i>120</i>&nbsp;            bookingCalculado = businessLogicService.callToCalculateBooking(dto);</b>
+<b class="nc"><i>121</i>&nbsp;            model.totalPrice = bookingCalculado.totalBookingPrice;</b>
+<b class="nc"><i>122</i>&nbsp;            Logger.info(&quot;bookroomnow.model: &quot;+model.toString());</b>
+<b class="nc"><i>123</i>&nbsp;            bookingId=bookingsService.save(model);</b>
+<i>124</i>&nbsp;
+<b class="nc"><i>125</i>&nbsp;            response.bookNowResult=true;</b>
+<b class="nc"><i>126</i>&nbsp;            response.bookingId=bookingId;</b>
+<b class="nc"><i>127</i>&nbsp;            response.bookLink=&quot;/thankyou/&quot;+bookingId;</b>
+<i>128</i>&nbsp;        }
+<b class="nc"><i>129</i>&nbsp;        catch (Exception e) {</b>
+<b class="nc"><i>130</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>131</i>&nbsp;            response.bookNowResult=false;</b>
+<b class="nc"><i>132</i>&nbsp;            response.bookingId=0;</b>
+<b class="nc"><i>133</i>&nbsp;            response.bookLink=&quot;&quot;;</b>
+<b class="nc"><i>134</i>&nbsp;            throw new BookingApiException(dto);</b>
+<b class="nc"><i>135</i>&nbsp;        }</b>
+<b class="nc"><i>136</i>&nbsp;        return response;</b>
+<i>137</i>&nbsp;    }
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-15 10:03</div>
+</div>
+</body>
+</html>

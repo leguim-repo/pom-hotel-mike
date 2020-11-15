@@ -1,0 +1,280 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BookingsEntity</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.pomhotel.booking.application.domain.entities</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BookingsEntity (com.pomhotel.booking.application.domain.entities)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BookingsEntity</td>
+<td class="coverageStat">
+  <span class="percent">
+    3,4%
+  </span>
+  <span class="absValue">
+    (1/ 29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2,3%
+  </span>
+  <span class="absValue">
+    (1/ 43)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BookingsEntity$HibernateProxy$hkLDqvm4</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    3,4%
+  </span>
+  <span class="absValue">
+    (1/ 29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2,3%
+  </span>
+  <span class="absValue">
+    (1/ 43)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.pomhotel.booking.application.domain.entities;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import javax.persistence.*;
+<i>4</i>&nbsp;import java.io.Serializable;
+<i>5</i>&nbsp;import java.sql.Date;
+<i>6</i>&nbsp;import java.util.Objects;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;//--- Entity -------------------------------------------------------
+<i>9</i>&nbsp;@Entity
+<i>10</i>&nbsp;@Table(name = &quot;bookings&quot;, schema = &quot;pom_hotel&quot;)
+<b class="fc"><i>11</i>&nbsp;public class BookingsEntity implements Serializable {</b>
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    //--- Attributes -----------------------------------------------
+<i>14</i>&nbsp;    @Id
+<i>15</i>&nbsp;    @GeneratedValue (strategy = GenerationType.IDENTITY)
+<i>16</i>&nbsp;    @Column(name = &quot;id&quot;, nullable = false)
+<i>17</i>&nbsp;    private long id;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    @Basic
+<i>20</i>&nbsp;    @Column(name = &quot;checkIn&quot;, nullable = true)
+<i>21</i>&nbsp;    private Date checkIn;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    @Basic
+<i>24</i>&nbsp;    @Column(name = &quot;checkOut&quot;, nullable = true)
+<i>25</i>&nbsp;    private Date checkOut;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Basic
+<i>30</i>&nbsp;    @Column(name = &quot;clientEmail&quot;, nullable = true, length = 100)
+<i>31</i>&nbsp;    private String clientEmail;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Basic
+<i>34</i>&nbsp;    @Column(name = &quot;guests&quot;, nullable = true, precision = 0)
+<i>35</i>&nbsp;    private int guests;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    @Basic
+<i>38</i>&nbsp;    @Column(name = &quot;breakfast&quot;)
+<i>39</i>&nbsp;    private boolean breakfast;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    @Basic
+<i>42</i>&nbsp;    @Column(name = &quot;carparking&quot;)
+<i>43</i>&nbsp;    private boolean carparking;
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    @Basic
+<i>46</i>&nbsp;    @Column(name = &quot;spa&quot;)
+<i>47</i>&nbsp;    private boolean spa;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @Basic
+<i>50</i>&nbsp;    @Column(name = &quot;laundry&quot;)
+<i>51</i>&nbsp;    private boolean laundry;
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    @Basic
+<i>54</i>&nbsp;    @Column(name = &quot;shuttle&quot;)
+<i>55</i>&nbsp;    private boolean shuttle;
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    @Basic
+<i>58</i>&nbsp;    @Column(name = &quot;codediscount&quot;, nullable = true, length = 100)
+<i>59</i>&nbsp;    private String codediscount;
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    @Basic
+<i>62</i>&nbsp;    @Column(name = &quot;totalPrice&quot;, nullable = true, precision = 0)
+<i>63</i>&nbsp;    private Double totalPrice;
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    @ManyToOne
+<i>66</i>&nbsp;    @JoinColumn(name = &quot;fk_client_id&quot;, referencedColumnName = &quot;id&quot;, table = &quot;bookings&quot;)
+<i>67</i>&nbsp;    private ClientsEntity clientsByFkClientId;
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @OneToOne
+<i>70</i>&nbsp;    @JoinColumn(name = &quot;fk_room_id&quot;, referencedColumnName = &quot;id&quot;, table = &quot;bookings&quot;)
+<i>71</i>&nbsp;    private RoomsEntity roomsByFkRoomId;
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    //--- Getters &amp; Setters ---------------------------------------
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    public long getId() {
+<b class="nc"><i>77</i>&nbsp;        return id;</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    public void setId(long id) {
+<b class="nc"><i>81</i>&nbsp;        this.id = id;</b>
+<b class="nc"><i>82</i>&nbsp;    }</b>
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    public Date getCheckIn() {
+<b class="nc"><i>85</i>&nbsp;        return checkIn;</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    public void setCheckIn(Date checkIn) {
+<b class="nc"><i>89</i>&nbsp;        this.checkIn = checkIn;</b>
+<b class="nc"><i>90</i>&nbsp;    }</b>
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    public Date getCheckOut() {
+<b class="nc"><i>93</i>&nbsp;        return checkOut;</b>
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    public void setCheckOut(Date checkOut) {
+<b class="nc"><i>97</i>&nbsp;        this.checkOut = checkOut;</b>
+<b class="nc"><i>98</i>&nbsp;    }</b>
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    public String getClientEmail() {
+<b class="nc"><i>101</i>&nbsp;        return clientEmail;</b>
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    public void setClientEmail(String clientEmail) {
+<b class="nc"><i>105</i>&nbsp;        this.clientEmail = clientEmail;</b>
+<b class="nc"><i>106</i>&nbsp;    }</b>
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    public int getGuests() {
+<b class="nc"><i>109</i>&nbsp;        return guests;</b>
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    public void setGuests(int guests) {
+<b class="nc"><i>113</i>&nbsp;        this.guests = guests;</b>
+<b class="nc"><i>114</i>&nbsp;    }</b>
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    public boolean isBreakfast() {
+<b class="nc"><i>117</i>&nbsp;        return breakfast;</b>
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    public void setBreakfast(boolean breakfast) {
+<b class="nc"><i>121</i>&nbsp;        this.breakfast = breakfast;</b>
+<b class="nc"><i>122</i>&nbsp;    }</b>
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    public boolean isCarparking() {
+<b class="nc"><i>125</i>&nbsp;        return carparking;</b>
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    public void setCarparking(boolean carparking) {
+<b class="nc"><i>129</i>&nbsp;        this.carparking = carparking;</b>
+<b class="nc"><i>130</i>&nbsp;    }</b>
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    public boolean isSpa() {
+<b class="nc"><i>133</i>&nbsp;        return spa;</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    public void setSpa(boolean spa) {
+<b class="nc"><i>137</i>&nbsp;        this.spa = spa;</b>
+<b class="nc"><i>138</i>&nbsp;    }</b>
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    public boolean isLaundry() {
+<b class="nc"><i>141</i>&nbsp;        return laundry;</b>
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;    public void setLaundry(boolean laundry) {
+<b class="nc"><i>145</i>&nbsp;        this.laundry = laundry;</b>
+<b class="nc"><i>146</i>&nbsp;    }</b>
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;    public boolean isShuttle() {
+<b class="nc"><i>149</i>&nbsp;        return shuttle;</b>
+<i>150</i>&nbsp;    }
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;    public void setShuttle(boolean shuttle) {
+<b class="nc"><i>153</i>&nbsp;        this.shuttle = shuttle;</b>
+<b class="nc"><i>154</i>&nbsp;    }</b>
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;    public String getCodediscount() {
+<b class="nc"><i>157</i>&nbsp;        return codediscount;</b>
+<i>158</i>&nbsp;    }
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;    public void setCodediscount(String codediscount) {
+<b class="nc"><i>161</i>&nbsp;        this.codediscount = codediscount;</b>
+<b class="nc"><i>162</i>&nbsp;    }</b>
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;    public Double getTotalPrice() {
+<b class="nc"><i>165</i>&nbsp;        return totalPrice;</b>
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;    public void setTotalPrice(Double totalPrice) {
+<b class="nc"><i>169</i>&nbsp;        this.totalPrice = totalPrice;</b>
+<b class="nc"><i>170</i>&nbsp;    }</b>
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    public ClientsEntity getClientsByFkClientId() {
+<b class="nc"><i>173</i>&nbsp;        return clientsByFkClientId;</b>
+<i>174</i>&nbsp;    }
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;    public void setClientsByFkClientId(ClientsEntity clientsByFkClientId) {
+<b class="nc"><i>177</i>&nbsp;        this.clientsByFkClientId = clientsByFkClientId;</b>
+<b class="nc"><i>178</i>&nbsp;    }</b>
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;    public RoomsEntity getRoomsByFkRoomId() {
+<b class="nc"><i>181</i>&nbsp;        return roomsByFkRoomId;</b>
+<i>182</i>&nbsp;    }
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    public void setRoomsByFkRoomId(RoomsEntity roomsByFkRoomId) {
+<b class="nc"><i>185</i>&nbsp;        this.roomsByFkRoomId = roomsByFkRoomId;</b>
+<b class="nc"><i>186</i>&nbsp;    }</b>
+<i>187</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-15 10:03</div>
+</div>
+</body>
+</html>
