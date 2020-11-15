@@ -4,6 +4,7 @@ import com.pomhotel.booking.BookingApplication;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.RoomsService;
 import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +47,13 @@ class HomeApiControllerTest {
 
     @Test
     @DisplayName("Endpoint: \"/api/rooms")
+    @Disabled("is necesary?")
     void getAllRoomsApi() {
     }
 
     @Test
     @DisplayName("Endpoint: \"/api/roomsandbookeddates")
+    @Disabled("is necesary?")
     void getAllRoomsWithBookedDates() {
     }
 

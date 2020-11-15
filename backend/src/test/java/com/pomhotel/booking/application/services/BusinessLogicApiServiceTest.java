@@ -34,15 +34,14 @@ class BusinessLogicApiServiceTest {
     }
 
     @Test
-    void getDaysBetweenTwoDates() throws Exception {
+    void getDaysBetweenTwoDates() {
         assertEquals(2, businessService.getDaysBetweenTwoDates(Date.valueOf("2020-01-01"), Date.valueOf("2020-01-03")));
         assertEquals(20, businessService.getDaysBetweenTwoDates(Date.valueOf("2020-01-01"), Date.valueOf("2020-01-21")));
         assertEquals(4, businessService.getDaysBetweenTwoDates(Date.valueOf("2021-01-30"), Date.valueOf("2021-02-03")));
-
     }
 
     @Test
-    void calculateBasePrice() throws Exception {
+    void calculateBasePrice() {
         assertEquals(1000, businessService.calculateBasePrice(10,100));
         assertEquals(1900, businessService.calculateBasePrice(19,100));
         assertEquals(2000, businessService.calculateBasePrice(20,100));
@@ -57,18 +56,17 @@ class BusinessLogicApiServiceTest {
     }
 
     @Test
-    void calculateBreakFastService() throws Exception {
+    void calculateBreakFastService() {
         assertEquals(6, businessService.calculateBasePrice(2,3));
     }
 
     @Test
-    void calculateCarParkingService() throws Exception {
+    void calculateCarParkingService() {
         assertEquals(100, businessService.calculateBasePrice(10,10));
-
     }
 
     @Test
-    void calculateSpaService() throws Exception {
+    void calculateSpaService() {
         RoomTypesModel roomType = new RoomTypesModel();
         roomType.setId(1);
         assertEquals(0, businessService.calculateSpaService(10,10,roomType));
@@ -83,19 +81,18 @@ class BusinessLogicApiServiceTest {
     }
 
     @Test
-    void calculateLaundryService() throws Exception {
+    void calculateLaundryService() {
         assertEquals(0, businessService.calculateLaundryService(0,10));
         assertEquals(100, businessService.calculateLaundryService(10,10));
-
     }
 
     @Test
-    void calculateShuttleService() throws Exception {
+    void calculateShuttleService() {
         assertEquals(10, businessService.calculateShuttleService(10));
     }
 
     @Test
-    void calculateCodeDiscount() throws Exception {
+    void calculateCodeDiscount() {
         assertNotEquals(-10, businessService.calculateCodeDiscount("CODE101"));
         assertEquals( -5, businessService.calculateCodeDiscount("CODE05"));
         assertEquals( -10, businessService.calculateCodeDiscount("CODE10"));
@@ -105,11 +102,10 @@ class BusinessLogicApiServiceTest {
         assertEquals( -50, businessService.calculateCodeDiscount("CODE50"));
         assertEquals( 0, businessService.calculateCodeDiscount("cadcada"));
         assertEquals( 0, businessService.calculateCodeDiscount("OWQIWO1232EX<"));
-
     }
 
     @Test
-    void calculateTotalPriceBooking() throws Exception {
+    void calculateTotalPriceBooking() {
 
         BookingApiDTO book = new BookingApiDTO();
         CalculatedBookDTO calculationsExpected = new CalculatedBookDTO();

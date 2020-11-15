@@ -433,7 +433,7 @@ function SpaService(props) {
   return(
     <Row className="" style={props.style}>
     <Col><span>SPA Facilities {props.book.spaPricePerNight}€ x {props.book.totalNights} nights</span></Col>
-    <Col md={3}><span className="pull-right">{props.book.spaTotalPrice} €</span></Col>
+    <Col md={3}><span className="pull-right">{props.book.spaTotalPrice !== 0 ? <>{props.book.spaTotalPrice} €</> : <>included</>}</span></Col>
     </Row>
   );
 }

@@ -64,7 +64,7 @@ function BookingDetailsThankYou(props) {
 
             <Row className="" style={book.spa ? {} : { display: 'none' }}>
               <Col><span>SPA Service {prices.spaPricePerNight}€ x {prices.totalNights} nights</span></Col>
-              <Col md={3}><span className="pull-right">{prices.spaTotalPrice} €</span></Col>
+              <Col md={3}><span className="pull-right">{prices.spaTotalPrice !== 0 ? <>{prices.spaTotalPrice} €</> : <>included</>}</span></Col>
             </Row>
 
             <Row className="" style={book.laundry ? {} : { display: 'none' }}>

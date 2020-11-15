@@ -122,8 +122,11 @@ class BookRoomApiControllerTest {
 
     @Test
     @DisplayName("Endpoint: \"/api/booking/{targetId}")
+    @Disabled("pending to finish")
     void getBookingsByIdApi() throws Exception {
-        mvc.perform(get("/api/booking/1")
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        mvc.perform(get("/api/booking/112221")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
