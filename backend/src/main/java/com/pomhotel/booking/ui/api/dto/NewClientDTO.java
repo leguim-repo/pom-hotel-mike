@@ -1,4 +1,4 @@
-package toDelete.sandbox.mvc.dto;
+package com.pomhotel.booking.ui.api.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

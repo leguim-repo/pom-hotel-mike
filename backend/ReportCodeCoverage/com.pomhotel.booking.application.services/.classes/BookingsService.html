@@ -40,35 +40,38 @@
 <i>2</i>&nbsp;
 <i>3</i>&nbsp;import com.pomhotel.booking.application.models.BookingDatesModel;
 <i>4</i>&nbsp;import com.pomhotel.booking.application.models.BookingsModel;
-<i>5</i>&nbsp;
-<i>6</i>&nbsp;import java.lang.reflect.Array;
-<i>7</i>&nbsp;import java.sql.Date;
-<i>8</i>&nbsp;import java.util.List;
-<i>9</i>&nbsp;
-<i>10</i>&nbsp;//--- Service Interface -------------------------------------------
-<i>11</i>&nbsp;public interface BookingsService {
-<i>12</i>&nbsp;
-<i>13</i>&nbsp;    BookingsModel findById(long id);
-<i>14</i>&nbsp;
-<i>15</i>&nbsp;    List&lt;BookingsModel&gt; findAll();
-<i>16</i>&nbsp;    List&lt;BookingDatesModel&gt; getBookedDatesByRoomId(long id);
-<i>17</i>&nbsp;
-<i>18</i>&nbsp;    List&lt;Date&gt; generateBookedDatesInRunTime(List&lt;BookingDatesModel&gt; model);
-<i>19</i>&nbsp;
-<i>20</i>&nbsp;    void saveOrUpdate(BookingsModel model);
-<i>21</i>&nbsp;    Integer save(BookingsModel model);
+<i>5</i>&nbsp;import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.lang.reflect.Array;
+<i>8</i>&nbsp;import java.sql.Date;
+<i>9</i>&nbsp;import java.util.List;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;//--- Service Interface -------------------------------------------
+<i>12</i>&nbsp;public interface BookingsService {
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    BookingsModel findById(long id);
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    List&lt;BookingsModel&gt; findAll();
+<i>17</i>&nbsp;    List&lt;BookingDatesModel&gt; getBookedDatesByRoomId(long id);
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    List&lt;Date&gt; generateBookedDatesInRunTime(List&lt;BookingDatesModel&gt; model);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    Integer SaveNewBooking(BookingApiDTO dto);
 <i>22</i>&nbsp;
-<i>23</i>&nbsp;    void deleteById(long id);
-<i>24</i>&nbsp;
-<i>25</i>&nbsp;    void delete(BookingsModel model);
-<i>26</i>&nbsp;
-<i>27</i>&nbsp;}
+<i>23</i>&nbsp;    void saveOrUpdate(BookingsModel model);
+<i>24</i>&nbsp;    Integer save(BookingsModel model);
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    void deleteById(long id);
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    void delete(BookingsModel model);
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-11-15 10:07</div>
+    <div style="float:right;">generated on 2020-11-15 13:40</div>
 </div>
 </body>
 </html>

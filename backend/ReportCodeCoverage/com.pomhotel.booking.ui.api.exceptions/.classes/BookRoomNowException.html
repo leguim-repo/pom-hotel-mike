@@ -74,12 +74,12 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package com.pomhotel.booking.ui.api.exceptions;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import toDelete.sandbox.mvc.dto.NewBookingDTO;
+<i>3</i>&nbsp;import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 <i>4</i>&nbsp;
 <i>5</i>&nbsp;public class BookRoomNowException extends RuntimeException{
 <i>6</i>&nbsp;
-<i>7</i>&nbsp;    public BookRoomNowException(NewBookingDTO dto) {
-<b class="nc"><i>8</i>&nbsp;        super(&quot;BookRoomNow Excetpion &quot; + dto.toString());</b>
+<i>7</i>&nbsp;    public BookRoomNowException(BookingApiDTO dto) {
+<b class="nc"><i>8</i>&nbsp;        super(&quot;BookRoomNow Exception &quot; + dto.toString());</b>
 <i>9</i>&nbsp;    }
 <i>10</i>&nbsp;}
 </div>
@@ -87,7 +87,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-11-15 10:03</div>
+    <div style="float:right;">generated on 2020-11-15 13:40</div>
 </div>
 </body>
 </html>

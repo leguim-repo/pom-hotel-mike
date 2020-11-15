@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    11,3%
+    14,6%
   </span>
   <span class="absValue">
-    (7/ 62)
+    (7/ 48)
   </span>
 </td>
 </tr>
@@ -167,56 +167,85 @@
 <i>93</i>&nbsp;    }
 <i>94</i>&nbsp;
 <i>95</i>&nbsp;
-<i>96</i>&nbsp;    // TODO OK Endpoint of button [Confirm Booking] save booking to DataBase and alert if correct or not
-<i>97</i>&nbsp;    // Valorar construir un NewBookingDTO mas ligero y sin tanto object
-<i>98</i>&nbsp;    @PostMapping(&quot;/api/bookroomnow&quot;)
-<i>99</i>&nbsp;    public BookNowResponseDTO bookRoomNowApi(@RequestBody @Valid BookingApiDTO dto) {
-<b class="nc"><i>100</i>&nbsp;        BookNowResponseDTO response = new BookNowResponseDTO();</b>
-<i>101</i>&nbsp;        CalculatedBookDTO bookingCalculado;
-<i>102</i>&nbsp;        RoomsModel room;
-<b class="nc"><i>103</i>&nbsp;        Integer bookingId = 0;</b>
-<b class="nc"><i>104</i>&nbsp;        BookingsModel model = new BookingsModel();</b>
-<i>105</i>&nbsp;        try {
-<i>106</i>&nbsp;            //esto es muy feo aqui debe pasarse a un servicio
-<b class="nc"><i>107</i>&nbsp;            room = roomsService.findById(dto.roomId);</b>
-<b class="nc"><i>108</i>&nbsp;            model.checkIn = Date.valueOf(dto.checkIn);</b>
-<b class="nc"><i>109</i>&nbsp;            model.checkOut = Date.valueOf(dto.checkOut);</b>
-<b class="nc"><i>110</i>&nbsp;            model.guests = room.guests;</b>
-<b class="nc"><i>111</i>&nbsp;            model.clientsByFkClientId = clientsService.findClientByUsername(&quot;miguel&quot;); // asignado a un cliente por defecto al no tener login</b>
-<b class="nc"><i>112</i>&nbsp;            model.breakfast = dto.breakfastService;</b>
-<b class="nc"><i>113</i>&nbsp;            model.carparking = dto.carParkingService;</b>
-<b class="nc"><i>114</i>&nbsp;            model.spa = dto.spaService;</b>
-<b class="nc"><i>115</i>&nbsp;            model.laundry = dto.laundryService;</b>
-<b class="nc"><i>116</i>&nbsp;            model.shuttle = dto.shuttleService;</b>
-<b class="nc"><i>117</i>&nbsp;            model.codediscount = dto.codeDiscount;</b>
-<b class="nc"><i>118</i>&nbsp;            model.clientEmail = dto.email;</b>
-<b class="nc"><i>119</i>&nbsp;            model.roomsByFKRoomId = room;</b>
-<b class="nc"><i>120</i>&nbsp;            bookingCalculado = businessLogicService.callToCalculateBooking(dto);</b>
-<b class="nc"><i>121</i>&nbsp;            model.totalPrice = bookingCalculado.totalBookingPrice;</b>
-<b class="nc"><i>122</i>&nbsp;            Logger.info(&quot;bookroomnow.model: &quot;+model.toString());</b>
-<b class="nc"><i>123</i>&nbsp;            bookingId=bookingsService.save(model);</b>
-<i>124</i>&nbsp;
-<b class="nc"><i>125</i>&nbsp;            response.bookNowResult=true;</b>
-<b class="nc"><i>126</i>&nbsp;            response.bookingId=bookingId;</b>
-<b class="nc"><i>127</i>&nbsp;            response.bookLink=&quot;/thankyou/&quot;+bookingId;</b>
-<i>128</i>&nbsp;        }
-<b class="nc"><i>129</i>&nbsp;        catch (Exception e) {</b>
-<b class="nc"><i>130</i>&nbsp;            e.printStackTrace();</b>
-<b class="nc"><i>131</i>&nbsp;            response.bookNowResult=false;</b>
-<b class="nc"><i>132</i>&nbsp;            response.bookingId=0;</b>
-<b class="nc"><i>133</i>&nbsp;            response.bookLink=&quot;&quot;;</b>
-<b class="nc"><i>134</i>&nbsp;            throw new BookingApiException(dto);</b>
-<b class="nc"><i>135</i>&nbsp;        }</b>
-<b class="nc"><i>136</i>&nbsp;        return response;</b>
-<i>137</i>&nbsp;    }
-<i>138</i>&nbsp;
-<i>139</i>&nbsp;}
+<i>96</i>&nbsp;    @PostMapping(&quot;/api/bookroomnow&quot;)
+<i>97</i>&nbsp;    public BookNowResponseDTO bookRoomNowApi(@RequestBody @Valid BookingApiDTO dto) {
+<b class="nc"><i>98</i>&nbsp;        BookNowResponseDTO response = new BookNowResponseDTO();</b>
+<i>99</i>&nbsp;        Integer bookingId;
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;        try {
+<b class="nc"><i>102</i>&nbsp;            bookingId=bookingsService.SaveNewBooking(dto);</b>
+<b class="nc"><i>103</i>&nbsp;            if (bookingId !=0) {</b>
+<b class="nc"><i>104</i>&nbsp;                response.bookNowResult=true;</b>
+<b class="nc"><i>105</i>&nbsp;                response.bookingId=bookingId;</b>
+<b class="nc"><i>106</i>&nbsp;                response.bookLink=&quot;/thankyou/&quot;+bookingId;</b>
+<i>107</i>&nbsp;            }
+<i>108</i>&nbsp;            else {
+<b class="nc"><i>109</i>&nbsp;                response.bookNowResult=false;</b>
+<b class="nc"><i>110</i>&nbsp;                response.bookingId=0;</b>
+<b class="nc"><i>111</i>&nbsp;                response.bookLink=&quot;&quot;;</b>
+<i>112</i>&nbsp;            }
+<i>113</i>&nbsp;        }
+<b class="nc"><i>114</i>&nbsp;        catch (Exception e) {</b>
+<b class="nc"><i>115</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>116</i>&nbsp;            response.bookNowResult=false;</b>
+<b class="nc"><i>117</i>&nbsp;            response.bookingId=0;</b>
+<b class="nc"><i>118</i>&nbsp;            response.bookLink=&quot;&quot;;</b>
+<b class="nc"><i>119</i>&nbsp;            throw new BookingApiException(dto);</b>
+<b class="nc"><i>120</i>&nbsp;        }</b>
+<b class="nc"><i>121</i>&nbsp;        return response;</b>
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;}
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;/*
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    @PostMapping(&quot;/api/bookroomnow&quot;)
+<i>129</i>&nbsp;    public BookNowResponseDTO bookRoomNowApi(@RequestBody @Valid BookingApiDTO dto) {
+<i>130</i>&nbsp;        BookNowResponseDTO response = new BookNowResponseDTO();
+<i>131</i>&nbsp;        CalculatedBookDTO bookingCalculado;
+<i>132</i>&nbsp;        RoomsModel room;
+<i>133</i>&nbsp;        Integer bookingId = 0;
+<i>134</i>&nbsp;        BookingsModel model = new BookingsModel();
+<i>135</i>&nbsp;        try {
+<i>136</i>&nbsp;            room = roomsService.findById(dto.roomId);
+<i>137</i>&nbsp;            model.checkIn = Date.valueOf(dto.checkIn);
+<i>138</i>&nbsp;            model.checkOut = Date.valueOf(dto.checkOut);
+<i>139</i>&nbsp;            model.guests = room.guests;
+<i>140</i>&nbsp;            model.clientsByFkClientId = clientsService.findClientByUsername(&quot;miguel&quot;); // asignado a un cliente por defecto al no tener login
+<i>141</i>&nbsp;            model.breakfast = dto.breakfastService;
+<i>142</i>&nbsp;            model.carparking = dto.carParkingService;
+<i>143</i>&nbsp;            model.spa = dto.spaService;
+<i>144</i>&nbsp;            model.laundry = dto.laundryService;
+<i>145</i>&nbsp;            model.shuttle = dto.shuttleService;
+<i>146</i>&nbsp;            model.codediscount = dto.codeDiscount;
+<i>147</i>&nbsp;            model.clientEmail = dto.email;
+<i>148</i>&nbsp;            model.roomsByFKRoomId = room;
+<i>149</i>&nbsp;            bookingCalculado = businessLogicService.callToCalculateBooking(dto);
+<i>150</i>&nbsp;            model.totalPrice = bookingCalculado.totalBookingPrice;
+<i>151</i>&nbsp;            Logger.info(&quot;bookroomnow.model: &quot;+model.toString());
+<i>152</i>&nbsp;            bookingId=bookingsService.save(model);
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;            response.bookNowResult=true;
+<i>155</i>&nbsp;            response.bookingId=bookingId;
+<i>156</i>&nbsp;            response.bookLink=&quot;/thankyou/&quot;+bookingId;
+<i>157</i>&nbsp;        }
+<i>158</i>&nbsp;        catch (Exception e) {
+<i>159</i>&nbsp;            e.printStackTrace();
+<i>160</i>&nbsp;            response.bookNowResult=false;
+<i>161</i>&nbsp;            response.bookingId=0;
+<i>162</i>&nbsp;            response.bookLink=&quot;&quot;;
+<i>163</i>&nbsp;            throw new BookingApiException(dto);
+<i>164</i>&nbsp;        }
+<i>165</i>&nbsp;        return response;
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp; */
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-11-15 10:03</div>
+    <div style="float:right;">generated on 2020-11-15 13:40</div>
 </div>
 </body>
 </html>
