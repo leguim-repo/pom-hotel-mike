@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.doubleThat;
 import static org.mockito.Mockito.when;
 
 
@@ -66,7 +67,7 @@ class BusinessLogicApiServiceTest {
     }
 
     @Test
-    void calculateSpaService() {
+    void calculateSpaServiceInFuntionOfRoomType() {
         RoomTypesModel roomType = new RoomTypesModel();
         roomType.setId(1);
         assertEquals(0, businessService.calculateSpaService(10,10,roomType));
@@ -92,16 +93,49 @@ class BusinessLogicApiServiceTest {
     }
 
     @Test
-    void calculateCodeDiscount() {
-        assertNotEquals(-10, businessService.calculateCodeDiscount("CODE101"));
-        assertEquals( -5, businessService.calculateCodeDiscount("CODE05"));
-        assertEquals( -10, businessService.calculateCodeDiscount("CODE10"));
-        assertEquals( -15, businessService.calculateCodeDiscount("CODE15"));
-        assertEquals( -20, businessService.calculateCodeDiscount("CODE20"));
-        assertEquals( -25, businessService.calculateCodeDiscount("CODE25"));
-        assertEquals( -50, businessService.calculateCodeDiscount("CODE50"));
-        assertEquals( 0, businessService.calculateCodeDiscount("cadcada"));
-        assertEquals( 0, businessService.calculateCodeDiscount("OWQIWO1232EX<"));
+    void calculateDiscountIfCodeDiscountIsValid() {
+
+        final double zeroeuroNoValidCode = 0;
+        final double minus5euro = -5;
+        final double minus10euro = -10;
+        final double minus15euro = -15;
+        final double minus20euro = -20;
+        final double minus25euro = -25;
+        final double minus50euro = -50;
+
+        double discountCalculated = 0;
+
+        discountCalculated = businessService.calculateCodeDiscount("CODE05");
+        assertEquals( minus5euro, discountCalculated);
+
+        discountCalculated = businessService.calculateCodeDiscount("CODE10");
+        assertEquals( minus10euro, discountCalculated);
+
+        discountCalculated = businessService.calculateCodeDiscount("CODE15");
+        assertEquals( minus15euro, discountCalculated);
+
+        discountCalculated = businessService.calculateCodeDiscount("CODE20");
+        assertEquals( minus20euro, discountCalculated);
+
+        discountCalculated = businessService.calculateCodeDiscount("CODE25");
+        assertEquals( minus25euro, discountCalculated);
+
+        discountCalculated = businessService.calculateCodeDiscount("CODE50");
+        assertEquals( minus50euro, discountCalculated);
+
+        discountCalculated = businessService.calculateCodeDiscount("CODE101");
+        assertEquals( zeroeuroNoValidCode, discountCalculated);
+
+        discountCalculated = businessService.calculateCodeDiscount("cadcada");
+        assertEquals( zeroeuroNoValidCode, discountCalculated);
+
+        discountCalculated = businessService.calculateCodeDiscount("OWQIWO1232EX");
+        assertEquals( zeroeuroNoValidCode, discountCalculated);
+
+        discountCalculated = businessService.calculateCodeDiscount("CODENOVALID");
+        assertEquals( zeroeuroNoValidCode, discountCalculated);
+
+
     }
 
     @Test
@@ -154,9 +188,9 @@ class BusinessLogicApiServiceTest {
         calculationsExpected.setTotalBookingPrice(3000);
 
         when(roomsService.findById(room.getId())).thenReturn(room);
-
         calculated = businessService.calculateTotalPriceBooking(book);
         assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
+
     }
 
 }
