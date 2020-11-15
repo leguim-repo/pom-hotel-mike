@@ -48,7 +48,7 @@ function BookingDetailsThankYou(props) {
 
             <Row className="">
               <Col>
-                { prices.longStay ? <SpecialPrice {...global} /> : <NormalPrice {...props} /> }
+                { prices.longStay ? <SpecialPrice {...global} /> : <NormalPrice {...global} /> }
               </Col>
             </Row>
 
