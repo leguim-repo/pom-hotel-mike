@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
 import { apiGetBookPrice, apiPostBookRoomNow } from 'api/ApiServices';
 import { Redirect } from 'react-router';
+import StorageManager from "components/StorageManager/StorageManager";
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
@@ -156,6 +157,11 @@ class BookingServices extends Component {
     }
 
     async getPriceOfCurrentBook() { 
+      if (this.state.checkin >= this.state.checkout) {
+        //alert('bad dates');
+        return {};
+      }
+
       const bookToCalculate = new BookingApiDTO();
       bookToCalculate.setRoomId(this.state.roomId);
       bookToCalculate.setCheckIn(this.state.checkin.toJSON().split("T")[0]);
@@ -220,7 +226,6 @@ class BookingServices extends Component {
 
     // https://www.valentinog.com/blog/await-react/
     async componentDidMount(){
-      //recoger de la api que dias ya estan reservados y por lo tanto la habitacion no se puede reservar
       const datos= await this.getPriceOfCurrentBook();
       this.setState({bookCalculate: datos});
       this.setState({excludeDates: [parseISO('2020-10-27')]});

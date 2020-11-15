@@ -4,12 +4,13 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale,  } from  "react-datepicker";
 import es from 'date-fns/locale/es';
-import {parseISO} from 'date-fns';
+import {parseISO, addDays} from 'date-fns';
 
 //https://reactdatepicker.com/
 //https://github.com/Hacker0x01/react-datepicker
 
 import StorageManager from "components/StorageManager/StorageManager";
+import { min } from 'moment';
 
 export const CheckInPicker = (props) => {
   registerLocale('es', es)
@@ -21,7 +22,6 @@ export const CheckInPicker = (props) => {
         locale="es"
         minDate={new Date()}
         dateFormat="dd/MM/yyyy"
-        //selected={checkin} 
         selected={StorageManager.getCheckin()}
         onChange={date => { props.handle(date); StorageManager.saveCheckin(date)}}
         excludeDates={excludeDates}
@@ -36,13 +36,24 @@ export const CheckOutPicker = (props) => {
   registerLocale('es', es)
   const excludeDates = props.excludeDates ? props.excludeDates.map( (day) => parseISO(day)) : [];
   //console.log('CheckOutPicker: ',checkout,' props: ',props);
+  let minDate=new Date();
+  let selectedDate=new Date();
+
+  minDate = addDays(StorageManager.getCheckin(),1)
+  if (StorageManager.getCheckin() >= StorageManager.getCheckout() ) {
+      selectedDate = ""; // bad dates force user to select checkout
+  }
+  else {
+      selectedDate = StorageManager.getCheckout();
+  }
+
   return (
     <DatePicker 
         //inline
         locale="es"
-        minDate={new Date()}
+        minDate={minDate}
         dateFormat="dd/MM/yyyy"
-        selected={StorageManager.getCheckout()} 
+        selected={selectedDate} 
         onChange={date => { props.handle(date); StorageManager.saveCheckout(date)}}
         excludeDates={excludeDates}
         />
