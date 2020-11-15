@@ -6,6 +6,7 @@ import {NormalPrice, SpecialPrice } from '../NormalAndSpecialPrice/NormalAndSpec
 import { CheckInPicker, CheckOutPicker } from '../CustomDatePicker/CustomDatePicker';
 import { parseISO} from 'date-fns';
 
+import { areIntervalsOverlapping } from 'date-fns'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
@@ -81,8 +82,7 @@ class BookingServices extends Component {
         checkin: props.checkin,
         checkout: props.checkout,
         guests: props.room.guests,
-        excludeDates: [],
-
+        overlap: false,
         showBreakfast: false,
         showCarParking: false,
         showSpaService: false,
@@ -156,10 +156,42 @@ class BookingServices extends Component {
       this.setState({email: event.target.value});
     }
 
+
+    checkOverlap() {
+      let overlap = false;
+      console.log('checkOverlap: ',this.props.excludeDates);
+      const targetDates = {start: this.state.checkin, end: this.state.checkout};
+      for (let i = 0; i < this.props.excludeDates.length; i++) {
+        overlap =  areIntervalsOverlapping(
+                      targetDates,
+                      {start: new Date(this.props.excludeDates[i]), end: new Date(this.props.excludeDates[i])},
+                      { inclusive: true });
+        if (overlap === true) {
+          console.log('overlap: ',overlap);
+          console.log('targetDates: ',targetDates);
+          console.log('this.props.excludeDates[i]: ',this.props.excludeDates[i]);
+          console.log('this.props.excludeDates.length: ',this.props.excludeDates.length);
+          return overlap
+          
+        }
+      }
+      return overlap;
+    }
+
     async getPriceOfCurrentBook() { 
-      if (this.state.checkin >= this.state.checkout) {
+      if ( (this.state.checkin >= this.state.checkout)   ) {
         //alert('bad dates');
         return {};
+      }
+
+      if (this.checkOverlap() ) {
+        
+        console.log('exist overlap')
+        return {};
+      }
+      else {
+        console.log('not exist overlap');
+
       }
 
       const bookToCalculate = new BookingApiDTO();
@@ -228,7 +260,6 @@ class BookingServices extends Component {
     async componentDidMount(){
       const datos= await this.getPriceOfCurrentBook();
       this.setState({bookCalculate: datos});
-      this.setState({excludeDates: [parseISO('2020-10-27')]});
     }
 
 
@@ -393,7 +424,10 @@ class BookingServices extends Component {
                       <div className="text-danger">{this.state.errors.email}</div>
                     </Row>
                     <Row className="justify-content-center mb-2">
-                    <Button type="submit" className="bg-warning" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now</Button>
+                    { 'totalBookingPrice' in this.state.bookCalculate 
+                      ? <Button type="submit" className="bg-warning mt-3" style={{fontSize: '1.2em', padding: '0.5em'}}>Book Now</Button> 
+                      : <Row className="mt-3 mb-3">Please check dates</Row>}
+                    
                   </Row>
                   </FormGroup>
                 </Col>
