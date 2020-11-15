@@ -21,6 +21,17 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class BusinessLogicApiServiceTest {
+    public enum RoomTypes { SuiteRoom (1), IndividualRoom(2), FamilyRoom(3), LuxuryRoom(4), DoubleRoom(5);
+        private final long roomType;
+        RoomTypes(long i) {
+            this.roomType = i;
+        }
+
+        public long getRoomType() {
+            return roomType;
+        }
+    }
+
     @MockBean
     private RoomsService roomsService;
 
@@ -29,7 +40,7 @@ class BusinessLogicApiServiceTest {
 
     @Test
     @DisplayName("El Service no es Null")
-    public void ShouldInnjectedBeanNeverShouldBeNull() throws Exception
+    public void ShouldInjectedBeanNeverShouldBeNull() throws Exception
     {
         assertThat(businessService).isNotNull();
     }
@@ -67,18 +78,31 @@ class BusinessLogicApiServiceTest {
     }
 
     @Test
-    void calculateSpaServiceInFuntionOfRoomType() {
+    void calculateSpaServiceInFunctionOfRoomTypeSuiteAndLuxuryShouldBeZero() {
+
         RoomTypesModel roomType = new RoomTypesModel();
-        roomType.setId(1);
-        assertEquals(0, businessService.calculateSpaService(10,10,roomType));
-        roomType.setId(2);
-        assertEquals(100, businessService.calculateSpaService(10,10,roomType));
-        roomType.setId(3);
-        assertEquals(100, businessService.calculateSpaService(10,10,roomType));
-        roomType.setId(4);
-        assertEquals(0, businessService.calculateSpaService(10,10,roomType));
-        roomType.setId(5);
-        assertEquals(100, businessService.calculateSpaService(10,10,roomType));
+        double priceCalculated = 0;
+
+        roomType.setId(RoomTypes.SuiteRoom.getRoomType());
+        priceCalculated = businessService.calculateSpaService(10,10,roomType);
+        assertEquals(0, priceCalculated);
+
+        roomType.setId(RoomTypes.IndividualRoom.getRoomType());
+        priceCalculated = businessService.calculateSpaService(10,10,roomType);
+        assertEquals(100, priceCalculated);
+
+        roomType.setId(RoomTypes.FamilyRoom.getRoomType());
+        priceCalculated = businessService.calculateSpaService(10,10,roomType);
+        assertEquals(100, priceCalculated);
+
+        roomType.setId(RoomTypes.LuxuryRoom.getRoomType());
+        priceCalculated = businessService.calculateSpaService(10,10,roomType);
+        assertEquals(0, priceCalculated);
+
+        roomType.setId(RoomTypes.DoubleRoom.getRoomType());
+        priceCalculated = businessService.calculateSpaService(10,10,roomType);
+        assertEquals(100, priceCalculated);
+
     }
 
     @Test
