@@ -1,3 +1,4 @@
+qr code: https://github.com/gcoro/react-qrcode-logo
 
 ribbon effect: https://codepen.io/nxworld/pen/oLdoWb
 

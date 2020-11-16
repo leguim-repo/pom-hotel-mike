@@ -64,7 +64,9 @@ class HomeApiControllerTest {
         theRoom.setId(1);
         theRoom.setPricePerNight(300.00);
         theRoom.setCode("SU1");
+
         when(mockRoomService.findById(1)).thenReturn(theRoom);
+
         this.mockMvc.perform(get("/api/roomdetail/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())

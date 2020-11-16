@@ -213,6 +213,7 @@ class BusinessLogicApiServiceTest {
 
         when(roomsService.findById(room.getId())).thenReturn(room);
         calculated = businessService.calculateTotalPriceBooking(book);
+
         assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }

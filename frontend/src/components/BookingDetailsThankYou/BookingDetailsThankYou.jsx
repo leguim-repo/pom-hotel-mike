@@ -25,6 +25,8 @@ function BookingDetailsThankYou(props) {
   }, [props]);
 
 
+  // https://blog.qr4.nl/QR-Code-Calendar-Event.aspx
+  // crear un qr con el evento de calendario estaria guay pero no rula
   if ( 'roomsByFKRoomId' in book) {
     console.log('global: ',global);
     return (
