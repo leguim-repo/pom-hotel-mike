@@ -32,6 +32,7 @@ function HomePage(props) {
         <PomHeader image={require("assets/img/tour-3.jpg")} sloganBig="POM HOTEL & SPA" sloganLittle="By Z-Devs Team"/>
         <div className="main" style={{ backgroundImage: "url(" + require("assets/img/pattern.png") + ")",}}>
             {/*<FindRoomsSimple {...props} ></FindRoomsSimple>*/}
+            <br/>
             <PopularSpaces></PopularSpaces>
             <GuestsOpinions></GuestsOpinions>
         </div>

@@ -18,7 +18,7 @@ class PopularSpaces extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container mt-0">
+        <div className="container mt-2">
 
             <h2 className="text-center">Popular Spaces</h2>
             <p>We love to tell our successful, behind the roof of our hotel, far from the current world, here live the blind texts.</p>
