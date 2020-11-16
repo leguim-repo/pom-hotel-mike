@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/landing.css" rel="stylesheet">
+    <title>Landing page</title>
+</head>
+<body>
+    <div class="bgimg">
+        <div class="topleft">
+          <p><img height="40" src="images/seat-code-logo.svg"></p>
+            <br>
+            <!--
+            <a class="preview-link" th:href="@{'http://pom-hotel.code:8080/mvc/home'}" target="_blank">Go to MVC Project</a><br>
+            -->
+            <p>
+                <a class="preview-link" th:href="@{'http://pom-hotel.code:3000'}" target="_blank">Go to API Project</a><br>
+            </p>
+            <!--
+            <div th:each="ip, stat: ${ipAvailables}" class="row" >
+                <p>With ip: <span th:text="${ip}"></span></p>
+                <a class="preview-link" th:href="@{'http://'+${ip}+':8080/mvc/home'}" target="_blank">Go to MVC Project</a><br>
+                <a class="preview-link" th:href="@{'http://'+${ip}+':3000'}" target="_blank">Go to API Project</a><br>
+                <br>
+            </div>
+            -->
+        </div>
+        <div class="middle-left">
+
+        </div>
+        <div class="bottomleft">
+          <!--
+
+            <p class="zdevs moonhouse-font">Z-Devs Team</p>
+            <p class="zdevs moonhouse-font" style="color: #F3896E">Z-Devs Team</p>
+            <p class="zdevs" style="color: #F3896E">Z-Devs Team</p>
+            <p class="zdevs" style="color: whitesmoke">Z-Devs Team</p>
+          -->
+          <p class="zdevs moonhouse-font" style="color:lightsalmon">Z-Devs Team</p>
+
+        </div>
+      </div>
+
+</body>
+</html>
+
+
+<!--
+
+    <html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Landing page</title>
+</head>
+<body>
+    <h1>Seat:Code</h1>
+    <p><a href="http://localhost:8080/mvc/home">Pom-Hotel MVC Version</a></p>
+    <p><a href="http://localhost:3000">Pom-Hotel API Version</a></p>
+
+</body>
+</html>
+-->

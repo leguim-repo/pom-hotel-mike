@@ -1,0 +1,24 @@
+.collection .collection-item.active {
+    background-color: #26a69a;
+    color: #eafaf9;
+}
+.collection a.collection-item {
+    display: block;
+    -webkit-transition: .25s;
+    transition: .25s;
+    color: #26a69a;
+}
+.collection .collection-item {
+    background-color: #fff;
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+a {
+    text-decoration: none;
+}
+
+.bg-blank {
+    background-color: white;
+}

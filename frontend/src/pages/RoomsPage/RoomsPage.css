@@ -1,0 +1,26 @@
+.gototop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+    color: black;
+    background-color: yellow;
+    width: 42px;
+    height: 42px;
+    font-size: 32px;
+}
+
+.gototop.active {
+    opacity: 1;
+    visibility: visible;
+    color: black!important;
+}
+.flecha {
+    color: black;
+}
+
