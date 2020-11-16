@@ -2,6 +2,7 @@ package com.pomhotel.booking.application.services;
 
 import com.pomhotel.booking.application.domain.factories.BookingsFactory;
 import com.pomhotel.booking.application.models.BookingsModel;
+import com.pomhotel.booking.application.models.PricingAdditionalServicesModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.models.RoomTypesModel;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
@@ -23,6 +24,9 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
     BookingsFactory bookingsFactory;
     DateTimeFormatter formatoDeEntrada = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     DateTimeFormatter formatoDeSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    // price list of additional services should be a table in DB
+    private PricingAdditionalServicesModel listOfPrices = new PricingAdditionalServicesModel();
 
     @Autowired
     public BusinessLogicApiServiceImplementation(RoomsService roomsService,BookingsFactory bookingsFactory) {
@@ -69,8 +73,8 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         // Feature of calc pricePerNight in function of season pending because I need intercept prices from DB before show in frontentd!!
         double price = 0;
         double basePrice =0;
-        if ( (totalNights >= 20) ) {
-            basePrice = pricePerNight - (pricePerNight * 0.20);
+        if ( (totalNights >= listOfPrices.numberOfNightsForLongStay) ) {
+            basePrice = pricePerNight - (pricePerNight * listOfPrices.roomPercentDiscountInPricePerNightLongStay);
         }
         price = basePrice * totalNights;
         return price;
@@ -145,7 +149,7 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
         if (specialPrice != 0) {
             accumulated = specialPrice;
-            calculatedBook.setRoomSpecialPricePerNight(room.pricePerNight - (room.pricePerNight * 0.20));
+            calculatedBook.setRoomSpecialPricePerNight(room.pricePerNight - (room.pricePerNight * listOfPrices.roomPercentDiscountInPricePerNightLongStay));
             calculatedBook.setRoomSpecialTotalPrice(specialPrice);
             calculatedBook.setLongStay(true);
         }
@@ -155,34 +159,34 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
 
         // check si es larga estancia
-        calculatedBook.setLongStay(calculatedBook.getTotalNights() >= 20);
+        calculatedBook.setLongStay(calculatedBook.getTotalNights() >= listOfPrices.numberOfNightsForLongStay);
 
         if ( book.breakfastService ) {
-            calculatedBook.setBreakFastPricePerNight(4);
+            calculatedBook.setBreakFastPricePerNight(listOfPrices.breakFastPricePerNight);
             calculatedBook.setBreakFastTotalPrice(calculateBreakFastService(calculatedBook.totalNights,calculatedBook.breakFastPricePerNight));
             accumulated += calculatedBook.breakFastTotalPrice;
         }
         if ( book.carParkingService ) {
-            calculatedBook.setCarParkingPricePerNight(10);
+            calculatedBook.setCarParkingPricePerNight(listOfPrices.carParkingPricePerNight);
             calculatedBook.setCarParkingTotalPrice(calculateCarParkingService(calculatedBook.totalNights,calculatedBook.carParkingPricePerNight));
             accumulated += calculatedBook.carParkingTotalPrice;
         }
 
         if ( book.spaService ) {
-            calculatedBook.setSpaPricePerNight(5);
+            calculatedBook.setSpaPricePerNight(listOfPrices.spaPricePerNight);
             calculatedBook.setSpaTotalPrice(calculateSpaService(calculatedBook.totalNights, calculatedBook.spaPricePerNight, room.roomtypesByFkRoomtypeId));
             accumulated += calculatedBook.spaTotalPrice;
         }
 
         if ( book.laundryService ) {
-            calculatedBook.setLaundryPricePerNight(2);
+            calculatedBook.setLaundryPricePerNight(listOfPrices.laundryPricePerNight);
             calculatedBook.setLaundryTotalPrice(calculateLaundryService(calculatedBook.totalNights, calculatedBook.laundryPricePerNight));
             accumulated += calculatedBook.laundryTotalPrice;
         }
 
         if ( book.shuttleService ) {
             if (calculatedBook.totalNights >= 1){
-                calculatedBook.setShuttlePricePerNight(20);
+                calculatedBook.setShuttlePricePerNight(listOfPrices.shuttlePricePerNight);
                 calculatedBook.setShuttleTotalPrice(calculateShuttleService(calculatedBook.shuttlePricePerNight));
                 accumulated += calculatedBook.shuttleTotalPrice;
             }
