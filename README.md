@@ -1,6 +1,6 @@
 # Pom Hotel
 
-Ejercicio practico realizado entre los dias 17/09/2029 al 2/10/2020 en las instalacion de Seat S.A. durante la realizacion del bootcamp de GeeksHubs Academy para Seat:Code.  
+Proyecto final practico realizado entre los dias 28/10/2020 al 16/11/2020 en las instalacion de Seat:Code durante la realizacion del bootcamp de GeeksHubs Academy para Seat:Code.  
 El objetivo es practicar con los lenguajes, herramientas y conceptos de programacion instruidos por los profesores de GeeksHubs.
 
 
