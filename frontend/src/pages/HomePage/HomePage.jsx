@@ -7,8 +7,8 @@ import PomHeader from "../../components/Header/PomHeader";
 import PomFooter from "../../components/Footer/PomFooter";
 
 // sections for this page
-import PopularSpaces from "../Sections/PopularSpaces";
-import GuestsOpinions from "../Sections/GuestsOpinions";
+import PopularSpaces from "../sections/PopularSpaces";
+import GuestsOpinions from "../sections/GuestsOpinions";
 import FindRoomsSimple from "../../components/FindRoomsSimple/FindRoomsSimple";
 
 
