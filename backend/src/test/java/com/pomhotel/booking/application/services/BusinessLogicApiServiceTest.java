@@ -39,7 +39,6 @@ class BusinessLogicApiServiceTest {
     private BusinessLogicApiServiceImplementation businessService;
 
     @Test
-    @DisplayName("El Service no es Null")
     public void ShouldInjectedBeanNeverShouldBeNull() throws Exception
     {
         assertThat(businessService).isNotNull();
@@ -162,7 +161,7 @@ class BusinessLogicApiServiceTest {
 
     }
 
-    @Test
+    @Test //TODO better name
     void calculateTotalPriceBooking() {
 
         BookingApiDTO book = new BookingApiDTO();
@@ -215,6 +214,57 @@ class BusinessLogicApiServiceTest {
         calculated = businessService.calculateTotalPriceBooking(book);
 
         assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
+
+    }
+
+    // todo crear mas casos de test desde el mas sencillo al mas complejo
+    // todo nombres bien descriptivos
+
+    @Test
+    void GivenAnyRoomOneNightNoAdditionalServicesShouldBeReturnRoomPrice() {
+
+    }
+
+    @Test
+    void GivenAnyRoomOneNightWithBreakfast_ShouldBeReturnSumOfRoomBreakfastPrice() {
+
+    }
+
+    @Test
+    void GivenAnyRoomOneNightWithBreakfastCarParking_ShouldBeReturnSumOfRoomBreakfastCarParkingPrice() {
+
+    }
+
+    @Test
+    void GivenAnyRoomOneNightWithBreakfastCarParkingLaundry_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryPrice() {
+
+    }
+
+    @Test
+    void GivenAnyRoomOneNightWithBreakfastCarParkingLaundryShuttle_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryShuttlePrice() {
+
+    }
+
+    @Test
+    void GivenARoomThatIsNotLuxuryOrSuiteWithBreakfastCarParkingLaundryShuttleSPA_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryShuttleSPAPrice() {
+
+    }
+
+    //SPA is a service included in Luxury Or Suite rooms
+    @Test
+    void GivenALuxuryOrSuiteWithBreakfastCarParkingLaundryShuttleSPA_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryShuttlePrice_SPAServiceIsIncludedWithTheseRooms() {
+
+    }
+
+    // Stay less than 20 nights normal price of room
+    @Test
+    void GivenAnyRoomWithAStayLessThan20NightsRoomPrice_ShouldBeCalcNormalPriceRoomPerNight(){
+
+    }
+
+    // Stay greater than or equal 20 nights 20% discount on room price
+    @Test
+    void GivenAnyRoomWithAStayGreaterThanOrEqualTo20NightsRoomPrice_ShouldBeApply20percentOfDiscountOnRoomPricePerNight(){
 
     }
 
