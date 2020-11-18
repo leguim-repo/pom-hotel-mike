@@ -39,20 +39,20 @@ class BusinessLogicApiServiceTest {
     private BusinessLogicApiServiceImplementation businessService;
 
     @Test
-    public void ShouldInjectedBeanNeverShouldBeNull() throws Exception
+    public void CheckIfServiceIsCorrectInjectedBean_NeverShouldBeNull() throws Exception
     {
         assertThat(businessService).isNotNull();
     }
 
     @Test
-    void getDaysBetweenTwoDates() {
+    void GivenTwoDates_ShouldBeReturnNumberOfNights() {
         assertEquals(2, businessService.getDaysBetweenTwoDates(Date.valueOf("2020-01-01"), Date.valueOf("2020-01-03")));
         assertEquals(20, businessService.getDaysBetweenTwoDates(Date.valueOf("2020-01-01"), Date.valueOf("2020-01-21")));
         assertEquals(4, businessService.getDaysBetweenTwoDates(Date.valueOf("2021-01-30"), Date.valueOf("2021-02-03")));
     }
 
     @Test
-    void calculateBasePrice() {
+    void GivenAnyNumberOfNightAndAnyPricePerNight_ShouldBeReturnMultiply() {
         assertEquals(1000, businessService.calculateBasePrice(10,100));
         assertEquals(1900, businessService.calculateBasePrice(19,100));
         assertEquals(2000, businessService.calculateBasePrice(20,100));
