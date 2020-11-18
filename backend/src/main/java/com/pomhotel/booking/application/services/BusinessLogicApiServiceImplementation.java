@@ -39,10 +39,12 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
 
 
     //--- Auxiliar Functions ----------------------------------------------------
-    //@Override
+    /*
+    @Override
     public Date stringToDate(String date) {
         return Date.valueOf( LocalDate.parse(date, formatoDeEntrada).format(formatoDeSalida) );
     }
+    */
 
     @Override
     public long getDaysBetweenTwoDates(Date date1, Date date2) {
