@@ -36,7 +36,7 @@ class BusinessLogicApiServiceTest {
     final double minus25euro = -25;
     final double minus50euro = -50;
 
-    public enum RoomTypes { SuiteRoom (1), IndividualRoom(2), FamilyRoom(3), LuxuryRoom(4), DoubleRoom(5);
+    public enum RoomTypes { SuiteRoom (1), IndividualRoom(2), FamilyRoom(3), LuxuryRoom(4), DoubleRoom(5), UnkwnowRoom(7);
         private final long roomType;
         RoomTypes(long i) {
             this.roomType = i;
@@ -193,7 +193,7 @@ class BusinessLogicApiServiceTest {
 
 
     @Test
-    void CheckOfDiscountCode_GivenAnyStringValue_ShouldBeReturnZero() {
+    void CheckOfDiscountCode_GivenAnyStringThatNotIsAValidCode_ShouldBeReturnZero() {
         double discountCalculated;
 
         discountCalculated = businessService.calculateCodeDiscount("cadcda31|2@");
@@ -205,49 +205,49 @@ class BusinessLogicApiServiceTest {
     // todo nombres bien descriptivos
 
     @Test
-    void GivenAnyRoomOneNightNoAdditionalServicesShouldBeReturnRoomPrice() {
+    void GivenAnyRoomOneNightNoAdditionalServices_ShouldBeReturnRoomPrice() {
         // Arrange
-
-        room.setId(10);
-        room.setCode("code");
-        room.setPricePerNight(160.0);
+        room.setId(5);
+        room.setCode("");
+        room.setPricePerNight(50.0);
         room.setDescription("description here");
-        room.setGuests(5);
+        room.setGuests(1);
         room.setImage("image here");
         roomType.setRoomsById(new ArrayList<>());
-        roomType.setId(10);
+        roomType.setId(RoomTypes.IndividualRoom.getRoomType());
         roomType.setName("room name");
         roomType.setDescription("description here");
         room.setRoomtypesByFkRoomtypeId(roomType);
 
-
         book.setRoomId(room.getId());
-        book.setCheckIn("2020-12-20");
-        book.setCheckOut("2021-01-09");
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
         book.setGuests(String.valueOf(room.getGuests()));
-        book.setBreakfastService(true);
-        book.setCarParkingService(true);
-        book.setSpaService(true);
-        book.setLaundryService(true);
-        book.setShuttleService(true);
-        book.setCodeDiscount("CODE50aa");
+        book.setBreakfastService(false);
+        book.setCarParkingService(false);
+        book.setSpaService(false);
+        book.setLaundryService(false);
+        book.setShuttleService(false);
+        book.setCodeDiscount("");
 
-        calculationsExpected.setTotalNights(20);
-        calculationsExpected.setRoomPricePerNight(160);
-        calculationsExpected.setRoomTotalPrice(2650);
-        calculationsExpected.setBreakFastPricePerNight(4);
-        calculationsExpected.setBreakFastTotalPrice(80);
-        calculationsExpected.setCarParkingPricePerNight(10);
-        calculationsExpected.setCarParkingTotalPrice(200);
-        calculationsExpected.setSpaPricePerNight(5);
-        calculationsExpected.setSpaTotalPrice(100);
-        calculationsExpected.setLaundryPricePerNight(2);
-        calculationsExpected.setLaundryTotalPrice(40);
-        calculationsExpected.setShuttlePricePerNight(20);
-        calculationsExpected.setShuttleTotalPrice(20);
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(0);
+        calculationsExpected.setBreakFastTotalPrice(0);
+        calculationsExpected.setCarParkingPricePerNight(0);
+        calculationsExpected.setCarParkingTotalPrice(0);
+        calculationsExpected.setSpaPricePerNight(0);
+        calculationsExpected.setSpaTotalPrice(0);
+        calculationsExpected.setLaundryPricePerNight(0);
+        calculationsExpected.setLaundryTotalPrice(0);
+        calculationsExpected.setShuttlePricePerNight(0);
+        calculationsExpected.setShuttleTotalPrice(0);
         calculationsExpected.setCodeDiscountPrice(0);
-        calculationsExpected.setTotalBookingPrice(3000);
-
+        calculationsExpected.setTotalBookingPrice(50.0);
 
         when(roomsService.findById(room.getId())).thenReturn(room);
 
@@ -255,108 +255,821 @@ class BusinessLogicApiServiceTest {
         calculated = businessService.calculateTotalPriceBooking(book);
 
         // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
         assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
-        assertEquals(false,true);
 
     }
 
     @Test
     void GivenAnyRoomOneNightWithBreakfast_ShouldBeReturnSumOfRoomBreakfastPrice() {
-        assertEquals(false,true);
+        // Arrange
+        room.setId(5);
+        room.setCode("");
+        room.setPricePerNight(50.0);
+        room.setDescription("description here");
+        room.setGuests(1);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
+        roomType.setId(RoomTypes.IndividualRoom.getRoomType());
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(true);
+        book.setCarParkingService(false);
+        book.setSpaService(false);
+        book.setLaundryService(false);
+        book.setShuttleService(false);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(4);
+        calculationsExpected.setBreakFastTotalPrice(4);
+        calculationsExpected.setCarParkingPricePerNight(0);
+        calculationsExpected.setCarParkingTotalPrice(0);
+        calculationsExpected.setSpaPricePerNight(0);
+        calculationsExpected.setSpaTotalPrice(0);
+        calculationsExpected.setLaundryPricePerNight(0);
+        calculationsExpected.setLaundryTotalPrice(0);
+        calculationsExpected.setShuttlePricePerNight(0);
+        calculationsExpected.setShuttleTotalPrice(0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(54.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
     @Test
     void GivenAnyRoomOneNightWithBreakfastCarParking_ShouldBeReturnSumOfRoomBreakfastCarParkingPrice() {
-        assertEquals(false,true);
+        // Arrange
+        room.setId(5);
+        room.setCode("");
+        room.setPricePerNight(50.0);
+        room.setDescription("description here");
+        room.setGuests(1);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
+        roomType.setId(RoomTypes.IndividualRoom.getRoomType());
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(true);
+        book.setCarParkingService(true);
+        book.setSpaService(false);
+        book.setLaundryService(false);
+        book.setShuttleService(false);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(4);
+        calculationsExpected.setBreakFastTotalPrice(4);
+        calculationsExpected.setCarParkingPricePerNight(10);
+        calculationsExpected.setCarParkingTotalPrice(10);
+        calculationsExpected.setSpaPricePerNight(0);
+        calculationsExpected.setSpaTotalPrice(0);
+        calculationsExpected.setLaundryPricePerNight(0);
+        calculationsExpected.setLaundryTotalPrice(0);
+        calculationsExpected.setShuttlePricePerNight(0);
+        calculationsExpected.setShuttleTotalPrice(0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(64.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
     @Test
     void GivenAnyRoomOneNightWithBreakfastCarParkingLaundry_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryPrice() {
-        assertEquals(false,true);
+        // Arrange
+        room.setId(5);
+        room.setCode("");
+        room.setPricePerNight(50.0);
+        room.setDescription("description here");
+        room.setGuests(1);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
+        roomType.setId(RoomTypes.IndividualRoom.getRoomType());
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(true);
+        book.setCarParkingService(true);
+        book.setSpaService(false);
+        book.setLaundryService(true);
+        book.setShuttleService(false);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(4);
+        calculationsExpected.setBreakFastTotalPrice(4);
+        calculationsExpected.setCarParkingPricePerNight(10);
+        calculationsExpected.setCarParkingTotalPrice(10);
+        calculationsExpected.setSpaPricePerNight(0);
+        calculationsExpected.setSpaTotalPrice(0);
+        calculationsExpected.setLaundryPricePerNight(2);
+        calculationsExpected.setLaundryTotalPrice(2);
+        calculationsExpected.setShuttlePricePerNight(0);
+        calculationsExpected.setShuttleTotalPrice(0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(66.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
     @Test
     void GivenAnyRoomOneNightWithBreakfastCarParkingLaundryShuttle_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryShuttlePrice() {
-        assertEquals(false,true);
+        // Arrange
+        room.setId(5);
+        room.setCode("");
+        room.setPricePerNight(50.0);
+        room.setDescription("description here");
+        room.setGuests(1);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
+        roomType.setId(RoomTypes.IndividualRoom.getRoomType());
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(true);
+        book.setCarParkingService(true);
+        book.setSpaService(false);
+        book.setLaundryService(true);
+        book.setShuttleService(true);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(4);
+        calculationsExpected.setBreakFastTotalPrice(4);
+        calculationsExpected.setCarParkingPricePerNight(10);
+        calculationsExpected.setCarParkingTotalPrice(10);
+        calculationsExpected.setSpaPricePerNight(0);
+        calculationsExpected.setSpaTotalPrice(0);
+        calculationsExpected.setLaundryPricePerNight(2);
+        calculationsExpected.setLaundryTotalPrice(2);
+        calculationsExpected.setShuttlePricePerNight(20.0);
+        calculationsExpected.setShuttleTotalPrice(20.0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(86.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
     //SPA is a service included in Suite
     @Test
     void GivenASuiteWithBreakfastCarParkingLaundryShuttleSPA_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryShuttlePrice_SPAServiceIsIncludedWithTheseRooms() {
-        RoomTypesModel roomType = new RoomTypesModel();
-        double priceCalculated;
-
+        // Arrange
+        room.setId(1);
+        room.setCode("");
+        room.setPricePerNight(300.0);
+        room.setDescription("description here");
+        room.setGuests(2);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
         roomType.setId(RoomTypes.SuiteRoom.getRoomType());
-        priceCalculated = businessService.calculateSpaService(10,10,roomType);
-        assertEquals(111, priceCalculated);
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(true);
+        book.setCarParkingService(true);
+        book.setSpaService(true);
+        book.setLaundryService(true);
+        book.setShuttleService(true);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(4);
+        calculationsExpected.setBreakFastTotalPrice(4);
+        calculationsExpected.setCarParkingPricePerNight(10);
+        calculationsExpected.setCarParkingTotalPrice(10);
+        calculationsExpected.setSpaPricePerNight(5);
+        calculationsExpected.setSpaTotalPrice(0);
+        calculationsExpected.setLaundryPricePerNight(2);
+        calculationsExpected.setLaundryTotalPrice(2);
+        calculationsExpected.setShuttlePricePerNight(20.0);
+        calculationsExpected.setShuttleTotalPrice(20.0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(336.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
-
 
     //SPA service with Individual Room
     @Test
     void GivenAnIndividualRoomWithBreakfastCarParkingLaundryShuttleSPA_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryShuttleSPAPrice() {
-        RoomTypesModel roomType = new RoomTypesModel();
-        double priceCalculated;
-
+        // Arrange
+        room.setId(5);
+        room.setCode("");
+        room.setPricePerNight(50.0);
+        room.setDescription("description here");
+        room.setGuests(1);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
         roomType.setId(RoomTypes.IndividualRoom.getRoomType());
-        priceCalculated = businessService.calculateSpaService(10,10,roomType);
-        assertEquals(111, priceCalculated);
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(true);
+        book.setCarParkingService(true);
+        book.setSpaService(true);
+        book.setLaundryService(true);
+        book.setShuttleService(true);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(4);
+        calculationsExpected.setBreakFastTotalPrice(4);
+        calculationsExpected.setCarParkingPricePerNight(10);
+        calculationsExpected.setCarParkingTotalPrice(10);
+        calculationsExpected.setSpaPricePerNight(5);
+        calculationsExpected.setSpaTotalPrice(5);
+        calculationsExpected.setLaundryPricePerNight(2);
+        calculationsExpected.setLaundryTotalPrice(2);
+        calculationsExpected.setShuttlePricePerNight(20.0);
+        calculationsExpected.setShuttleTotalPrice(20.0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(91.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
     //SPA service with Familiy Room
     @Test
     void GivenAnFamilyRoomWithBreakfastCarParkingLaundryShuttleSPA_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryShuttleSPAPrice() {
-        RoomTypesModel roomType = new RoomTypesModel();
-        double priceCalculated;
-
+        // Arrange
+        room.setId(9);
+        room.setCode("");
+        room.setPricePerNight(155.0);
+        room.setDescription("description here");
+        room.setGuests(4);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
         roomType.setId(RoomTypes.FamilyRoom.getRoomType());
-        priceCalculated = businessService.calculateSpaService(10,10,roomType);
-        assertEquals(111, priceCalculated);
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(true);
+        book.setCarParkingService(true);
+        book.setSpaService(true);
+        book.setLaundryService(true);
+        book.setShuttleService(true);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(4);
+        calculationsExpected.setBreakFastTotalPrice(4);
+        calculationsExpected.setCarParkingPricePerNight(10);
+        calculationsExpected.setCarParkingTotalPrice(10);
+        calculationsExpected.setSpaPricePerNight(5);
+        calculationsExpected.setSpaTotalPrice(5);
+        calculationsExpected.setLaundryPricePerNight(2);
+        calculationsExpected.setLaundryTotalPrice(2);
+        calculationsExpected.setShuttlePricePerNight(20.0);
+        calculationsExpected.setShuttleTotalPrice(20.0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(196.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
     //SPA is a service included in Luxury
     @Test
     void GivenALuxuryWithBreakfastCarParkingLaundryShuttleSPA_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryShuttlePrice_SPAServiceIsIncludedWithTheseRooms() {
-        RoomTypesModel roomType = new RoomTypesModel();
-        double priceCalculated;
-
+        // Arrange
+        room.setId(11);
+        room.setCode("");
+        room.setPricePerNight(450.0);
+        room.setDescription("description here");
+        room.setGuests(2);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
         roomType.setId(RoomTypes.LuxuryRoom.getRoomType());
-        priceCalculated = businessService.calculateSpaService(10,10,roomType);
-        assertEquals(111, priceCalculated);
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(true);
+        book.setCarParkingService(true);
+        book.setSpaService(true);
+        book.setLaundryService(true);
+        book.setShuttleService(true);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(4);
+        calculationsExpected.setBreakFastTotalPrice(4);
+        calculationsExpected.setCarParkingPricePerNight(10);
+        calculationsExpected.setCarParkingTotalPrice(10);
+        calculationsExpected.setSpaPricePerNight(5);
+        calculationsExpected.setSpaTotalPrice(0);
+        calculationsExpected.setLaundryPricePerNight(2);
+        calculationsExpected.setLaundryTotalPrice(2);
+        calculationsExpected.setShuttlePricePerNight(20.0);
+        calculationsExpected.setShuttleTotalPrice(20.0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(486.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
     //SPA service with Double Room
     @Test
     void GivenAnDoubleRoomWithBreakfastCarParkingLaundryShuttleSPA_ShouldBeReturnSumOfRoomBreakfastCarParkingLaundryShuttleSPAPrice() {
-        RoomTypesModel roomType = new RoomTypesModel();
-        double priceCalculated;
-
+        // Arrange
+        room.setId(14);
+        room.setCode("");
+        room.setPricePerNight(80.0);
+        room.setDescription("description here");
+        room.setGuests(2);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
         roomType.setId(RoomTypes.DoubleRoom.getRoomType());
-        priceCalculated = businessService.calculateSpaService(10,10,roomType);
-        assertEquals(111, priceCalculated);
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(true);
+        book.setCarParkingService(true);
+        book.setSpaService(true);
+        book.setLaundryService(true);
+        book.setShuttleService(true);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(4);
+        calculationsExpected.setBreakFastTotalPrice(4);
+        calculationsExpected.setCarParkingPricePerNight(10);
+        calculationsExpected.setCarParkingTotalPrice(10);
+        calculationsExpected.setSpaPricePerNight(5);
+        calculationsExpected.setSpaTotalPrice(5);
+        calculationsExpected.setLaundryPricePerNight(2);
+        calculationsExpected.setLaundryTotalPrice(2);
+        calculationsExpected.setShuttlePricePerNight(20.0);
+        calculationsExpected.setShuttleTotalPrice(20.0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(121.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
-
-    // Stay less than 20 nights normal price of room
+    //SPA service Special Case if Room Id is Unknown
     @Test
-    void GivenAnyRoomWithAStayLessThan20NightsRoomPrice_ShouldBeCalcNormalPriceRoomPerNight(){
-        assertEquals(false,true);
+    void GivenAnUnknownRoomWithSPA_ShouldBeReturnSumOfRoomSPAPrice() {
+        // Arrange
+        room.setId(5);
+        room.setCode("");
+        room.setPricePerNight(50.0);
+        room.setDescription("description here");
+        room.setGuests(1);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
+        roomType.setId(RoomTypes.UnkwnowRoom.getRoomType());
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-02");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(false);
+        book.setCarParkingService(false);
+        book.setSpaService(true);
+        book.setLaundryService(false);
+        book.setShuttleService(false);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(1);
+        calculationsExpected.setLongStay(false);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(0);
+        calculationsExpected.setRoomSpecialTotalPrice(0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(0);
+        calculationsExpected.setBreakFastTotalPrice(0);
+        calculationsExpected.setCarParkingPricePerNight(0);
+        calculationsExpected.setCarParkingTotalPrice(0);
+        calculationsExpected.setSpaPricePerNight(5);
+        calculationsExpected.setSpaTotalPrice(5);
+        calculationsExpected.setLaundryPricePerNight(0);
+        calculationsExpected.setLaundryTotalPrice(0);
+        calculationsExpected.setShuttlePricePerNight(0);
+        calculationsExpected.setShuttleTotalPrice(0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(55.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.isLongStay(), calculated.isLongStay());
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
     // Stay greater than or equal 20 nights 20% discount on room price
     @Test
     void GivenAnyRoomWithAStayGreaterThanOrEqualTo20NightsRoomPrice_ShouldBeApply20percentOfDiscountOnRoomPricePerNight(){
-        assertEquals(false,true);
+        // Arrange
+        room.setId(5);
+        room.setCode("");
+        room.setPricePerNight(50.0);
+        room.setDescription("description here");
+        room.setGuests(1);
+        room.setImage("image here");
+        roomType.setRoomsById(new ArrayList<>());
+        roomType.setId(RoomTypes.IndividualRoom.getRoomType());
+        roomType.setName("room name");
+        roomType.setDescription("description here");
+        room.setRoomtypesByFkRoomtypeId(roomType);
+
+        book.setRoomId(room.getId());
+        book.setCheckIn("2021-01-01");
+        book.setCheckOut("2021-01-21");
+        book.setGuests(String.valueOf(room.getGuests()));
+        book.setBreakfastService(false);
+        book.setCarParkingService(false);
+        book.setSpaService(false);
+        book.setLaundryService(false);
+        book.setShuttleService(false);
+        book.setCodeDiscount("");
+
+        calculationsExpected.setTotalNights(20);
+        calculationsExpected.setRoomPricePerNight(room.getPricePerNight());
+        calculationsExpected.setRoomSpecialPricePerNight(40.0); // 50 - 20% = 40.0
+        calculationsExpected.setRoomSpecialTotalPrice(800.0);
+        calculationsExpected.setRoomTotalPrice(room.getPricePerNight() * calculationsExpected.getTotalNights());
+        calculationsExpected.setBreakFastPricePerNight(0);
+        calculationsExpected.setBreakFastTotalPrice(0);
+        calculationsExpected.setCarParkingPricePerNight(0);
+        calculationsExpected.setCarParkingTotalPrice(0);
+        calculationsExpected.setSpaPricePerNight(0);
+        calculationsExpected.setSpaTotalPrice(0);
+        calculationsExpected.setLaundryPricePerNight(0);
+        calculationsExpected.setLaundryTotalPrice(0);
+        calculationsExpected.setShuttlePricePerNight(0);
+        calculationsExpected.setShuttleTotalPrice(0);
+        calculationsExpected.setCodeDiscountPrice(0);
+        calculationsExpected.setTotalBookingPrice(800.0);
+
+        when(roomsService.findById(room.getId())).thenReturn(room);
+
+        // Act
+        calculated = businessService.calculateTotalPriceBooking(book);
+
+        // Asserts
+        assertEquals(calculationsExpected.totalNights, calculated.totalNights);
+        assertEquals(calculationsExpected.roomPricePerNight, calculated.roomPricePerNight);
+        assertEquals(calculationsExpected.roomTotalPrice, calculated.roomTotalPrice);
+        assertEquals(calculationsExpected.roomSpecialPricePerNight, calculated.roomSpecialPricePerNight);
+        assertEquals(calculationsExpected.roomSpecialTotalPrice, calculated.roomSpecialTotalPrice);
+        assertEquals(calculationsExpected.breakFastPricePerNight, calculated.breakFastPricePerNight);
+        assertEquals(calculationsExpected.breakFastTotalPrice, calculated.breakFastTotalPrice);
+        assertEquals(calculationsExpected.carParkingPricePerNight, calculated.carParkingPricePerNight);
+        assertEquals(calculationsExpected.carParkingTotalPrice, calculated.carParkingTotalPrice);
+        assertEquals(calculationsExpected.spaPricePerNight, calculated.spaPricePerNight);
+        assertEquals(calculationsExpected.spaTotalPrice, calculated.spaTotalPrice);
+        assertEquals(calculationsExpected.laundryPricePerNight, calculated.laundryPricePerNight);
+        assertEquals(calculationsExpected.laundryTotalPrice, calculated.laundryTotalPrice);
+        assertEquals(calculationsExpected.shuttlePricePerNight, calculated.shuttlePricePerNight);
+        assertEquals(calculationsExpected.shuttleTotalPrice, calculated.shuttleTotalPrice);
+        assertEquals(calculationsExpected.codeDiscountPrice, calculated.codeDiscountPrice);
+        assertEquals(calculationsExpected.totalBookingPrice, calculated.totalBookingPrice);
 
     }
 
