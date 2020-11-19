@@ -5,7 +5,6 @@ import com.pomhotel.booking.application.models.RoomTypesModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
 import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.doubleThat;
 import static org.mockito.Mockito.when;
 
 
@@ -141,7 +139,7 @@ class BusinessLogicApiServiceTest {
     }
 
     @Test
-    void GivenAnBookingsModel_ShouldBeReturnACalculateBookDTO_SimpleTestFoMethodcallToCalculateBooking() {
+    void GivenAnBookingModel_ShouldBeReturnACalculateBookDTO_SimpleTestFoMethodcallToCalculateBooking() {
         BookingsModel bookModel = new BookingsModel();
         // Arrange
         room.setId(5);

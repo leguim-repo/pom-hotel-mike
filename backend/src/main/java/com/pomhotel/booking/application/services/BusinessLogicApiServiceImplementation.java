@@ -181,11 +181,9 @@ public class BusinessLogicApiServiceImplementation implements BusinessLogicApiSe
         }
 
         if ( book.shuttleService ) {
-            if (calculatedBook.totalNights >= 1){
-                calculatedBook.setShuttlePricePerNight(listOfPrices.shuttlePricePerNight);
-                calculatedBook.setShuttleTotalPrice(calculateShuttleService(calculatedBook.shuttlePricePerNight));
-                accumulated += calculatedBook.shuttleTotalPrice;
-            }
+            calculatedBook.setShuttlePricePerNight(listOfPrices.shuttlePricePerNight);
+            calculatedBook.setShuttleTotalPrice(calculateShuttleService(calculatedBook.shuttlePricePerNight));
+            accumulated += calculatedBook.shuttleTotalPrice;
         }
 
 
