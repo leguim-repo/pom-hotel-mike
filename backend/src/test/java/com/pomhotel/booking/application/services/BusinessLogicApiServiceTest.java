@@ -65,7 +65,6 @@ class BusinessLogicApiServiceTest {
 
     }
 
-
     @Test
     void GivenAnBookingApiDTO_ShouldBeReturnACalculateBookDTO_SimpleTestFoMethodcallToCalculateBooking() {
         // Arrange
@@ -246,7 +245,6 @@ class BusinessLogicApiServiceTest {
 
     }
 
-
     @Test
     void CalcOfLaundry_GivenAnyNumberOfNightAndAnyPricePerNight_ShouldBeReturnMultiply() {
         assertEquals(0, businessService.calculateLaundryService(0,10));
@@ -332,6 +330,7 @@ class BusinessLogicApiServiceTest {
 
     }
 
+    // Simple case
     @Test
     void GivenAnyRoomOneNightNoAdditionalServices_ShouldBeReturnRoomPrice() {
         // Arrange
