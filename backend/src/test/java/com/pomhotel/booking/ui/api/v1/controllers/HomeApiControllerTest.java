@@ -56,7 +56,7 @@ class HomeApiControllerTest {
     }
 
     @Test
-    @DisplayName("Endpoint: \"/api/roomdetail/{targetId}\"")
+    @DisplayName("Endpoint: \"/api/v1/getroombyid/{targetId}\"")
     void findRoomByIdApi() throws Exception {
         RoomsModel theRoom = new RoomsModel();
         theRoom.setId(1);
@@ -65,7 +65,7 @@ class HomeApiControllerTest {
 
         when(mockRoomService.findById(1)).thenReturn(theRoom);
 
-        this.mockMvc.perform(get("/api/roomdetail/1")
+        this.mockMvc.perform(get("/api/v1/getroombyid/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())

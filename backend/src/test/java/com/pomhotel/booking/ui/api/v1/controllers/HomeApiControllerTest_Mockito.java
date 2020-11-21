@@ -45,25 +45,25 @@ class HomeApiControllerTest_Mockito {
     }
 
     @Test
-    @DisplayName("MockMvc Endpoint: \"/api/roomdetail/{targetId}\"")
+    @DisplayName("MockMvc Endpoint: \"/api/v1/getroombyid/{targetId}\"")
     // De esta forma se hace un test hasta la BD
     void findRoomByIdApi_mockMvc() throws Exception {
-        this.mockMvc.perform(get("/api/roomdetail/1").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/api/v1/getroombyid/1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.pricePerNight").value(300.00))
                 .andExpect(jsonPath("$.code").value("SU1"));
 
-        this.mockMvc.perform(get("/api/roomdetail/2").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/api/v1/getroombyid/2").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.pricePerNight").value(320.00))
                 .andExpect(jsonPath("$.code").value("SU2"));
 
-        this.mockMvc.perform(get("/api/roomdetail/3").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/api/v1/getroombyid/3").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.pricePerNight").value(290.00))
                 .andExpect(jsonPath("$.code").value("SU3"));
 
-        this.mockMvc.perform(get("/api/roomdetail/4").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/api/v1/getroombyid/4").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.pricePerNight").value(285.00))
                 .andExpect(jsonPath("$.code").value("SU4"));

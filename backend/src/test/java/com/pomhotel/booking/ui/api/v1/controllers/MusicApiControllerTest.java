@@ -38,7 +38,7 @@ class MusicApiControllerTest {
 
     @Test
     public void ShouldReturnOkWhenVisitMusic() throws  Exception{
-        mvc.perform(get("/api/music").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v1/music").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -46,7 +46,7 @@ class MusicApiControllerTest {
     @Test
     public void CheckIfReturnedIsOkAndJSONObjectContainsAKeyNamedLinkAndNotIsEmpty() throws  Exception{
 
-        mvc.perform(get("/api/music")
+        mvc.perform(get("/api/v1/music")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -57,7 +57,7 @@ class MusicApiControllerTest {
 
     @Test
     public void CheckIfMusicReturnAValidURL() throws Exception {
-        MvcResult mvcResponse = mvc.perform(get("/api/music")
+        MvcResult mvcResponse = mvc.perform(get("/api/v1/music")
                                     .contentType(MediaType.APPLICATION_JSON))
                                     .andDo(print())
                                     .andExpect(status().isOk())

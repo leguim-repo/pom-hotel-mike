@@ -60,14 +60,14 @@ class HomeApiControllerTest_MockBean {
     }
 
     @Test
-    @DisplayName("MockBean Endpoint: \"/api/roomdetail/{targetId}\"")
+    @DisplayName("MockBean Endpoint: \"/api/v1/getroombyid/{targetId}\"")
     void findRoomByIdApi_mockMvc() throws Exception {
         RoomsModel theRoom = new RoomsModel();
         theRoom.setId(1);
         theRoom.setPricePerNight(300.00);
         theRoom.setCode("SU1");
         when(mockRoomService.findById(1)).thenReturn(theRoom);
-        this.mockMvc.perform(get("/api/roomdetail/1")
+        this.mockMvc.perform(get("/api/v1/getroombyid/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())

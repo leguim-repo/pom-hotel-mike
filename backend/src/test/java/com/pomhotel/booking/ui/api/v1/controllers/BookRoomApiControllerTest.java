@@ -132,10 +132,10 @@ class BookRoomApiControllerTest {
     }
 
     @Test
-    @DisplayName("Endpoint: \"/api/dates/{targetId}")
+    @DisplayName("Endpoint: \"/api/v1/getallreserveddatesbyroomid/{targetId}")
     void getAllBookingsDatesByRoomIdApi() throws Exception {
         MvcResult result;
-        result = mvc.perform(get("/api/dates/1")
+        result = mvc.perform(get("/api/v1/getallreserveddatesbyroomid/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -150,12 +150,12 @@ class BookRoomApiControllerTest {
     }
 
     @Test
-    @DisplayName("Endpoint: \"/api/calculatebook")
+    @DisplayName("Endpoint: \"/api/v1/calculatepriceofbook")
     void calculatePriceOfBook() throws Exception {
         when(roomsService.findById(room.getId())).thenReturn(room);
         book.setCodeDiscount("CODE50");
 
-        mvc.perform(post("/api/calculatebook")
+        mvc.perform(post("/api/v1/calculatepriceofbook")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.toJson(book)))
                 .andDo(print())
@@ -166,12 +166,12 @@ class BookRoomApiControllerTest {
     }
 
     @Test
-    @DisplayName("Endpoint: \"/api/bookroomnow")
+    @DisplayName("Endpoint: \"/api/v1/bookingroomnow")
     void bookRoomNowApi() throws Exception {
         when(roomsService.findById(room.getId())).thenReturn(room);
         when(clientsService.findClientByUsername(clientFake.getName())).thenReturn(clientFake);
 
-        mvc.perform(post("/api/bookroomnow")
+        mvc.perform(post("/api/v1/bookingroomnow")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.toJson(book)))
                 .andDo(print())
