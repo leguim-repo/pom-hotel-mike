@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 // con random port me peta
-@SpringBootTest(classes = MusicApiController.class)
+@SpringBootTest(classes = MusicController.class)
 @AutoConfigureMockMvc
 class MusicApiControllerTest {
     @Autowired

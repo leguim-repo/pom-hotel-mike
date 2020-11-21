@@ -25,7 +25,7 @@ class HomeApiControllerTest_Mockito {
     private MockMvc mockMvc;
 
     @Autowired
-    private HomeApiController homeApiController;
+    private GetRoomByIdController homeApiController;
     private RoomsService mockRoomService;
 
     @Test
@@ -39,8 +39,8 @@ class HomeApiControllerTest_Mockito {
         var mockRoomsService = Mockito.mock(RoomsService.class);
         Mockito.when(mockRoomsService.findById(1)).thenReturn(fakeRoomsModel);
         //Test sobre la Api
-        HomeApiController testHomeApiController = new HomeApiController(mockRoomsService);
-        assertEquals(testHomeApiController.findRoomByIdApi("1"), fakeRoomsModel);
+        GetRoomByIdController testHomeApiController = new GetRoomByIdController(mockRoomsService);
+        assertEquals(testHomeApiController.getRoomById("1"), fakeRoomsModel);
 
     }
 

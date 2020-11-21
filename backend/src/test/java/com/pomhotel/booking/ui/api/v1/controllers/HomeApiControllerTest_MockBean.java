@@ -37,7 +37,7 @@ class HomeApiControllerTest_MockBean {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
-    private HomeApiController homeApiController;
+    private GetRoomByIdController homeApiController;
 
     @Before("")
     public void setup(){
@@ -55,7 +55,7 @@ class HomeApiControllerTest_MockBean {
         fakeRoomsModel.setPricePerNight(200.00);
 
         when(mockRoomService.findById(1)).thenReturn(fakeRoomsModel);
-        assertEquals(homeApiController.findRoomByIdApi("1"), fakeRoomsModel);
+        assertEquals(homeApiController.getRoomById("1"), fakeRoomsModel);
 
     }
 

@@ -33,8 +33,7 @@ class HomeApiControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private HomeApiController homeApiController;
+
 
     @Before("")
     public void setup(){

@@ -66,7 +66,7 @@ class BookRoomApiControllerTest {
     private MockMvc mvc;
 
     @Autowired
-    private HomeApiController homeApiController;
+    private GetAllRoomsController homeApiController;
 
     @Before("")
     public void setup(){

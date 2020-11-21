@@ -14,8 +14,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1")
-public class GetAllReservedDatesByRoomId {
-    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("GetAllReservedDatesByRoomId.class");
+public class GetAllReservedDatesByRoomIdController {
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("GetAllReservedDatesByRoomIdController.class");
 
     //--- Services & Variables used ---------------------------------------
     BookingsService bookingsService;
@@ -23,7 +23,7 @@ public class GetAllReservedDatesByRoomId {
 
     //--- Constructor --------------------------------------------------
     @Autowired
-    public GetAllReservedDatesByRoomId(BookingsService bookingsService) {
+    public GetAllReservedDatesByRoomIdController(BookingsService bookingsService) {
         this.bookingsService = bookingsService;
 
     }

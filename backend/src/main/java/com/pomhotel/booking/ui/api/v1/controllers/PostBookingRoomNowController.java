@@ -12,12 +12,12 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1")
-public class PostBookingRoomNow {
-    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("PostBookingRoomNowEPController.class");
+public class PostBookingRoomNowController {
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("PostBookingRoomNowController.class");
 
     BookingsService bookingsService;
 
-    public PostBookingRoomNow(BookingsService bookingsService) {
+    public PostBookingRoomNowController(BookingsService bookingsService) {
         this.bookingsService = bookingsService;
     }
 

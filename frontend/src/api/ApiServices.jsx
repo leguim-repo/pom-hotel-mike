@@ -1,14 +1,14 @@
 import axios from "axios";
 //import api from "../api/apiEndPoints.json";
 
-const apiBaseURL = "http://pom-hotel.code:8080/api"
-const apiGetAllRooms = apiBaseURL+"/rooms";
-const apiGetRoomById = apiBaseURL+"/roomdetail";
-const apiCalculateBook = apiBaseURL+"/v1/calculatepriceofbook";
-const apiBookedDatesByRoomId = apiBaseURL+"/v1/getallreserveddatesbyroomid";
-const apiRoomsAndBookedDates = apiBaseURL+"/roomsandbookeddates";
-const apiGetDataBookingById = apiBaseURL+"/v1/getbookingbyidandprices";
-const apiBookRoomNow = apiBaseURL+"/v1/bookingroomnow";
+const apiBaseURL = "http://pom-hotel.code:8080/api/v1"
+const apiGetAllRooms = apiBaseURL+"/getallrooms";
+const apiGetRoomById = apiBaseURL+"/getroombyid";
+const apiCalculateBook = apiBaseURL+"/calculatepriceofbook";
+const apiBookedDatesByRoomId = apiBaseURL+"/getallreserveddatesbyroomid";
+const apiRoomsAndBookedDates = apiBaseURL+"/getallroomswithreserveddates";
+const apiGetDataBookingById = apiBaseURL+"/getbookingbyidandprices";
+const apiBookRoomNow = apiBaseURL+"/bookingroomnow";
 export const apiGetMusicLink = apiBaseURL+"/music";
 
 

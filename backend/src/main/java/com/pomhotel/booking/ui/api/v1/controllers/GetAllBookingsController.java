@@ -14,16 +14,16 @@ import java.util.List;
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1")
-public class GetAllBookings {
+public class GetAllBookingsController {
 
-    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("GetAllBookingsEPController.class");
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("GetAllBookingsController.class");
 
     //--- Services & Variables used ---------------------------------------
     BookingsService bookingsService;
 
     //--- Constructor --------------------------------------------------
     @Autowired
-    public GetAllBookings(BookingsService bookingsService) {
+    public GetAllBookingsController(BookingsService bookingsService) {
         this.bookingsService = bookingsService;
     }
     //@GetMapping("/api/bookings")

@@ -11,11 +11,11 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1")
-public class PostCalculateBookingPrice {
-    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("PostCalculateBookingPrice.class");
+public class PostCalculateBookingPriceController {
+    private static final org.apache.commons.logging.Log Logger = LogFactory.getLog("PostCalculateBookingPriceController.class");
     BusinessLogicApiService businessLogicService;
 
-    public PostCalculateBookingPrice(BusinessLogicApiService businessLogicService) {
+    public PostCalculateBookingPriceController(BusinessLogicApiService businessLogicService) {
         this.businessLogicService = businessLogicService;
     }
 
