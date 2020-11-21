@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+//TODO https://github.com/bezkoder/spring-boot-spring-security-jwt-authentication
 //@CrossOrigin(origins = "http://pom-hotel.code:3000", maxAge = 3600, allowCredentials = "true")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 @RestController
