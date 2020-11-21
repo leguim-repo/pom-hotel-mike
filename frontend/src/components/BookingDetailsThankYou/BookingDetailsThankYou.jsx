@@ -4,7 +4,11 @@ import Loader from '../Loader/Loader';
 import { NormalPrice, SpecialPrice } from '../NormalAndSpecialPrice/NormalAndSpecialPrice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcVisa, faCcAmex,  faCcApplePay, faCcPaypal, faCcAmazonPay, faCcDiscover, } from '@fortawesome/free-brands-svg-icons';
-import { QRCode } from 'react-qrcode-logo';
+
+import '@deckdeckgo/qrcode';
+import { defineCustomElements as deckDeckGoElement } from '@deckdeckgo/qrcode/dist/loader';
+deckDeckGoElement();
+
 
 function BookingDetailsThankYou(props) {
   const [book, setBook] = useState({});
@@ -25,10 +29,41 @@ function BookingDetailsThankYou(props) {
   }, [props]);
 
 
-  // https://blog.qr4.nl/QR-Code-Calendar-Event.aspx
-  // crear un qr con el evento de calendario estaria guay pero no rula
+  var estiloQR = { "--deckgo-qrcode-size": "250px",
+                  };
+
+  // https://github.com/kazuhikoarase/qrcode-generator
+  // npm install @deckdeckgo/qrcode --save
+  // https://docs.deckdeckgo.com/components/qrcode/
+  // https://kazuhikoarase.github.io/qrcode-generator/js/demo/
+
+  // calendario chulisimo Blocking Dates and Time
+  // https://ej2.syncfusion.com/react/demos/#/material/schedule/block-events
+
+
+  // https://github.com/zxing/zxing
+  // https://zxing.appspot.com/generator
+
   if ( 'roomsByFKRoomId' in book) {
     console.log('global: ',global);
+
+    const checkInCal = book.checkIn.replace(/-/g,"");
+    const checkOutCal = book.checkOut.replace(/-/g,"");
+    const eol = "  ";
+    const evento =  "BEGIN:VEVENT\r" +
+                    "SUMMARY:Booking POM Hotel & SPA\n" +
+                    "DTSTART;VALUE=DATE:" + checkInCal + "\n" +
+                    "DTEND;VALUE=DATE:" + checkOutCal + "\n" +
+                    "LOCATION:Las Ramblas 124 Barcelona 080002\n" +
+                    "URL:http://pom-hotel.code:3000/thankyou/" + book.id + "\n" +
+                    "DESCRIPTION:" +
+                          "Room Name: "+book.roomsByFKRoomId.roomtypesByFkRoomtypeId.name + eol +
+                          "Max Guests: "+book.guests + eol +
+                          "Total Nights: " + global.book.totalNights + eol +
+                          "Total Price: " + prices.totalBookingPrice + "\n" +
+                    "END:VEVENT";
+    
+
     return (
       <React.Fragment>
         <Form style={{margin: '0px'}} className="formExtend border mb-5">
@@ -114,8 +149,16 @@ function BookingDetailsThankYou(props) {
               <Row className="mt-5 mb-1 justify-content-center">
                 <p>Your current booking</p>
               </Row>
-              <Row className="justify-content-center mb-4">
-                <QRCode value={`http://pom-hotel.code:3000/thankyou/${book.id}`} />
+              <Row className="justify-content-center mb-4 bg-white">
+                <deckgo-qrcode 
+                  style={estiloQR}
+                  qrCellSize = {20}
+                  type={"svg"}
+                  content={evento}
+                  deckgo-qrcode-size="300px"
+                  >
+                  <img slot="logo" src={require("assets/img/Z-500x500.png")} alt="logo" />
+                </deckgo-qrcode>
               </Row>
             </Col>
 
