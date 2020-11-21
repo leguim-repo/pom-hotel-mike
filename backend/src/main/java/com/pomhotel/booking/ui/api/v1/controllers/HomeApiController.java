@@ -1,11 +1,11 @@
-package com.pomhotel.booking.ui.api.controllers;
+package com.pomhotel.booking.ui.api.v1.controllers;
 
 
 import com.pomhotel.booking.application.models.RoomWithBookedDatesModel;
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.RoomsAndBookedDatesService;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.api.exceptions.RoomNotFoundException;
+import com.pomhotel.booking.ui.api.v1.exceptions.RoomNotFoundException;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

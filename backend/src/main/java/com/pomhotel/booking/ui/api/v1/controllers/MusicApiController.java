@@ -1,7 +1,7 @@
-package com.pomhotel.booking.ui.api.controllers;
+package com.pomhotel.booking.ui.api.v1.controllers;
 
-import com.pomhotel.booking.ui.api.services.RandomMusicURLService;
-import com.pomhotel.booking.ui.api.services.RandomMusicURLServiceImplementation;
+import com.pomhotel.booking.ui.api.v1.services.RandomMusicURLService;
+import com.pomhotel.booking.ui.api.v1.services.RandomMusicURLServiceImplementation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

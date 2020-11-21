@@ -2,8 +2,8 @@ package com.pomhotel.booking.application.services;
 
 import com.pomhotel.booking.application.models.BookingsModel;
 import com.pomhotel.booking.application.models.RoomTypesModel;
-import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
-import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
+import com.pomhotel.booking.ui.api.v1.dto.BookingApiDTO;
+import com.pomhotel.booking.ui.api.v1.dto.CalculatedBookDTO;
 
 import java.sql.Date;
 

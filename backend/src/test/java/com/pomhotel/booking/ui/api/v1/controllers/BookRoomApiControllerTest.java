@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.api.controllers;
+package com.pomhotel.booking.ui.api.v1.controllers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,12 +8,10 @@ import com.pomhotel.booking.BookingApplication;
 import com.pomhotel.booking.application.models.ClientsModel;
 import com.pomhotel.booking.application.models.RoomTypesModel;
 import com.pomhotel.booking.application.models.RoomsModel;
-import com.pomhotel.booking.application.services.BookingsService;
 import com.pomhotel.booking.application.services.BusinessLogicApiService;
 import com.pomhotel.booking.application.services.ClientLoginService;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
-import com.pomhotel.booking.ui.api.dto.CalculatedBookDTO;
+import com.pomhotel.booking.ui.api.v1.dto.BookingApiDTO;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

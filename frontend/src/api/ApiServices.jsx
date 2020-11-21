@@ -4,11 +4,11 @@ import axios from "axios";
 const apiBaseURL = "http://pom-hotel.code:8080/api"
 const apiGetAllRooms = apiBaseURL+"/rooms";
 const apiGetRoomById = apiBaseURL+"/roomdetail";
-const apiCalculateBook = apiBaseURL+"/calculatebook";
-const apiBookedDatesByRoomId = apiBaseURL+"/dates";
+const apiCalculateBook = apiBaseURL+"/v1/calculatepriceofbook";
+const apiBookedDatesByRoomId = apiBaseURL+"/v1/getallreserveddatesbyroomid";
 const apiRoomsAndBookedDates = apiBaseURL+"/roomsandbookeddates";
-const apiGetDataBookingById = apiBaseURL+"/booking";
-const apiBookRoomNow = apiBaseURL+"/bookroomnow";
+const apiGetDataBookingById = apiBaseURL+"/v1/getbookingbyidandprices";
+const apiBookRoomNow = apiBaseURL+"/v1/bookingroomnow";
 export const apiGetMusicLink = apiBaseURL+"/music";
 
 

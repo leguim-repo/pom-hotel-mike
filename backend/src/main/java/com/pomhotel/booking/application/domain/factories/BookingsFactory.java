@@ -3,7 +3,7 @@ package com.pomhotel.booking.application.domain.factories;
 import com.pomhotel.booking.application.domain.entities.BookingsEntity;
 import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.models.BookingsModel;
-import com.pomhotel.booking.ui.api.dto.BookingApiDTO;
+import com.pomhotel.booking.ui.api.v1.dto.BookingApiDTO;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

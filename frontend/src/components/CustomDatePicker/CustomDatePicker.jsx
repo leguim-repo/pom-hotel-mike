@@ -36,24 +36,14 @@ export const CheckOutPicker = (props) => {
   registerLocale('es', es)
   const excludeDates = props.excludeDates ? props.excludeDates.map( (day) => parseISO(day)) : [];
   //console.log('CheckOutPicker: ',checkout,' props: ',props);
-  let minDate=new Date();
-  let selectedDate=new Date();
-
-  minDate = addDays(StorageManager.getCheckin(),1)
-  if (StorageManager.getCheckin() >= StorageManager.getCheckout() ) {
-      selectedDate = ""; // bad dates force user to select checkout
-  }
-  else {
-      selectedDate = StorageManager.getCheckout();
-  }
 
   return (
     <DatePicker 
         //inline
         locale="es"
-        minDate={minDate}
+        minDate={addDays(StorageManager.getCheckin(),1)}
         dateFormat="dd/MM/yyyy"
-        selected={selectedDate} 
+        selected={ StorageManager.getCheckout()} 
         onChange={date => { props.handle(date); StorageManager.saveCheckout(date)}}
         excludeDates={excludeDates}
         />

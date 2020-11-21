@@ -1,7 +1,7 @@
-package com.pomhotel.booking.ui.api.controllers;
+package com.pomhotel.booking.ui.api.v1.controllers;
 
 import org.apache.commons.logging.LogFactory;
-import com.pomhotel.booking.ui.api.dto.NewClientDTO;
+import com.pomhotel.booking.ui.api.v1.dto.NewClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

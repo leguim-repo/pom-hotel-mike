@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.api.controllers;
+package com.pomhotel.booking.ui.api.v1.controllers;
 
 import com.pomhotel.booking.BookingApplication;
 import com.pomhotel.booking.application.models.RoomsModel;
@@ -12,24 +12,19 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-// https://dzone.com/articles/rest-endpoint-testing-with-mockmvc
-
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = BookingApplication.class)
-class HomeApiControllerTest_MockBean {
+class HomeApiControllerTest {
     @MockBean
     private RoomsService mockRoomService;
 
@@ -50,25 +45,27 @@ class HomeApiControllerTest_MockBean {
     }
 
     @Test
-    @DisplayName("MockBean Endpoint: \"/api/roomdetail/{targetId}\"")
-    void GetFindRoomByIdApi() {
-        RoomsModel fakeRoomsModel = new RoomsModel();
-        fakeRoomsModel.setId(1);
-        fakeRoomsModel.setPricePerNight(200.00);
-
-        when(mockRoomService.findById(1)).thenReturn(fakeRoomsModel);
-        assertEquals(homeApiController.findRoomByIdApi("1"), fakeRoomsModel);
-
+    @DisplayName("Endpoint: \"/api/rooms")
+    @Disabled("is necesary?")
+    void getAllRoomsApi() {
     }
 
     @Test
-    @DisplayName("MockBean Endpoint: \"/api/roomdetail/{targetId}\"")
-    void findRoomByIdApi_mockMvc() throws Exception {
+    @DisplayName("Endpoint: \"/api/roomsandbookeddates")
+    @Disabled("is necesary?")
+    void getAllRoomsWithBookedDates() {
+    }
+
+    @Test
+    @DisplayName("Endpoint: \"/api/roomdetail/{targetId}\"")
+    void findRoomByIdApi() throws Exception {
         RoomsModel theRoom = new RoomsModel();
         theRoom.setId(1);
         theRoom.setPricePerNight(300.00);
         theRoom.setCode("SU1");
+
         when(mockRoomService.findById(1)).thenReturn(theRoom);
+
         this.mockMvc.perform(get("/api/roomdetail/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())

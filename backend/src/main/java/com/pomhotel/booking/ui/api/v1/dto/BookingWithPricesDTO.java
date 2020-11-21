@@ -1,4 +1,4 @@
-package com.pomhotel.booking.ui.api.dto;
+package com.pomhotel.booking.ui.api.v1.dto;
 
 
 import com.pomhotel.booking.application.models.BookingsModel;

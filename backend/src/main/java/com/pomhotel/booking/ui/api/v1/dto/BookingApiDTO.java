@@ -1,6 +1,4 @@
-package com.pomhotel.booking.ui.api.dto;
-
-import com.pomhotel.booking.application.models.RoomsModel;
+package com.pomhotel.booking.ui.api.v1.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

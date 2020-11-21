@@ -1,7 +1,5 @@
-package com.pomhotel.booking.ui.api.controllers;
+package com.pomhotel.booking.ui.api.v1.controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.jayway.jsonpath.JsonPath;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
