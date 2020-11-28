@@ -2,7 +2,7 @@ drop database if exists pom_hotel;
 create database pom_hotel character set latin1 collate latin1_spanish_ci;
 use pom_hotel;
 
-create table if not exists ROOMTYPES
+create table if not exists roomtypes
 (
     id          bigint AUTO_INCREMENT,
     name        varchar(100),
@@ -10,7 +10,7 @@ create table if not exists ROOMTYPES
     PRIMARY KEY (id)
 );
 
-create table if not exists ROOMS
+create table if not exists rooms
 (
     id              bigint AUTO_INCREMENT,
     fk_roomtype_id     bigint,
@@ -20,10 +20,10 @@ create table if not exists ROOMS
     image           varchar(100),
     guests          int,
     PRIMARY KEY (id),
-    FOREIGN KEY (fk_roomtype_id) REFERENCES ROOMTYPES (id)
+    FOREIGN KEY (fk_roomtype_id) REFERENCES roomtypes (id)
 );
 
-create table if not exists CLIENTS
+create table if not exists clients
 (
     id               bigint AUTO_INCREMENT,
     name           	 varchar(100),
@@ -32,7 +32,7 @@ create table if not exists CLIENTS
     PRIMARY KEY (id)
 );
 
-create table if not exists BOOKINGS
+create table if not exists bookings
 (
     id              bigint AUTO_INCREMENT,
     fk_client_id	bigint,
@@ -49,11 +49,11 @@ create table if not exists BOOKINGS
     codediscount	varchar(100),
     totalPrice      double,
     PRIMARY KEY (id),
-    FOREIGN KEY (fk_room_id) REFERENCES ROOMS (id),
-    FOREIGN KEY (fk_client_id) REFERENCES CLIENTS (id)
+    FOREIGN KEY (fk_room_id) REFERENCES rooms (id),
+    FOREIGN KEY (fk_client_id) REFERENCES clients (id)
 );
 
-create table if not exists LOGINS
+create table if not exists logins
 (
     id      		bigint AUTO_INCREMENT,
     fk_client_id  		bigint UNIQUE,
@@ -62,5 +62,5 @@ create table if not exists LOGINS
     role            varchar(100),
     enabled         tinyint(1),
     PRIMARY KEY (id),
-    FOREIGN KEY (fk_client_id) REFERENCES CLIENTS (id)
+    FOREIGN KEY (fk_client_id) REFERENCES clients (id)
 );

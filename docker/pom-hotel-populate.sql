@@ -1,6 +1,6 @@
 use pom_hotel;
 
-INSERT INTO ROOMTYPES VALUES
+INSERT INTO roomtypes VALUES
     (1, 'Suite room','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero eum at qui, deserunt repudiandae sint sunt quam accusamus ipsam unde! Aliquid odio doloremque illo perferendis cum eaque magni eius harum?'),
     (2, 'Individual room','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero eum at qui, deserunt repudiandae sint sunt quam accusamus ipsam unde! Aliquid odio doloremque illo perferendis cum eaque magni eius harum?'),
     (3, 'Family room','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero eum at qui, deserunt repudiandae sint sunt quam accusamus ipsam unde! Aliquid odio doloremque illo perferendis cum eaque magni eius harum?'),
@@ -9,7 +9,7 @@ INSERT INTO ROOMTYPES VALUES
     ;
 
 
-INSERT INTO ROOMS VALUES
+INSERT INTO rooms VALUES
     (1, 1, 'SU1','Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum doloribus sed, magnam corrupti sapiente aspernatur dolorum ullam sequi officia dignissimos et neque maiores dolore provident. Illo rem ex labore ut?',300,'room-3.jpg',2),
     (2, 1, 'SU2','Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita libero porro incidunt error recusandae possimus necessitatibus iure assumenda suscipit? Ratione!',320, 'room-5.jpg',2),
     (3, 1, 'SU3','Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dolorum aspernatur suscipit aut rem earum perferendis laboriosam architecto, numquam voluptates officia nulla quam! Praesentium, earum iure cumque veniam perspiciatis id illum culpa ipsum repudiandae molestias eaque minus nostrum, quo ut?',290,'room-3.jpg',2),
@@ -30,14 +30,14 @@ INSERT INTO ROOMS VALUES
     ;
 
 
-INSERT INTO CLIENTS VALUES 
+INSERT INTO clients VALUES 
     (1, 'Pablo','Garcia','Garcia@seat.es'),
     (2, 'Oscar','Garcia','OGarcia@seat.com'),
     (3, 'Miguel','de Pablos','mdpablos@seat.com')
     ;
 
 
-INSERT INTO BOOKINGS VALUES
+INSERT INTO bookings VALUES
     (1, 1, 1, '2020-11-10','2020-11-11','demo@demo.dot',2,1,1,1,1,1,"code",0),
     (2, 1, 1, '2020-10-13','2020-11-14','demo@demo.dot',2,1,1,1,1,1,"code",0),
     (3, 1, 1, '2020-10-15','2020-11-16','demo@demo.dot',2,1,1,1,1,1,"code",0),
@@ -45,7 +45,7 @@ INSERT INTO BOOKINGS VALUES
     ;
 
 
-INSERT INTO LOGINS VALUES 
+INSERT INTO logins VALUES 
     (1, 1, 'Garcia1989','1234','ROLE_CLIENT',1),
     (2, 2, 'Oscar2000','1234','ROLE_CLIENT',1),
     (3, 3, 'Miguel','1234','ROLE_CLIENT',1)
