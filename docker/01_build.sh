@@ -12,6 +12,6 @@ waitinXsec 5
 source 50_CreateDB.sh
 source 51_PopulateDB.sh
 docker ps
-source 99_upPom-MySQL-Container.sh
+source 98_stopPom-MySQL-Container.sh
 waitinXsec 5
 docker ps
