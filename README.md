@@ -11,7 +11,8 @@ El objetivo es practicar con los lenguajes, herramientas y conceptos de programa
 ![Seat:Code](img/geekshubs.png "Coded in Barcelona")
 -->
 ---
-![Coded in Barcelona](img/codedinbcn.png "Coded in Barcelona")
+<!-- Pit i Collons -->
+![Coded In Barcelona](https://raw.githubusercontent.com/leguim-repo/leguim-repo/master/img/currentfooter.png)
 <!-- Regalito https://www.youtube.com/watch?v=Y6A_Czw8TFU -->
 
 
