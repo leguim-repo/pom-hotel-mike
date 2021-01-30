@@ -3,6 +3,7 @@ package com.pomhotel.booking.ui.api.v1.controllers;
 import com.pomhotel.booking.application.models.BookingDatesModel;
 import com.pomhotel.booking.application.services.BookingsService;
 import com.pomhotel.booking.application.services.BusinessLogicApiService;
+import com.pomhotel.booking.ui.api.v1.exceptions.ApiManagerException;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,7 @@ public class GetAllReservedDatesByRoomIdController {
         }
         catch (Exception e) {
             e.printStackTrace();
+            throw ApiManagerException.NotFoundGetAllReservedDatesByRoomIdApi(e, targetId);
         }
         return bookedDates;
     }
