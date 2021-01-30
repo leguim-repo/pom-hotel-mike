@@ -3,9 +3,9 @@ echo "Launching POM Hotel & SPA Project. Cross the fingers"
 echo "The backend run in background. Remember kill it (ps command is your friend)"
 read -n 1 -r -s -p $'Press enter to continue...\n'
 
-cd docker
+cd docker/DockerMySQL
 source 99_startPom-MySQL-Container.sh
-cd ..
+cd ../..
 
 cd backend
 source upJar.sh &
