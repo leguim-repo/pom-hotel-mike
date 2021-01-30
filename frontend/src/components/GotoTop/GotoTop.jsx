@@ -8,11 +8,14 @@ function GotoTop() {
   const handleOnScroll = useCallback(event => {
     //console.log("handleOnScroll.event: ",event);
     //setScrollPos(event.target.documentElement.scrollTop);
-    if (event.target.documentElement.scrollTop >= 300) {
-      setShowGotoTop(true);
-    }
-    else {
-      setShowGotoTop(false);
+    //check bubbles to protect use GoFullPage Extension
+    if (event.bubbles === true) {
+      if (event.target.documentElement.scrollTop >= 300) {
+        setShowGotoTop(true);
+      }
+      else {
+        setShowGotoTop(false);
+      }
     }
 }, []);
 
