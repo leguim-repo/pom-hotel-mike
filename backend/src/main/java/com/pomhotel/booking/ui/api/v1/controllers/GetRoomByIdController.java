@@ -2,7 +2,7 @@ package com.pomhotel.booking.ui.api.v1.controllers;
 
 import com.pomhotel.booking.application.models.RoomsModel;
 import com.pomhotel.booking.application.services.RoomsService;
-import com.pomhotel.booking.ui.api.v1.exceptions.RoomNotFoundException;
+import com.pomhotel.booking.ui.api.v1.exceptions.RoomManagerException;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,20 +16,20 @@ public class GetRoomByIdController {
     public GetRoomByIdController(RoomsService roomsService) {
         this.roomsService = roomsService;
     }
-    //@GetMapping("/api/roomdetail/{targetId}")
     @GetMapping("getroombyid/{targetId}")
-    public RoomsModel getRoomById(@PathVariable String targetId) {
-        RoomsModel requestedRoom=new RoomsModel();
+    public RoomsModel getRoomById(@PathVariable String targetId) throws RoomManagerException {
+        RoomsModel requestedRoom;
         try {
             requestedRoom = roomsService.findById(Long.parseLong(targetId));
             Logger.debug(requestedRoom.getCode());
         }
         catch (Exception e) {
-            e.printStackTrace();
-            throw new RoomNotFoundException(targetId);
-
+            throw RoomManagerException.RoomNotFoundById(e, targetId);
         }
-        //return new ResponseEntity(requestedRoom,HttpStatus.OK);
         return requestedRoom;
+        /* I should be use the following way
+        return new ResponseEntity(requestedRoom, HttpStatus.OK);
+        */
     }
 }
+
