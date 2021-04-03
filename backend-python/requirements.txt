@@ -1,0 +1,33 @@
+# AWS
+boto3
+botocore
+
+#Data Science
+pandas
+pyarrow
+numpy
+pytz
+xlrd==1.2.0 # if your want .xlsx support
+openpyxl # alternative to xlrd
+sqlalchemy
+pymysql
+python-dateutil
+fastjsonschema
+python-snappy
+
+# s3 upload
+aiofiles
+environs
+python-multipart
+httpx
+pyjwt
+pytest
+pytest-asyncio
+requests
+fastapi
+gunicorn
+uvicorn
+starlette
+pydantic
+cryptography
+pyopenssl
