@@ -17,7 +17,6 @@ class ClientsRepository(ClientsRepositoryInterface):
 
     def getAllClients(self) -> List[ClientsModel]:
         models = []
-        client_model = ClientsModel()
         factory = ClientsFactory()
         session = self.__create_session()
         entities = session.query(ClientsEntity).all()
@@ -26,7 +25,6 @@ class ClientsRepository(ClientsRepositoryInterface):
             client_model = factory.create_model(entity)
             models.append(client_model)
         return models
-        #return super().getAllClients()
 
     def __create_session(self):
         session_manager = sessionmaker(bind=self.engine)

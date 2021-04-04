@@ -11,8 +11,5 @@ class ClientsService:
     def get_all_clients() -> List:
         clients_repo = ClientsRepository()
         clients = clients_repo.getAllClients()
-        clients_list = []
-        for row in clients:
-            clients_list.append(row)
-        return clients_list
+        return clients
 

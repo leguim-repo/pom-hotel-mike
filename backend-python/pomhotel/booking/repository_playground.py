@@ -1,5 +1,3 @@
-import json
-
 from app.services.ClientsService import ClientsService
 
 clients = ClientsService().get_all_clients()

@@ -1,8 +1,9 @@
-import json
+from fastapi import APIRouter
 
 from fastapi import APIRouter
 
-from app.services.ClientsService import ClientsService
+from app.services.ClientsServices import ClientsService
+
 router = APIRouter()
 
 
