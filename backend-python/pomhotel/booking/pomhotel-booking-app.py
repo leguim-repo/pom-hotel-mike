@@ -17,14 +17,15 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-app.mount("/static", StaticFiles(directory="./app/resources/static"), name="static")
 
 app.include_router(HealthController.router, prefix=api_basename + "/health", tags=["health"], responses={404: {"description": "Not found"}})
 app.include_router(GetAllClients.router, prefix=api_basename + "/getallclients", tags=["getallclients"], responses={404: {"description": "Not found"}})
 app.include_router(GetRandomMusicURL.router, prefix=api_basename + "/music", tags=["music"], responses={404: {"description": "Not found"}})
 app.include_router(LandingController.router, responses={404: {"description": "Not found"}})
+app.mount("/static", StaticFiles(directory="./app/resources/static"), name="static")
 
 if __name__ == '__main__':
+
     uvicorn.run(app, host="0.0.0.0", port=8080)
     print('exit')
 
