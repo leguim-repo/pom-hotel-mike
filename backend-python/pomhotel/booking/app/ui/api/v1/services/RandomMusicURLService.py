@@ -1,10 +1,12 @@
 import random
-from app.api.v1.services.RandomMusicURLServiceInterface import RandomMusicURLServiceInterface
+
+from app.ui.api.v1.services.RandomMusicURLServiceInterface import RandomMusicURLServiceInterface
 
 
 class RandomMusicURLService(RandomMusicURLServiceInterface):
+
     musicURLS = [
-        "https://youtu.be/mL7Gb6rcAAo", # Himno Oficial del POM Hotel Albano & Romina Power - Felicità Italiano Ragazzi Dance Remix
+        "https://youtu.be/mL7Gb6rcAAo",  # Himno Oficial del POM Hotel Albano & Romina Power - Felicità Italiano Ragazzi Dance Remix
         "https://youtu.be/4ollgP4iCm0",  # Amelie Lens all night long @ Labyrinth Club 2017 (8 hours session)
         "https://youtu.be/GJkuTx1DQzg",  # Amelie Lens at Atomium in Brussels, Belgium for Cercle
         "https://youtu.be/Y6A_Czw8TFU",  # Amelie Lens lockdown session at home
@@ -17,11 +19,15 @@ class RandomMusicURLService(RandomMusicURLServiceInterface):
         "https://youtu.be/yj2bHkkBS-Q",  # Gabry Ponte - Live Felicità (di Albano & Romina Power) - (Full HD) - 31.08.2020 - Battiti live
         "https://youtu.be/A8gdkWOsc6Q",  # Gabry Ponte - Medley Live - Battiti Live - estate 2020 - 31.08.2020
         "https://youtu.be/P867JatlH18",  # Bob Sinclar - Live from Bob's Studio (Heineken powered by Defected)
+        "https://youtu.be/qmbfKCP2jCg",  # The Original Music Of Studio 54 (Mix #4) "Mix By Dj Memix
     ]
+
+    def __init__(self):
+        pass
 
     def getRandomMusicURL(self) -> str:
         url = random.choice(self.musicURLS)
         return url
 
-    def __init__(self):
-        pass
+    def getAllMusicURL(self) -> list:
+        return self.musicURLS

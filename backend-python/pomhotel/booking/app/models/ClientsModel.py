@@ -44,7 +44,7 @@ class ClientsModel:
     def __str__(self):
         return f'ClientsModel({self.idclient}, {self.name}, {self.lastname}, {self.email})'
 
-    def to_json(self):
+    def to_json(self):  # deprecated -> to_dict better way for transform to json
         return dict(id=self.idclient,
                     name=self.name,
                     lastname=self.lastname,

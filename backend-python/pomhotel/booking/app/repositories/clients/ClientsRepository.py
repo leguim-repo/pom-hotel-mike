@@ -5,9 +5,9 @@ from sqlalchemy.orm import sessionmaker
 
 from app.configuration.database_configuration import db_target
 from app.domain.entities.ClientsEntity import ClientsEntity
-from app.domain.repositories.clients.ClientsRepositoryInterface import ClientsRepositoryInterface
-from app.factories.ClientsFactory import ClientsFactory
+from app.domain.factories.ClientsFactory import ClientsFactory
 from app.models.ClientsModel import ClientsModel
+from app.repositories.clients.ClientsRepositoryInterface import ClientsRepositoryInterface
 
 
 class ClientsRepository(ClientsRepositoryInterface):

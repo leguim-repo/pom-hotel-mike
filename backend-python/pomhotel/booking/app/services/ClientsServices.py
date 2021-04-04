@@ -1,6 +1,6 @@
 from typing import List
 
-from app.domain.repositories.clients.ClientsRepository import ClientsRepository
+from app.repositories.clients.ClientsRepository import ClientsRepository
 
 
 class ClientsService:
