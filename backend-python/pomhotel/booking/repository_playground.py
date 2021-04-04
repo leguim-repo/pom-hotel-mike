@@ -1,8 +1,7 @@
-from repositories.clients.ClientsRepository import ClientsRepository
+import json
 
-clients_repo = ClientsRepository()
-clients = clients_repo.getAllClients()
-print(type(clients))
-for row in clients:
-    print(row, type(row))
+from app.services.ClientsService import ClientsService
 
+clients = ClientsService().get_all_clients()
+clients_json = [obj.to_dict() for obj in clients]
+print(clients_json)

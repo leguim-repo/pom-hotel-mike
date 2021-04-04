@@ -5,11 +5,11 @@ RUN apt update
 RUN pip3 install --upgrade pip
 RUN pip install -r /tmp/requirements.txt
 
-RUN mkdir /app
+RUN mkdir /booking
 
-VOLUME /app
+VOLUME /booking
 
-WORKDIR /app
+WORKDIR /booking/
 
 CMD ["python","pomhotel-booking-app.py"]
 #CMD ["bash"]

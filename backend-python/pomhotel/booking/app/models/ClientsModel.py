@@ -1,12 +1,13 @@
 class ClientsModel:
-    def __init__(self, idclient, name, lastname, email):
-        self._idclient = idclient
-        self._name = name
-        self._lastname = lastname
-        self._email = email
+
+    def __init__(self):
+        self._idclient = 0
+        self._name = ''
+        self._lastname = ''
+        self._email = ''
 
     @property
-    def idclient(self) -> str:
+    def idclient(self) -> int:
         return self._idclient
 
     @idclient.setter
@@ -38,16 +39,19 @@ class ClientsModel:
         self._email = value
 
     def __repr__(self):
-        return f'Call({self._name}, {self._lastname}, {self._email})'
+        return f'ClientsModel({self.name}, {self.lastname}, {self.email})'
 
     def __str__(self):
-        return f'Call({self._idclient}, {self._name}, {self._lastname}, {self._email})'
+        return f'ClientsModel({self.idclient}, {self.name}, {self.lastname}, {self.email})'
 
     def to_json(self):
-        return dict(id=self._idclient,
-                    name=self._name,
-                    lastname=self._lastname,
-                    email=self._email)
+        return dict(id=self.idclient,
+                    name=self.name,
+                    lastname=self.lastname,
+                    email=self.email)
 
-
-
+    def to_dict(self):
+        return {"id": self.idclient,
+                "name": self.name,
+                "lastname": self.lastname,
+                "email": self.email}

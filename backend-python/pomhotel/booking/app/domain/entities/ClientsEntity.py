@@ -1,11 +1,12 @@
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
 
 class ClientsEntity(Base):
     __tablename__ = 'clients'
+
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String, nullable=True)
     lastname = Column(String, nullable=True)
@@ -18,11 +19,11 @@ class ClientsEntity(Base):
         self.email = email
 
     @property
-    def idclient(self) -> int:
+    def id_field(self) -> int:
         return self.id
 
-    @idclient.setter
-    def idclient(self, value):
+    @id_field.setter
+    def id_field(self, value):
         self.id = value
 
     @property
@@ -50,16 +51,13 @@ class ClientsEntity(Base):
         self.email = value
 
     def __repr__(self):
-        return f'Call({self.name}, {self.lastname}, {self.email})'
+        return f'ClientsEntity({self.name}, {self.lastname}, {self.email})'
 
     def __str__(self):
-        return f'Call({self.id}, {self.name}, {self.lastname}, {self.email})'
+        return f'ClientsEntity({self.id}, {self.name}, {self.lastname}, {self.email})'
 
     def to_json(self):
         return dict(id=self.id,
                     name=self.name,
                     lastname=self.lastname,
                     email=self.email)
-
-
-

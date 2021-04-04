@@ -1,5 +1,6 @@
 from typing import List
-from domain.models.ClientsModel import ClientsModel
+
+from app.models.ClientsModel import ClientsModel
 
 
 class ClientsRepositoryInterface:
